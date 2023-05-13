@@ -6,13 +6,13 @@ Currently, as the platform is just starting out, we only have a few courses read
 
 ## Built using
 
-NextJs
-Nextra
-MDX
+1. NextJs
+2. Nextra
+3. MDX
 
 ## Built by
 
 Thomas Sankara
 
-[YouTube Channel](https://youtube.com/tsbsankara)
-[Website](https://tsbsankara.com)
+1. [YouTube Channel](https://youtube.com/tsbsankara)
+2. [Website](https://tsbsankara.com)
