@@ -1,27 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply bg-[#111111] dark:bg-[#111111];
+  font-family: "Inter", sans-serif;
+}
+
+code,
+pre {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+p,
+li {
+  line-height: 1.8;
+}
+
+h1 {
+  text-transform: capitalize;
 }
