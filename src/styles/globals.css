@@ -13,6 +13,11 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+img {
+  max-width: 100%;
+  margin: auto;
+}
+
 code,
 pre {
   font-family: "Roboto Mono", monospace !important;
