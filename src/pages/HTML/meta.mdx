@@ -1,1 +1,82 @@
 # Meta Tags
+
+`meta` tags represent metadata about your website. Metadata is information about data. For example, if you have a file, you can view when it was created, who created it, when it was modified, and by whom it was modified. These are examples of metadata.
+
+In HTML, `meta` tags are used to define the character set of the document, page descriptions, keywords, authors, viewport, and social media cards which display when sharing content. `meta` tags are always placed in the `head` of your HTML document.
+
+Most `meta` tags have the structure `<meta name="" content="" />`
+
+In the example on the previous page, we had something similar to this:
+
+```
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+```
+
+The first line represents the character set to use in the HTML document. UTF-8 is the most popular character encoding. Each character is represented by one to four bytes. Below are further references for UTF-8
+
+1. [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)
+2. [MDN Docs - UTF-8](https://developer.mozilla.org/en-US/docs/Glossary/UTF-8)
+
+The second line tells the browser that the webpage being created should be optimized or compatible with Internet Explorer.
+
+The third and final line tells the browser that the contents of the webpage should fit within the width of the device with which it is being viewed, and should not be zoomed in.
+
+You can also add other `meta` tags. See the example below:
+
+```
+<meta name="description" content="Learn HTML on Eduketa">
+<meta name="keywords" content="HTML, Learn HTML, Eduketa">
+<meta name="author" content="Thomas Sankara">
+```
+
+The first line above gives a description of the webpage. Make sure that you make this as descriptive as you can, but not so long, taking note that this description is what is going to appear in a Google Search.
+
+The second line gives a series of keywords associated with your website that, when searched for, will increase the chances that your website is going to appear in the top search results.
+
+The third line adds the author of the website. Just by adding these few lines to your webiste, you will have already greatly increased your chances of being found out by search engines. This is called Search Engine Optimization.
+
+NOTE: `meta` tags are heavily used in Search Engine Optimization. More on this in the module about [SEO](/HTML/seo).
+
+## Open Graph `Meta` Tags: What are they?
+
+Aside from the basic `meta` tags discussed above, there is also another type of `meta` tags called open graph tags. Have you ever shared a social media post and a kind of card shows up such as the one below?
+
+![open-graph-image](src/assets/open-graph-image.png)
+
+Such cards are beautiful to look at, and they are made possible using open graph meta tags. Notice that the card above has the title, the link to the website, the title of the document or article that is being shared, and the description of the webpage that will open when you click the link. So, how do you create such a card? You guessed it! We use open graph tags. Take a look at the example below:
+
+```
+<meta property="og:title" content="Fundamentals of ReactJs: With Examples" />
+<meta property="og:description" content="Practical content and explanations from my over 4 years' experience in Front-end Web Development" />
+<meta property="og:image" content="https://tsbsankara.gumroad.com/book-cover.png" />
+```
+
+The example above renders the book card in the image shown. Can you tell what the code does? And can you notice the slight difference with normal open graph tags? When using OG tags, you need to have the `og:` directive before the name of the `meta` tag that you want. So instead of just having `description`, you now have `og:description` and so on.
+
+### Why use Open Graph Tags?
+
+1. They help social media websites to understand what the shared content is about.
+2. They are eye-catching and are therefore more likely to be clicked on by users.
+3. They describe your content at a glance.
+
+There are 17 OG Tags listed in [Facebook's official documentation](https://developers.facebook.com/docs/sharing/webmasters/) which is also linked at the end of this page. We are going to go through the most commonly used ones.
+
+#### `og:url`
+
+#### `og:title`
+
+#### `og:description`
+
+#### `og:image`
+
+#### `og:type`
+
+#### `og:locale`
+
+#### `og:video`
+
+#### `og:video`
+
+Here's a link to [read more about open graph tags](https://developers.facebook.com/docs/sharing/webmasters/) from Facebook's official documentation.
