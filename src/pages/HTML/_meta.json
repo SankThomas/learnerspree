@@ -3,7 +3,10 @@
   "useful-docs": "Useful Docs",
   "additional-setup": "Additional Setup",
   "a-simple-html-program": "A Simple HTML Program",
-  "meta": "Meta Tags",
   "rules-for-writing-html": "Rules For Writing HTML",
-  "seo": "Search Engine Optimization"
+  "html-tags": "HTML Tags",
+  "types-of-elements": "Types Of HTML Elements",
+  "meta": "Meta Tags",
+  "seo": "Search Engine Optimization",
+  "comments": "Adding Comments In HTML"
 }

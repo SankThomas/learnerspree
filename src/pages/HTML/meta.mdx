@@ -4,7 +4,7 @@
 
 In HTML, `meta` tags are used to define the character set of the document, page descriptions, keywords, authors, viewport, and social media cards which display when sharing content. `meta` tags are always placed in the `head` of your HTML document.
 
-Most `meta` tags have the structure `<meta name="" content="" />`
+Most `meta` tags have the syntax `<meta name="" content="" />`
 
 In the example on the previous page, we had something similar to this:
 
@@ -16,8 +16,9 @@ In the example on the previous page, we had something similar to this:
 
 The first line represents the character set to use in the HTML document. UTF-8 is the most popular character encoding. Each character is represented by one to four bytes. Below are further references for UTF-8
 
-1. [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)
-2. [MDN Docs - UTF-8](https://developer.mozilla.org/en-US/docs/Glossary/UTF-8)
+1. [W3Schools](https://www.w3schools.com/tags/tag_meta.asp)
+2. [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)
+3. [MDN Docs](https://developer.mozilla.org/en-US/docs/Glossary/UTF-8)
 
 The second line tells the browser that the webpage being created should be optimized or compatible with Internet Explorer.
 
@@ -35,11 +36,13 @@ The first line above gives a description of the webpage. Make sure that you make
 
 The second line gives a series of keywords associated with your website that, when searched for, will increase the chances that your website is going to appear in the top search results.
 
-The third line adds the author of the website. Just by adding these few lines to your webiste, you will have already greatly increased your chances of being found out by search engines. This is called Search Engine Optimization.
+The third line adds the author of the website.
+
+Just by adding these few lines to your webiste, you will have already greatly increased your chances of being found out by search engines. This is called Search Engine Optimization.
 
 NOTE: `meta` tags are heavily used in Search Engine Optimization. More on this in the module about [SEO](/HTML/seo).
 
-## Open Graph `Meta` Tags: What are they?
+## Open Graph Meta Tags: What are they?
 
 Aside from the basic `meta` tags discussed above, there is also another type of `meta` tags called open graph tags. Have you ever shared a social media post and a kind of card shows up such as the one below?
 
@@ -64,17 +67,50 @@ The example above renders the book card in the image shown. Can you tell what th
 There are 17 OG Tags listed in [Facebook's official documentation](https://developers.facebook.com/docs/sharing/webmasters/) which is also linked at the end of this page. We are going to go through the most commonly used ones.
 
 #### `og:url`
+This is the canonical URL for your website. It has the syntax: `<meta name="og:url" content="" />`. A canonical URL is one that prevents duplicate pages by using the most recent or most preferred page; i.e, the one that you specify in the `content` attribute.
+
+**Example:** `<meta name="og:url" content="https://eduketa.com" />`
 
 #### `og:title`
+This is the title of your article or document, such as your site name. It has the syntax `<meta name="og:title" content="" />`
+
+**Example:**  `<meta name="og:title" content="Eduketa Online Course Modules Platform" />`
 
 #### `og:description`
+This is a short description about the content. Facebook recommends that they should be about 2 to 4 sentences. The description will be displayed below the title. It has the syntax: `<meta name="og:description" content="" />`
+
+**Example:** `<meta name="og:title" content="Eduketa is an online educational platform that allows you access to programming resources, and quizes and projects that will help you to build real world projects." />`
 
 #### `og:image`
+This is the URL of the image that appears when someone shares your content. It has the syntax:  `<meta name="og:image" content="">`
+
+**Example:** `<meta name="og:image" content="https://eduketa.com/logo.png">`
 
 #### `og:type`
+This represents the type of content that you are sharing, such as an article, website, music and video. It has the syntax: `<meta name="og:type" content="">`.
+
+**Examples:** 
+1. `<meta name="og:type" content="article">`
+2. `<meta name="og:type" content="website">`
+3. `<meta name="og:type" content="music.song">`
+4. `<meta name="og:type" content="video.movie">`
+
+Notice how you can add objects as the reference when using `og:type`. These objects are defined by the community, and have to be agreed upon before a new one can be added, or changes made to old ones. [Here is a complete reference for you.](https://ogp.me/)
 
 #### `og:locale`
+Locale is an identifier for a region. It defaults to `en_US` but can be changed to an accepted locale such as `es_LA` for Spanish, `en_GB` for British English, and `fr_FR` for French. It has the syntax: `<meta name="og:locale" content="">`
+
+**Example:** 
+`<meta name="og:locale" content="en_US">`
+`<meta name="og:locale:alternate" content="en_GB">`
+
+`og:locale` can also be used with `og:locale:alternate` if your content is available in other languages also. The syntax remains the same.
 
 #### `og:video`
+This is the URL for the video. It has the syntax: `<meta name="og:video" content="">`
 
-Here's a link to [read more about open graph tags](https://developers.facebook.com/docs/sharing/webmasters/) from Facebook's official documentation.
+**Example:** `<meta name="og:locale" content="https://youtube.com/@tsbsankara/videos/link-to-video">`
+
+[Read more about open graph tags](https://developers.facebook.com/docs/sharing/webmasters/) from Facebook's official documentation.
+
+In the next module, we are going to take a look at the Rules to use when writing HTML code.
