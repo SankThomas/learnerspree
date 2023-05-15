@@ -8,7 +8,7 @@ In HTML, `meta` tags are used to define the character set of the document, page 
 
 In the example on the previous page, we had something similar to this:
 
-```
+```html
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,10 +26,10 @@ The third and final line tells the browser that the contents of the webpage shou
 
 You can also add other `meta` tags. See the example below:
 
-```
-<meta name="description" content="Learn HTML on Eduketa">
-<meta name="keywords" content="HTML, Learn HTML, Eduketa">
-<meta name="author" content="Thomas Sankara">
+```html
+<meta name="description" content="Learn HTML on Eduketa" />
+<meta name="keywords" content="HTML, Learn HTML, Eduketa" />
+<meta name="author" content="Thomas Sankara" />
 ```
 
 The first line above gives a description of the webpage. Make sure that you make this as descriptive as you can, but not so long, taking note that this description is what is going to appear in a Google Search.
@@ -50,10 +50,16 @@ Aside from the basic `meta` tags discussed above, there is also another type of 
 
 Such cards are beautiful to look at, and they are made possible using open graph meta tags. Notice that the card above has the title, the link to the website, the title of the document or article that is being shared, and the description of the webpage that will open when you click the link. So, how do you create such a card? You guessed it! We use open graph tags. Take a look at the example below:
 
-```
+```html
 <meta property="og:title" content="Fundamentals of ReactJs: With Examples" />
-<meta property="og:description" content="Practical content and explanations from my over 4 years' experience in Front-end Web Development" />
-<meta property="og:image" content="https://tsbsankara.gumroad.com/book-cover.png" />
+<meta
+  property="og:description"
+  content="Practical content and explanations from my over 4 years' experience in Front-end Web Development"
+/>
+<meta
+  property="og:image"
+  content="https://tsbsankara.gumroad.com/book-cover.png"
+/>
 ```
 
 The example above renders the book card in the image shown. Can you tell what the code does? And can you notice the slight difference with normal open graph tags? When using OG tags, you need to have the `og:` directive before the name of the `meta` tag that you want. So instead of just having `description`, you now have `og:description` and so on.
@@ -67,49 +73,88 @@ The example above renders the book card in the image shown. Can you tell what th
 There are 17 OG Tags listed in [Facebook's official documentation](https://developers.facebook.com/docs/sharing/webmasters/) which is also linked at the end of this page. We are going to go through the most commonly used ones.
 
 #### `og:url`
+
 This is the canonical URL for your website. It has the syntax: `<meta name="og:url" content="" />`. A canonical URL is one that prevents duplicate pages by using the most recent or most preferred page; i.e, the one that you specify in the `content` attribute.
 
-**Example:** `<meta name="og:url" content="https://eduketa.com" />`
+**Example:**
+
+```html
+<meta name="og:url" content="https://eduketa.com" />
+```
 
 #### `og:title`
+
 This is the title of your article or document, such as your site name. It has the syntax `<meta name="og:title" content="" />`
 
-**Example:**  `<meta name="og:title" content="Eduketa Online Course Modules Platform" />`
+**Example:**
+
+```html
+<meta name="og:title" content="Eduketa Online Course Modules Platform" />
+```
 
 #### `og:description`
+
 This is a short description about the content. Facebook recommends that they should be about 2 to 4 sentences. The description will be displayed below the title. It has the syntax: `<meta name="og:description" content="" />`
 
-**Example:** `<meta name="og:description" content="Eduketa is an online educational platform that allows you access to programming resources, and quizes and projects that will help you to build real world projects." />`
+**Example:**
+
+```html
+<meta
+  name="og:description"
+  content="Eduketa is an online educational platform that allows you access to programming resources, and quizes and projects that will help you to build real world projects."
+/>
+```
 
 #### `og:image`
-This is the URL of the image that appears when someone shares your content. It has the syntax:  `<meta name="og:image" content="">`
 
-**Example:** `<meta name="og:image" content="https://eduketa.com/logo.png">`
+This is the URL of the image that appears when someone shares your content. It has the syntax: `<meta name="og:image" content="">`
+
+**Example:**
+
+```html
+<meta name="og:image" content="https://eduketa.com/logo.png" />
+```
 
 #### `og:type`
+
 This represents the type of content that you are sharing, such as an article, website, music and video. It has the syntax: `<meta name="og:type" content="">`.
 
-**Examples:** 
-1. `<meta name="og:type" content="article">`
-2. `<meta name="og:type" content="website">`
-3. `<meta name="og:type" content="music.song">`
-4. `<meta name="og:type" content="video.movie">`
+**Examples:**
+
+```html
+<meta name="og:type" content="article" />
+<meta name="og:type" content="website" />
+<meta name="og:type" content="music.song" />
+<meta name="og:type" content="video.movie" />
+```
 
 Notice how you can add objects as the reference when using `og:type`. These objects are defined by the community, and have to be agreed upon before a new one can be added, or changes made to old ones. [Here is a complete reference for you.](https://ogp.me/)
 
 #### `og:locale`
+
 Locale is an identifier for a region. It defaults to `en_US` but can be changed to an accepted locale such as `es_LA` for Spanish, `en_GB` for British English, and `fr_FR` for French. It has the syntax: `<meta name="og:locale" content="">`
 
-**Example:** 
-1. `<meta name="og:locale" content="en_US">`
-2. `<meta name="og:locale:alternate" content="en_GB">`
+**Example:**
+
+```html
+<meta name="og:locale" content="en_US" />
+<meta name="og:locale:alternate" content="en_GB" />
+```
 
 `og:locale` can also be used with `og:locale:alternate` if your content is available in other languages also. The syntax remains the same.
 
 #### `og:video`
+
 This is the URL for the video. It has the syntax: `<meta name="og:video" content="">`
 
-**Example:** `<meta name="og:locale" content="https://youtube.com/@tsbsankara/videos/link-to-video">`
+**Example:**
+
+```html
+<meta
+  name="og:locale"
+  content="https://youtube.com/@tsbsankara/videos/link-to-video"
+/>
+```
 
 [Read more about open graph tags](https://developers.facebook.com/docs/sharing/webmasters/) from Facebook's official documentation.
 
