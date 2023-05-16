@@ -161,7 +161,7 @@ This is the URL for the video. It has the syntax: `<meta name="og:video" content
 
 ```html
 <meta
-  name="og:locale"
+  name="og:video"
   content="https://youtube.com/@tsbsankara/videos/link-to-video"
 />
 ```
@@ -183,3 +183,38 @@ Open Gragh Meta Tags are used for Facebook advertisement. Twitter also has its o
 Congratulations. You have successfully added cards for Twitter.
 
 > [Here](https://www.digitalocean.com/community/tutorials/how-to-add-twitter-card-and-open-graph-social-metadata-to-your-webpage-with-html) is a useful resource to learn more about open graph tags, and Twitter metadata.
+
+## Full example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn HTML on Eduketa" />
+    <meta name="keywords" content="HTML, Learn HTML, Eduketa" />
+    <meta name="author" content="Thomas Sankara" />
+
+    <!-- Open graph metadata -->
+    <meta name="og:site_name" content="Eduketa" />
+    <meta name="og:url" content="https://eduketa.com" />
+    <meta name="og:title" content="Eduketa Online Course Modules Platform" />
+    <meta name="og:description" content="Eduketa | Learn online" />
+    <meta name="og:image" content="https://eduketa.com/logo.png" />
+    <meta name="og:type" content="website" />
+    <meta name="og:locale" content="en_US" />
+    <meta name="og:locale:alternate" content="en_GB" />
+
+    <!-- Twitter metadata -->
+    <meta name="twitter:title" content="Eduketa | Learn online" />
+    <meta name="twitter:description" content="Easily learn web development" />
+    <meta name="twitter:image" content="https://eduketa.com/logo.png" />
+    <title>Meta Tags Full Example</title>
+  </head>
+  <body>
+    <h1>Meta Tags Full Example</h1>
+  </body>
+</html>
+```
