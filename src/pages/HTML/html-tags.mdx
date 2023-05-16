@@ -5,19 +5,23 @@
 HTML tags or elements are keywords that tell the browser how it should format your webpage. For example, if you wanted to create a section, then you would create a `<div>` or a `<section>`. If you wanted to add an image to your webpage, you would create an `<img />` tag, among other examples, which we are going to look at below.
 
 ## `<a>`
+
 This is called the **anchor** tag. It is used to link the pages in your website together, or to add links to other websites. For example, if you have a homepage and you want to add a link that goes to your about page, you would use this tag. In the same way, if you wanted to add your social media to your website, you would use anchor tags and then add the direct links to your social media profiles.
 
-It has the syntax: 
+It has the syntax:
+
 ```html
 <a href="LINK_TO_WEBSITE">Text to show</a>
 ```
 
 **Example:** The example below links to the "About Us" page
+
 ```html
 <a href="about.html">About Us</a>
 ```
 
 **Example using external links**
+
 ```html
 <a href="https://twitter.com/@TSBSankara">@TSBSankara</a>
 ```
@@ -37,13 +41,15 @@ Sometimes you want that when users click on the links, they open up in new tabs.
 The `rel` attribute defines the relationship between the linked resource and the current document. Therefore setting it to `noreferrer` means that the newly opened tab cannot be used to inject scripts (XSS) in the actual document.
 
 ## `<audio>`
+
 This is used to add sound files to your website such as music and other audio streams.
 
 **Example:**
+
 ```html
 <audio>
-  <source src="favsong.ogg" type="audio/ogg">
-  <source src="favsong.mp3" type="audio/mpeg">
+  <source src="favsong.ogg" type="audio/ogg" />
+  <source src="favsong.mp3" type="audio/mpeg" />
   Your browser does not support the audio tag.
 </audio>
 ```
@@ -52,17 +58,40 @@ The audio tag is used together with the `source` tag to define multiple audio fi
 
 The text inside the `audio` tag will show if your browser does not support JavaScript.
 
+The `audio` tag takes in a number of attributes:
+
+1. `controls` - this adds icons to pause and play the audio as well as adjust the volume.
+2. `autoplay` - this enables the audio to autoplay once it loads.
+3. `loop` - this enables the audio to restart playing once it finishes.
+
+The syntax for the attributes looks like this:
+
+```html
+<audio controls autoplay loop>
+  <source src="favsong.ogg" type="audio/ogg" />
+  <source src="favsong.mp3" type="audio/mpeg" />
+  Your browser does not support the audio tag.
+</audio>
+```
+
+> Note: The attributes are not in name-value pairs like others we have seen so far. This is because they are boolean values. They are either true or false.
+
 ## `<b>`
+
 This is used to make text bold. It can be used in place of the `strong` tag which also makes text bold. Text that you want to make bold is text that you and your users are going to consider important. Simply wrap the text you want to be bold in this tag as in the example below:
 
 ```html
 <b>I am important text because I am in bold</b>
 ```
 
+> The `<b>` tag does make text bold - but it does not mark it as important. If you want to mark text as important and bold, use the `<strong>` tag instead.
+
 ## `<blockquote>`
+
 Is used to specify content that has been quoted from another source.
 
 **Example:**
+
 ```html
 <blockquote cite="http://eduketa.com">
   You can easily learn how to code using Eduketa. Did you know?
@@ -72,14 +101,19 @@ Is used to specify content that has been quoted from another source.
 It takes in a `cite` attribute which links to the source being quoted.
 
 ## `<body>`
+
 This tag contains all the visible content for your website. Everything that you want your users to interact with, to see or to read should be placed inside the body tags.
 
 **Example:**
+
 ```html
 <body>
   <article>
     <h1>Welcome to self-taught learning with Eduketa</h1>
-    <p>Learn programming, transcription and even sybersecurity with our extensive documentation</p>
+    <p>
+      Learn programming, transcription and even sybersecurity with our extensive
+      documentation
+    </p>
     <button>Show me how</button>
     <img src="https://eduketa.com/logo.png" alt="Eduketa logo" />
   </article>
@@ -87,29 +121,35 @@ This tag contains all the visible content for your website. Everything that you 
 ```
 
 ## `<br />`
+
 Inserts a single line break between elements.
 
 **Example:**
+
 ```html
 <article>
   <h2>Diary of a wimpy kid</h2>
-  <br /
+  <br />
   <p>This is a story of a boy who used to cry a lot.</p>
 </article>
 ```
 
 ## `<button>`
+
 This is used to represent a clickable button.
 
 **Example:**
+
 ```html
 <button>Subscribe</button>
 ```
 
 ## `<canvas>`
+
 This is used to draw graphics on web pages with the help of JavaScript.
 
 **Example from W3Schools:**
+
 ```javascript
 <canvas id="myCanvas">
 Your browser does not support the canvas tag.
@@ -126,13 +166,17 @@ Your browser does not support the canvas tag.
 The example above draws a red rectangle. The text inside the `canvas` element will display when you have JavaScript disabled in your web browser, or when the script to draw the canvas fails to load.
 
 ## `<caption>`
+
 This is used to add a caption for a table. It must be inserted immediately after the `table` tag.
 
 **Example:**
+
 ```html
 <table>
-  <caption>Table showing expenditure against budget</caption>
-  
+  <caption>
+    Table showing expenditure against budget
+  </caption>
+
   <!-- Rest of the table goes here -->
 </table>
 ```
@@ -140,9 +184,11 @@ This is used to add a caption for a table. It must be inserted immediately after
 By default, table captions are aligned to the center.
 
 ## `<code>`
+
 Is used to represent code, or a code block.
 
 **Example:**
+
 ```html
 <body>
   <p>It is a good idea to use <code>meta</code> tags to improve SEO</p>
@@ -151,13 +197,107 @@ Is used to represent code, or a code block.
 
 ## `<div>`
 
+This is used to represent a **div**ision or a section in your HTML document. It is used as a container element which is then styled in CSS.
+
+By default, there is always a line break before and after the `div` element. This is important to note as you will see when we begin styling with CSS.
+
+**Example:**
+
+```html
+<div>This is my section. There are many like it, but this one is mine.</div>
+```
+
+> You can place any kind of content inside the `<div>`
+
 ## `<form>`
+
+Is used to create a form which will require user interaction.
+
+**Example:**
+
+```html
+<form>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    placeholder="Enter your username"
+  />
+  <button type="submit">Log In</button>
+</form>
+```
+
+The form above has an input that says "Enter your username" as the placeholder text, and a submit button that the user can click to submit the form when the input is filled.
+
+The `form` element takes in an optional attribute called `action` which defines the endpoint to hit when the form is submitted, such as a database to add the data. For example:
+
+```html
+<form action="https://api.eduketa.com/index.php">
+  <!-- Rest of code -->
+  <!-- The endpoint above does not exist -->
+</form>
+```
 
 ## `<h1>`
 
+HTML has six headings which start with `<h1>` as the biggest heading, and `<h6>` as the smallest heading. All these are used to create headings within your HTML document.
+
+**Example:**
+
+```html
+<h1>I am the biggest heading. Better put some respect on my name!</h1>
+
+<h2>I am the most responsible child in the family.</h2>
+
+<h3>I don't care what people think about me.</h3>
+
+<h4>You'd be surprised how much people don't care about what you do.</h4>
+
+<h5>People might not know what you do...</h5>
+
+<h6>...but everyone will know what you have done.</h6>
+```
+
+> Only ever have one `<h1>` element per page in your website. Read more in the Rules For Writing HTML module.
+
 ## `<head>`
 
+The `head` element is the container for metadata. All `meta` tags are defined in the `head` section of your document, and they will not be displayed to the users.
+
+Document titles, stylesheets and scripts are also linked in the `head` section.
+
+**Example:**
+
+```html
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Thomas Sankara" />
+  <meta
+    name="description"
+    content="Buy Amazon prime today and enjoy free Twitch subscriptions"
+  />
+  <meta name="keywords" content="amazon prime, twitch, amazon" />
+  <link rel="stylesheet" href="index.css" />
+  <script src="app.js"></script>
+  <title>Amazon prime | A Subsidiary of Twitch</title>
+</head>
+```
+
 ## `<hr />`
+
+Is used to insert a horizontal rule in your document. Just like `<br />`, simply define `<hr />` wherever you want your line to appear.
+
+**Example:**
+
+```html
+<article>
+  <p>But you never even told me where you live...</p>
+  <hr />
+  <p>221B Baker Street!</p>
+</article>
+```
 
 ## `<html>`
 
