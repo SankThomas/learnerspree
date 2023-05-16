@@ -1,14 +1,8 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import React from "react";
 
 export default function Home() {
-  const router = useRouter();
-
-  function handleClick() {
-    router.push("/home");
-  }
-
   return (
     <>
       <Head>
@@ -28,12 +22,12 @@ export default function Home() {
             programming resources, and quizes and projects that will help you
             build real world projects.
           </p>
-          <button
-            onClick={handleClick}
+          <Link
+            href="/home"
             className="bg-[#111111] dark:bg-white py-3 px-6 rounded text-[#ffffff] dark:text-black shadow"
           >
             Get Started
-          </button>
+          </Link>
         </div>
       </section>
     </>
