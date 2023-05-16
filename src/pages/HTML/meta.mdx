@@ -72,6 +72,16 @@ The example above renders the book card in the image shown. Can you tell what th
 
 There are 17 OG Tags listed in [Facebook's official documentation](https://developers.facebook.com/docs/sharing/webmasters/) which is also linked at the end of this page. We are going to go through the most commonly used ones.
 
+#### `og:site_name`
+
+This is the name that your overall website is on.
+
+**Example:**
+
+```html
+<meta name="og:site_name" content="Eduketa" />
+```
+
 #### `og:url`
 
 This is the canonical URL for your website. It has the syntax: `<meta name="og:url" content="" />`. A canonical URL is one that prevents duplicate pages by using the most recent or most preferred page; i.e, the one that you specify in the `content` attribute.
@@ -158,4 +168,18 @@ This is the URL for the video. It has the syntax: `<meta name="og:video" content
 
 [Read more about open graph tags](https://developers.facebook.com/docs/sharing/webmasters/) from Facebook's official documentation.
 
-In the next module, we are going to take a look at the Rules to use when writing HTML code.
+## Twitter `meta` tags
+
+Open Gragh Meta Tags are used for Facebook advertisement. Twitter also has its own brand of sharing using `meta` tags, and it is as simple as adding open graph meta tags, and substituting `og` with `twitter`.
+
+**Example:**
+
+```html
+<meta name="twitter:title" content="Eduketa | Learn online" />
+<meta name="twitter:description" content="Easily learn web development" />
+<meta name="twitter:image" content="https://eduketa.com/logo.png" />
+```
+
+Congratulations. You have successfully added cards for Twitter.
+
+> [Here](https://www.digitalocean.com/community/tutorials/how-to-add-twitter-card-and-open-graph-social-metadata-to-your-webpage-with-html) is a useful resource to learn more about open graph tags, and Twitter metadata.
