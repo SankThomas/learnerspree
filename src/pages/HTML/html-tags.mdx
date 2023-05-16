@@ -34,11 +34,23 @@ Sometimes you want that when users click on the links, they open up in new tabs.
 <a href="about.html" target="_blank" rel="noreferrer">About Us</a>
 ```
 
-## `<article>`
-
-## `<aside>`
+The `rel` attribute defines the relationship between the linked resource and the current document. Therefore setting it to `noreferrer` means that the newly opened tab cannot be used to inject scripts (XSS) in the actual document.
 
 ## `<audio>`
+This is used to add sound files to your website such as music and other audio streams.
+
+**Example:**
+```html
+<audio>
+  <source src="favsong.ogg" type="audio/ogg">
+  <source src="favsong.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+```
+
+The audio tag is used together with the `source` tag to define multiple audio files, or to define multiple audio files of different formats. The `source` tag is an empty tag that takes in a `src` attribute which defines the path to the audio file, and a `type` attribute that defines that type of audio file it is, such as an mp3 file.
+
+The text inside the `audio` tag will show if your browser does not support JavaScript.
 
 ## `<b>`
 This is used to make text bold. It can be used in place of the `strong` tag which also makes text bold. Text that you want to make bold is text that you and your users are going to consider important. Simply wrap the text you want to be bold in this tag as in the example below:
@@ -48,6 +60,16 @@ This is used to make text bold. It can be used in place of the `strong` tag whic
 ```
 
 ## `<blockquote>`
+Is used to specify content that has been quoted from another source.
+
+**Example:**
+```html
+<blockquote cite="http://eduketa.com">
+  You can easily learn how to code using Eduketa. Did you know?
+</blockquote>
+```
+
+It takes in a `cite` attribute which links to the source being quoted.
 
 ## `<body>`
 This tag contains all the visible content for your website. Everything that you want your users to interact with, to see or to read should be placed inside the body tags.
@@ -59,25 +81,75 @@ This tag contains all the visible content for your website. Everything that you 
     <h1>Welcome to self-taught learning with Eduketa</h1>
     <p>Learn programming, transcription and even sybersecurity with our extensive documentation</p>
     <button>Show me how</button>
+    <img src="https://eduketa.com/logo.png" alt="Eduketa logo" />
   </article>
 </body>
 ```
 
 ## `<br />`
+Inserts a single line break between elements.
+
+**Example:**
+```html
+<article>
+  <h2>Diary of a wimpy kid</h2>
+  <br /
+  <p>This is a story of a boy who used to cry a lot.</p>
+</article>
+```
 
 ## `<button>`
+This is used to represent a clickable button.
+
+**Example:**
+```html
+<button>Subscribe</button>
+```
 
 ## `<canvas>`
+This is used to draw graphics on web pages with the help of JavaScript.
+
+**Example from W3Schools:**
+```javascript
+<canvas id="myCanvas">
+Your browser does not support the canvas tag.
+</canvas>
+
+<script>
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(0, 0, 80, 80);
+</script>
+```
+
+The example above draws a red rectangle. The text inside the `canvas` element will display when you have JavaScript disabled in your web browser, or when the script to draw the canvas fails to load.
 
 ## `<caption>`
+This is used to add a caption for a table. It must be inserted immediately after the `table` tag.
+
+**Example:**
+```html
+<table>
+  <caption>Table showing expenditure against budget</caption>
+  
+  <!-- Rest of the table goes here -->
+</table>
+```
+
+By default, table captions are aligned to the center.
 
 ## `<code>`
+Is used to represent code, or a code block.
 
-## `<details>`
+**Example:**
+```html
+<body>
+  <p>It is a good idea to use <code>meta</code> tags to improve SEO</p>
+</body>
+```
 
 ## `<div>`
-
-## `<footer>`
 
 ## `<form>`
 
