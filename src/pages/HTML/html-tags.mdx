@@ -1,38 +1,155 @@
 # HTML Tags
 
-> I decided to make this a separate page from "Semantic HTML elements" so that we could talk about general tags in this module
+> In this module, we are going to be looking a HTML tags in general, and then in a later module, we are going to look at those called "Semantic Elements", that were introduced in HTML5.
 
 HTML tags or elements are keywords that tell the browser how it should format your webpage. For example, if you wanted to create a section, then you would create a `<div>` or a `<section>`. If you wanted to add an image to your webpage, you would create an `<img />` tag, among other examples, which we are going to look at below.
 
 ## `<a>`
+This is called the **anchor** tag. It is used to link the pages in your website together, or to add links to other websites. For example, if you have a homepage and you want to add a link that goes to your about page, you would use this tag. In the same way, if you wanted to add your social media to your website, you would use anchor tags and then add the direct links to your social media profiles.
 
-## `<article>`
+It has the syntax: 
+```html
+<a href="LINK_TO_WEBSITE">Text to show</a>
+```
 
-## `<aside>`
+**Example:** The example below links to the "About Us" page
+```html
+<a href="about.html">About Us</a>
+```
+
+**Example using external links**
+```html
+<a href="https://twitter.com/@TSBSankara">@TSBSankara</a>
+```
+
+Sometimes you want that when users click on the links, they open up in new tabs. You can achieve this by adding an attribute on the anchor tag called `target` and setting it equal to `_blank`. For example, if you have an "About Us" page that you want to open on a new tab, you would do something similar to the example below:
+
+```html
+<a href="about.html" target="_blank">About Us</a>
+```
+
+> However, opening links in new tabs opens you up to a vulnerability called **Cross Site Scripting**, abbreviated as XSS. To avoid this, add another attribute called `rel` on the anchor tag and set it equal to `noreferrer`, as in the example below:
+
+```html
+<a href="about.html" target="_blank" rel="noreferrer">About Us</a>
+```
+
+The `rel` attribute defines the relationship between the linked resource and the current document. Therefore setting it to `noreferrer` means that the newly opened tab cannot be used to inject scripts (XSS) in the actual document.
 
 ## `<audio>`
+This is used to add sound files to your website such as music and other audio streams.
+
+**Example:**
+```html
+<audio>
+  <source src="favsong.ogg" type="audio/ogg">
+  <source src="favsong.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+```
+
+The audio tag is used together with the `source` tag to define multiple audio files, or to define multiple audio files of different formats. The `source` tag is an empty tag that takes in a `src` attribute which defines the path to the audio file, and a `type` attribute that defines that type of audio file it is, such as an mp3 file.
+
+The text inside the `audio` tag will show if your browser does not support JavaScript.
 
 ## `<b>`
+This is used to make text bold. It can be used in place of the `strong` tag which also makes text bold. Text that you want to make bold is text that you and your users are going to consider important. Simply wrap the text you want to be bold in this tag as in the example below:
+
+```html
+<b>I am important text because I am in bold</b>
+```
 
 ## `<blockquote>`
+Is used to specify content that has been quoted from another source.
+
+**Example:**
+```html
+<blockquote cite="http://eduketa.com">
+  You can easily learn how to code using Eduketa. Did you know?
+</blockquote>
+```
+
+It takes in a `cite` attribute which links to the source being quoted.
 
 ## `<body>`
+This tag contains all the visible content for your website. Everything that you want your users to interact with, to see or to read should be placed inside the body tags.
+
+**Example:**
+```html
+<body>
+  <article>
+    <h1>Welcome to self-taught learning with Eduketa</h1>
+    <p>Learn programming, transcription and even sybersecurity with our extensive documentation</p>
+    <button>Show me how</button>
+    <img src="https://eduketa.com/logo.png" alt="Eduketa logo" />
+  </article>
+</body>
+```
 
 ## `<br />`
+Inserts a single line break between elements.
+
+**Example:**
+```html
+<article>
+  <h2>Diary of a wimpy kid</h2>
+  <br /
+  <p>This is a story of a boy who used to cry a lot.</p>
+</article>
+```
 
 ## `<button>`
+This is used to represent a clickable button.
+
+**Example:**
+```html
+<button>Subscribe</button>
+```
 
 ## `<canvas>`
+This is used to draw graphics on web pages with the help of JavaScript.
+
+**Example from W3Schools:**
+```javascript
+<canvas id="myCanvas">
+Your browser does not support the canvas tag.
+</canvas>
+
+<script>
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(0, 0, 80, 80);
+</script>
+```
+
+The example above draws a red rectangle. The text inside the `canvas` element will display when you have JavaScript disabled in your web browser, or when the script to draw the canvas fails to load.
 
 ## `<caption>`
+This is used to add a caption for a table. It must be inserted immediately after the `table` tag.
+
+**Example:**
+```html
+<table>
+  <caption>Table showing expenditure against budget</caption>
+  
+  <!-- Rest of the table goes here -->
+</table>
+```
+
+By default, table captions are aligned to the center.
 
 ## `<code>`
+Is used to represent code, or a code block.
 
-## `<details>`
+**Example:**
+```html
+<body>
+  <p>It is a good idea to use <code>meta</code> tags to improve SEO</p>
+</body>
+```
 
 ## `<div>`
-
-## `<footer>`
 
 ## `<form>`
 

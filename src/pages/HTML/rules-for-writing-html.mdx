@@ -26,6 +26,10 @@ However, it is not recommended to use uppercase letters because they are hard to
 
 Also, do not mix lowercase and uppercase letters, such as `seCTion`. Even though it will not break your website, if you go back to your code in a few weeks or months, you are going to experience self-inflicted intellectual torture.
 
+### Only have one `<h1>` per page
+
+In HTML, headings are numbered `h1` to `h6`, with `h1` being the biggest heading, and `h6` being the smallest heading. For every unique page in your website, you should always have a `h1` tag, and it should be the only one for that entire page. However, you can have multiple of the rest of the headings. This is because web crawlers always search for the `h1` to quickly know what your website is about, and therefore improve your search rankings in search engines.
+
 ### Always close corresponding tags
 
 "Every action has an equal and opposite reaction", said Newton. HTML replied and said, "Yes. And almost every opening tag must have an equal and corresponding closing tag".
@@ -38,7 +42,7 @@ HTML tags are opened by surrounding the element name with angle brackets(`<>`) a
   <head>
     <title>Eduketa</title>
   </head>
-  </body>
+  <body>
     Eduketa is an  amazing platform for learning web development.
   </body>
 </html>
@@ -232,6 +236,35 @@ The above example quickly becomes hard to read, tiresome to maintain, and cumber
   <p>Particular unaffected projection sentiments no my.</p>
 </section>
 ```
+
+### Add proper indentation
+
+Use proper indentation whenever possible in order to make your code easier to read. Consider the examples below:
+
+**Example 1:**
+```html
+<body>
+<article>
+<h1>Welcome to self-taught learning with Eduketa</h1>
+<p>Learn programming, transcription and even sybersecurity with our extensive documentation</p>
+<button>Show me how</button>
+</article>
+</body>
+```
+
+**Example 2:**
+```html
+<body>
+  <article>
+    <h1>Welcome to self-taught learning with Eduketa</h1>
+    <p>Learn programming, transcription and even sybersecurity with our extensive documentation</p>
+    <button>Show me how</button>
+  </article>
+</body>
+```
+
+You can quickly tell using example 2 that has the proper indentation, that it is not only easier to read, but you can also tell the hierarchy of the elements. Therefore, always use proper indentation, which is usually 2 spaces. If you have a Formatter installed, it can enforce this rule for you so that you don't have to keep adding spaces manually.
+
 
 ### Always have the `title` element
 
