@@ -1,0 +1,30 @@
+# HTML Entities
+
+HTML possesses some reserved characters. For example, if you want to display a mathematical expression where one number is greater than the other, you might do something like this:
+
+```html
+8 > 2
+```
+
+However, this might not be the best method because you never know whether the browser will take the ">" symbol and interpret is as a tag. The solution to this is to use HTML Entities.
+
+HTML Entities are used to display reserved characters. For example, the "greater than" symbol will now become `&gt;`
+
+**Example:**
+
+```html
+8 &gt; 2
+```
+
+It might not make sense seeing this example, but whent the browser encounters this, it translates it to the correct symbol.
+
+Other examples include:
+
+1. `&nbsp;` - a non-breaking space
+2. `&copy;` - copyright symbol
+3. `&quot;` - single quote
+4. `&reg;` - registered trademark
+
+> HTML Entities start with `&` and end with a `;`.
+
+A complete reference for you is on [this link](https://www.w3schools.com/html/html_entities.asp)
