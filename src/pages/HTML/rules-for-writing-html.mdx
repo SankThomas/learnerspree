@@ -2,21 +2,21 @@
 
 Even though HTML is not a programming language, it has some rules and conventions that help developers put out clean, easy-to-read, and maintainable code.
 
-### HTML File Extensions
+### 1. HTML File Extensions
 
 HTML files must always have the extension `.html` or `.htm`. For example, a testimonials page could be called `testimonials.html`
 
-### Always have an `index.html` file in your workspace
+### 2. Always have an `index.html` file in your workspace
 
 Whenever you are building a new website, always make sure you have an `index.html` file at the root of your workspace. This file works as the entry point of your entire website. If you don't have it, you won't even be able to deploy your website to the internet.
 
 Once you have your index file, then you can begin to add other page files as neccessary such as an `about.html` or `contact.html` and so on and so forth.
 
-### Always declare the document type
+### 3. Always declare the document type
 
 In HTML5, we declare the document type by adding the line `<!DOCTYPE html>`. By doing this, you tell the browser that you are about to write code using HTML5 standards. Always declare this line at the very top of your document.
 
-### Use lowercase element and attribute names
+### 4. Use lowercase element and attribute names
 
 Once again, HTML is not a programming language. Therefore, it is not case sensitive. This means that if you declare a section using the `section` element, you can declare it in lowercase or in uppercase.
 
@@ -26,11 +26,11 @@ However, it is not recommended to use uppercase letters because they are hard to
 
 Also, do not mix lowercase and uppercase letters, such as `seCTion`. Even though it will not break your website, if you go back to your code in a few weeks or months, you are going to experience self-inflicted intellectual torture.
 
-### Only have one `<h1>` per page
+### 5. Only have one `<h1>` per page
 
 In HTML, headings are numbered `h1` to `h6`, with `h1` being the biggest heading, and `h6` being the smallest heading. For every unique page in your website, you should always have a `h1` tag, and it should be the only one for that entire page. However, you can have multiple of the rest of the headings. This is because web crawlers always search for the `h1` to quickly know what your website is about, and therefore improve your search rankings in search engines.
 
-### Always close corresponding tags
+### 6. Always close corresponding tags
 
 "Every action has an equal and opposite reaction", said Newton. HTML replied and said, "Yes. And almost every opening tag must have an equal and corresponding closing tag".
 
@@ -62,7 +62,7 @@ Note however, that there are some tags that don't need to be closed in order for
 
 The first block is not closed. The second block is closed. Even though they do the same thing, the second way is the recommended way to do it as it also helps to avoid confusion, and to follow the convention so that other people can also read and understand your code, and help you out by contributing to your codebase.
 
-### Close empty elements
+### 7. Close empty elements
 
 We have just seen how we should always close all opening tags. Now, we are going to go further and learn that even thought the premiering statement is true, there are some elements that are exempt to this rule.
 
@@ -80,7 +80,7 @@ Examples include:
 
 Notice how the all have a space and then an ending forward slash? These are completely optional. You can safely remove them and remain with only the angle brackets and the tag name. Both ways are an acceptable convention.
 
-### Always quote attribute names
+### 8. Always quote attribute names
 
 Attributes are used to give additional information about an element, and they usually come in key-value pairs: i.e name="some_name". For example, I can add a `height` attribute to a `section` as follows:
 
@@ -156,7 +156,7 @@ The following are the most common types of attributes:
 <a href="/next-page" title="Click me to go to the next page">Next Page</a>
 ```
 
-### Always specify an `alt` attribute for images
+### 9. Always specify an `alt` attribute for images
 
 `alt` attributes are used to give information about images in case they fail to load. This can be helpful to end users because, rather than sitting and waiting for an image that will never load, they will see the text, and perhaps reload the page.
 
@@ -168,11 +168,11 @@ The following are the most common types of attributes:
 
 > HTML does accept that decorative images such as icons do not need to have an `alt` attribute. However, frameworks such as NextJs have rules to ensure that all images have `alt` attributes in order to keep with the standard for web development.
 
-### Avoid long code lines
+### 10. Avoid long code lines
 
 It is good practice to always limit your code lines to 80 characters per line. Formatters such as Prettier have this rule in place so that when single code lines exceed 80 characters, they break up the line.
 
-### Avoid unnecessary spaces
+### 11. Avoid unnecessary spaces
 
 In HTML, empty spaces are ignored. For example, if you have a line of code like:
 
@@ -188,7 +188,7 @@ and another one:
 
 They will both render the same thing to the user. These kinds of spaces are unnecessary in HTML and should be avoided. They make your code harder to read and they are also harder to type.
 
-### Add Blank lines when necessary
+### 12. Add Blank lines when necessary
 
 A good practice when writing code in any language is to always separate large blocks of code using blank lines. This helps make your code readable and easy to maintain and debug.
 
@@ -237,7 +237,7 @@ The above example quickly becomes hard to read, tiresome to maintain, and cumber
 </section>
 ```
 
-### Add proper indentation
+### 13. Add proper indentation
 
 Use proper indentation whenever possible in order to make your code easier to read. Consider the examples below:
 
@@ -273,14 +273,12 @@ Use proper indentation whenever possible in order to make your code easier to re
 
 You can quickly tell using example 2 that has the proper indentation, that it is not only easier to read, but you can also tell the hierarchy of the elements. Therefore, always use proper indentation, which is usually 2 spaces. If you have a Formatter installed, it can enforce this rule for you so that you don't have to keep adding spaces manually.
 
-### Always have the `title` element
+### 14. Always have the `title` element
 
 The `title` element describes the what the document or website is about. This is important to not only search engines but also to end users who will immediately know what the website is about. The title element should always be placed in the `head` section of your html document.
 
-### Always have the `html`, `head`, and `body` tags
+### 15. Always have the `html`, `head`, and `body` tags
 
 Even if you do not have these tags present in your document, the browser is intelligent enough to detect it and add them in automatically.
 
 However, you should always have them in because if you don't have the `head` tag, then where will you place your metadata and link your stylesheet? And without the `html` tag, then how would you define the primary language of your document? And without the `body` tag, then how would you know where to start and stop adding content to your website?
-
-In the next module, we are going to look at HTML Tags
