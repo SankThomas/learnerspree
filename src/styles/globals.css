@@ -9,7 +9,7 @@
 }
 
 body {
-  @apply bg-[#111111] dark:bg-[#111111];
+  @apply bg-white dark:bg-[#111111];
   font-family: "Inter", sans-serif;
 }
 
@@ -31,4 +31,8 @@ li {
 
 h1 {
   text-transform: capitalize;
+}
+
+.landing-button {
+  @apply bg-blue-500 text-white hover:bg-blue-600 transition-all duration-150;
 }
