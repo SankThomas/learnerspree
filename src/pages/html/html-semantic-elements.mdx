@@ -62,6 +62,16 @@ Defines a dropdown section that users can open and close whenever they need to. 
 </details>
 ```
 
+> Additional styling has been applied for the interactive example below:
+
+<details>
+  <summary>Details</summary>
+  <p>
+    Did you know I am hidden content that you can only see when you click the
+    button? These are the things they don't want you to know.
+  </p>
+</details>
+
 When you run the snippet above, you will have a title called "Details" and an icon that, when you click, will show the text inside. If you want to change this title to something more descriptive, use the `<summary>` tag. See the example below:
 
 ```html
@@ -73,6 +83,16 @@ When you run the snippet above, you will have a title called "Details" and an ic
   </p>
 </details>
 ```
+
+> Additional styling has been applied for the interactive example below:
+
+<details>
+  <summary>Read more...</summary>
+  <p>
+    Did you know I am hidden content that you can only see when you click the
+    button? These are the things they don't want you to know.
+  </p>
+</details>
 
 The title will now show "Read more..." instead of the default "Details".
 
@@ -205,6 +225,12 @@ Is used to highlight text.
 </p>
 ```
 
+<p className="bg-[#FFFF00] inline-block">
+  <mark>
+    Shino: This is important text. The reason is because it is highlighted.
+  </mark>
+</p>
+
 ## `<nav>`
 
 Represents a set of navigational links. Usually, only include the major links in the `nav` element.
@@ -219,6 +245,23 @@ Represents a set of navigational links. Usually, only include the major links in
   <a href="create-account.html">Create Account</a>
 </nav>
 ```
+
+The above code example is going to render the following navigation:
+
+<nav className="flex gap-2">
+  <a href="about.html" className="text-blue-500 underline">
+    About us
+  </a>
+  <a href="contact.html" className="text-blue-500 underline">
+    Contact us
+  </a>
+  <a href="login.html" className="text-blue-500 underline">
+    Login
+  </a>
+  <a href="create-account.html" className="text-blue-500 underline">
+    Create Account
+  </a>
+</nav>
 
 ## `<section>`
 
@@ -256,6 +299,13 @@ Represents the visible clickable heading of the `details` tag. It should be the 
   <p>You're lying Dolores. And one mustn't tell lies.</p>
 </details>
 ```
+
+The code snippet above renders the following: (additional styling has been applied so this is not how it looks by default).
+
+<details>
+  <summary>A famous quote...</summary>
+  <p>You're lying Dolores. And one mustn't tell lies.</p>
+</details>
 
 ## `<time>`
 
