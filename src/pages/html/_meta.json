@@ -1,5 +1,5 @@
 {
-  "html": "What is HTML",
+  "html": "What is HTML?",
   "useful-docs": "Useful Docs",
   "additional-setup": "Additional Setup",
   "a-simple-html-program": "A Simple HTML Program",
@@ -9,8 +9,10 @@
   "html-semantic-elements": "HTML Semantic Elements",
   "types-of-elements": "Types Of HTML Elements",
   "working-with-images": "Working With Images",
+  "working-with-forms": "Working With Forms",
   "meta": "Meta Tags",
   "seo": "Search Engine Optimization",
   "html-entities": "HTML Entities",
-  "html-events": "HTML Events"
+  "html-events": "HTML Events",
+  "what-next": "What Next?"
 }
