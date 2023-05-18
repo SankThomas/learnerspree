@@ -3,3 +3,114 @@ import { Callout } from "nextra-theme-docs";
 # Working With Forms
 
 <Callout type="info">This page is under construction</Callout>
+
+The `form` element is used to create a HTML form which accepts user input. It contains a couple of components for it to be complete.
+
+## 1. The `input` element
+
+The `input` element is used to create an input that users can fill, such as a text input for usernames, or ones that they can select, such as a checkbox or radio button.
+
+It is used to create text fields.
+
+## 2. The `label` element
+
+The `label` is essentially the name of the input. For example, you can have a `label` and then link it to your input so that when the user clicks on the label, it automatically triggers the input.
+
+It is recommended that your inputs should always have labels. You can circumvent this rule though depending on your needs.
+
+## The `submit` button
+
+The submit button is going to trigger the `submit` event of the form so that functions like form validation can run. You can create a submit button using a `button` element, or by using an `input` with a `type` of `submit`, i.e:
+
+```html
+<input type="submit" value="Submit" />
+```
+
+This will render:
+
+<br />
+
+<input type="submit" value="Submit" />
+
+## Form examples
+
+> For reasons that adding demo forms breaks the website (because the form triggers a reload event when it is submitted), I am not showing the demo. However, you can try out the code on your local machine to test out what you will have.
+
+### A form that accepts a username, email and password
+
+```html
+<form>
+  <label for="username">Username</label>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    placeholder="Enter your username"
+    required
+  />
+
+  <label for="email">Enter your email</label>
+  <input
+    type="email"
+    name="email"
+    id="email"
+    placeholder="Enter your email"
+    required
+  />
+
+  <label for="password">Enter your password</label>
+  <input
+    type="password"
+    name="password"
+    id="password"
+    placeholder="Enter your password"
+    required
+  />
+
+  <button type="submit">Log In</button>
+</form>
+```
+
+> I have made a habit of giving the `name` and `id` attributes the same name as the input type I am creating to improve the workflow. However, you can have whatever names you want, as long as you have the correct input type.
+
+### A form with a radio buttons
+
+```html
+<form>
+  <label for="option1">Option 1</label>
+  <input type="radio" name="option1" id="option1" />
+
+  <label for="option2">Option 2</label>
+  <input type="radio" name="option2" id="option2" />
+
+  <label for="option3">Option 3</label>
+  <input type="radio" name="option3" id="option3" />
+
+  <button type="submit">Next Page</button>
+</form>
+```
+
+### A form with multiple checkbox options
+
+```html
+<form>
+  <h2>Please select all options relevant to you</h2>
+
+  <input type="checkbox" name="checkbox1" id="checkbox1" />
+  <label for="checkbox1">High School Graduate</label>
+
+  <input type="checkbox" name="checkbox2" id="checkbox2" />
+  <label for="checkbox2">Undergraduate Degree</label>
+
+  <input type="checkbox" name="checkbox3" id="checkbox3" />
+  <label for="checkbox3">PhD</label>
+
+  <button type="submit">Confirm Selection</button>
+</form>
+```
+
+## Form Events
+
+Now that we know how to create forms, there are events that go along with the forms. For example, there is a submit event when you submit the form, there is a change event when you change the value of the input by typing something in, among others, which we are going to look at below.
+
+### `onsubmit` event
