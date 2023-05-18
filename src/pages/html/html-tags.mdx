@@ -519,119 +519,6 @@ You can create inputs depending on the one you want to show your users. All thes
 </form>
 ```
 
-The example above renders the following inputs: (Additional styling has been applied for the presentation)
-
-<br />
-
-<div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-  <article>
-    <label for="firstname" className="cursor-pointer">Enter your first name</label>
-    <input type="text" name="firstname" id="firstname" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="email" className="cursor-pointer">Enter your email</label>
-    <input type="email" name="email" id="email" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
-  </article>
-  
-  <article>
-    <label for="password" className="cursor-pointer">Enter your password</label>
-    <input type="password" name="password" id="password" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
-  </article>
-  
-  <article>
-    <label for="number" className="cursor-pointer">Choose a number</label>
-    <input type="number" name="number" id="number" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
-  </article>
-  
-  <article>
-    <label for="myCheckbox" className="cursor-pointer">Receive updates on new releases</label>
-    <input type="checkbox" name="myCheckbox" id="myCheckbox" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
-  </article>
-  
-  <article>
-    <label for="myButtn" className="cursor-pointer">Button input</label>
-    <input type="button" name="myButton" id="myButton" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="color-picker" className="cursor-pointer">What is your favorite color?</label>
-    <input type="color" name="color-picker" id="color-picker" className="block border-2 border-black dark:border-white cursor-pointer" />
-  </article>
-  
-  <article>
-    <label for="calendar" className="cursor-pointer">Enter your email</label>
-    <input type="date" name="calendar" id="calendar" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="file-picker" className="cursor-pointer">Choose a file to upload</label>
-    <input type="file" name="file-picker" id="file-picker" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="captcha" className="cursor-pointer">I am not a robot</label>
-    <input type="hidden" name="captcha" id="captcha" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="submit-button" className="cursor-pointer">Log In</label>
-    <input type="image" src="https://www.pngall.com/wp-content/uploads/5/Account-Login-Button-PNG-Picture.png" name="submit-button" id="submit-button" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="month" className="cursor-pointer">What is your birth month?</label>
-    <input type="month" name="month" id="month" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="radio-button" className="cursor-pointer">Choose your destiny</label>
-    <input type="radio" name="radio-button" id="radio-button" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="range-slider" className="cursor-pointer">On a scale of 1 to 10...</label>
-    <input type="range" name="range-slider" id="range-slider" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="reset" className="cursor-pointer">Reset form inputs</label>
-    <input type="reset" name="reset" id="reset" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="search" className="cursor-pointer">Search for a country</label>
-    <input type="search" name="search" id="search" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="submit-button" className="cursor-pointer">Submit Form</label>
-    <input type="submit" name="submit" id="submit" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="phone-number" className="cursor-pointer">Enter your phone number</label>
-    <input type="tel" name="phone-number" id="phone-number" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="time" className="cursor-pointer">What time is it?</label>
-    <input type="time" name="time" id="time" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="website" className="cursor-pointer">What is your website?</label>
-    <input type="url" name="website" id="website" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-  
-  <article>
-    <label for="week" className="cursor-pointer">Week and Year</label>
-    <input type="week" name="week" id="week" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
-  </article>
-</div>
-
-> NOTE: In the visual example above, a `div` is used in place of the `form` to prevent the page from reloading and causing errors when you interact with it in this documentation. However, when creating your own inputs, you should always use a form.
-
 ## `<label>`
 
 Defines the text to show for an `input`. It takes in a `for` attribute which should be equal to the `id` attribute of the same input.
@@ -770,36 +657,360 @@ The above examples shows a range slider which has an initial value of "50". When
 
 ## `<p>`
 
-Defines a paragraph.
+Defines a paragraph. It is a block element, therefore they will all start on a new line, unless you change it to an inline element using CSS.
+
+**Example:**
+
+```html
+<p>Lorem ipsum is dummy text</p>
+<p>It has been used as placeholder text since the 1500s,</p>
+<p>And it was popularized in the 1960s</p>
+```
+
+Will render:
+<br />
+
+<p>Lorem ipsum is dummy text</p>
+<p>It has been used as placeholder text since the 1500s,</p>
+<p>And it was popularized in the 1960s</p>
 
 ## `<pre>`
 
+Represents preformatted text.
+
+**Example:**
+
+```html
+<pre>
+  Lorem ipsum dolor sit amet
+  consectetur adipiscing elit.
+  Lorem ipsum is dummy text.
+</pre>
+```
+
+Will render the following:
+
+<br />
+
+<pre>
+  Lorem ipsum dolor sit amet
+  consectetur adipiscing elit.
+  Lorem ipsum is dummy text.
+</pre>
+
+Preformatted text does not respect the borders you have placed within your document. So if the text was more than the width of your device, it would overflow, as in the example below:
+
+```html
+<pre>This is some really long text that will overflow when the device width is greater than the amount of text here</pre>
+```
+
+Will render: 
+
+<br />
+
+<pre>This is some really long text that will overflow when the device width is greater than the amount of text here</pre>
+
 ## `<q>`
+
+Inserts a quotation mark.
+
+**Example:**
+
+```html
+<p>He said to <q>handle</q> the situation</p>
+```
+
+Will render:
+
+<br />
+<p>He said to <q>handle</q> the situation</p>
 
 ## `<script>`
 
-## `<select>`
+Is used to add JavaScript code to your HTML. It can also be used to link external JavaScript files in your HTML document.
+
+**Example:**
+
+```html
+<!-- Adding Javascript code -->
+<script>
+  alert("Welcome to my house");
+</script>
+
+<!-- Linking an external JavaScript file -->
+<script src="index.js"></script>
+```
+
+The `script` tag can be added in the `head` of your HTML document, or in the body. It is good practice that if you add it in the `head`, you give it a `defer` attribute to ensure that the script will only trigger once everything else in your HTML has loaded in. This improves website loading speed because scripts do not allow your website to load until they have executed.
+
+If you add your script in your body, then it is recommended to add it right before the closing `body` tag to ensure that the script loads last, after all the HTML had loaded in. The reason for this convention is the same as having the `defer` attribute on the `script` tag.
+
+**Example:**
+
+```html
+<!-- Adding the script in the head -->
+<head>
+  <!-- Some HTML code -->
+  <script src="index.js" defer></script>
+</head>
+
+<!-- Adding the script in the body -->
+<body>
+  <!-- Some HTML code here -->
+  
+  <script src="index.js"></script>
+</body>
+```
+
+When you add the  `script` tag as the last element just before closing the `body` tag, you don't need to have the `defer` attribute on it, because it will load last already, because of how HTML inteprets your code.
 
 ## `<small>`
 
+It is an inline element that is used to render smaller text. It can be used for copyright text, licence text, or some other information.
+
+**Example:**
+
+```html
+<p>This is the end of the documentation...Not</p>
+<p><small>Copyright 2023</small></p>
+```
+
 ## `<source>`
+
+Is used to define multiple sources of a piece of media such as audios, videos, and images.
+
+**Example:**
+
+```html
+<!-- Example using the audio tag -->
+<audio>
+  <source src="favsong.ogg" type="audio/ogg" />
+  <source src="favsong.mp3" type="audio/mpeg" />
+  Your browser does not support the audio tag.
+</audio>
+
+<!-- Example using the video tag -->
+<video width="320" height="240" controls>
+  <source src="movie.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+```
+
+It can also be used together with the `picture` tag in order to add multiple images for different device widths. More on this on the module about [Working With Images](/html/working-with-images#the-picture-element)
 
 ## `<span>`
 
+It is an inline element used to style up part of some text. It can be used just like a `div` with the only difference being that a `span` is an inline element and a `div` is a block element.
+
+**Example:**
+
+```html
+<h1>Professional, <span>Responsive</span> Web Design</h1>
+```
+
+You can then apply the styles that you want to the span, such as custom font sizes and colors, depending on your needs.
+
 ## `<strong>`
 
-## `<sup>`
+Is used to mark important text.
+
+**Example:**
+
+```html
+<p><strong>This text is important</strong></p>
+```
+
+This will render:
+
+<br />
+
+<p><strong>This text is important</strong></p>
+
+## `<sup>` and `sub`
+
+`sup` is used to represent superscript, and `sub` is used to represent subscript. Superscript text represents text such as Trademarks and Footnotes, while subscript text represents text such as chemical formulas.
+
+**Example:**
+
+```html
+<!-- Superscript -->
+<p>This is a registered Trademark<sup>TM</sup></p>
+
+<p>What is 2 log <sub>10</sub>?</p>
+```
+
+This will render:
+
+<br />
+
+<p>This is a registered Trademark<sup>TM</sup></p>
+
+<p>What is 2 log <sub>10</sub>?</p>
 
 ## `<svg>`
+Stands for Scalable Vector Graphics. It can be used to draw cirles, boxes, text and other graphic images, shapes, and other graphic images.
+
+**Example:**
+
+```html
+<svg width="400" height="100">
+  <rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+</svg>
+```
+
+This will draw a blue rectange, as in the illustration below:
+
+<svg width="400" height="100">
+  <rect
+    width="400"
+    height="100"
+    style={{
+    fill: "rgb(0,0,255)",
+    strokeWidth: 10,
+    stroke: "rgb(0,0,0)"
+  }} />
+</svg>
+
 
 ## `<table>`
 
+Is used to create a HTML Table. It is used together with other table tags in order to get the correct representation of the table.
+
+**Example:**
+
+```html
+<table>
+  <tr>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+</table>
+```
+
+More about tables is in the module [Working With Tables](/html/working-with-tables)
+
 ## `<template>`
+
+Is used to describe content that will be hidden when the page loads. This content can be shown using JavaScript.
+
+It is used to create components that you want to reuse in many parts of your website.
+
+**Example:**
+
+```html
+<template>
+  <h2>Profile Image</h2>
+  <img src="/profile.png" alt="Thomas Sankara Profile" />
+</template>
+```
+
+You can then use JavaScript to show this template when the user interacts with your website, such as when they click a button to show it.
 
 ## `<textarea>`
 
+Is used to create a multi-line text input. It is usually used to collect information such as comments, and reviews. It is used together with the `label` element just like the inputs.
+
+**Example:**
+
+```html
+<label for="comments">Leave a comment</label>
+
+<textarea
+  name="comments"
+  id="comments"
+  cols="10"
+  rows="10"
+  placeholder="Leave a comment">
+</textarea>
+```
+
+The above snippet will create a textarea input with 30 rows and 10 columns. You can style it depending on your needs. See the interactive example below: (Additional styling has been applied for the presentation)
+
+<br />
+
+<label for="comments" className="block">Leave a comment</label>
+
+<textarea
+  name="comments"
+  id="comments"
+  cols="30"
+  rows="10"
+  placeholder="Leave a comment" className="w-full">
+</textarea>
+
 ## `<title>`
+
+Is used to give the title of your HTML document. It is always placed in the `head` of your HTML document.
+
+**Example:**
+
+```html
+<head>
+  <title>Eduketa online course modules</title>
+</head>
+```
+
+The `title` will show up in the address bar.
 
 ## `<ul>`
 
+Is used to create an unordered list, usually with bullets. It is used together with `li` to create list items.
+
+**Example:**
+
+```html
+<ul>
+  <li>Eat</li>
+  <li>Sleep</li>
+  <li>Code</li>
+  <li>Repeat</li>
+</ul>
+```
+
+Will render: 
+
+<br />
+
+<ul className="list-disc pl-4">
+  <li>Eat</li>
+  <li>Sleep</li>
+  <li>Code</li>
+  <li>Repeat</li>
+</ul>
+
+> The bullets will not show if you have set `list-style-type` to `none` in your CSS.
+
+You can also use a `ul` to render navigation links.
+
+**Example:**
+
+```html
+<nav>
+  <ul>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</nav>
+```
+
 ## `<video>`
+
+Is used to add videos to your website.
+
+**Example:**
+
+```html
+<video>
+  <source src="video.ogg" type="video/ogg" />
+  <source src="video.mp4" type="video/mpeg" />
+  Your browser does not support the video tag.
+</video>
+```
+
+Usage is the same as the `audio` tag.
