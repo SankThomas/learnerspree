@@ -1,8 +1,4 @@
-import { Callout } from "nextra-theme-docs";
-
 # HTML Tags
-
-<Callout type="info">This page is under construction</Callout>
 
 > In this module, we are going to be looking a HTML tags in general, and then in a later module, we are going to look at those called "Semantic Elements", that were introduced in HTML5.
 
@@ -307,22 +303,22 @@ Is used to insert a horizontal rule in your document. Just like `<br />`, simply
 
 ## `<html>`
 
-This tag represents the root (starting point) of your HTML document. It is the parent component for all other tags that you will have in your web page - except the  `<!Doctype html>`
+This tag represents the root (starting point) of your HTML document. It is the parent component for all other tags that you will have in your web page - except the `<!Doctype html>`
 
-It takes in a  `lang` attribute which describes the language of the document. Always have the `lang` attribute as it helps search engines to know the language of your website.
+It takes in a `lang` attribute which describes the language of the document. Always have the `lang` attribute as it helps search engines to know the language of your website.
 
 **Example:**
 
 ```html
 <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <title>Title of the document</title>
-    </head>
-  
-    <body>
-      <h1>Hello world!</h1>
-    </body>
+<html lang="en">
+  <head>
+    <title>Title of the document</title>
+  </head>
+
+  <body>
+    <h1>Hello world!</h1>
+  </body>
 </html>
 ```
 
@@ -352,10 +348,10 @@ If you're embedding content such as a YouTube video, there are extra attributes 
   name="YouTube Intro Video"
   allowfullscreen="true"
   width="500px"
-  height="300px">
+  height="300px"
+>
 </iframe>
 ```
-
 
 ## `<img>`
 
@@ -368,6 +364,7 @@ Defines an input field that a user can use to enter data. It is the most importa
 The input is a self-closing tag.
 
 **Example:**
+
 ```html
 <form>
   <input type="text" />
@@ -379,7 +376,10 @@ This is the simplest definition of an `input` that you can have. The above creat
 <br />
 
 <form>
-  <input type="text" className="bg-white border border-black focus:outline-2 focus:outline-black ring-none shadow" />
+  <input
+    type="text"
+    className="bg-white border border-black focus:outline-2 focus:outline-black ring-none shadow"
+  />
 </form>
 
 Additional styling has been applied to the example above so that it can be viewed on both dark and light modes. More about styling inputs in the CSS modules.
@@ -396,7 +396,8 @@ The input takes in a couple of other attributes which defines what type of input
     name="username"
     id="username"
     placeholder="Enter your username"
-    required />
+    required
+  />
 </form>
 ```
 
@@ -416,7 +417,8 @@ Below is that the example above is going to render:
     id="username"
     placeholder="Enter your username"
     className="border-2 border-black"
-    required />
+    required
+  />
 </form>
 
 > The `label` and `input` elements are both inline elements - they start on the same line - hence the appearance above of the label and input being on the same line.
@@ -432,87 +434,91 @@ You can create inputs depending on the one you want to show your users. All thes
 ```html
 <!-- A form with autocomplete disabled -->
 <form autocomplete="off">
-  
   <!-- An input that accepts text -->
   <label for="firstname">Enter your first name</label>
   <input type="text" name="firstname" id="firstname" />
-  
+
   <!-- An input for that accepts emails only -->
   <label for="email">Enter your email</label>
-  <input type="email" name="email" id="email"/>
-  
+  <input type="email" name="email" id="email" />
+
   <!-- An input that accepts passwords only -->
   <label for="password">Enter your password</label>
   <input type="password" name="password" id="password" />
-  
+
   <!-- A number input -->
   <label for="number">Choose a number</label>
   <input type="number" name="number" id="number" />
-  
+
   <!-- An input that creates a checkbox -->
   <label for="myCheckbox">Receive updates on new releases</label>
   <input type="checkbox" name="myCheckbox" id="muyCheckbox" />
-  
+
   <!-- An input that creates a button -->
   <label for="myButton">Button input</label>
   <input type="button" name="myButton" id="myButton" />
-  
+
   <!-- An inputs that shows a color picker -->
   <label for="color-picker">What is your favorite color?</label>
   <input type="color" name="color-picker" id="color-picker" />
-  
+
   <!-- An input that shows a calendar -->
   <label for="calendar">Enter your email</label>
   <input type="date" name="calendar" id="calendar" />
-  
+
   <!-- An input that allows users to select files from their machine -->
   <label for="file-picker">Choose a file to upload</label>
   <input type="file" name="file-picker" id="file-picker" />
-  
+
   <!-- A hidden input usually used for the infamous "I am not a Robot captcha" -->
   <label for="captcha">I am not a robot</label>
   <input type="hidden" name="captcha" id="captcha" />
-  
+
   <!-- An image as the form submit button. Pass the image in the `src` attribute -->
   <label for="submit-button">Log In</label>
-  <input type="image" src="submit.gif" name="submit-button" id="submit-button" />
-  
+  <input
+    type="image"
+    src="submit.gif"
+    name="submit-button"
+    id="submit-button"
+  />
+
   <!-- A month datepicker -->
   <label for="month">What is your birth month?</label>
   <input type="month" name="month" id="month" />
-  
+
   <!-- Creates a radio button -->
   <label for="radio-button">Choose your destiny</label>
   <input type="radio" name="radio-button" id="radio-button" />
-  
+
   <!-- Creates a range slider -->
   <label for="range-slider">On a scale of 1 to 10...</label>
   <input type="range" name="range-slider" id="range-slider" />
-  
+
   <!-- Resets all form values to their initial values -->
   <label for="reset">Reset</label>
   <input type="reset" name="reset" id="reset" />
-  
+
   <!-- Defines a search input -->
   <label for="search">Search for a country</label>
   <input type="search" name="search" id="search" />
-  
+
   <!-- Defines a submit button -->
   <label for="submit-button">Submit Form</label>
   <input type="submit" name="submit" id="submit" />
-  
+
   <!-- Defines a telephone number input -->
   <label for="phone-number">Enter your phone number</label>
   <input type="tel" name="phone-number" id="phone-number" />
-  
+
   <!-- Defines a time input -->
   <label for="time">What time is it?</label>
   <input type="time" name="time" id="time" />
-  
+
   <!-- Defines a url input -->
   <label for="website">What is your website?</label>
   <input type="url" name="website" id="website" />
-  
+
   <!-- Creates a datepicker for week and year -->
   <label for="week">Week and Year</label>
   <input type="week" name="week" id="week" />
@@ -576,6 +582,7 @@ Creates an ordered (numbered) list, either numerical or alphabetical.
 ```
 
 Will create:
+
 <br />
 
 <ol>
@@ -630,7 +637,9 @@ The above example outputs the following: (Additional styling has been applied)
 
 <br />
 
-<label for="country" className="block">From where do you originate?</label>
+<label for="country" className="block">
+  From where do you originate?
+</label>
 
 <select id="country" className="w-full max-w-xs">
   <option value="Kenya">Kenya</option>
@@ -648,8 +657,10 @@ Is used to show the result of a calculation.
 ```html
 <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
   <input type="range" id="a" value="50" />
-  +<input type="number" id="b" value="25" />
-  =<output name="x" for="a b"></output>
+  +<input type="number" id="b" value="25" /> =<output
+    name="x"
+    for="a b"
+  ></output>
 </form>
 ```
 
@@ -668,6 +679,7 @@ Defines a paragraph. It is a block element, therefore they will all start on a n
 ```
 
 Will render:
+
 <br />
 
 <p>Lorem ipsum is dummy text</p>
@@ -693,22 +705,26 @@ Will render the following:
 <br />
 
 <pre>
-  Lorem ipsum dolor sit amet
-  consectetur adipiscing elit.
-  Lorem ipsum is dummy text.
+  Lorem ipsum dolor sit amet consectetur adipiscing elit. Lorem ipsum is dummy
+  text.
 </pre>
 
 Preformatted text does not respect the borders you have placed within your document. So if the text was more than the width of your device, it would overflow, as in the example below:
 
 ```html
-<pre>This is some really long text that will overflow when the device width is greater than the amount of text here</pre>
+<pre>
+This is some really long text that will overflow when the device width is greater than the amount of text here</pre
+>
 ```
 
-Will render: 
+Will render:
 
 <br />
 
-<pre>This is some really long text that will overflow when the device width is greater than the amount of text here</pre>
+<pre>
+  This is some really long text that will overflow when the device width is
+  greater than the amount of text here
+</pre>
 
 ## `<q>`
 
@@ -723,7 +739,9 @@ Inserts a quotation mark.
 Will render:
 
 <br />
-<p>He said to <q>handle</q> the situation</p>
+<p>
+  He said to <q>handle</q> the situation
+</p>
 
 ## `<script>`
 
@@ -757,12 +775,11 @@ If you add your script in your body, then it is recommended to add it right befo
 <!-- Adding the script in the body -->
 <body>
   <!-- Some HTML code here -->
-  
   <script src="index.js"></script>
 </body>
 ```
 
-When you add the  `script` tag as the last element just before closing the `body` tag, you don't need to have the `defer` attribute on it, because it will load last already, because of how HTML inteprets your code.
+When you add the `script` tag as the last element just before closing the `body` tag, you don't need to have the `defer` attribute on it, because it will load last already, because of how HTML inteprets your code.
 
 ## `<small>`
 
@@ -791,8 +808,8 @@ Is used to define multiple sources of a piece of media such as audios, videos, a
 
 <!-- Example using the video tag -->
 <video width="320" height="240" controls>
-  <source src="movie.mp4" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
+  <source src="movie.mp4" type="video/mp4" />
+  <source src="movie.ogg" type="video/ogg" />
   Your browser does not support the video tag.
 </video>
 ```
@@ -825,7 +842,9 @@ This will render:
 
 <br />
 
-<p><strong>This text is important</strong></p>
+<p>
+  <strong>This text is important</strong>
+</p>
 
 ## `<sup>` and `sub`
 
@@ -844,18 +863,27 @@ This will render:
 
 <br />
 
-<p>This is a registered Trademark<sup>TM</sup></p>
+<p>
+  This is a registered Trademark<sup>TM</sup>
+</p>
 
-<p>What is 2 log <sub>10</sub>?</p>
+<p>
+  What is 2 log <sub>10</sub>?
+</p>
 
 ## `<svg>`
+
 Stands for Scalable Vector Graphics. It can be used to draw cirles, boxes, text and other graphic images, shapes, and other graphic images.
 
 **Example:**
 
 ```html
 <svg width="400" height="100">
-  <rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+  <rect
+    width="400"
+    height="100"
+    style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)"
+  />
 </svg>
 ```
 
@@ -866,12 +894,12 @@ This will draw a blue rectange, as in the illustration below:
     width="400"
     height="100"
     style={{
-    fill: "rgb(0,0,255)",
-    strokeWidth: 10,
-    stroke: "rgb(0,0,0)"
-  }} />
+      fill: "rgb(0,0,255)",
+      strokeWidth: 10,
+      stroke: "rgb(0,0,0)",
+    }}
+  />
 </svg>
-
 
 ## `<table>`
 
@@ -925,23 +953,26 @@ Is used to create a multi-line text input. It is usually used to collect informa
   id="comments"
   cols="10"
   rows="10"
-  placeholder="Leave a comment">
-</textarea>
+  placeholder="Leave a comment"
+></textarea>
 ```
 
 The above snippet will create a textarea input with 30 rows and 10 columns. You can style it depending on your needs. See the interactive example below: (Additional styling has been applied for the presentation)
 
 <br />
 
-<label for="comments" className="block">Leave a comment</label>
+<label for="comments" className="block">
+  Leave a comment
+</label>
 
 <textarea
   name="comments"
   id="comments"
   cols="30"
   rows="10"
-  placeholder="Leave a comment" className="w-full">
-</textarea>
+  placeholder="Leave a comment"
+  className="w-full"
+></textarea>
 
 ## `<title>`
 
@@ -972,7 +1003,7 @@ Is used to create an unordered list, usually with bullets. It is used together w
 </ul>
 ```
 
-Will render: 
+Will render:
 
 <br />
 
