@@ -242,6 +242,8 @@ The `form` element takes in an optional attribute called `action` which defines 
 </form>
 ```
 
+> The default behavior of a `form` element is to reload the entire webpage when the form is submitted. You can present this with JavaScript.
+
 ## `<h1>`
 
 HTML has six headings which start with `<h1>` as the biggest heading, and `<h6>` as the smallest heading. All these are used to create headings within your HTML document.
@@ -305,25 +307,470 @@ Is used to insert a horizontal rule in your document. Just like `<br />`, simply
 
 ## `<html>`
 
+This tag represents the root (starting point) of your HTML document. It is the parent component for all other tags that you will have in your web page - except the  `<!Doctype html>`
+
+It takes in a  `lang` attribute which describes the language of the document. Always have the `lang` attribute as it helps search engines to know the language of your website.
+
+**Example:**
+
+```html
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>Title of the document</title>
+    </head>
+  
+    <body>
+      <h1>Hello world!</h1>
+    </body>
+</html>
+```
+
 ## `<iframe>`
+
+Defines an inline frame. It is used to embed content from another document into the current HTML document. They are mostly used for media such as embedding YouTube videos into your website.
+
+**Example:**
+
+```html
+<iframe src="https://tsbsankara.com"></iframe>
+```
+
+If you're embedding content such as a YouTube video, there are extra attributes that you need to add to the `iframe`:
+
+1. `allowfullscreen` - this is set to either `true` or `false` and allows the user to play the video in fullscreen mode.
+2. `height` - used to define the height of the `iframe`
+3. `width` - used to define the width of the `iframe`
+4. `name` - is the name of the `iframe`
+5. `src` - specifies the web address of the document you want to embed.
+
+**Example:**
+
+```html
+<iframe
+  src="https://youtube.com/tsbsankara/video.mp4"
+  name="YouTube Intro Video"
+  allowfullscreen="true"
+  width="500px"
+  height="300px">
+</iframe>
+```
+
 
 ## `<img>`
 
+This is used to embed images in your HTML document. More information about this tag is available in the module about [Working With Images](/html/working-with-images)
+
 ## `<input />`
+
+Defines an input field that a user can use to enter data. It is the most important component of the `form` element.
+
+The input is a self-closing tag.
+
+**Example:**
+```html
+<form>
+  <input type="text" />
+</form>
+```
+
+This is the simplest definition of an `input` that you can have. The above creates a single input that a user can use to enter text information, numbers, and symbols, as in the example below:
+
+<br />
+
+<form>
+  <input type="text" className="bg-white border border-black focus:outline-2 focus:outline-black ring-none shadow" />
+</form>
+
+Additional styling has been applied to the example above so that it can be viewed on both dark and light modes. More about styling inputs in the CSS modules.
+
+The input takes in a couple of other attributes which defines what type of input you want to create. It is also used in conjuction with the `label` element which "links" it to the input.
+
+**Example:**
+
+```html
+<form>
+  <label for="username">Enter your username</label>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    placeholder="Enter your username"
+    required />
+</form>
+```
+
+The `label` element takes in a `for` attribute which should match either the `id` or `name` of the input to which it is linked. In the example above, it is linked to the input that has the `name` and `id` of `username`. The text within the `label` represents the visible text that the users can read.
+
+The above example creates an input of type `text` to accept text input, as well as adding a `name` and `id` attribute which links it to the `label`. The `placeholder` adds guiding text that you want to appear inside the input. The `required` attribute adds HTML5 validation so that the form cannot be submitted until the input is filled.
+
+Below is that the example above is going to render:
+
+<br />
+
+<form>
+  <label for="username">Enter your username</label>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    placeholder="Enter your username"
+    className="border-2 border-black"
+    required />
+</form>
+
+> The `label` and `input` elements are both inline elements - they start on the same line - hence the appearance above of the label and input being on the same line.
+
+The input also supports autofilling data. So, if you have saved some data in your browser such as you name and email address, when you create an input that accepts the name and another that accepts the email address, you have the option to autofill the data.
+
+If you want to disable the autofill, set `autocomplete="off"` on the parent `form` element.
+
+### Input types
+
+You can create inputs depending on the one you want to show your users. All these are dependent on the input types. See the examples below:
+
+```html
+<!-- A form with autocomplete disabled -->
+<form autocomplete="off">
+  
+  <!-- An input that accepts text -->
+  <label for="firstname">Enter your first name</label>
+  <input type="text" name="firstname" id="firstname" />
+  
+  <!-- An input for that accepts emails only -->
+  <label for="email">Enter your email</label>
+  <input type="email" name="email" id="email"/>
+  
+  <!-- An input that accepts passwords only -->
+  <label for="password">Enter your password</label>
+  <input type="password" name="password" id="password" />
+  
+  <!-- A number input -->
+  <label for="number">Choose a number</label>
+  <input type="number" name="number" id="number" />
+  
+  <!-- An input that creates a checkbox -->
+  <label for="myCheckbox">Receive updates on new releases</label>
+  <input type="checkbox" name="myCheckbox" id="muyCheckbox" />
+  
+  <!-- An input that creates a button -->
+  <label for="myButton">Button input</label>
+  <input type="button" name="myButton" id="myButton" />
+  
+  <!-- An inputs that shows a color picker -->
+  <label for="color-picker">What is your favorite color?</label>
+  <input type="color" name="color-picker" id="color-picker" />
+  
+  <!-- An input that shows a calendar -->
+  <label for="calendar">Enter your email</label>
+  <input type="date" name="calendar" id="calendar" />
+  
+  <!-- An input that allows users to select files from their machine -->
+  <label for="file-picker">Choose a file to upload</label>
+  <input type="file" name="file-picker" id="file-picker" />
+  
+  <!-- A hidden input usually used for the infamous "I am not a Robot captcha" -->
+  <label for="captcha">I am not a robot</label>
+  <input type="hidden" name="captcha" id="captcha" />
+  
+  <!-- An image as the form submit button. Pass the image in the `src` attribute -->
+  <label for="submit-button">Log In</label>
+  <input type="image" src="submit.gif" name="submit-button" id="submit-button" />
+  
+  <!-- A month datepicker -->
+  <label for="month">What is your birth month?</label>
+  <input type="month" name="month" id="month" />
+  
+  <!-- Creates a radio button -->
+  <label for="radio-button">Choose your destiny</label>
+  <input type="radio" name="radio-button" id="radio-button" />
+  
+  <!-- Creates a range slider -->
+  <label for="range-slider">On a scale of 1 to 10...</label>
+  <input type="range" name="range-slider" id="range-slider" />
+  
+  <!-- Resets all form values to their initial values -->
+  <label for="reset">Reset</label>
+  <input type="reset" name="reset" id="reset" />
+  
+  <!-- Defines a search input -->
+  <label for="search">Search for a country</label>
+  <input type="search" name="search" id="search" />
+  
+  <!-- Defines a submit button -->
+  <label for="submit-button">Submit Form</label>
+  <input type="submit" name="submit" id="submit" />
+  
+  <!-- Defines a telephone number input -->
+  <label for="phone-number">Enter your phone number</label>
+  <input type="tel" name="phone-number" id="phone-number" />
+  
+  <!-- Defines a time input -->
+  <label for="time">What time is it?</label>
+  <input type="time" name="time" id="time" />
+  
+  <!-- Defines a url input -->
+  <label for="website">What is your website?</label>
+  <input type="url" name="website" id="website" />
+  
+  <!-- Creates a datepicker for week and year -->
+  <label for="week">Week and Year</label>
+  <input type="week" name="week" id="week" />
+</form>
+```
+
+The example above renders the following inputs: (Additional styling has been applied for the presentation)
+
+<br />
+
+<div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+  <article>
+    <label for="firstname" className="cursor-pointer">Enter your first name</label>
+    <input type="text" name="firstname" id="firstname" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="email" className="cursor-pointer">Enter your email</label>
+    <input type="email" name="email" id="email" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
+  </article>
+  
+  <article>
+    <label for="password" className="cursor-pointer">Enter your password</label>
+    <input type="password" name="password" id="password" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
+  </article>
+  
+  <article>
+    <label for="number" className="cursor-pointer">Choose a number</label>
+    <input type="number" name="number" id="number" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
+  </article>
+  
+  <article>
+    <label for="myCheckbox" className="cursor-pointer">Receive updates on new releases</label>
+    <input type="checkbox" name="myCheckbox" id="myCheckbox" className="block border-2 border-black dark:border-white cursor-pointer w-full"  />
+  </article>
+  
+  <article>
+    <label for="myButtn" className="cursor-pointer">Button input</label>
+    <input type="button" name="myButton" id="myButton" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="color-picker" className="cursor-pointer">What is your favorite color?</label>
+    <input type="color" name="color-picker" id="color-picker" className="block border-2 border-black dark:border-white cursor-pointer" />
+  </article>
+  
+  <article>
+    <label for="calendar" className="cursor-pointer">Enter your email</label>
+    <input type="date" name="calendar" id="calendar" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="file-picker" className="cursor-pointer">Choose a file to upload</label>
+    <input type="file" name="file-picker" id="file-picker" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="captcha" className="cursor-pointer">I am not a robot</label>
+    <input type="hidden" name="captcha" id="captcha" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="submit-button" className="cursor-pointer">Log In</label>
+    <input type="image" src="https://www.pngall.com/wp-content/uploads/5/Account-Login-Button-PNG-Picture.png" name="submit-button" id="submit-button" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="month" className="cursor-pointer">What is your birth month?</label>
+    <input type="month" name="month" id="month" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="radio-button" className="cursor-pointer">Choose your destiny</label>
+    <input type="radio" name="radio-button" id="radio-button" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="range-slider" className="cursor-pointer">On a scale of 1 to 10...</label>
+    <input type="range" name="range-slider" id="range-slider" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="reset" className="cursor-pointer">Reset form inputs</label>
+    <input type="reset" name="reset" id="reset" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="search" className="cursor-pointer">Search for a country</label>
+    <input type="search" name="search" id="search" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="submit-button" className="cursor-pointer">Submit Form</label>
+    <input type="submit" name="submit" id="submit" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="phone-number" className="cursor-pointer">Enter your phone number</label>
+    <input type="tel" name="phone-number" id="phone-number" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="time" className="cursor-pointer">What time is it?</label>
+    <input type="time" name="time" id="time" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="website" className="cursor-pointer">What is your website?</label>
+    <input type="url" name="website" id="website" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+  
+  <article>
+    <label for="week" className="cursor-pointer">Week and Year</label>
+    <input type="week" name="week" id="week" className="block border-2 border-black dark:border-white cursor-pointer w-full" />
+  </article>
+</div>
+
+> NOTE: In the visual example above, a `div` is used in place of the `form` to prevent the page from reloading and causing errors when you interact with it in this documentation. However, when creating your own inputs, you should always use a form.
 
 ## `<label>`
 
+Defines the text to show for an `input`. It takes in a `for` attribute which should be equal to the `id` attribute of the same input.
+
+The label increases the clickable area of an input as it triggers the input when it is clicked.
+
+**Example:**
+
+```html
+<label for="search">Search for a country</label>
+<input type="search" name="search" id="search" />
+```
+
+> When you click on the text in the label, it also triggers the input and shows the keyboard if you're on mobile.
+
 ## `<link>`
+
+This is used to link external stylesheets which contain your CSS code, into the HTML document that requires it. It must be placed within the `head` of your HTML file.
+
+It takes in a `rel` attribute which describes the relationship of the document you are linking, i.e a stylesheet, and another `href` attribute which is the relative link to the actual CSS file.
+
+It is a self-closing tag.
+
+**Example:**
+
+```html
+<head>
+  <link rel="stylesheet" href="index.css" />
+</head>
+```
 
 ## `<noscript>`
 
+Defines alternate content that will be displayed to users who have disabled JavaScript in the browser, or if the scripts is unable to load.
+
+**Example:**
+
+```html
+<noscript>You need to enable JavaScript for this app to run.</noscript>
+```
+
 ## `<ol>`
 
-## `<option>`
+Creates an ordered (numbered) list, either numerical or alphabetical.
+
+**Example:**
+
+```html
+<ol>
+  <li>Eat</li>
+  <li>Sleep</li>
+  <li>Code</li>
+  <li>Repeat</li>
+</ol>
+```
+
+Will create:
+<br />
+
+<ol>
+  <li>1. Eat</li>
+  <li>2. Sleep</li>
+  <li>3. Code</li>
+  <li>4. Repeat</li>
+</ol>
+
+You can also define the starting point of your numbering using the `start` attribute on the `ol` element. For example, if you want your numbering to start at 800, you would do the following:
+
+```html
+<ol start="800">
+  <li>Eat</li>
+  <li>Sleep</li>
+  <li>Code</li>
+  <li>Repeat</li>
+</ol>
+```
+
+This creates the following:
+
+<ol start="800">
+  <li>800. Eat</li>
+  <li>801. Sleep</li>
+  <li>802. Code</li>
+  <li>803. Repeat</li>
+</ol>
+
+> Note: The numberings will not display if you have set the `list-style-type` property in CSS to `none`
+
+## `<select>` and `<option>`
+
+Are used to define a dropdown list.
+
+**Example:**
+
+```html
+<label for="country">From where do you originate?</label>
+
+<select id="country">
+  <option value="Kenya">Kenya</option>
+  <option value="Uganda">Uganda</option>
+  <option value="Tanzania">Tanzania</option>
+  <option value="Rwanda">Rwanda</option>
+</select>
+```
+
+`select` is the parent container for the `option`s. The `option` takes in a `value` attribute that defines what that particular option will choose.
+
+The above example outputs the following: (Additional styling has been applied)
+
+<br />
+
+<label for="country" className="block">From where do you originate?</label>
+
+<select id="country" className="w-full max-w-xs">
+  <option value="Kenya">Kenya</option>
+  <option value="Uganda">Uganda</option>
+  <option value="Tanzania">Tanzania</option>
+  <option value="Rwanda">Rwanda</option>
+</select>
 
 ## `<output>`
 
+Is used to show the result of a calculation.
+
+**[Example from W3Schools:](https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_output)**
+
+```html
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+  <input type="range" id="a" value="50" />
+  +<input type="number" id="b" value="25" />
+  =<output name="x" for="a b"></output>
+</form>
+```
+
+The above examples shows a range slider which has an initial value of "50". When you change the slider, it adds "25" plus the current position of the slider (between 0 and 100 by default), and then shows the output in the output tag.
+
 ## `<p>`
+
+Defines a paragraph.
 
 ## `<pre>`
 
