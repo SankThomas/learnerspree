@@ -9,7 +9,7 @@
 }
 
 body {
-  @apply bg-white dark:bg-[#111111];
+  @apply bg-white;
   font-family: "Inter", sans-serif;
 }
 
