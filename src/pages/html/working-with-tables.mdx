@@ -2,6 +2,10 @@ import { Callout } from "nextra-theme-docs";
 
 # Working With Tables
 
+<Callout type="warning">
+  When on mobile devices, this page has an overflow on the x-axis (you can scroll horizontally). This is an intended feature, and the reason for it is explained in the [Tables on Mobile](#tables-on-mobile) section.
+</Callout>
+
 Tables are used to create - obviously - tabulated data. There are a number of elements available to use with the `table` element in order to make data presentable, alongside styling it with some attributes and with CSS as well.
 
 The default structure of a table is to create a `table` tag. It is a block element.
@@ -406,7 +410,7 @@ And you can see that this is not only more readable, but also more presentable.
 
 ## Tables on mobile
 
-If you have been using a mobile device, you must have noticed by now that the tables we have created so far are not responsive: i.e.
+If you have been using a mobile device, you must have noticed by now that the tables we have created so far are not responsive: i.e. they cause a horizontal overflow.
 
 What you can do to such tables is add the `style` and then add a  property called `overflow` and set it to `auto` so that when the table width or content is greater than the device width, it will automatically introduce a horizontal scrollbar for the table only - as opposed to a horizontal scrollbar for the entire website. You don't want that to happen because it will massively break your user's experience.
 
