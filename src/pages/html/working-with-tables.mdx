@@ -5,3 +5,152 @@ import { Callout } from "nextra-theme-docs";
 <Callout type="info">
     This page is under construction
 </Callout>
+
+Tables are used to create - obviously - tabulated data. There are a number of elements available to use with the `table` element in order to make data presentable, alongside styling it with some attributes and with CSS as well.
+
+The default structure of a table is to create a `table` tag. It is a block element.
+
+**Example:**
+
+```html
+<table></table>
+```
+
+With combination of other tags available is the `table` element such as `thead`, `tbody`, `tr` and `td`, you can create headings for the table as well as rows, columns and the data in the table.
+
+<Callout type="error">
+    Never use tables to layout your website. Only use tables when you want to present structured data (rows and columns). Tables were not designed to layout your entire website from the navigation links to the footer.    
+</Callout>
+
+## Simple table example
+
+```html
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+
+  <tr>
+    <td>Thomas</td>
+    <td>25</td>
+  </tr>
+</table>
+```
+
+The code example above creates the following table:
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+
+  <tr>
+    <td>Thomas</td>
+    <td>25</td>
+  </tr>
+</table>
+
+> It doesn't look like a table does it? This is because an attribute, as well as CSS styling need to be applied to it in order for the table to span the entire width.
+
+### Table elements
+1. `tr` - Creates a table row
+1. `th` - Creates a table heading
+1. `td` - Adds table data to the cells.
+
+### Improved Example
+
+```html
+<table width="100%" >
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+
+  <tr>
+    <td>Thomas</td>
+    <td>25</td>
+  </tr>
+</table>
+```
+
+In the above code snippet, the table width has been set to `100%`. Therefore, it will output the following:
+
+<br />
+
+<table width="100%" >
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+
+  <tr>
+    <td>Thomas</td>
+    <td>25</td>
+  </tr>
+</table>
+
+<br />
+
+> Table headings are centered by default, and you can adjust the width of the table by adjusting the `width` of the table. For example, you can have a table of with `30%` or one of `3000%`.
+
+HTML Tables always have a border by default (even though they might not be visible). To remove these border, you need to style the table in your CSS by adding the `border-collapse: collapse` property. Also, you can set the table text to the left by adding the `text-align: left` property. For example:
+
+```html
+<!-- Adding the table styles inside the `head` of our document -->
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<table width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+
+  <tr>
+    <td>Thomas</td>
+    <td>25</td>
+  </tr>
+</table>
+```
+
+When adding more data to your table, make sure that the columns correspond to the number of headings and rows so that you don't get a weird-looking table. For example:
+
+```html
+<table width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+
+<!--
+Adding new items to the table. Notice that for each row,
+there are two table cells corresponding to the only two headings
+that we have
+-->
+
+  <tr>
+    <td>Tony</td>
+    <td>25</td>
+  </tr>
+  
+  <tr>
+    <td>Luke</td>
+    <td>30</td>
+  </tr>
+  
+  <tr>
+    <td>Thomas</td>
+    <td>38</td>
+  </tr>
+</table>
+```
+
+###
