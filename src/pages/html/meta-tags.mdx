@@ -1,0 +1,220 @@
+# Meta Tags
+
+`meta` tags represent metadata about your website. Metadata is information about data. For example, if you have a file, you can view when it was created, who created it, when it was modified, and by whom it was modified. These are examples of metadata.
+
+In HTML, `meta` tags are used to define the character set of the document, page descriptions, keywords, authors, viewport, and social media cards which display when sharing content. `meta` tags are always placed in the `head` of your HTML document.
+
+`meta` tags have the syntax `<meta name="" content="" />`
+
+In the example on the page about A Simple HTML Program, we had something similar to this:
+
+```html
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+```
+
+The first line represents the character set to use in the HTML document. UTF-8 is the most popular character encoding. Each character is represented by one to four bytes. Below are further references for UTF-8
+
+1. [W3Schools](https://www.w3schools.com/tags/tag_meta.asp)
+2. [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)
+3. [MDN Docs](https://developer.mozilla.org/en-US/docs/Glossary/UTF-8)
+
+The second line tells the browser that the webpage being created should be optimized or compatible with Internet Explorer.
+
+The third and final line tells the browser that the contents of the webpage should fit within the width of the device with which it is being viewed, and should not be zoomed in.
+
+You can also add other `meta` tags. See the example below:
+
+```html
+<meta name="description" content="Learn HTML on Eduketa" />
+<meta name="keywords" content="HTML, Learn HTML, Eduketa" />
+<meta name="author" content="Thomas Sankara" />
+```
+
+The first line above gives a description of the webpage. Make sure that you make this as descriptive as you can, but not so long, taking note that this description is what is going to appear in a Google Search.
+
+The second line gives a series of keywords associated with your website that, when searched for, will increase the chances that your website is going to appear in the top search results.
+
+The third line adds the author of the website.
+
+Just by adding these few lines to your webiste, you will have already greatly increased your chances of being found out by search engines. This is called Search Engine Optimization.
+
+NOTE: `meta` tags are heavily used in Search Engine Optimization. More on this in the module about [SEO](/HTML/seo).
+
+## Open Graph Meta Tags: What are they?
+
+Aside from the basic `meta` tags discussed above, there is also another type of `meta` tags called open graph tags. Have you ever shared a social media post and a kind of card shows up such as the one below?
+
+![open-graph-image](src/assets/open-graph-image.png)
+
+Such cards are beautiful to look at, and they are made possible using open graph meta tags. Notice that the card above has the title, the link to the website, the title of the document or article that is being shared, and the description of the webpage that will open when you click the link. So, how do you create such a card? You guessed it! We use open graph tags. Take a look at the example below:
+
+```html
+<meta property="og:title" content="Fundamentals of ReactJs: With Examples" />
+<meta
+  property="og:description"
+  content="Practical content and explanations from my over 4 years' experience in Front-end Web Development"
+/>
+<meta
+  property="og:image"
+  content="https://tsbsankara.gumroad.com/book-cover.png"
+/>
+```
+
+The example above renders the book card in the image shown. Can you tell what the code does? And can you notice the slight difference with normal open graph tags? When using OG tags, you need to have the `og:` directive before the name of the `meta` tag that you want. So instead of just having `description`, you now have `og:description` and so on.
+
+### Why use Open Graph Tags?
+
+1. They help social media websites to understand what the shared content is about.
+2. They are eye-catching and are therefore more likely to be clicked on by users.
+3. They describe your content at a glance.
+
+There are 17 OG Tags listed in [Facebook's official documentation](https://developers.facebook.com/docs/sharing/webmasters/) which is also linked at the end of this page. We are going to go through the most commonly used ones.
+
+#### `og:site_name`
+
+This is the name that your overall website is on.
+
+**Example:**
+
+```html
+<meta name="og:site_name" content="Eduketa" />
+```
+
+#### `og:url`
+
+This is the canonical URL for your website. It has the syntax: `<meta name="og:url" content="" />`. A canonical URL is one that prevents duplicate pages by using the most recent or most preferred page; i.e, the one that you specify in the `content` attribute.
+
+**Example:**
+
+```html
+<meta name="og:url" content="https://eduketa.com" />
+```
+
+#### `og:title`
+
+This is the title of your article or document, such as your site name. It has the syntax `<meta name="og:title" content="" />`
+
+**Example:**
+
+```html
+<meta name="og:title" content="Eduketa Online Course Modules Platform" />
+```
+
+#### `og:description`
+
+This is a short description about the content. Facebook recommends that they should be about 2 to 4 sentences. The description will be displayed below the title. It has the syntax: `<meta name="og:description" content="" />`
+
+**Example:**
+
+```html
+<meta
+  name="og:description"
+  content="Eduketa is an online educational platform that allows you access to programming resources, and quizes and projects that will help you to build real world projects."
+/>
+```
+
+#### `og:image`
+
+This is the URL of the image that appears when someone shares your content. It has the syntax: `<meta name="og:image" content="">`
+
+**Example:**
+
+```html
+<meta name="og:image" content="https://eduketa.com/logo.png" />
+```
+
+#### `og:type`
+
+This represents the type of content that you are sharing, such as an article, website, music and video. It has the syntax: `<meta name="og:type" content="">`.
+
+**Examples:**
+
+```html
+<meta name="og:type" content="article" />
+<meta name="og:type" content="website" />
+<meta name="og:type" content="music.song" />
+<meta name="og:type" content="video.movie" />
+```
+
+Notice how you can add objects as the reference when using `og:type`. These objects are defined by the community, and have to be agreed upon before a new one can be added, or changes made to old ones. [Here is a complete reference for you.](https://ogp.me/)
+
+#### `og:locale`
+
+Locale is an identifier for a region. It defaults to `en_US` but can be changed to an accepted locale such as `es_LA` for Spanish, `en_GB` for British English, and `fr_FR` for French. It has the syntax: `<meta name="og:locale" content="">`
+
+**Example:**
+
+```html
+<meta name="og:locale" content="en_US" />
+<meta name="og:locale:alternate" content="en_GB" />
+```
+
+`og:locale` can also be used with `og:locale:alternate` if your content is available in other languages also. The syntax remains the same.
+
+#### `og:video`
+
+This is the URL for the video. It has the syntax: `<meta name="og:video" content="">`
+
+**Example:**
+
+```html
+<meta
+  name="og:video"
+  content="https://youtube.com/@tsbsankara/videos/link-to-video"
+/>
+```
+
+[Read more about open graph tags](https://developers.facebook.com/docs/sharing/webmasters/) from Facebook's official documentation.
+
+## Twitter `meta` tags
+
+Open Gragh Meta Tags are used for Facebook advertisement. Twitter also has its own brand of sharing using `meta` tags, and it is as simple as adding open graph meta tags, and substituting `og` with `twitter`.
+
+**Example:**
+
+```html
+<meta name="twitter:title" content="Eduketa | Learn online" />
+<meta name="twitter:description" content="Easily learn web development" />
+<meta name="twitter:image" content="https://eduketa.com/logo.png" />
+```
+
+Congratulations. You have successfully added cards for Twitter.
+
+> [Here](https://www.digitalocean.com/community/tutorials/how-to-add-twitter-card-and-open-graph-social-metadata-to-your-webpage-with-html) is a useful resource to learn more about open graph tags, and Twitter metadata.
+
+## Full example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn HTML on Eduketa" />
+    <meta name="keywords" content="HTML, Learn HTML, Eduketa" />
+    <meta name="author" content="Thomas Sankara" />
+
+    <!-- Open graph metadata -->
+    <meta name="og:site_name" content="Eduketa" />
+    <meta name="og:url" content="https://eduketa.com" />
+    <meta name="og:title" content="Eduketa Online Course Modules Platform" />
+    <meta name="og:description" content="Eduketa | Learn online" />
+    <meta name="og:image" content="https://eduketa.com/logo.png" />
+    <meta name="og:type" content="website" />
+    <meta name="og:locale" content="en_US" />
+    <meta name="og:locale:alternate" content="en_GB" />
+
+    <!-- Twitter metadata -->
+    <meta name="twitter:title" content="Eduketa | Learn online" />
+    <meta name="twitter:description" content="Easily learn web development" />
+    <meta name="twitter:image" content="https://eduketa.com/logo.png" />
+    <title>Meta Tags Full Example</title>
+  </head>
+  <body>
+    <h1>Meta Tags Full Example</h1>
+  </body>
+</html>
+```
