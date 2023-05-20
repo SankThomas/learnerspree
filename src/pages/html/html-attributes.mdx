@@ -14,28 +14,295 @@ Global Attributes are attributes that can be used with all HTML elements. Listed
 
 ### `accesskey`
 
+This specifies a keyboard key that can be used to focus an element.
+
+**Example:**
+
+```html
+<p>Click on T to focus on the button</p>
+
+<button accesskey="t">T to Focus</button>
+```
+
+The above is going to output the following:
+
+<br />
+
+<p>Click on T to focus on the button</p>
+
+<button accessKey="t">T to Focus</button>
+
 ### `class`
+
+The `class` attribute is used to add custom classnames to your elements so that you can target the elements in your CSS when styling them. You can have the same `class`es on multiple elements.
+
+**Example:**
+
+```html
+<p class="showcase-text">This is some text on the hero page of the website</p>
+
+<p class="showcase-text">This is some other text separate from the hero page</p>
+```
 
 ### `contenteditable`
 
+Is used to define whether the content of an element can be editable. For example, if you wanted to have some text that the users can edit, you can use this attribute.
+
+**Example:**
+
+```html
+<p contenteditable="true">This is some editable text</p>
+```
+
+The above example is going to output the following. (When you click on the text, you can edit it).
+
+<br />
+
+<p contentEditable="true">This is some editable text</p>
+
 ### `data-*`
+
+These are called data attributes that allow for information to be shared between your HTML and JavaScript.
+
+You can call these whatever you want, as long as you begin it with the word `data-`. For example; `data-name="Thomas"`, `data-country="Kenya"` and so on and so forth.
+
+**Example:**
+
+```html
+<p data-id="3008">I'm 3008, You're 2000 and late.</p>
+```
+
+> You must not have capital letters in the the `data-` attribute.
 
 ### `dir`
 
+This is used to indicate the direction of an element's text. It can only have three values:
+
+1. `rtl` - right to left
+2. `ltr` - left to right
+3. `auto` - orients text depending on your settings or region
+
+**Example:**
+
+```html
+<p dir="rtl">Text that is right to left</p>
+<p dir="ltr">Text that is left to right</p>
+<p dir="auto">Text that is set to auto</p>
+```
+
+The above examples renders the following:
+
+<br />
+
+<p dir="rtl">Text that is right to left</p>
+<p dir="ltr">Text that is left to right</p>
+<p dir="auto">Text that is set to auto</p>
+
 ### `draggable`
+
+Specifies whether an elements should be draggable by mouse. When defining whether an element should be draggable, always specify a value of `true` or `false`.
+
+**Example:**
+
+```html
+<img draggable="true" src="image.png" alt="An draggable image" />
+```
+
+The above example is good. The one below is not good:
+
+```html
+<img draggable src="image.png" alt="An draggable image" />
+```
+
+<Callout>
+  Always specify a value of `true` or `false` on the `draggable` attribute.
+</Callout>
 
 ### `hidden`
 
+This is used to hide elements that you don't want displayed to the user until a certain condition has been met. For example, you can use it to hide some content until the user completes the sign up procedure, and more infamously, it is used to display the annoying "I am not a robot" captchas when you submit a form.
+
+**Example:**
+
+```html
+<p hidden>These are the things they don't want you to know</p>
+```
+
+The `hidden` attribute can be set to an empty string (as above) which defaults to the hidden state, or it can be set to the `until-found` value.
+
+When set to the `until-found` value, the content of the element is only accessible to the browsers "find in page" feature: i.e `Ctrl + F`. When this happens, the browser removes the `hidden` attribute on the element and makes it accessible on the web page.
+
 ### `id`
+
+This defines an identifier that <strong>MUST</strong> be unique throughout the entire document: i.e you cannot have two elements having the same `id`, unlike `class`es.
+
+**Example:**
+
+```html
+<input type="text" id="username" class="username" />
+
+<!-- Classes can be reused, but id's MUST be unique -->
+
+<input type="text" id="username2" class="username" />
+```
 
 ### `lang`
 
+This is used to define the language of an element.
+
+**Example:**
+
+```html
+<p lang="en">A paragraph that uses English as the language</p>
+
+<p lang="en-GB">A paragraph that uses British English as the language</p>
+
+<p lang="fr">A paragraph that uses French as the language</p>
+```
+
+Sometimes, the `lang` attribute is ignored if you have already set a global language of your document in the `html` tag.
+
 ### `spellcheck`
+
+This is used to define whether an element should be spellchecked for errors. It can be used with the `contenteditable` attribute where you want some kind of verification to the user when they type something in.
+
+It takes in either `true` or `false` as the attribute values.
+
+**Example:**
+
+```html
+<p contenteditable spellcheck="true">This paragraph will be spellchecked</p>
+
+<p contenteditable spellcheck="false">
+  This paragraph will NOT be spellchecked
+</p>
+```
+
+> Always set spellchecking to `false` if you are going to be getting sensitive information from the users.
 
 ### `style`
 
+Is used to define inline CSS styles on an element.
+
+**Example:**
+
+```html
+<p style="background-color: red; color: white;">
+  This is a paragraph with a red background color
+</p>
+```
+
+The above example will output the following:
+
+<br />
+
+<p
+  style={{
+    backgroundColor: "red",
+    color: "white",
+  }}
+>
+  This is a paragraph with a red background color
+</p>
+
 ### `tabindex`
+
+This is used to make elements focussable, or to prevent them from being sequentially focussable, and to determine the order in which they are going to be focussed - all this, when using the `Tab` key.
+
+In HTML, elements such as `input`s and `button`s are focussable by default. Other elements such as `div`s and `section`s are not focussable by default. However, when you give them the `tabindex` attribute, they become focussable.
+
+**Example:**
+
+```html
+<label>I am the first element: <input type="text" /></label>
+
+<!-- Cannot focus on this element -->
+<section>I can't be focussed. That makes me sad</section>
+
+<!-- Can focus on this element -->
+<section tabindex="0">I can be focussed. Hooray!</section>
+
+<button>Focus on me</button>
+```
+
+The above example will output the following: Click on the label and the use the `Tab` key to see the magic.
+
+<br />
+
+<label>
+  I am the first element: <input type="text" />
+</label>
+
+<br />
+
+<section>I can't be focussed. That makes me sad</section>
+
+<br />
+
+<section tabindex="0">I can be focussed. Hooray!</section>
+
+<br />
+
+<button>Focus on me</button>
 
 ### `title`
 
+This is used to display more information about the element, kind of like a tooltip.
+
+> This is NOT the same as the `title` element.
+
+**Example:**
+
+```html
+<button title="Go to the login page">Login</button>
+```
+
+This will output a button which, upon hover, will show the text. See the example below:
+
+<br />
+
+<button title="Go to the login page">Login</button>
+
+The main use of the `title` attribute is to add more information to `iframe`s so that screen readers can know what they are about.
+
+**Example from MDN Docs:**
+
+```html
+<iframe
+  title="Wikipedia page for the HTML language"
+  src="https://en.m.wikipedia.org/wiki/HTML"
+  width="100%"
+  height="300px"
+></iframe>
+```
+
+Will output:
+
+<br />
+
+<iframe
+  title="Wikipedia page for the HTML language"
+  src="https://en.m.wikipedia.org/wiki/HTML"
+  width="100%"
+  height="300px"
+></iframe>
+
 ### `translate`
+
+Is used to specify whether an element - and it's Text children should be translated when your webpage is localized.
+
+It takes in `yes` or `no` for its value.
+
+**Example:**
+
+```html
+<!-- Translatable section -->
+<section translate="yes">
+  <p>Le verre verse un verrier vers vingt heure</p>
+</section>
+
+<!-- Section not translatable -->
+<section translate="no">
+  <p>Le verre verse un verrier vers vingt heure</p>
+</section>
+```
