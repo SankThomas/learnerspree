@@ -234,39 +234,224 @@ This is the event that fires when a user presses a key on the keyboard - and rel
 
 ### `onclick`
 
+Fires when the mouse is clicked on an element, usually a button, such as when you want to go to another page on a website, or when you click a login button.
+
+**Example:**
+
+```html
+<button onclick="handleClick()">Next Page</button>
+```
+
 ### `onmousedown`
 
-### `onmousemove`
+This event fires when a mouse button (the left, middle, or right mouse button) is pressed over an element. Pressed, without being let go that is.
+
+**Example:**
+
+```html
+<p onmouseover="handleMouseOver()">
+  Omae wa mou shindeiru
+</p>
+```
+
+<Callout type="info">
+Depending on the mouse button you have clicked, and also depending on your mouse settings as to which is the primary button, the order of events is as follows:
+
+For the primary mouse button (usually left-click):
+  - `onmousedown`
+  - `onmouseup`
+  - `onclick`
+  
+For the secondary mouse button (usually right-click):
+  - `onmousedown`
+  - `onmouseup`
+  - `oncontextmenu`
+
+</Callout>
+
+### `onmousemove` and `onmouseover`
+
+These two events are similar, in that they are triggered when the mouse is (moving) over an element. You can use this to place focus on certain important elements on your website.
+
+**Example:**
+
+```html
+<!-- Example using `onmousemove` -->
+<img onmousemove="handleMouseMove()" src="your_image.png" alt="Random image" />
+
+<input type="text" onmousemove="handleFocusInput()" value="Hover this input" />
+
+<!-- Example using `onmouseover` -->
+<img onmouseover="handleMouseOver()" src="your_image.png" alt="Random image" />
+
+<input type="text" onmouseover="handleFocusInput()" value="Hover this input" />
+```
 
 ### `onmouseout`
 
-### `onmouseover`
+This event is usually used with the `onmouseover` event, and it triggers when the mouse moves away from an element.
+
+**Example:**
+
+```html
+<img onmouseout="handleMouseOut()" src="your_image.png" alt="Random image" />
+```
 
 ### `onmouseup`
 
+Triggers when the mouse is released over an element. It is usually used with the `onmousedown` event.
+
+**Example:**
+
+```html
+<p onmouseout="handleMouseOut()">
+  Omae wa mou shindeiru
+</p>
+```
+
 ### `onwheel`
+
+This event fires when the user uses the scroll button of the mouse to scroll an element, or using the touchpad of a laptop to scroll.
+
+**Example:**
+
+```html
+<section onwheel="handleWheelScroll()>
+  Some content here that can be scrolled.
+</section>
+```
 
 ## Drag events
 
 ### `ondrag`
 
+Fires when an element or the selection of an element is being dragged. To make an element draggable, simply add the `draggable` attribute to the element. Read more about the `draggable` attribute in [HTML Attributes](/html/html-attributes#draggable)
+
+**Example:**
+
+```html
+<div draggable="true" ondrag="handleDrag()"></div>
+```
+
 ### `ondragend`
+
+Fired when the user has finished dragging the element.
+
+**Example:**
+
+```html
+<div draggable="true" ondragend="handleDragEnd()"></div>
+```
 
 ### `ondragenter`
 
+This event fires when the element being dragged enters the drop zone or target.
+
+**Example:**
+
+```html
+<div draggable="true" ondragenter="handleDragEnter()"></div>
+```
+
 ### `ondragleave`
+
+This event fires when the draggable element leaves a valid drop target.
+
+**Example:**
+
+```html
+<div draggable="true" ondragleave="handleDragLeave()"></div>
+```
 
 ### `ondragover`
 
+This event triggers when the draggable element is over a valid drop target.
+
+**Example:**
+
+```html
+<div draggable="true" ondragover="handleDragOver()"></div>
+```
+
 ### `ondragstart`
+
+This event fires when the element begins to be dragged.
+
+**Example:**
+
+```html
+<div draggable="true" ondragstart="handleDragStart()"></div>
+```
 
 ### `ondrop`
 
+This event fires when the element is dropped in a valid drop target.
+
+**Example:**
+
+```html
+<div draggable="true" ondrop="handleDrop()"></div>
+```
+
+<Callout type="info">
+  The order of events when dragging an element are as follows:
+  
+  1. Events on the element being dragged:
+    - `ondragstart`
+    - `ondrag`
+    - `ondragend`
+    
+  2. Events fired on the drop target:
+    - `ondragover`
+    - `ondragover`
+    - `ondragleave`
+    - `ondrop`
+</Callout>
+
 ### `onscroll`
+
+This event fires when an element is being scrolled. Usually, this refers to the `body` element. However, you can make multiple elements scrollable in HTML.
+
+You can use this event to disply a "Back to top" button when the user begins to scroll down your website.
+
+**Example:**
+
+```html
+<body onscroll="handleScroll()">
+  <!-- Button to scroll to top when clicked -->
+  <button id="scroll-to-top-button" style="display: none">Scroll To Top</button>
+
+  <script>
+    // Get the scroll to top button and assign it to a custom
+    // variable called "scrollToTop"
+    const scrollToTop = document.getElementById("scroll-to-top-button");
+    
+    // Display the button as a block element when the user scrolls
+    // more than 100 pixels from the top of the document
+    if (window.element.scrollTop > 100) {
+      scrollToTop.style.display = "block";
+    }
+  </script>
+</body>
+```
 
 ## Clipboard events
 
 ### `oncopy`
+
+This event fires when the user copies the content of an input, or an element such as paragraph text, or an image.
+
+**Example:**
+
+```html
+<input type="text" oncopy="handleCopy()" value="Copy this text" />
+
+<script>
+  function handleCopy() {
+    alert("You have copied the text!");
+  }  
+</script>
+```
 
 ### `oncut`
 
