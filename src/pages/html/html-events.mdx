@@ -8,6 +8,8 @@ import { Callout } from "nextra-theme-docs";
 ### Note
 
 The examples below are just syntax. We will dive deeper into HTML Events when we get to JavaScript.
+
+Also, this page introduces slight JavaScript syntax which is added in `script` tags. If you're not comfortable reading JavaScript code, I recommend you go through the [Getting Started With JavaScript](/javascript/getting-started) and [JavaScript Functions](/javascript/functions) modules.
 </Callout>
 
 HTML has the ability to trigger certain actions when a user interacts with elements on the webpage. These actions are called "Events" and usually need the assistance of JavaSctipt to achieve the correct behaviour.
@@ -17,17 +19,15 @@ Examples of events are: a user submitting a form, clicking a button and scrollin
 These events are added as attributes to HTML elements as in the example below:
 
 ```html
-<form onsubmit="">
+<form eventName="functionName()">
   <!-- Rest of code -->
 </form>
 ```
 
 <Callout type="info">
+  All event attributes are added as "name-value" pairs.
 
-All event attributes are added as "name-value" pairs.
-
-Use the syntax `event_name="function()"` for all the events below.
-
+  Use the syntax `eventName="functionName()"` for all the events below.
 </Callout>
 
 The list below is not a complete reference to HTML Events, but rather a list of the most commonly used events. For a full list, visit the MDN Docs.
@@ -36,23 +36,199 @@ The list below is not a complete reference to HTML Events, but rather a list of 
 
 ### `onload`
 
+This is the event that fires when the document has finished loading. For example, you might want to display a "Cookies Policy" Popup after everything else has already loaded in.
+
+**Usage:**
+
+```html
+<body onload="showCookies()">
+  <!-- Some content here -->
+  
+  <script>
+    alert("Please accept the cookies");
+  </script>
+</body>
+```
+
+In the example above, an alert saying, "Please accept the cookies", will be shown to the user when they navigate to the page.
+
 ### `onoffline`
+
+The event that fires when the browser detects that you have no active internet connection. Using this event, you can do things such as display a notice that tells the user that they are offline the way YouTube and Facebook do.
+
+**Usage:**
+
+```html
+<body onoffline="handleAppOffline()">
+  <!-- Some content here -->
+  
+  <script>
+    function handleAppOffline() {
+      alert("You seem to be offline. Please check your internet connection.");
+    }
+  </script>
+</body>
+```
+
+In the example above, the browser will check whether you are offline and then display an alert telling you that you are offline.
+
+> NOTE: It's not a good idea to use alerts for everything because they do not allow any other interaction of your web app until they are closed.
 
 ### `ononline`
 
+This is the event that fires when the browser detects that you are (back) online. It is the opposite of `onoffline`.
+
+**Usage:**
+
+```html
+<body ononline="handleBackOnline()">
+  <!-- Some content here -->
+  
+  <script>
+    function handleBackOnline() {
+      alert("You are back online!");
+    }
+  </script>
+</body>
+```
+
 ### `onpageshow`
+
+This is similar to the `onload` event in that it triggers when the user navigates to the webpage. The difference between the two pages is that, `onpageshow` is going to trigger every single time that the user visits the website, but `onload` will only trigger when the website is not loaded from the cache.
+
+> When the website is loaded from cache, the `onload` event will not trigger.
+
+**Usage:**
+
+```html
+<body onpageshow="handleBackOnline()">
+  <!-- Some content here -->
+  
+  <script>
+    function handleBackOnline() {
+      alert("Welcome back!");
+    }
+  </script>
+</body>
+```
 
 ## Form events
 
-Form events have been covered in the module [Working With Forms](/html/working-with-forms#form-events)
+Form events have also been covered in the module [Working With Forms](/html/working-with-forms#form-events)
+
+### `onsubmit`
+
+This is the action that triggers when a user submits the form, either using the <kbd>Enter</kbd> key, or when they click the `Submit` button of the form. See the example below:
+
+```html
+<form onsubmit="handleSubmit()">
+ <!-- Rest of your form -->
+</form>
+```
+
+> The default behaviour for the form when a user submits it is to cause the entire webpage to reload. You can prevent this in JavaScript if you don't want this to happen. More on this in the JavaScript modules.
+
+Note that you can call the submit function on the form as in the example above, or you can add it to the submit button of the form. When you add it to the submit button, the event to use is `onclick` and no longer `onsubmit`. For example:
+
+```html
+<form>
+ <!-- Rest of your form -->
+ 
+ <button type="submit" onclick="handleSubmit()">Submit</button>
+</form>
+```
+
+You can add the submit function both on the form and on the button, as long as you use the correct event names.
+
+```html
+<!-- Submit function on the form -->
+<form onsubmit="handleSubmit()">
+ <!-- Rest of your form -->
+ 
+ <!-- Submit function on the button also -->
+ <button type="submit" onclick="handleSubmit()">Submit</button>
+</form>
+```
+
+<Callout type="info">
+  When you add the `submit` function on the button only and not on the form, what happens is called "event bubbling". This means that the event is propagated upwards from where it is fired - in this case the button when it is clicked - up until it reaches the parent element - in this case the form.
+</Callout>
+
+
+
+### `onblur`
+
+This event triggers when focus is lost on the form or on an input. It can be used to call a validation function immediately the user finishes typing in and clicks away, or it can be used for more subtle things like changing the background color of an input when the user clicks away, to show that they have filled in the input.
+
+The syntax is:
+
+```html
+<form onblur="handleBlur()"></form>
+```
+
+### `onchange`
+
+This is the event that fires whenever the value of an input changes. Not all inputs use the `onchange` event. For example, a checkbox will use the `onchecked` event.
+
+It has the syntax:
+
+```html
+<form onchange="handleChange()"></form>
+```
+
+### `oncontextmenu`
+
+This is the event that fires when the uses presses the Right-Click button on the mouse to open the context menu.
+
+It has the syntax:
+
+```html
+<form oncontextmenu="handleOpenContextMenu()"></form>
+```
+
+### `onfocus`
+
+This is the opposite of the `onblur` event - instead of performing an action when an element loses focus, the `onfocus` will trigger when an element if focussed on such as when it is clicked.
+
+It has the syntax:
+
+```html
+<form onfocus="handleFocus()"></form>
+```
 
 ## Keyboard events
 
 ### `onkeydown`
 
+This event fires when the user is pressing a key on the keyboard.
+
+**Example:**
+
+```html
+<input type="text" onkeydown="handleKeyDown()" />
+```
+
 ### `onkeypress`
 
+This event fires when the user presses a key on the keyboard. It is similar to the `onkeydown` event - however, the difference is that `onkeypress` does not work for all keys such as <kbd>CTRL</kbd> and <kbd>ALT</kbd>.
+
+If you want to have an event that works for all keys, then use `onkeydown`.
+
+**Example:**
+
+```html
+<input type="text" onkeypress="handleKeyPress()" />
+```
+
 ### `onkeyup`
+
+This is the event that fires when a user presses a key on the keyboard - and releases it.
+
+**Example:**
+
+```html
+<input type="text" onkeyup="handleKeyUp()" />
+```
 
 ## Mouse events
 
@@ -94,12 +270,112 @@ Form events have been covered in the module [Working With Forms](/html/working-w
 
 ### `oncut`
 
+This event fires when you cut some text inside an input. It is usually used with `input`s which have a type of `text`, but can also be used with elements that have the `contenteditable` attribute set to `true`. Read more about `contenteditable` in the module, [HTML Attributes](/html/html-attributes#contenteditable)
+
+**Example:**
+
+```html
+<input type="text" oncut="handleCut()" value="Cut this text" />
+
+<script>
+  function handleCut() {
+    alert("You have pasted in some content");
+  }  
+</script>
+
+<!-- A paragraph where you can cut the text -->
+<p contenteditable="true" oncut="handleCut()">You can cut this text</p>
+
+<script>
+  function handleCut() {
+    alert("You have cut this content");
+  }  
+</script>
+```
+
 ### `onpaste`
+
+This is the event that fires when you paste something in your document - usually in `input`s which have a type of `text`.
+
+You can also paste in some content in other elements - however, they have to have the attribute of `contenteditable` set to `true`. Read more about `contenteditable` in the module, [HTML Attributes](/html/html-attributes#contenteditable)
+
+**Example:**
+
+```html
+<!-- An input where you can paste something in -->
+<input type="text" onpaste="handlePaste()" value="Paste something in" />
+
+<script>
+  function handlePaste() {
+    alert("You have pasted in some content");
+  }  
+</script>
+
+<!-- A paragraph where you can paste something in -->
+<p contenteditable="true" onpaste="handlePaste()">Paste something here</p>
+
+<script>
+  function handlePaste() {
+    alert("You have pasted in some content");
+  }  
+</script>
+```
 
 ## Media events
 
 ### `onpause`
 
+The event that fires when a pieces of media has been paused.
+
+**Example:**
+
+```html
+<audio onpause="handlePause()">
+  <source src="audio.mp3" />
+</audio>
+
+<script>
+  function handlePause() {
+    alert("Audio has been paused");
+  }
+</script>
+```
+
+> The `onpause` event also fires when the media has reached the end.
+
 ### `onplay`
 
+The event that triggers when an audio or video begins to play.
+
+**Example:**
+
+```html
+<audio onplay="handlePlay()">
+  <source src="audio.mp3" />
+</audio>
+
+<script>
+  function handlePlay() {
+    alert("Audio has began playing");
+  }
+</script>
+```
+
+
 ### `onended`
+
+This event fires when the media has reached the end. You can use it to show "Thank you" messages for example.
+
+**Example:**
+
+```html
+<audio onended="handleAudioEnded()">
+  <source src="audio.mp3" />
+</audio>
+
+<script>
+  function handleAudioEnded() {
+    alert("Thank you for listening!");
+  }
+</script>
+```
