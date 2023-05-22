@@ -2,14 +2,13 @@ import { Callout } from "nextra-theme-docs";
 
 # HTML Events
 
-<Callout type="info">This page is under construction</Callout>
-
 <Callout type="info">
 ### Note
 
 The examples below are just syntax. We will dive deeper into HTML Events when we get to JavaScript.
 
 Also, this page introduces slight JavaScript syntax which is added in `script` tags. If you're not comfortable reading JavaScript code, I recommend you go through the [Getting Started With JavaScript](/javascript/getting-started) and [JavaScript Functions](/javascript/functions) modules.
+
 </Callout>
 
 HTML has the ability to trigger certain actions when a user interacts with elements on the webpage. These actions are called "Events" and usually need the assistance of JavaSctipt to achieve the correct behaviour.
@@ -27,7 +26,8 @@ These events are added as attributes to HTML elements as in the example below:
 <Callout type="info">
   All event attributes are added as "name-value" pairs.
 
-  Use the syntax `eventName="functionName()"` for all the events below.
+Use the syntax `eventName="functionName()"` for all the events below.
+
 </Callout>
 
 The list below is not a complete reference to HTML Events, but rather a list of the most commonly used events. For a full list, visit the MDN Docs.
@@ -43,7 +43,7 @@ This is the event that fires when the document has finished loading. For example
 ```html
 <body onload="showCookies()">
   <!-- Some content here -->
-  
+
   <script>
     alert("Please accept the cookies");
   </script>
@@ -61,7 +61,7 @@ The event that fires when the browser detects that you have no active internet c
 ```html
 <body onoffline="handleAppOffline()">
   <!-- Some content here -->
-  
+
   <script>
     function handleAppOffline() {
       alert("You seem to be offline. Please check your internet connection.");
@@ -83,7 +83,7 @@ This is the event that fires when the browser detects that you are (back) online
 ```html
 <body ononline="handleBackOnline()">
   <!-- Some content here -->
-  
+
   <script>
     function handleBackOnline() {
       alert("You are back online!");
@@ -103,7 +103,7 @@ This is similar to the `onload` event in that it triggers when the user navigate
 ```html
 <body onpageshow="handleBackOnline()">
   <!-- Some content here -->
-  
+
   <script>
     function handleBackOnline() {
       alert("Welcome back!");
@@ -122,7 +122,7 @@ This is the action that triggers when a user submits the form, either using the 
 
 ```html
 <form onsubmit="handleSubmit()">
- <!-- Rest of your form -->
+  <!-- Rest of your form -->
 </form>
 ```
 
@@ -132,9 +132,9 @@ Note that you can call the submit function on the form as in the example above, 
 
 ```html
 <form>
- <!-- Rest of your form -->
- 
- <button type="submit" onclick="handleSubmit()">Submit</button>
+  <!-- Rest of your form -->
+
+  <button type="submit" onclick="handleSubmit()">Submit</button>
 </form>
 ```
 
@@ -143,18 +143,19 @@ You can add the submit function both on the form and on the button, as long as y
 ```html
 <!-- Submit function on the form -->
 <form onsubmit="handleSubmit()">
- <!-- Rest of your form -->
- 
- <!-- Submit function on the button also -->
- <button type="submit" onclick="handleSubmit()">Submit</button>
+  <!-- Rest of your form -->
+
+  <!-- Submit function on the button also -->
+  <button type="submit" onclick="handleSubmit()">Submit</button>
 </form>
 ```
 
 <Callout type="info">
-  When you add the `submit` function on the button only and not on the form, what happens is called "event bubbling". This means that the event is propagated upwards from where it is fired - in this case the button when it is clicked - up until it reaches the parent element - in this case the form.
+  When you add the `submit` function on the button only and not on the form,
+  what happens is called "event bubbling". This means that the event is
+  propagated upwards from where it is fired - in this case the button when it is
+  clicked - up until it reaches the parent element - in this case the form.
 </Callout>
-
-
 
 ### `onblur`
 
@@ -249,23 +250,23 @@ This event fires when a mouse button (the left, middle, or right mouse button) i
 **Example:**
 
 ```html
-<p onmouseover="handleMouseOver()">
-  Omae wa mou shindeiru
-</p>
+<p onmouseover="handleMouseOver()">Omae wa mou shindeiru</p>
 ```
 
 <Callout type="info">
 Depending on the mouse button you have clicked, and also depending on your mouse settings as to which is the primary button, the order of events is as follows:
 
 For the primary mouse button (usually left-click):
-  - `onmousedown`
-  - `onmouseup`
-  - `onclick`
-  
+
+- `onmousedown`
+- `onmouseup`
+- `onclick`
+
 For the secondary mouse button (usually right-click):
-  - `onmousedown`
-  - `onmouseup`
-  - `oncontextmenu`
+
+- `onmousedown`
+- `onmouseup`
+- `oncontextmenu`
 
 </Callout>
 
@@ -304,9 +305,7 @@ Triggers when the mouse is released over an element. It is usually used with the
 **Example:**
 
 ```html
-<p onmouseout="handleMouseOut()">
-  Omae wa mou shindeiru
-</p>
+<p onmouseout="handleMouseOut()">Omae wa mou shindeiru</p>
 ```
 
 ### `onwheel`
@@ -394,18 +393,10 @@ This event fires when the element is dropped in a valid drop target.
 ```
 
 <Callout type="info">
-  The order of events when dragging an element are as follows:
-  
-  1. Events on the element being dragged:
-    - `ondragstart`
-    - `ondrag`
-    - `ondragend`
-    
-  2. Events fired on the drop target:
-    - `ondragover`
-    - `ondragover`
-    - `ondragleave`
-    - `ondrop`
+  The order of events when dragging an element are as follows: 1. Events on the
+  element being dragged: - `ondragstart` - `ondrag` - `ondragend` 2. Events
+  fired on the drop target: - `ondragover` - `ondragover` - `ondragleave` -
+  `ondrop`
 </Callout>
 
 ### `onscroll`
@@ -425,7 +416,7 @@ You can use this event to disply a "Back to top" button when the user begins to 
     // Get the scroll to top button and assign it to a custom
     // variable called "scrollToTop"
     const scrollToTop = document.getElementById("scroll-to-top-button");
-    
+
     // Display the button as a block element when the user scrolls
     // more than 100 pixels from the top of the document
     if (window.element.scrollTop > 100) {
@@ -449,7 +440,7 @@ This event fires when the user copies the content of an input, or an element suc
 <script>
   function handleCopy() {
     alert("You have copied the text!");
-  }  
+  }
 </script>
 ```
 
@@ -465,7 +456,7 @@ This event fires when you cut some text inside an input. It is usually used with
 <script>
   function handleCut() {
     alert("You have pasted in some content");
-  }  
+  }
 </script>
 
 <!-- A paragraph where you can cut the text -->
@@ -474,7 +465,7 @@ This event fires when you cut some text inside an input. It is usually used with
 <script>
   function handleCut() {
     alert("You have cut this content");
-  }  
+  }
 </script>
 ```
 
@@ -493,7 +484,7 @@ You can also paste in some content in other elements - however, they have to hav
 <script>
   function handlePaste() {
     alert("You have pasted in some content");
-  }  
+  }
 </script>
 
 <!-- A paragraph where you can paste something in -->
@@ -502,7 +493,7 @@ You can also paste in some content in other elements - however, they have to hav
 <script>
   function handlePaste() {
     alert("You have pasted in some content");
-  }  
+  }
 </script>
 ```
 
@@ -545,7 +536,6 @@ The event that triggers when an audio or video begins to play.
   }
 </script>
 ```
-
 
 ### `onended`
 
