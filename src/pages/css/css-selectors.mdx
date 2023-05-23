@@ -30,7 +30,6 @@ button {
 }
 ```
 
-
 ## Class Names
 
 This involves giving the elements a `class` attribute which you can then use in your CSS.
@@ -82,13 +81,53 @@ And in your CSS file:
 
 ## Id Names
 
+This involves adding an `id` attribute to your HTML element, and then using the id name to style the element in your CSS. When using `id`s, prefix it with a hashtag (`#`).
 
+**Example:**
 
-## The Universal Selector 
+```html
+<!-- In your HTML -->
+<section id="mysection">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
 
+And in your CSS file:
+
+```css
+#mysection {
+  background-color: gray;
+  color: white;
+}
+```
+
+Notice the difference when you are using `class`es, and when you are using `id`s. The downside to using `id`s is that they have to be unique in your entire HTML document. This means that you cannot reuses the styles above for any other element - even if they are similar.
+
+> It is always recommended that you use classes when styling your web page. You can use other types of selectors, but it is always more recommended that you use classes because they are reusable.
+
+## The Universal Selector
+
+The universal selector is denoted by an asterisk (`*`). It is used to add styles that will apply to all elements in your HTML document.
+
+In HTML, elements usually have some kind of margins and paddings applied to them. That is the reason why, even though you have not applied any CSS, elements will still push away from one another.
+
+A good habit to get in to is to always remove the default margins and paddings that elements have by default. You can do that using the universal selector as follows:
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+```
+
+This ensures that elements will not have any kind of styling applied to them, and you can add in your own styles without interference. For example, all headings always have margins by default, and lists (`ol` and `ul`) and `button`s have a padding on them.
+
+The interference comes in when you have not reset the margins and paddings, and then you also add more margins and paddings when you're styling individual elements. This is sometimes hard to catch but you can always tell when elements don't behave as they should.
+
+The line `box-sizing: border-box` tells the browser to use [The CSS Box Model](/css/css-box-model). More on this in that module.
 
 ## Combinators
-
 
 There are also more advanced selectors - advanced in that you can go "inside" the element and select elements based on certain characteristics. For example:
 
@@ -97,6 +136,4 @@ There are also more advanced selectors - advanced in that you can go "inside" th
 
 ## Attribute Selectors
 
-
 ## Pseudo Selectors
-
