@@ -2,9 +2,11 @@
   "css": "What Is CSS?",
   "why-css": "Why Use CSS?",
   "css-syntax": "CSS Syntax",
+  "css-comments": "Comments In CSS",
   "css-selectors": "CSS Selectors",
   "cascading": "The Cascading Nature Of CSS",
-  "pseudo-selectors": "Pseudo Selectors",
+  "css-box-model": "The CSS Box Model",
+  "css-properties": "CSS Properties",
   "media-queries": "CSS Media Queries And Responsiveness",
   "css-rules": "CSS At-Rules",
   "deeply-nested-elements": "Deeply Nested Elements",
@@ -15,5 +17,6 @@
   "css-positioning": "CSS Positioning",
   "fonts": "Fonts",
   "css-animations": "Adding Animations To Webpages",
-  "css-entities": "CSS Entities"
+  "css-entities": "CSS Entities",
+  "css-preprocessors": "CSS Preprocessors"
 }
