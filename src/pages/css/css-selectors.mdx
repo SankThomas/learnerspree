@@ -1,5 +1,102 @@
 import { Callout } from "nextra-theme-docs";
 
-# How To Style Elements
+# CSS Selectors And How To Style Elements
 
 <Callout type="info">This page is under construction</Callout>
+
+CSS Selectors refers to the way in which we "target" elements in our HTML files so that we can apply CSS styling to them.
+
+The following are the commonly used CSS Selectors:
+
+1. [Element names](#element-names)
+2. [Class names](#class-names)
+3. [Id names](#id-names)
+4. [The Universal selector](#the-universal-selector)
+5. [Combinators](#combinators)
+
+## Element Names
+
+This refers to simply targetting the element by its name, such as `div`, or `section`, or `button`, or `input` or any other element name that you have present in your HTML document.
+
+**Example:**
+
+```css
+div {
+  background-color: indigo;
+}
+
+button {
+  color: white;
+}
+```
+
+
+## Class Names
+
+This involves giving the elements a `class` attribute which you can then use in your CSS.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section class="mysection">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
+
+And in your CSS file:
+
+```css
+.mysection {
+  background-color: gray;
+  color: white;
+}
+```
+
+Notice how, when defining the styles for the section above in our CSS, we use a dot(`.`) before the name of the class: that is: `.mysection` and not just `mysection`.
+
+This is consistent with how you write CSS code for classes. The dot tells the browser that it is a CSS class that has been applied, and it should check the CSS file for the corresponding class name and apply the styles therein.
+
+Class attributes can be reused on whatever elements you want to have the styles that you have defined. For example:
+
+```html
+<!-- In your HTML -->
+<section class="mysection">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+
+<section class="mysection">
+  <p>I burnt it all to make a fire</p>
+</section>
+```
+
+And in your CSS file:
+
+```css
+/* In your CSS */
+.mysection {
+  background-color: gray;
+  color: white;
+}
+```
+
+## Id Names
+
+
+
+## The Universal Selector 
+
+
+## Combinators
+
+
+There are also more advanced selectors - advanced in that you can go "inside" the element and select elements based on certain characteristics. For example:
+
+1. [Attribute Selectors](#attribute-selectors)
+2. [Pseudo Selectors](#attribute-selectors)
+
+## Attribute Selectors
+
+
+## Pseudo Selectors
+
