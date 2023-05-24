@@ -480,10 +480,44 @@ There are also more advanced selectors - advanced in that you can go "inside" th
 
 In CSS, you can select elements to style based on their attributes, or attribute names.
 
+Read more about [HTML Attributes](/html/html-attributes) in that module.
+
+The most commonly used syntax for attribute selectors is as follows:
+
+```css
+div[attribute_name="attribute_value"] {
+  /* css properties */
+}
+```
+
+<Callout type="error">
+  Note that there is no space between the selector and the opening square bracket. If you add a space, it becomes an error in your code. Take caution.
+</Callout>
+
 **Example:**
 
 ```css
-div
+input[type="text"] {
+  background-color: yellow;
+}
 ```
+
+The above example will find all inputs that have a `type` of `text` and apply a yellow background color to all of them.
+
+There are other ways to select elements based on their attributes. See the examples below:
+
+#### Using [attribute]
+
+You can select an element based on just its attribute name.
+
+**Example:**
+
+```css
+input[type] {
+  background-color: yellow;
+}
+```
+
+This will select all input with an attribute of `type` and apply a yellow background to all of them.
 
 ### Pseudo Selectors
