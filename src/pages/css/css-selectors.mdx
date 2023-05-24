@@ -6,6 +6,8 @@ import { Callout } from "nextra-theme-docs";
 
 CSS Selectors refers to the way in which we "target" elements in our HTML files so that we can apply CSS styling to them.
 
+## Commonly Used Selectors
+
 The following are the commonly used CSS Selectors:
 
 1. [Element names](#element-names)
@@ -14,7 +16,7 @@ The following are the commonly used CSS Selectors:
 4. [The Universal selector](#the-universal-selector)
 5. [Combinators](#combinators)
 
-## Element Names
+### Element Names
 
 This refers to simply targetting the element by its name, such as `div`, or `section`, or `button`, or `input` or any other element name that you have present in your HTML document.
 
@@ -30,7 +32,7 @@ button {
 }
 ```
 
-## Class Names
+### Class Names
 
 This involves giving the elements a `class` attribute which you can then use in your CSS.
 
@@ -79,7 +81,50 @@ And in your CSS file:
 }
 ```
 
-## Id Names
+Sometimes, you want to style only one element out of a number of elements. For example, on this website, the active link or page that you are viewing has a light blue background color, with dark blue text. You can add such styles in CSS by doing the following:
+
+```html
+<!-- In your HTML -->
+<ul>
+  <li><a href="/what-is-css.html">What Is CSS?</a></li>
+  <li><a href="/comments.html">Comments In CSS</a></li>
+  <li><a href="/css-selectors.html" class="active">CSS Selectors</a></li>
+</ul>
+```
+
+```css
+/* And in your CSS */
+/* Style all links to be white by default */
+a {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+}
+
+/* Style the active link */
+a.active {
+  background-color: lightblue;
+  color: blue;
+}
+```
+
+<Callout>
+  You can use the syntax above if you want to have conditional classes: classes that will only apply when certain conditons have been met - or classes that will only apply on particular elements.
+</Callout>
+
+What the above means is that, all the links, by default, will have a transparent background, with white text and some padding to increase the space they take up. However, when the user navigates to a certain link, it will make it active, and will add a class of `active` on the link so that the styles for an active link will apply and make it blue. This will involve the use of JavaScript as well, but the basics are in CSS.
+
+> You can call the class whatever you want. A good naming convention is to call it `active` because it is easy to understand. However, you can call it `rum` even - but remember, you might have to look at this code after a long time and you don't want to keep guessing what your own code does. Therefore, always make the names descriptive to the function they perform.
+
+<Callout type="info">
+  It is important to note that, when changing the styles of an element that already has styles applied to it - such as the example about the active link above, the styles that are changed as well as the styles already applied above will be applied (unless you also change them to something else).
+  
+  Therefore, the property of a 10 pixel padding will apply to the active link as well, because both the `background-color` and `color` properties have been changed when adding the custom style. 
+  
+  This is an important behaviour to know about.
+</Callout>
+
+### Id Names
 
 This involves adding an `id` attribute to your HTML element, and then using the id name to style the element in your CSS. When using `id`s, prefix it with a hashtag (`#`).
 
@@ -105,7 +150,42 @@ Notice the difference when you are using `class`es, and when you are using `id`s
 
 > It is always recommended that you use classes when styling your web page. You can use other types of selectors, but it is always more recommended that you use classes because they are reusable.
 
-## The Universal Selector
+Just like with classes, you can also style elements differently depending on whether they have a custom `id` or not.
+
+For example:
+
+```html
+<p>This is an excerpt from Alice In Wonderland</p>
+
+<p id="aliceblue">
+  And without a second though, down went Alice after it.
+</p>
+```
+
+```css
+p {
+  background-color: pink;
+  color: white;
+  padding: 10px;
+}
+ 
+/* Style the custom paragraph text color */
+p#aliceblue {
+  color: aliceblue;
+}
+```
+
+In this case, we are now saying that the paragraph that has a custom `id` attribute of "aliceblue" will have its text changed to the `aliceblue` text color.
+
+<Callout type="info">
+  It is important to note that, when changing the styles of an element that already has styles applied to it - such as the example about the aliceblue paragraph above, the styles that are changed as well as the styles already applied above will be applied (unless you also change them to something else).
+  
+  Therefore, the properties of a pink background color as well as a 10 pixel padding will apply to the aliceblue paragraph as well, because the only style that has been changed is the text color.
+  
+  This is an important behaviour to know about.
+</Callout>
+
+### The Universal Selector
 
 The universal selector is denoted by an asterisk (`*`). It is used to add styles that will apply to all elements in your HTML document.
 
@@ -127,13 +207,317 @@ The interference comes in when you have not reset the margins and paddings, and 
 
 The line `box-sizing: border-box` tells the browser to use [The CSS Box Model](/css/css-box-model). More on this in that module.
 
-## Combinators
+### Combinators
+
+CSS combinators are symbols that explain the relationship between selectors.
+
+There are 4 types of combinator selectors:
+
+#### 1. Descendant selector
+
+This is used to find and access elements directly in the element hierarchy.
+
+**Example:**
+```html
+<section>
+  <article>
+    <p>Dare to invent the future</p>
+  </article>
+</section>
+```
+
+In the example above, if I wanted to style the article, I would do the following:
+
+```css
+section article {
+  background-color: red;
+}
+```
+
+And if I wanted to style the paragraph, I would do this:
+
+```css
+section article p {
+  color: aliceblue;
+}
+```
+
+This syntax works even when you are using classes or ids or any other selector that you want - just make sure that you are using the correct notation: that is, a dot (`.`) for classes, and a hashtag (`#`) for ids.
+
+More on this in the module about [Deeply Nested Elements](/css/deeply-nested-elements)
+
+<Callout type="warning">
+  Using the descendant selector will select all the elements in the hierarchy that match. Therefore, if you had multiple paragraphs in the example above, they would all be styled in the same way - even if they were inside other elements!. This is a good thing because it allows you to add styles once and not every single time you encounter that element. 
+  
+  However, It is something to take note of in case you want to have different styles for particular elements. If that is the case, you can use class names, or you can use [pseudo selectors](#pseudo-selectors)
+</Callout>
+
+#### 2. Child selector
+
+This is denoted by a "greater than" symbol: `>`. It is used to select all child elements that match.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>
+    Dare to invent the future
+  </p>
+  
+  <p>
+    You cannot carry out fundamental change without a certain amount of madness.
+  </p>
+  
+  <p>
+    Problems cannot be solved at the same level of awareness that created them.
+  </p>
+</section>
+```
+
+And in your CSS:
+
+```css
+section > p {
+  background-color: red;
+}
+```
+
+This will select all child paragraph elements and apply a red background to them. However, there is something to note about using this selector, that is: it selects only the immediate children. So, if you break the hierarchy just a bit, then your styles also break.
+
+See the example below:
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>
+    Dare to invent the future
+  </p>
+  
+  <p>
+    You cannot carry out fundamental change without a certain amount of madness.
+  </p>
+  
+  <article>
+    <p>
+      Problems cannot be solved at the same level of awareness that created them.
+    </p>
+  </article>
+</section>
+```
+
+And in your CSS:
+
+```css
+section > p {
+  background-color: red;
+}
+```
+
+With the introduction of the article, the hierarchy is now broken and the paragraph inside the article will not have any of the styles applied.
+
+> Take note of this behaviour as you can use it to clevery manipulate elements - or it can seriously make you feel stupid.
+
+Another - perhaps easier - way of thinking about the example above is that it will select all `p` elements that have a `section` as the parent element. So any `p` elements that have a different parent element will remain unaffected.
+
+#### 3. Adjacent sibling selector
+
+This is denoted by a "plus" (`+`) symbol. It is used to select elements that are directly after a specified element.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>
+    We must dare to invent the future
+  </p>
+</section>
+
+<p>
+  Fundamentals of programming
+</p>
+```
+
+And in your CSS:
+
+```css
+section + p {
+  background-color: red;
+}
+```
+
+In the above example, the paragraph inside the `section` element will remain unchanged. However, the paragraph outside of the `section` will have a background color of red. That is how the adjacent sibling selector works.
+
+So, what if you had more paragraphs outisde of the `section`? Well, only the immediate paragraph will be affected, and all others will remain unchanged. Try it out using the example below:
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>
+    We must dare to invent the future
+  </p>
+</section>
+
+<p>
+  Fundamentals of programming
+</p>
+
+<!-- This paragrah is unaffected because it is not 
+the immediate sibling of the section -->
+<p>
+  Fundamentals of HTML and CSS
+</p>
+```
+
+However, if I added another section before a paragraph, then the styles will apply to that paragraph. See the example below:
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>
+    We must dare to invent the future
+  </p>
+</section>
+
+<p>
+  Fundamentals of programming
+</p>
+
+<section>
+  <!-- Some content here -->
+</section>
+
+<!-- Now this paragraph will have a red background color
+because it comes after a section element -->
+<p>
+  Fundamentals of HTML and CSS
+</p>
+```
+
+
+#### 4. General sibling selector
+
+This is denoted by the "wave dash" symbol (`~`). It works the same as the adjacent sibling selector with the only difference being that it will select all sibling elements while the other only selects the immediate sibling elements.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>
+    We must dare to invent the future
+  </p>
+</section>
+ 
+<p>
+  Fundamentals of programming
+</p>
+```
+
+And in your CSS:
+
+```css
+section ~ p {
+  background-color: red;
+}
+```
+
+This will change the paragraph background color to red. And even if you added more paragraphs, they would all have a red background color. See the example below:
+
+```html
+<section>
+  <p>
+    We must dare to invent the future
+  </p>
+</section>
+ 
+<p>
+  Fundamentals of programming
+</p>
+
+<p>
+  Fundamentals of HTML and CSS
+</p>
+
+<p>
+  Charles Darwin  
+</p>
+```
+
+All the paragraphs above will have red backgrounds.
+
+However, if you break the hierarchy by introducing another element, the the paragraph will remain unchanged. For example:
+
+```html
+<section>
+  <p>
+    We must dare to invent the future
+  </p>
+</section>
+ 
+<p>
+  Fundamentals of programming
+</p>
+
+<article>
+  <p>
+    Fundamentals of HTML and CSS
+  </p>
+</article>
+```
+
+This is because the paragraph is no longer a sibling element of the section, and therefore, it remains unchanged.
+
+## Advanced Selectors
 
 There are also more advanced selectors - advanced in that you can go "inside" the element and select elements based on certain characteristics. For example:
 
 1. [Attribute Selectors](#attribute-selectors)
 2. [Pseudo Selectors](#attribute-selectors)
 
-## Attribute Selectors
+### Attribute Selectors
 
-## Pseudo Selectors
+In CSS, you can select elements to style based on their attributes, or attribute names.
+
+Read more about [HTML Attributes](/html/html-attributes) in that module.
+
+The most commonly used syntax for attribute selectors is as follows:
+
+```css
+div[attribute_name="attribute_value"] {
+  /* css properties */
+}
+```
+
+<Callout type="error">
+  Note that there is no space between the selector and the opening square bracket. If you add a space, it becomes an error in your code. Take caution.
+</Callout>
+
+**Example:**
+
+```css
+input[type="text"] {
+  background-color: yellow;
+}
+```
+
+The above example will find all inputs that have a `type` of `text` and apply a yellow background color to all of them.
+
+There are other ways to select elements based on their attributes. See the examples below:
+
+#### Using [attribute]
+
+You can select an element based on just its attribute name.
+
+**Example:**
+
+```css
+input[type] {
+  background-color: yellow;
+}
+```
+
+This will select all input with an attribute of `type` and apply a yellow background to all of them.
+
+### Pseudo Selectors
