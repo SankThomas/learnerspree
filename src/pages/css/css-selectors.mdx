@@ -124,6 +124,14 @@ What the above means is that, all the links, by default, will have a transparent
   This is an important behaviour to know about.
 </Callout>
 
+You can also sadd multiple classes for in a single element. All you need to do is separate the different class names with a single space. For example:
+
+```html
+<section class="mysection showcase platform banner-section">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
+
 ### Id Names
 
 This involves adding an `id` attribute to your HTML element, and then using the id name to style the element in your CSS. When using `id`s, prefix it with a hashtag (`#`).
@@ -146,7 +154,7 @@ And in your CSS file:
 }
 ```
 
-Notice the difference when you are using `class`es, and when you are using `id`s. The downside to using `id`s is that they have to be unique in your entire HTML document. This means that you cannot reuses the styles above for any other element - even if they are similar.
+Notice the difference when you are using `class`es, and when you are using `id`s. The downside to using `id`s is that they have to be unique in your entire HTML document. This means that you cannot reuse the styles above for any other element - even if you intend for them to have the same styles.
 
 > It is always recommended that you use classes when styling your web page. You can use other types of selectors, but it is always more recommended that you use classes because they are reusable.
 
@@ -158,7 +166,7 @@ For example:
 <p>This is an excerpt from Alice In Wonderland</p>
 
 <p id="aliceblue">
-  And without a second though, down went Alice after it.
+  And without a second thought, down went Alice after it.
 </p>
 ```
 
@@ -184,6 +192,14 @@ In this case, we are now saying that the paragraph that has a custom `id` attrib
   
   This is an important behaviour to know about.
 </Callout>
+
+You can add multiple ids in single element. All you need to do is separate the different id names with a single space. For example:
+
+```html
+<section id="mysection showcase platform banner-section">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
 
 ### The Universal Selector
 
@@ -249,7 +265,7 @@ More on this in the module about [Deeply Nested Elements](/css/deeply-nested-ele
 <Callout type="warning">
   Using the descendant selector will select all the elements in the hierarchy that match. Therefore, if you had multiple paragraphs in the example above, they would all be styled in the same way - even if they were inside other elements!. This is a good thing because it allows you to add styles once and not every single time you encounter that element. 
   
-  However, It is something to take note of in case you want to have different styles for particular elements. If that is the case, you can use class names, or you can use [pseudo selectors](#pseudo-selectors)
+  However, It is something to take note of in case you want to have different styles for particular elements. If that is the case, you can use class names, or you can use [pseudo classes](#pseudo-classes)
 </Callout>
 
 #### 2. Child selector
@@ -506,7 +522,7 @@ The above example will find all inputs that have a `type` of `text` and apply a 
 
 There are other ways to select elements based on their attributes. See the examples below:
 
-#### Using [attribute]
+#### Using `[attribute]`
 
 You can select an element based on just its attribute name.
 
@@ -520,4 +536,183 @@ input[type] {
 
 This will select all input with an attribute of `type` and apply a yellow background to all of them.
 
-### Pseudo Selectors
+#### Using `[attribute~="value"]`
+
+This is used to select elements that have the specified value. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">
+  Some content here  
+</section>
+
+<section id="something else">
+  Some content here
+</section>
+
+<section id="something-flower">
+  Some content here
+</section>
+```
+
+And in your CSS:
+
+```css
+section[id~="something"] {
+  background-color: indigo;
+}
+```
+
+This will select the first and second `section` elements because they have an `id` attribute that contains the value of `something`. The third `section` will not be selected because its attribute does not match the value that we are looking for.
+
+#### Using `[attribute|="value"]`
+
+This is used to select elements that have the specified value, or part of the value that matches. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">
+  Some content here  
+</section>
+
+<section id="something else">
+  Some content here
+</section>
+
+<section id="something-flower">
+  Some content here
+</section>
+```
+
+And in your CSS:
+
+```css
+section[id|="something"] {
+  background-color: indigo;
+}
+```
+
+In the example above, the first and third sections will be selected and will have a background color of indigo. However, the second section will not be selected. Why?
+
+Because this attribute selector will match the element whose value is the exact value, or the value, followed by a hyphen (`-`).
+
+#### Using `[attribute^="value"]`
+
+This is used to select elements whose attribute values starts with the specified value. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">
+  Some content here  
+</section>
+
+<section id="something else">
+  Some content here
+</section>
+
+<section id="something-flower">
+  Some content here
+</section>
+```
+
+And in your CSS:
+
+```css
+section[id^="some"] {
+  background-color: indigo;
+}
+```
+
+This will select all three sections because they all contain an `id` attribute that starts with the value of `some` which is our specified value.
+
+#### Using `[attribute$="value"]`
+
+This is used to select elements whose attribute values end with with specified value. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">
+  Some content here  
+</section>
+
+<section id="something else">
+  Some content here
+</section>
+
+<section id="something-flower">
+  Some content here
+</section>
+```
+
+And in your CSS:
+
+```css
+section[id$="thing"] {
+  background-color: indigo;
+}
+```
+
+This will select only the first section because it is the only section that has an `id` attribute that ends with `thing`.
+
+> The second section ends with `else` and not `thing`. And the third section ends with `flower`. Take note.
+
+#### Using `[attribute*="value"]`
+
+This is used to select elements whose attribute value matches the value you have specified. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">
+  Some content here  
+</section>
+
+<section id="something else">
+  Some content here
+</section>
+
+<section id="something-flower">
+  Some content here
+</section>
+```
+
+And in your CSS:
+
+```css
+section[id*="thin"] {
+  background-color: indigo;
+}
+```
+
+This will match to all three sections and change their background color to indigo.
+
+## Pseudo Classes and Pseudo Elements
+
+### Pseudo Classes
+
+### Pseudo Elements
+
+## Using Attribute Selectors With Forms
+
+You can also use attribute selectors to style out your form inputs. For example:
+
+```css
+/* Selects inputs with a type of "text" */
+input[type="text"] {
+  background-color: yellow;
+}
+
+/* Selects inputs with a type of "number" */
+input[type="number"] {
+  background-color: indigo;  
+}
+
+/* Selects inputs with a type of "email" */
+input[type="email"] {
+  background-color: pink;  
+}
+
+/* Selects inputs with a type of "date" */
+input[type="date"] {
+  background-color: firebrick;  
+}
+```
