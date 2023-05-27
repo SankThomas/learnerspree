@@ -2,8 +2,6 @@ import { Callout } from "nextra-theme-docs";
 
 # The Cascading Nature Of CSS
 
-<Callout type="info">This page is under construction</Callout>
-
 The **C** in CSS stands for Cascading. Cascading means that CSS will apply styles to your HTML webpage according to how the styles are defined, from top to bottom.
 
 What this also means is that styles that are located more to the bottom of your CSS file will be intepreted as having more significance than the other styles.
@@ -139,10 +137,99 @@ The section is still going to have a height of `80px` because we have not tamper
 
 </Callout>
 
-
 ### `id` attributes Vs `class` attributes
 
+When using both `id`s and `class`es to style an element, the styles on the `id` will take precedence over the styles of the `class` no matter their placement in your CSS file.
+
+**Example:**
+
+```html
+<section class="banner" id="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using id */
+#banner {
+  background-color: firebrick;
+}
+```
+
+Above, the section will have a color of `firebrick` because the styles on the `#banner` have more specificity than that of the `.banner`.
 
 ### Element Name Vs `id` Vs `class`
 
+After learning the specificity above, then this becomes somewhat obvious because, if class names have higher priority than the element name, and ids have the highest specificity of the three, then what do you think is going to happen to the section below?
+
+**Example:**
+
+```html
+<section class="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using id */
+#banner {
+  background-color: firebrick;
+}
+
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using element name */
+section {
+  background-color: aliceblue;
+}
+```
+
 ### The `!important` rule
+
+If you want certain styles to apply over all others - no matter their placement in your CSS files, or no matter the selector you have used, CSS has a rule called `!important` that you can apply.
+
+> The `!important` rule has the highest specificity of anything! Be careful how you use it.
+
+Usually, you will find yourself using this rule in cases where you're using a CSS framework and you want to override some of its default styles to apply your own.
+
+**Example:**
+
+```html
+<section class="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using id */
+#banner {
+  background-color: firebrick;
+}
+
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using element name */
+section {
+  background-color: aliceblue !important;
+}
+```
+
+In the example above, the styles of the `section` will apply over the styles of the `.banner` or `#banner` because the `section` has a property that has the `!important` rule. This rule is always placed after the property that you want to have the highest specificity.
+
+<Callout type="warning">
+  The `!important` rule has the highest specificity. If you use it too much or
+  wrongly in your application, you will end up with styles you cannot override
+  even if you wanted to apply different styles for different device widths: i.e.
+  when you wanted to add responsiveness to your website.
+</Callout>
