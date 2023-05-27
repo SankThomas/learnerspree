@@ -28,6 +28,30 @@ This means that if you define one section that has two classes and you style out
 
 In the above example, the styles of the `.showcase` class will be applied over the styles of the `.banner` class.
 
+And if you happen to style the section using the same class name, but they are located in different places of your stylesheet, the one that is located more to the bottom will apply over the other one. For example:
+
+**Example:**
+
+```html
+<section class="banner showcase">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+.banner {
+  background-color: violet;
+}
+
+/* Some other CSS code */
+
+.banner {
+  background-color: purple;
+}
+```
+
+Now, the section will have a purple background color.
+
 This is the basic concept of how CSS styles are applied. However, there are certain rules that are overt to this - and they belong to what is called CSS Specificity.
 
 ## CSS Specificity
