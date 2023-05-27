@@ -18,7 +18,7 @@ The following are the commonly used CSS Selectors:
 
 ### Element Names
 
-This refers to simply targetting the element by its name, such as `div`, or `section`, or `button`, or `input` or any other element name that you have present in your HTML document.
+This refers to simply targeting the element by its name, such as `div`, or `section`, or `button`, or `input` or any other element name that you have present in your HTML document.
 
 **Example:**
 
@@ -109,7 +109,9 @@ a.active {
 ```
 
 <Callout>
-  You can use the syntax above if you want to have conditional classes: classes that will only apply when certain conditons have been met - or classes that will only apply on particular elements.
+  You can use the syntax above if you want to have conditional classes: classes
+  that will only apply when certain conditions have been met - or classes that
+  will only apply on particular elements.
 </Callout>
 
 What the above means is that, all the links, by default, will have a transparent background, with white text and some padding to increase the space they take up. However, when the user navigates to a certain link, it will make it active, and will add a class of `active` on the link so that the styles for an active link will apply and make it blue. This will involve the use of JavaScript as well, but the basics are in CSS.
@@ -117,14 +119,16 @@ What the above means is that, all the links, by default, will have a transparent
 > You can call the class whatever you want. A good naming convention is to call it `active` because it is easy to understand. However, you can call it `rum` even - but remember, you might have to look at this code after a long time and you don't want to keep guessing what your own code does. Therefore, always make the names descriptive to the function they perform.
 
 <Callout type="info">
-  It is important to note that, when changing the styles of an element that already has styles applied to it - such as the example about the active link above, the styles that are changed as well as the styles already applied above will be applied (unless you also change them to something else).
-  
-  Therefore, the property of a 10 pixel padding will apply to the active link as well, because both the `background-color` and `color` properties have been changed when adding the custom style. 
-  
-  This is an important behaviour to know about.
+  It is important to note that, when changing the styles of an element that
+  already has styles applied to it - such as the example about the active link
+  above, the styles that are changed as well as the styles already applied above
+  will be applied (unless you also change them to something else). Therefore,
+  the property of a 10 pixel padding will apply to the active link as well,
+  because both the `background-color` and `color` properties have been changed
+  when adding the custom style. This is an important behaviour to know about.
 </Callout>
 
-You can also sadd multiple classes for in a single element. All you need to do is separate the different class names with a single space. For example:
+You can also add multiple classes for in a single element. All you need to do is separate the different class names with a single space. For example:
 
 ```html
 <section class="mysection showcase platform banner-section">
@@ -165,9 +169,7 @@ For example:
 ```html
 <p>This is an excerpt from Alice In Wonderland</p>
 
-<p id="aliceblue">
-  And without a second thought, down went Alice after it.
-</p>
+<p id="aliceblue">And without a second thought, down went Alice after it.</p>
 ```
 
 ```css
@@ -176,7 +178,7 @@ p {
   color: white;
   padding: 10px;
 }
- 
+
 /* Style the custom paragraph text color */
 p#aliceblue {
   color: aliceblue;
@@ -186,11 +188,14 @@ p#aliceblue {
 In this case, we are now saying that the paragraph that has a custom `id` attribute of "aliceblue" will have its text changed to the `aliceblue` text color.
 
 <Callout type="info">
-  It is important to note that, when changing the styles of an element that already has styles applied to it - such as the example about the aliceblue paragraph above, the styles that are changed as well as the styles already applied above will be applied (unless you also change them to something else).
-  
-  Therefore, the properties of a pink background color as well as a 10 pixel padding will apply to the aliceblue paragraph as well, because the only style that has been changed is the text color.
-  
-  This is an important behaviour to know about.
+  It is important to note that, when changing the styles of an element that
+  already has styles applied to it - such as the example about the aliceblue
+  paragraph above, the styles that are changed as well as the styles already
+  applied above will be applied (unless you also change them to something else).
+  Therefore, the properties of a pink background color as well as a 10 pixel
+  padding will apply to the aliceblue paragraph as well, because the only style
+  that has been changed is the text color. This is an important behaviour to
+  know about.
 </Callout>
 
 You can add multiple ids in single element. All you need to do is separate the different id names with a single space. For example:
@@ -234,6 +239,7 @@ There are 4 types of combinator selectors:
 This is used to find and access elements directly in the element hierarchy.
 
 **Example:**
+
 ```html
 <section>
   <article>
@@ -263,9 +269,14 @@ This syntax works even when you are using classes or ids or any other selector t
 More on this in the module about [Deeply Nested Elements](/css/deeply-nested-elements)
 
 <Callout type="warning">
-  Using the descendant selector will select all the elements in the hierarchy that match. Therefore, if you had multiple paragraphs in the example above, they would all be styled in the same way - even if they were inside other elements!. This is a good thing because it allows you to add styles once and not every single time you encounter that element. 
-  
-  However, It is something to take note of in case you want to have different styles for particular elements. If that is the case, you can use class names, or you can use [pseudo classes](#pseudo-classes)
+  Using the descendant selector will select all the elements in the hierarchy
+  that match. Therefore, if you had multiple paragraphs in the example above,
+  they would all be styled in the same way - even if they were inside other
+  elements!. This is a good thing because it allows you to add styles once and
+  not every single time you encounter that element. However, It is something to
+  take note of in case you want to have different styles for particular
+  elements. If that is the case, you can use class names, or you can use [pseudo
+  classes](#pseudo-classes)
 </Callout>
 
 #### 2. Child selector
@@ -277,14 +288,12 @@ This is denoted by a "greater than" symbol: `>`. It is used to select all child 
 ```html
 <!-- In your HTML -->
 <section>
-  <p>
-    Dare to invent the future
-  </p>
-  
+  <p>Dare to invent the future</p>
+
   <p>
     You cannot carry out fundamental change without a certain amount of madness.
   </p>
-  
+
   <p>
     Problems cannot be solved at the same level of awareness that created them.
   </p>
@@ -306,17 +315,16 @@ See the example below:
 ```html
 <!-- In your HTML -->
 <section>
-  <p>
-    Dare to invent the future
-  </p>
-  
+  <p>Dare to invent the future</p>
+
   <p>
     You cannot carry out fundamental change without a certain amount of madness.
   </p>
-  
+
   <article>
     <p>
-      Problems cannot be solved at the same level of awareness that created them.
+      Problems cannot be solved at the same level of awareness that created
+      them.
     </p>
   </article>
 </section>
@@ -332,7 +340,7 @@ section > p {
 
 With the introduction of the article, the hierarchy is now broken and the paragraph inside the article will not have any of the styles applied.
 
-> Take note of this behaviour as you can use it to clevery manipulate elements - or it can seriously make you feel stupid.
+> Take note of this behaviour as you can use it to cleverly manipulate elements - or it can seriously make you feel stupid.
 
 Another - perhaps easier - way of thinking about the example above is that it will select all `p` elements that have a `section` as the parent element. So any `p` elements that have a different parent element will remain unaffected.
 
@@ -345,14 +353,10 @@ This is denoted by a "plus" (`+`) symbol. It is used to select elements that are
 ```html
 <!-- In your HTML -->
 <section>
-  <p>
-    We must dare to invent the future
-  </p>
+  <p>We must dare to invent the future</p>
 </section>
 
-<p>
-  Fundamentals of programming
-</p>
+<p>Fundamentals of programming</p>
 ```
 
 And in your CSS:
@@ -365,25 +369,19 @@ section + p {
 
 In the above example, the paragraph inside the `section` element will remain unchanged. However, the paragraph outside of the `section` will have a background color of red. That is how the adjacent sibling selector works.
 
-So, what if you had more paragraphs outisde of the `section`? Well, only the immediate paragraph will be affected, and all others will remain unchanged. Try it out using the example below:
+So, what if you had more paragraphs outside of the `section`? Well, only the immediate paragraph will be affected, and all others will remain unchanged. Try it out using the example below:
 
 ```html
 <!-- In your HTML -->
 <section>
-  <p>
-    We must dare to invent the future
-  </p>
+  <p>We must dare to invent the future</p>
 </section>
 
-<p>
-  Fundamentals of programming
-</p>
+<p>Fundamentals of programming</p>
 
-<!-- This paragrah is unaffected because it is not 
+<!-- This paragraph is unaffected because it is not 
 the immediate sibling of the section -->
-<p>
-  Fundamentals of HTML and CSS
-</p>
+<p>Fundamentals of HTML and CSS</p>
 ```
 
 However, if I added another section before a paragraph, then the styles will apply to that paragraph. See the example below:
@@ -391,14 +389,10 @@ However, if I added another section before a paragraph, then the styles will app
 ```html
 <!-- In your HTML -->
 <section>
-  <p>
-    We must dare to invent the future
-  </p>
+  <p>We must dare to invent the future</p>
 </section>
 
-<p>
-  Fundamentals of programming
-</p>
+<p>Fundamentals of programming</p>
 
 <section>
   <!-- Some content here -->
@@ -406,11 +400,8 @@ However, if I added another section before a paragraph, then the styles will app
 
 <!-- Now this paragraph will have a red background color
 because it comes after a section element -->
-<p>
-  Fundamentals of HTML and CSS
-</p>
+<p>Fundamentals of HTML and CSS</p>
 ```
-
 
 #### 4. General sibling selector
 
@@ -421,14 +412,10 @@ This is denoted by the "wave dash" symbol (`~`). It works the same as the adjace
 ```html
 <!-- In your HTML -->
 <section>
-  <p>
-    We must dare to invent the future
-  </p>
+  <p>We must dare to invent the future</p>
 </section>
- 
-<p>
-  Fundamentals of programming
-</p>
+
+<p>Fundamentals of programming</p>
 ```
 
 And in your CSS:
@@ -443,22 +430,14 @@ This will change the paragraph background color to red. And even if you added mo
 
 ```html
 <section>
-  <p>
-    We must dare to invent the future
-  </p>
+  <p>We must dare to invent the future</p>
 </section>
- 
-<p>
-  Fundamentals of programming
-</p>
 
-<p>
-  Fundamentals of HTML and CSS
-</p>
+<p>Fundamentals of programming</p>
 
-<p>
-  Charles Darwin  
-</p>
+<p>Fundamentals of HTML and CSS</p>
+
+<p>Charles Darwin</p>
 ```
 
 All the paragraphs above will have red backgrounds.
@@ -467,19 +446,13 @@ However, if you break the hierarchy by introducing another element, the the para
 
 ```html
 <section>
-  <p>
-    We must dare to invent the future
-  </p>
+  <p>We must dare to invent the future</p>
 </section>
- 
-<p>
-  Fundamentals of programming
-</p>
+
+<p>Fundamentals of programming</p>
 
 <article>
-  <p>
-    Fundamentals of HTML and CSS
-  </p>
+  <p>Fundamentals of HTML and CSS</p>
 </article>
 ```
 
@@ -507,7 +480,8 @@ div[attribute_name="attribute_value"] {
 ```
 
 <Callout type="error">
-  Note that there is no space between the selector and the opening square bracket. If you add a space, it becomes an error in your code. Take caution.
+  Note that there is no space between the selector and the opening square
+  bracket. If you add a space, it becomes an error in your code. Take caution.
 </Callout>
 
 **Example:**
@@ -542,17 +516,11 @@ This is used to select elements that have the specified value. For example:
 
 ```html
 <!-- In your HTML -->
-<section id="something">
-  Some content here  
-</section>
+<section id="something">Some content here</section>
 
-<section id="something else">
-  Some content here
-</section>
+<section id="something else">Some content here</section>
 
-<section id="something-flower">
-  Some content here
-</section>
+<section id="something-flower">Some content here</section>
 ```
 
 And in your CSS:
@@ -571,17 +539,11 @@ This is used to select elements that have the specified value, or part of the va
 
 ```html
 <!-- In your HTML -->
-<section id="something">
-  Some content here  
-</section>
+<section id="something">Some content here</section>
 
-<section id="something else">
-  Some content here
-</section>
+<section id="something else">Some content here</section>
 
-<section id="something-flower">
-  Some content here
-</section>
+<section id="something-flower">Some content here</section>
 ```
 
 And in your CSS:
@@ -602,17 +564,11 @@ This is used to select elements whose attribute values starts with the specified
 
 ```html
 <!-- In your HTML -->
-<section id="something">
-  Some content here  
-</section>
+<section id="something">Some content here</section>
 
-<section id="something else">
-  Some content here
-</section>
+<section id="something else">Some content here</section>
 
-<section id="something-flower">
-  Some content here
-</section>
+<section id="something-flower">Some content here</section>
 ```
 
 And in your CSS:
@@ -631,17 +587,11 @@ This is used to select elements whose attribute values end with with specified v
 
 ```html
 <!-- In your HTML -->
-<section id="something">
-  Some content here  
-</section>
+<section id="something">Some content here</section>
 
-<section id="something else">
-  Some content here
-</section>
+<section id="something else">Some content here</section>
 
-<section id="something-flower">
-  Some content here
-</section>
+<section id="something-flower">Some content here</section>
 ```
 
 And in your CSS:
@@ -662,17 +612,11 @@ This is used to select elements whose attribute value matches the value you have
 
 ```html
 <!-- In your HTML -->
-<section id="something">
-  Some content here  
-</section>
+<section id="something">Some content here</section>
 
-<section id="something else">
-  Some content here
-</section>
+<section id="something else">Some content here</section>
 
-<section id="something-flower">
-  Some content here
-</section>
+<section id="something-flower">Some content here</section>
 ```
 
 And in your CSS:
@@ -703,16 +647,16 @@ input[type="text"] {
 
 /* Selects inputs with a type of "number" */
 input[type="number"] {
-  background-color: indigo;  
+  background-color: indigo;
 }
 
 /* Selects inputs with a type of "email" */
 input[type="email"] {
-  background-color: pink;  
+  background-color: pink;
 }
 
 /* Selects inputs with a type of "date" */
 input[type="date"] {
-  background-color: firebrick;  
+  background-color: firebrick;
 }
 ```
