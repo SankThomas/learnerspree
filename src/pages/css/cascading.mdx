@@ -257,3 +257,114 @@ In the example above, the styles of the `section` will apply over the styles of 
   even if you wanted to apply different styles for different device widths: i.e.
   when you wanted to add responsiveness to your website.
 </Callout>
+
+### Inline styling, Internal Styling, and External Styling
+
+In the module about [CSS Syntax](/css/css-syntax), we learnt how to add CSS to our HTML, and we talked about three ways to do it: Inline styling, Internal styling, and External styling.
+
+Well, whatever method you choose to add in your styles will have an impact on CSS Specificity of your styles.
+
+For example, if you choose to have inline styling by adding your CSS styles directly inside the elements, and then you try to style the same element using internal or external styles, what will happen is that your element will take the styles for the inline styles.
+
+<Callout type="info">
+  Inline styles have the highest specificity: Higher than both intenral and
+  external styles.
+</Callout>
+
+**Example:**
+
+```html
+<section style="background-color: red">Some content here</section>
+```
+
+```css
+section {
+  background-color: pink;
+}
+```
+
+The above example uses inline styles for the section. What you will end up with is a section with a red background. And even if you have `id` attributes on the HTML element (because `id`s have a higher specificity than `class`es and element names), what you will still end up with, is a pink background. See the second example below:
+
+**Example:**
+
+```html
+<section style="background-color: red">Some content here</section>
+```
+
+```css
+section {
+  background-color: pink;
+}
+
+.banner {
+  background-color: indigo;
+}
+
+#banner {
+  background-color: firebrick;
+}
+```
+
+> The `section` will still have a red background color because inline styles have the highest specificity.
+
+This same rule applies when you try to add in internal styles in the `head` of your HTML document.
+
+**Example:**
+
+```html
+<head>
+  <style>
+    section {
+      background-color: navy;
+    }
+  </style>
+</head>
+
+<body>
+  <section style="background-color: red">Some content here</section>
+</body>
+```
+
+The above example has added in internal styling of the `section` element. However, the styles that will still apply is the red background on the section.
+
+#### But...
+
+...there is a way to make your internal or external styles apply over your inline styles. The way to do that is to add the `!important` rule. Always remember that the `!important` rule has the highest specificity over everything else - including inline styles.
+
+**Example:**
+
+```html
+<section style="background-color: red">Some content here</section>
+```
+
+```css
+section {
+  background-color: indigo !important;
+}
+```
+
+Now, the `section` will have a background color of indigo.
+
+You can also add this to the `head` of your HTML document, i.e.
+
+**Example:**
+
+```html
+<head>
+  <style>
+    section {
+      background-color: navy !important;
+    }
+  </style>
+</head>
+
+<body>
+  <section style="background-color: red">Some content here</section>
+</body>
+```
+
+The `section` will now change to a navy blue background color.
+
+#### However
+
+Take note that you don't always override your styles with the `!important` directive as this can cause unintended issues much later in your code, such as when you want to add responsiveness to your website. More on this in the module about [CSS Media Queries And Responsiveness](/css/media-queries)
