@@ -633,6 +633,65 @@ This will match to all three sections and change their background color to indig
 
 ### Pseudo Classes
 
+CSS pseudo classes are used to define a special state of an element, such as when you hover over a button and the background color changes, or when you click a link and it is no longer blue in color but purple.
+
+CSS pseudo classes can be used to improve the user experience of your web application. They have the syntax:
+
+```css
+selector:pseudo-class {
+  /* Your CSS code */
+}
+```
+
+> Pseudo class names always have a full colon, and can be used with element names, class names, id attributes, and other types of CSS selectors.
+
+Below are examples of the most commonly used CSS Pseudo classes.
+
+#### `:hover`
+
+This is used to define what happens to the element when the user hovers over it with the mouse.
+
+> The `hover` state on mobile is a long-press. If you want to test it out, you long-press on the element that has the `hover` state applied to it.
+
+**Example:**
+
+```html
+<button>Get Started</button>
+```
+
+```css
+/* Default styles of the button element */
+button {
+  background-color: pink;
+  color: black;
+  padding: 8px 30px;
+}
+
+/* The hover state for the button */
+button:hover {
+  background-color: navy;
+  color: white;
+}
+```
+
+The example above will render the button below. Try to hover over it with your mouse - or long press it if you are on mobile:
+
+<br />
+
+<button className="bg-[pink] hover:bg-[navy] text-black hover:text-white py-[8px] px-[32px]">Get Started</button>
+
+The `hover` state can also be used to those nice little tooltips that pop up when you hover over elements and give you more information about them - or about a certain setting on a website.
+
+**Example:**
+
+```html
+<article>
+  Get Started
+</article>
+```
+
+#### `:link`
+
 ### Pseudo Elements
 
 ## Using Attribute Selectors With Forms
