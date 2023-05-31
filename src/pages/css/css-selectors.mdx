@@ -627,6 +627,32 @@ section[id*="thin"] {
 
 This will match to all three sections and change their background color to indigo.
 
+### Using Attribute Selectors With Forms
+
+You can also use attribute selectors to style out your form inputs. For example:
+
+```css
+/* Selects inputs with a type of "text" */
+input[type="text"] {
+  background-color: yellow;
+}
+
+/* Selects inputs with a type of "number" */
+input[type="number"] {
+  background-color: indigo;
+}
+
+/* Selects inputs with a type of "email" */
+input[type="email"] {
+  background-color: pink;
+}
+
+/* Selects inputs with a type of "date" */
+input[type="date"] {
+  background-color: firebrick;
+}
+```
+
 ## Pseudo Classes and Pseudo Elements
 
 ### Pseudo Classes
@@ -676,7 +702,9 @@ The example above will render the button below. Try to hover over it with your m
 
 <br />
 
-<button className="bg-[pink] hover:bg-[navy] text-black hover:text-white py-[8px] px-[32px]">Get Started</button>
+<button className="bg-[pink] hover:bg-[navy] text-black hover:text-white py-[8px] px-[32px]">
+  Get Started
+</button>
 
 The `hover` state can also be used to create those nice little tooltips that pop up when you hover over elements to give you more information about them.
 
@@ -685,7 +713,7 @@ The `hover` state can also be used to create those nice little tooltips that pop
 ```html
 <article>
   Hover over me
-  
+
   <p>These are the things they only want you to show</p>
 </article>
 ```
@@ -798,6 +826,7 @@ This will insert an `gif` image before the paragraph.
 This is used to style the first letter of some text. It can only be used with block elements.
 
 **Example:**
+
 ```html
 <p>Captain Scarlet, you are virtually indestructible!</p>
 ```
@@ -808,12 +837,13 @@ p::first-letter {
 }
 ```
 
-
 This will change the first letter of the paragraph to a crimson-red color as below:
 
 <br />
 
-<p className="first-letter:text-red-500">Captain Scarlet, you are virtually indestructible!</p>
+<p className="first-letter:text-red-500">
+  Captain Scarlet, you are virtually indestructible!
+</p>
 
 #### `::first-line`
 
@@ -835,7 +865,9 @@ The above example will result in the following:
 
 <br />
 
-<p className="first-line:text-purple-500">Captain Scarlet, you are virtually indestructible!</p>
+<p className="first-line:text-purple-500">
+  Captain Scarlet, you are virtually indestructible!
+</p>
 
 > CSS counts the first line as the top one alone - even if you have multiple sentences. This also means that if a line is incomplete and it breaks onto the next line, then the next line will not be viable to have the styles applied to it.
 
@@ -848,7 +880,7 @@ This is used to select the markers of list items. You can use this to style out 
 ```css
 ::marker {
   color: beige;
-  font-size: 1.25rem;  
+  font-size: 1.25rem;
 }
 ```
 
@@ -868,29 +900,3 @@ This is used to style out how your text or content will look like when highlight
 ```
 
 This will result in the highlighted text having a purple background color with pink text.
-
-## Using Attribute Selectors With Forms
-
-You can also use attribute selectors to style out your form inputs. For example:
-
-```css
-/* Selects inputs with a type of "text" */
-input[type="text"] {
-  background-color: yellow;
-}
-
-/* Selects inputs with a type of "number" */
-input[type="number"] {
-  background-color: indigo;
-}
-
-/* Selects inputs with a type of "email" */
-input[type="email"] {
-  background-color: pink;
-}
-
-/* Selects inputs with a type of "date" */
-input[type="date"] {
-  background-color: firebrick;
-}
-```
