@@ -2,9 +2,7 @@ import { Callout } from "nextra-theme-docs";
 
 # CSS Selectors And How To Style Elements
 
-<Callout type="info">This page is under construction</Callout>
-
-CSS Selectors refers to the way in which we "target" elements in our HTML files so that we can apply CSS styling to them.
+CSS Selectors refers to the way in which we "find" or "get" particular elements in our HTML files so that we can apply CSS styling to them.
 
 ## Commonly Used Selectors
 
@@ -272,7 +270,7 @@ More on this in the module about [Deeply Nested Elements](/css/deeply-nested-ele
   Using the descendant selector will select all the elements in the hierarchy
   that match. Therefore, if you had multiple paragraphs in the example above,
   they would all be styled in the same way - even if they were inside other
-  elements!. This is a good thing because it allows you to add styles once and
+  elements! This is a good thing because it allows you to add styles once and
   not every single time you encounter that element. However, It is something to
   take note of in case you want to have different styles for particular
   elements. If that is the case, you can use class names, or you can use [pseudo
@@ -633,7 +631,243 @@ This will match to all three sections and change their background color to indig
 
 ### Pseudo Classes
 
+CSS pseudo classes are used to define a special state of an element, such as when you hover over a button and the background color changes, or when you click a link and it is no longer blue in color but purple.
+
+CSS pseudo classes can be used to improve the user experience of your web application. They have the syntax:
+
+```css
+selector:pseudo-class {
+  /* Your CSS code */
+}
+```
+
+> Pseudo class names always have a full colon, and can be used with element names, class names, id attributes, and other types of CSS selectors.
+
+Below are examples of the most commonly used CSS Pseudo classes.
+
+#### `:hover`
+
+This is used to define what happens to the element when the user hovers over it with the mouse.
+
+> The `hover` state on mobile is a long-press. If you want to test it out, you long-press on the element that has the `hover` state applied to it.
+
+**Example:**
+
+```html
+<button>Get Started</button>
+```
+
+```css
+/* Default styles of the button element */
+button {
+  background-color: pink;
+  color: black;
+  padding: 8px 30px;
+}
+
+/* The hover state for the button */
+button:hover {
+  background-color: navy;
+  color: white;
+}
+```
+
+The example above will render the button below. Try to hover over it with your mouse - or long press it if you are on mobile:
+
+<br />
+
+<button className="bg-[pink] hover:bg-[navy] text-black hover:text-white py-[8px] px-[32px]">Get Started</button>
+
+The `hover` state can also be used to create those nice little tooltips that pop up when you hover over elements to give you more information about them.
+
+**Example:**
+
+```html
+<article>
+  Hover over me
+  
+  <p>These are the things they only want you to show</p>
+</article>
+```
+
+```css
+article p {
+  display: none;
+}
+
+article:hover p {
+  display: block;
+}
+```
+
+In the example above, you are going to end up with an `article` element which, when you hover over, will show you the content inside it: i.e. the paragraph.
+
+#### `:link`
+
+This selects and styles all univisited links.
+
+**Example:**
+
+```css
+a:link {
+  color: indigo;
+  text-decoration: underline;
+}
+```
+
+All unvisited links will have a text color of indigo with an underline.
+
+#### `:active`
+
+#### `:checked`
+
+#### `:disabled`
+
+#### `:enabled`
+
+#### `:first-child`
+
+#### `:focus`
+
+#### `:last-child`
+
+#### `:not(selector)`
+
+#### `:nth-child(n)`
+
+#### `:nth-of-type`
+
+#### `:root`
+
+#### `:target`
+
+#### `:visited`
+
 ### Pseudo Elements
+
+Pseudo elements are used to style specific parts of an element. For example, they can be used to change the color of your highlight when selecting text on a website, or they can be used to insert content before an element.
+
+> Pseudo elements have a double colon (`::`) as opposed to the single colon (`:`) of pseudo classes.
+
+They have the syntax:
+
+```css
+selector::pseudo-element {
+  /* CSS properties */
+}
+```
+
+Below are all the CSS Pseudo Elements in CSS.
+
+#### `::after`
+
+This is used to insert some content after an element.
+
+**Example:**
+
+```html
+<p>Omae wa mou shindeiru</p>
+```
+
+```css
+p::after {
+  content: url(surprised.gif);
+}
+```
+
+#### `::before`
+
+This is used to insert some content before an element.
+
+**Example:**
+
+```html
+<p>Omae wa mou shindeiru</p>
+```
+
+```css
+p::before {
+  content: url(surprised.gif);
+}
+```
+
+This will insert an `gif` image before the paragraph.
+
+#### `::first-letter`
+
+This is used to style the first letter of some text. It can only be used with block elements.
+
+**Example:**
+```html
+<p>Captain Scarlet, you are virtually indestructible!</p>
+```
+
+```css
+p::first-letter {
+  color: crimson;
+}
+```
+
+
+This will change the first letter of the paragraph to a crimson-red color as below:
+
+<br />
+
+<p className="first-letter:text-red-500">Captain Scarlet, you are virtually indestructible!</p>
+
+#### `::first-line`
+
+This is used to apply styles to the first line of text, and it can only be applied to block elements.
+
+**Example:**
+
+```html
+<p>Captain Scarlet, you are virtually indestructible!</p>
+```
+
+```css
+p::first-line {
+  color: rebeccapurple;
+}
+```
+
+The above example will result in the following:
+
+<br />
+
+<p className="first-line:text-purple-500">Captain Scarlet, you are virtually indestructible!</p>
+
+> CSS counts the first line as the top one alone - even if you have multiple sentences. This also means that if a line is incomplete and it breaks onto the next line, then the next line will not be viable to have the styles applied to it.
+
+#### `::marker`
+
+This is used to select the markers of list items. You can use this to style out the numbers or bullets of list items.
+
+**Example:**
+
+```css
+::marker {
+  color: beige;
+  font-size: 1.25rem;  
+}
+```
+
+This will make the bullets or numbers that you will have in your HTML document to have a beige color, with increased font size of 1.25rem (usually 20px if the default font size has not been changed).
+
+#### `::selection`
+
+This is used to style out how your text or content will look like when highlighted.
+
+**Example:**
+
+```css
+::selection {
+  background-color: rebeccapurple;
+  color: pink;
+}
+```
+
+This will result in the highlighted text having a purple background color with pink text.
 
 ## Using Attribute Selectors With Forms
 
