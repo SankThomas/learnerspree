@@ -1,12 +1,8 @@
 {
   "index": "Welcome To Eduketa",
   "home": "Getting Started",
-  "html": "Learn HTML5",
-  "css": "Learn CSS",
-  "javascript": "Learn JavaScript",
-  "nodejs": "Learn NodeJs",
-  "react": "Learn ReactJs",
-  "react-native": "Mobile App Development With React Native",
+  "web-development": "Web Development",
+  "react-native": "Mobile App Development",
   "cybersecurity": "Cybersecurity",
   "projects": "Projects",
   "transcription": "Learn Transcription"
