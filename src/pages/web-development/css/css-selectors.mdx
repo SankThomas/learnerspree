@@ -747,11 +747,129 @@ All unvisited links will have a text color of indigo with an underline.
 
 #### `:active`
 
+This is used to style the active state of elements. It is usually used on links, but can be used on all elements.
+
+<Callout type="info">
+  When using `:active`, make sure that it comes after `:hover` if you are using
+  the `:hover` pseudo selector. If it appears before, it won't work.
+</Callout>
+
+An element get the `:active` pseudo selector when the user clicks on it.
+
+**Example:**
+
+```html
+<a href="https://twitter.com/tsbsankara">Thomas Sankara Twitter</a>
+
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+```
+
+```css
+a:active {
+  color: #10b581;
+}
+
+p:active {
+  background-color: #10b581;
+}
+```
+
+The above examples will render a link which, when you click on it to activate the `:active` state, will have a green text color, as well as a paragraph that will have a green background color when it is active.
+
+See the interactive examples below:
+
+<br />
+
+<div className="flex flex-col md:flex-row gap-8">
+  <a
+    href="https://twitter.com/tsbsankara"
+    target="_blank"
+    rel="noreferrer"
+    className="active:text-emerald-500 lg:text-xl"
+  >
+    Thomas Sankara Twitter
+  </a>
+
+  <p className="active:bg-emerald-500 lg:text-xl">
+    Lorem ipsum dolor sit amet consectetur adipiscing elit.
+  </p>
+</div>
+
 #### `:checked`
+
+This is used to selected inputs that have been checked. It only works for checkboxes, radio buttons, and the `<option>` element.
+
+**Example:**
+
+```css
+input:checked {
+  background-color: yellow;
+  padding: 1rem 2rem;
+}
+
+option:checked {
+  width: 100px;
+}
+```
 
 #### `:disabled`
 
+This matches all disabled inputs in a form.
+
+**Example:**
+
+```html
+<input type="text" disabled />
+```
+
+```css
+input:disabled {
+  background-color: #999;
+  border: 1px solid #888;
+}
+```
+
+This will result in the following input:
+
+<br />
+
+<input
+  type="text"
+  disabled
+  placeholder="This input is disabled"
+  className="bg-gray-500 border border-gray-600 placeholder-gray-800"
+/>
+
+> `:disabled` also works for the `<option>` element.
+
 #### `:enabled`
+
+This is the opposite of the `:disabled` selector. It selects all inputs which have been enabled.
+
+**Example:**
+
+```html
+<input type="text" enabled />
+```
+
+```css
+input:enabled {
+  background-color: #10b581;
+}
+```
+
+This will result in the following input:
+
+<br />
+
+<input
+  type="text"
+  enabled
+  placeholder="This input is enabled"
+  className="bg-emerald-500 placeholder-white"
+/>
+
+> `:enabled` also works for the `<option>` element.
 
 #### `:first-child`
 
