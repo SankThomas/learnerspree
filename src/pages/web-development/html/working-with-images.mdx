@@ -1,0 +1,363 @@
+import { Callout } from "nextra-theme-docs";
+
+# Working With Images
+
+Images massively improve the aesthetic of your website. Almost all websites and web apps contain at least one image or icon.
+
+Take a look at the examples below:
+
+| Website Preview                                                  | Website Link                                         |
+| ---------------------------------------------------------------- | ---------------------------------------------------- |
+| ![tsbsankara-homepage](src/assets/tsbsankara-homepage.png)       | [TsbSankara Homepage](https://tsbsankara.com)        |
+| ![traversymedia-homepage](src/assets/traversymedia-homepage.png) | [Traversy Media Homepage](https://traversymedia.com) |
+| ![github-homepage](src/assets/github-homepage.png)               | [GitHub Homepage](https://github.com)                |
+
+Images are integral in web development. They are what attract users to your website as well so it is important that they are in tandem with the feel of your website.
+
+In this module, we are going to learn all we need to know about working with images on the modern web.
+
+## Syntax
+
+To add an image to your website, simply use the following syntax:
+
+```html
+<img src="PATH_TO_IMAGE" alt="alterative text" />
+```
+
+Replace `PATH_TO_IMAGE` to the actual path of the image which you can have locally in your workspace, or the link to one on the internet.
+
+```html
+<!-- A local image -->
+<img src="./local-image.png" alt="This is a local image" />
+
+<!-- An image from the internet -->
+<img src="https://eduketa.com/logo.png" alt="Image from the internet" />
+```
+
+<Callout type="info">
+  Images are fetched at runtime and then "placed" into your website. So it is
+  important to avoid fetching many images at once as this can impact your
+  website loading speed.
+
+If you absolutely have to load many images at once, use the [`loading="lazy"`](#lazy-loading) attribute on the image which will ensure that it is only fetched when it is about to come into the viewport.
+
+</Callout>
+
+## Types of images
+
+### 1. jpeg
+
+Stands for Joint Photographic Experts Group. They have the file extensions: `.jpeg`, `.jpg`, `.jfif`, `.pjpeg`, `.pjp`, and are used to show important images such as logos and banner images.
+
+```html
+<img src="/album-cover.jpeg" alt="album cover image" />
+<img src="/album-cover.jpg" alt="album cover image" />
+```
+
+### 2. png
+
+Stands for Portable Network Graphics. They have the file extension: `.png`, and are used to show icons and other important images such as banner images.
+
+```html
+<img src="/album-cover.png" alt="album cover image" />
+```
+
+### 3. svg
+
+Stands for Scalable Vector Graphics. They have the file extension: `.svg`, and are used to show illustrations and icons.
+
+```html
+<img src="/company-icon.svg" alt="company icon" />
+```
+
+### 4. avif
+
+Stands for AV1 Image File Format. They have the file extension: `.avif`, and can be used to show banner images and illustrations.
+
+```html
+<img src="/album-cover.avif" alt="album cover image" />
+```
+
+### 5. webp
+
+Is an image format that was created by Google to replace JPEG and PNG as the standard for web development. It provides smaller size images but with consistent quality. They have the file extension: `.webp`, and are used to show banner images and other important images.
+
+```html
+<img src="/album-cover.webp" alt="album cover image" />
+```
+
+### 6. gif
+
+Stands for Graphics Interchange Format. They have the file extension: `.gif`, and are used to show animated images.
+
+```html
+<img src="/album-cover.gif" alt="animated album cover" />
+```
+
+### 7. ico
+
+Stands for Microsoft Icon. They have the file extension: `.ico`, and are used to display meaningful icons such as favicons.
+
+```html
+<img src="/favicon.ico" alt="favicon" />
+```
+
+<Callout type="info">
+  A favicon is a type of image that shows on the left of the address bar of the
+  website, and also on the left of the title in search results.
+</Callout>
+
+<Callout type="warning">
+  Avif and WebP are not well supported on all browsers at the time of writing
+  this. So use them cautiously.
+</Callout>
+
+## Optimizing images for the web
+
+Whenever you're choosing an image that you want to use, here are a few things that you need to think about:
+
+1. Does the image convey what the website is about?
+2. Is the image copyright free?
+3. Is the image in-line with the feel of the website?
+4. How large is the image?
+
+You can always edit images in Adobe PhotoShop so that you can add little elements about your website, and also remove unwanted items in the image.
+
+If images are too large, there are software online that you can use to compress them to optimize them for your website.
+
+Never ever use images with copyright: unless you are the copyright owner.
+
+To get royalty-free images, check out:
+
+1. [Unsplash.com](https://unsplash.com)
+2. [Pexels](https://pexels.com)
+
+## The `src` attribute
+
+The `src` attribute represents the path to the image. It can be a local image that you have in your workspace or on your machine, or one that you get from the internet.
+
+**Example:**
+
+```html
+<!-- A local image -->
+<img src="./local-image.png" alt="This is a local image" />
+
+<!-- An image from the internet -->
+<img src="https://eduketa.com/logo.png" alt="Image from the internet" />
+```
+
+## The `alt` attribute
+
+The `alt` attribute represents alternative text that will show up in case the image fails to load. Be sure to make this descriptive enough because screen readers use this text to read aloud to the listeners.
+
+The alt text can be displayed: if you have a slow network, if you don't have active internet, if you're using an internet image and the path to it has changed, if you add a wrong path to the image, or if you have a wrong extension to the image.
+
+**Example:**
+
+```html
+<!-- Slow network shows the alt text -->
+<img src="./slow-network.png" alt="Slow network shows the alt text" />
+
+<!-- No active internet show the alt text -->
+<img src="https://eduketa.com/logo.png" alt="Inactive internet show this" />
+
+<!-- Path to image has changed -->
+<img src="PATH_HAS_CHANGED.svg" alt="Wrong image path shows this text" />
+
+<!-- Wrong path to image shows the alt text -->
+<img src="https://eduketa.com/wrong-path.jpg" alt="Wrong path to image" />
+
+<!-- Wrong file extension shows the alt text -->
+<img src="https://eduketa.com/no-image.jpeeg" alt="Wrong image extension" />
+```
+
+The above example is going to render the following:
+
+<img src="./slow-network.png" alt="Slow network shows the alt text" />
+
+<img src="https://eduketa.com/logo.png" alt="Inactive internet show this" />
+
+<img src="PATH_HAS_CHANGED.svg" alt="Wrong image path shows this text" />
+
+<img src="https://eduketa.com/wrong-path.jpg" alt="Wrong path to image" />
+
+<img src="https://eduketa.com/no-image.jpeeg" alt="Wrong image extension" />
+
+## The `picture` element
+
+The `picture` element was introduced so that developers could link multiple images that would show depending on the device width of the image.
+
+It takes in a `source` element which you can link to a certain image. You can have as many `source` elements as you need. For example, if I wanted to display a certain image for mobile devices, but then change the image to something different on desktops, I would do something like:
+
+```html
+<picture>
+  <source media="(min-width: 1024px)" srcset="/desktop-image.png" />
+  <img src="/mobile-image.png" alt="Hero banner" />
+</picture>
+```
+
+In the snippet above, the browser will check for whether the current device has a width that is greater than `1024px`, which is the breakpoint for most laptops, and then display the desktop image. Otherwise, it is going to fallback to the mobile image.
+
+> These breakpoints are defined using the `media` attribute. More about this in the module about CSS Responsiveness.
+
+Note that when using the `picture` tag, you also need to define the `img` element within it as this is going to act as the default / fallback image in case all other fail to load.
+
+Also note that we define `srcset` as the source for the image when using the `source` element in the `picture` tag.
+
+The `alt` attribute on the `img` element acts as the alternative text for all the images defined within the parent `picture` element.
+
+To improve the above example, how about if you also had a tablet image that you wanted to show? Simply add in the tablet breakpoint. See below:
+
+```html
+<picture>
+  <source media="(min-width: 1024px)" srcset="/desktop-image.png" />
+  <source media="(min-width: 768px)" srcset="/tablet-image.png" />
+  <img src="/mobile-image.png" alt="Hero banner" />
+</picture>
+```
+
+And what if you had an extremely large image for extremely large screens? Well, just add in another breakpoint:
+
+```html
+<picture>
+  <source media="(min-width: 1600px)" srcset="/extremely-large-image.png" />
+  <source media="(min-width: 1024px)" srcset="/desktop-image.png" />
+  <source media="(min-width: 768px)" srcset="/tablet-image.png" />
+  <img src="/mobile-image.png" alt="Hero banner" />
+</picture>
+```
+
+When adding more sources for more images, take note that you add them from the largest one going to the smallest one.
+
+Using the `picture` tag allows you to add responsiveness to your images without having to add in any CSS. Yes, you can do this with CSS as well, but it's more tedious.
+
+## Width and Height
+
+Whenever you add images to your website, they take up their original width and height. Meaning, if the image is greater in width than the width of your device, it is going to cause an overflow on the horizontal axis. The same thing happens if the original height of the image exceeds the height of the device.
+
+In order to fix this, you can add `width` and `height` attributes to limit the width and height of the image respectively.
+
+```html
+<img
+  src="https://eduketa.com/logo.png"
+  height="200px"
+  width="300px"
+  alt="This is a very large image that has been reduced using `height` and `width` attributes"
+/>
+```
+
+Another way to add `height` and `width` to an image is to apply CSS styling to it using the `style` attribute. See the example below:
+
+```html
+<img
+  src="https://eduketa.com/logo.png"
+  alt="This is a very large image that is styled using CSS `height` and `width` properties"
+  style="height: 200px; width: 300px;"
+/>
+```
+
+<Callout type="info">
+  Adding styles like this is not a good idea as they override all other styles
+  that you might apply on the image. Read more about this in the module about
+  CSS Specificity.
+</Callout>
+
+## Local images
+
+It is recommended that if you want to add images into your website, then you should have them locally in your workspace. This reduces the few seconds that the browser requires when fetching an image from the internet, and therefore increases your website loading time as people are very impatient these days.
+
+In order to have local images, all you need to do is download the images and add them in your workspace. The convention when you do this is to create a folder called `assets` or `images` for all your images.
+
+## Server images
+
+These refer to images that require to be fetched from the internet or database before they can be displayed to your users.
+
+It is good to not have many server images because the browser always has to send a GET request to get the image before it can display in your web app.
+
+When adding a server image, all you need to do is add the path to the image, as in the example below:
+
+```html
+<img
+  src="https://facebook.com/tsbsankara/image-showcase.jpeg"
+  alt="An image that is fetched from the internet and then shown to the user"
+/>
+```
+
+## Lazy loading
+
+Lazy loading is a concept where the browser does not fetch the image until it is about to be brought into the viewport of the device. This greatly reduces the bandwidth that your end users need to use to view the images, while also greatly increasing your website speed.
+
+Popular websites such as YouTube, Facebook, Instagram and Twitter use this method so that you don't load in twelve million images at a go.
+
+Sometimes, you can't avoid fetching tons of images from the internet. In order to make this process easier on the users, lazy loading was introduced. See the example below:
+
+**Example:**
+
+```html
+<img
+  src="https://instagram.com/image-1.png"
+  alt="Some text here"
+  loading="lazy"
+  height="200px"
+  width="100%"
+/>
+<img
+  src="https://instagram.com/image-2.png"
+  alt="Some text here"
+  loading="lazy"
+  height="200px"
+  width="100%"
+/>
+<img
+  src="https://instagram.com/image-3.png"
+  alt="Some text here"
+  loading="lazy"
+  height="200px"
+  width="100%"
+/>
+```
+
+By simply adding the `loading="lazy"` attribute, the third image above will not load it until you are just about to scroll to it. The browser detects scrolls using the `onscroll` event and then calculate the current position of the scroll relative to the position of the next image. If it's close enough, it begins to load the image so that by the time you reach it, it had loaded in and you don't have to wait anymore.
+
+Quite interesting right?
+
+## Animated images
+
+You can also add in animated images such as `gif`s using the same syntax to add in images.
+
+**Example:**
+
+```html
+<img src="https://eduketa.com/animation.gif" alt="An animated image" />
+```
+
+## Images as a link
+
+Sometimes you want that when someone clicks your image, such as your logo, it goes to a certain page. This can easily be achieved by wrapping your image in an anchor tag. See the example below:
+
+```html
+<a href="https://frontendmentor.io">
+  <img
+    src="https://www.frontendmentor.io/static/images/logo-desktop.svg"
+    alt="Frontend Mentor"
+  />
+</a>
+```
+
+They snippet above links the image to the Frontend Mentor homepage. The image below shows what to expect when running the code. Click on the image to test it out. (Additional styling has been applied in order to show the image)
+
+<br />
+
+<div className="bg-white p-8 rounded-lg shadow inline-block">
+  <a href="https://frontendmentor.io">
+    <img
+      src="https://www.frontendmentor.io/static/images/logo-desktop.svg"
+      alt="Frontend Mentor"
+    />
+  </a>
+</div>
+
+<Callout type="warning">
+  Use images carefully as they drastically negate your website load time when
+  used improperly
+</Callout>

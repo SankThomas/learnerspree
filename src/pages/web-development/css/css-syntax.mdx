@@ -1,0 +1,121 @@
+import { Callout } from "nextra-theme-docs";
+
+# How To Add CSS Styles To Your HTML
+
+<Callout type="info">
+  From here on out, we are going to be dealing with mainly CSS code. It is only
+  for relevant examples that there will be HTML code present as well.
+</Callout>
+
+CSS syntax is added in the following way:
+
+```css
+element_name {
+  property: value;
+}
+
+/* For example */
+div {
+  background-color: red;
+}
+```
+
+> CSS files have the extension `.css`. For example, `index.css` or `styles.css`. <br /> <br />
+> CSS, like HTML, is also case-insensitive. Therefore, `BACKGROUND-COLOR: RED` and `background-color: red` work the same. However, it is recommended to use lowercase letters as they are easier to read, and write
+
+The next prudent question to ask ourselves is, how do we add CSS to our HTML to make it appealing? Because HTML on it's own is actually quite terrible looking.
+
+There are three ways that you can add CSS to your HTML.
+
+### 1. Inline CSS
+
+This refers to adding styles right within the HTML element - as we have been doing in the HTML examples. It involves giving the element the `style` attribute and then adding the CSS properties you want.
+
+**Example:**
+
+```html
+<div style="background-color: red">
+  This is a section with a red background color.
+</div>
+```
+
+This will create a section with a red background color. The above example is called inline styling and it should only ever be used if:
+
+    1. The styles you are applying to the element are only going to be used in that element alone.
+
+    2. You want to override some global styles that you might have applied in your actual CSS file.
+
+> The reason it is important to note the two points above is because of CSS Specificity - which means that inline styles will override all other styles that you have applied in an external CSS file. More on this in the module [CSS Specificity](/css/cascading)
+
+### 2. Internal CSS
+
+This refers to adding CSS styles in the `head` of your HTML document, inside `style` tags.
+
+**Example:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- meta tags and other relevant data -->
+
+    <!-- Style tag for CSS -->
+    <style>
+      div {
+        background-color: red;
+      }
+    </style>
+    <!-- End of styles tag -->
+
+    <title>Internal CSS</title>
+  </head>
+  <body>
+    <div>
+      <h1>A section with a red background color</h1>
+    </div>
+  </body>
+</html>
+```
+
+The `<style>` tag indicates to the browser that you are about to add in CSS code, and it should intepret everything inside the `style` tags as CSS code and not HTML. Remember, HTML will not throw you an error on the screen. So, if you forget to add in these tags, your web app might not show an error, and it is up to you to determine that it is an error, and to find out where the error is.
+
+The downside to adding CSS styles in this way is that they will only apply to the current document in which they are found. For example, if you had the above styles in a HTML file called `index.html`, and you created another file called `about.html`, the styles in the `index.html` will not apply to the `about.html`. If you want them to apply, you will have to add them in the `head` tag of the `about.html` file.
+
+### 3. External CSS
+
+In your HTML document, in the `head` of your HTML, you can link your stylesheet in the following way:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- meta tags and other relevant data -->
+
+    <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="index.css" />
+
+    <title>External CSS</title>
+  </head>
+  <body>
+    <div>
+      <h1>A section with a red background color</h1>
+    </div>
+  </body>
+</html>
+```
+
+Once you do this, you can begin to add relevant styles in your CSS file and they will apply to the current document. For example, in your actual CSS file, you can have the following:
+
+```css
+div {
+  background-color: red;
+}
+```
+
+This, like the other examples above, will render a section with a red background color;
+
+This is the main way - and also the recommended way - that you will be using to add your CSS files to your HTML documents.
+
+> NOTE: It is the recommended way. However, even when you have an external CSS file, always select the most convenient one for what you are currently doing. For example, sometimes you need to apply overriding styles to your elements. This is where [CSS Specificity](/css/cascading) comes in. More on this in that module.
+
+In the next module, we are going to talk about CSS Selectors.

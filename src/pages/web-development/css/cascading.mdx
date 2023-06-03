@@ -1,0 +1,370 @@
+import { Callout } from "nextra-theme-docs";
+
+# The Cascading Nature Of CSS
+
+The **C** in CSS stands for Cascading. Cascading means that CSS will apply styles to your HTML webpage according to how the styles are defined, from top to bottom.
+
+What this also means is that styles that are located more to the bottom of your CSS file will be intepreted as having more significance than the other styles.
+
+This means that if you define one section that has two classes and you style out the classes to have different background colors, the class that is more to the bottom of your file is going to have priority over the first defined style.
+
+**Example:**
+
+```html
+<section class="banner showcase">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+.banner {
+  background-color: violet;
+}
+
+.showcase {
+  background-color: purple;
+}
+```
+
+In the above example, the styles of the `.showcase` class will be applied over the styles of the `.banner` class.
+
+And if you happen to style the section using the same class name, but they are located in different places of your stylesheet, the one that is located more to the bottom will apply over the other one. For example:
+
+**Example:**
+
+```html
+<section class="banner showcase">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+.banner {
+  background-color: violet;
+}
+
+/* Some other CSS code */
+
+.banner {
+  background-color: purple;
+}
+```
+
+Now, the section will have a purple background color.
+
+This is the basic concept of how CSS styles are applied. However, there are certain rules that are overt to this - and they belong to what is called CSS Specificity.
+
+## CSS Specificity
+
+CSS styles that are located more to the bottom of your CSS file have more priority than other styles applied above. This is called CSS Specificity. (It's a hard word to pronounce).
+
+This is one rule for CSS Specificity. However, there are exceptions to this rule which we are going to discuss below:
+
+### 1. Element Names Vs Class Names
+
+Class names have higher specificity than element names. This means that if you have a section which you style using its name: i.e. `section` - and you style the same section using a class name that you have applied on it, the styles of the class name will apply over the styles on the element name.
+
+**Example:**
+
+```html
+<section class="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using element name */
+section {
+  background-color: firebrick;
+}
+
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+```
+
+In the above example, what you will end up with is a section with a violet background color.
+
+<Callout type="info">
+It is important to note that only the styles that you change in the more specific class that you are styling, will apply. For example, if I applied a height of `100px` to the section (not the class) then the section will have a height of `100px`, even when I style it out using the class name. This is because, it the class name, which is more specific, I am not changing the `height` property - I am only changing the `background-color` property.
+
+This also means that if I now change the `height` to something else, then the section will now use the `height` I have applied on the more specific class name.
+
+</Callout>
+
+Still using the example above, what if I styled the class name before styling the element name? This way, the element name will be more to the bottom of the CSS file and have more specificity, right? Well, as true as the statement might be, the class name will still take priority. For example:
+
+```html
+<section class="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using element name */
+section {
+  background-color: firebrick;
+}
+```
+
+> The element name comes last, but the background color of the section will still be violet because of specificity.
+
+### 2. Element names Vs Id attributes
+
+Just like with class names, styles on the `id` attribute will take precedence over styles applied using element names.
+
+**Example:**
+
+```html
+<section id="showcase">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+section {
+  background-color: indigo;
+}
+
+#showcase {
+  background-color: navy;
+}
+```
+
+In this case, the styles of the `#showcase` will apply and the styles of the `section` will not apply. The same will happen even if you define the `#showcase` styles first before defining the `section` classes.
+
+<Callout type="info">
+### Once again
+
+Something important to note is that only the styles you change in the more specific styles will apply. Meaning, untouched style properties will remain untouched.
+
+**Example:**
+
+```css
+section {
+  height: 80px;
+  background-color: yellow;
+}
+
+#showcase {
+  background-color: red;
+}
+```
+
+The section is still going to have a height of `80px` because we have not tampered with the `height` property in the styles for the `#showcase`.
+
+</Callout>
+
+### `id` attributes Vs `class` attributes
+
+When using both `id`s and `class`es to style an element, the styles on the `id` will take precedence over the styles of the `class` no matter their placement in your CSS file.
+
+**Example:**
+
+```html
+<section class="banner" id="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using id */
+#banner {
+  background-color: firebrick;
+}
+```
+
+Above, the section will have a color of `firebrick` because the styles on the `#banner` have more specificity than that of the `.banner`.
+
+### Element Name Vs `id` Vs `class`
+
+After learning the specificity above, then this becomes somewhat obvious because, if class names have higher priority than the element name, and ids have the highest specificity of the three, then what do you think is going to happen to the section below?
+
+**Example:**
+
+```html
+<section class="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using id */
+#banner {
+  background-color: firebrick;
+}
+
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using element name */
+section {
+  background-color: aliceblue;
+}
+```
+
+### The `!important` rule
+
+If you want certain styles to apply over all others - no matter their placement in your CSS files, or no matter the selector you have used, CSS has a rule called `!important` that you can apply.
+
+> The `!important` rule has the highest specificity of anything! Be careful how you use it.
+
+Usually, you will find yourself using this rule in cases where you're using a CSS framework and you want to override some of its default styles to apply your own.
+
+**Example:**
+
+```html
+<section class="banner">
+  <!-- Some content here -->
+</section>
+```
+
+```css
+/* Styles using id */
+#banner {
+  background-color: firebrick;
+}
+
+/* Styles using class name */
+.banner {
+  background-color: violet;
+}
+
+/* Styles using element name */
+section {
+  background-color: aliceblue !important;
+}
+```
+
+In the example above, the styles of the `section` will apply over the styles of the `.banner` or `#banner` because the `section` has a property that has the `!important` rule. This rule is always placed after the property that you want to have the highest specificity.
+
+<Callout type="warning">
+  The `!important` rule has the highest specificity. If you use it too much or
+  wrongly in your application, you will end up with styles you cannot override
+  even if you wanted to apply different styles for different device widths: i.e.
+  when you wanted to add responsiveness to your website.
+</Callout>
+
+### Inline styling, Internal Styling, and External Styling
+
+In the module about [CSS Syntax](/css/css-syntax), we learnt how to add CSS to our HTML, and we talked about three ways to do it: Inline styling, Internal styling, and External styling.
+
+Well, whatever method you choose to add in your styles will have an impact on the CSS Specificity of your styles.
+
+For example, if you choose to have inline styling by adding your CSS styles directly inside the elements, and then you try to style the same element using internal or external styles, what will happen is that your element will take the styles for the inline styles.
+
+<Callout type="info">
+  Inline styles have the highest specificity: Higher than both intenral and
+  external styles.
+</Callout>
+
+**Example:**
+
+```html
+<section style="background-color: red">Some content here</section>
+```
+
+```css
+section {
+  background-color: pink;
+}
+```
+
+The above example uses inline styles for the section. What you will end up with is a section with a red background. And even if you have `id` attributes on the HTML element (because `id`s have a higher specificity than `class`es and element names), what you will still end up with, is a pink background. See the second example below:
+
+**Example:**
+
+```html
+<section style="background-color: red">Some content here</section>
+```
+
+```css
+section {
+  background-color: pink;
+}
+
+.banner {
+  background-color: indigo;
+}
+
+#banner {
+  background-color: firebrick;
+}
+```
+
+> The `section` will still have a red background color because inline styles have the highest specificity.
+
+This same rule applies when you try to add in internal styles in the `head` of your HTML document.
+
+**Example:**
+
+```html
+<head>
+  <style>
+    section {
+      background-color: navy;
+    }
+  </style>
+</head>
+
+<body>
+  <section style="background-color: red">Some content here</section>
+</body>
+```
+
+The above example has added in internal styling of the `section` element. However, the styles that will still apply is the red background on the section.
+
+#### But...
+
+...there is a way to make your internal or external styles apply over your inline styles. The way to do that is to add the `!important` rule. Always remember that the `!important` rule has the highest specificity over everything else - including inline styles.
+
+**Example:**
+
+```html
+<section style="background-color: red">Some content here</section>
+```
+
+```css
+section {
+  background-color: indigo !important;
+}
+```
+
+Now, the `section` will have a background color of indigo.
+
+You can also add this to the `head` of your HTML document, i.e.
+
+**Example:**
+
+```html
+<head>
+  <style>
+    section {
+      background-color: navy !important;
+    }
+  </style>
+</head>
+
+<body>
+  <section style="background-color: red">Some content here</section>
+</body>
+```
+
+The `section` will now change to a navy blue background color.
+
+#### However
+
+Take note that you don't always override your styles with the `!important` directive as this can cause unintended issues much later in your code, such as when you want to add responsiveness to your website. More on this in the module about [CSS Media Queries And Responsiveness](/css/media-queries)

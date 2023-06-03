@@ -1,0 +1,83 @@
+import { Callout } from "nextra-theme-docs";
+
+# A Simple HTML Program
+
+What does HTML code look like? See the example below. Don't worry if you don't immediately understand what the code does, as it will be explained in a moment.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Simple HTML Program</title>
+  </head>
+  <body>
+    <h1>A Simple HTML Program</h1>
+  </body>
+</html>
+```
+
+Save this file as `index.html` and then open it up using `Live Server` or double click it to open it in your favorite browser. What you will see on the screen is the image below:
+
+![a-simple-html-program](src/assets/a-simple-html-program.png)
+
+Congratulations! You have just written your first HTML document.
+
+## What does the code do?
+
+The line `<!DOCTYPE html>` tells the browser that it is about to receive an HTML document. This type of declaration is for HTML5. Previous versions of HTML also had their own `Doctype` declarations listed below:
+
+```
+The HTML 4.01 strict doctype.
+The HTML 4.01 transitional doctype.
+The XML 1.0 strict and transitional doctypes.
+The HTML 4.01 and XML 1.0 frameset doctypes.
+```
+
+(The source above is from Google)
+
+The line `<html lang="en">` tells the browser to apply English as the primary language for the document.
+
+The line `<head>...</head>` is used to insert items into the "invisible" (for lack of a better word) part of the website. Items such as `<script>` tags, analytics, cookies, CSS stylesheets, meta tags and document titles are all placed in the `head` of the HTML document.
+
+The line `<title>A Simple HTML Program</title>` is the title of your HTML document that shows up in the address bar of your browser, in search results, and is also the title that shows when you `Alt + Tab` between screens. So make sure it's something meaningful and descriptive.
+
+I have skipped over the `meta` tags because we are going to dive deeper into them in the module about Meta Tags.
+
+## How is HTML processed?
+
+HTML is processed by the browser at runtime. Meaning, when the browser receives the document, it goes through the document and renders it in a waterfall fashion, step-by-step, from top to bottom.
+
+HTML is not a progamming language and will render elements as they are typed in. This means that if you make a mistake such as having multiple `<><><><>` tags, then the browser is going to render `<><><><>`, and it will be up to you to interpret them as errors and correct them. They do not show up as bugs or errors in your code!
+
+## Point to note
+
+<Callout type="info">
+### Caution
+
+If you're coding locally on your machine, please make sure that whenever you are running the examples, you have the following boilerplate code in your HTML file.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boilerplate code</title>
+  </head>
+  <body>
+    <h1>Boilerplate code</h1>
+  </body>
+</html>
+```
+
+If you're using an online code editor with the exception of VSCode.dev, you can safely skip this as they automatically insert the necessary code for you.
+
+In VSCode, there is an extension that comes in very handy called `Emmet`. With this, you can create your HTML file and simply type "!" - without the quotation marks - and press `Enter` or `Tab`, and it will generate the boilerplate above.
+
+> "Emmet" can be installed in other code editors as well. Visit [Emmet.io](https://emmet.io) for more information.
+
+</Callout>

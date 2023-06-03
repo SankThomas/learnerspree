@@ -1,0 +1,214 @@
+import { Callout } from "nextra-theme-docs";
+
+# Working With Forms
+
+<Callout type="info">
+### Note
+
+The examples below are just syntax. We will dive deeper into Working With Forms in the JavaScript Modules, so that we can understand how to create the functions and call them on the elements, as well as preventing some actions form occurring.
+</Callout>
+
+The `form` element is used to create a HTML form which accepts user input. It contains a couple of components for it to be complete.
+
+## 1. The `input` element
+
+The `input` element is used to create an input that users can fill, such as a text input for usernames, or ones that they can select, such as a checkbox or radio button.
+
+It is used to create text fields.
+
+## 2. The `label` element
+
+The `label` is essentially the name of the input. For example, you can have a `label` and then link it to your input so that when the user clicks on the label, it automatically triggers the input.
+
+It is recommended that your inputs should always have labels. You can circumvent this rule though depending on your needs.
+
+## The `submit` button
+
+The submit button is going to trigger the `submit` event of the form so that functions like form validation can run. You can create a submit button using a `button` element, or by using an `input` with a `type` of `submit`, i.e:
+
+```html
+<input type="submit" value="Submit" />
+```
+
+This will render:
+
+<br />
+
+<input type="submit" value="Submit" />
+
+## Form examples
+
+> For reasons that adding demo forms breaks the website (because the form triggers a reload event when it is submitted), I am not showing the demo. However, you can try out the code on your local machine to test out what you will have.
+
+### A form that accepts a username, email and password
+
+```html
+<form>
+  <label for="username">Username</label>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    placeholder="Enter your username"
+    required
+  />
+
+  <label for="email">Enter your email</label>
+  <input
+    type="email"
+    name="email"
+    id="email"
+    placeholder="Enter your email"
+    required
+  />
+
+  <label for="password">Enter your password</label>
+  <input
+    type="password"
+    name="password"
+    id="password"
+    placeholder="Enter your password"
+    required
+  />
+
+  <button type="submit">Log In</button>
+</form>
+```
+
+> I have made a habit of giving the `name` and `id` attributes the same name as the input type I am creating to improve the workflow. However, you can have whatever names you want, as long as you have the correct input type.
+
+### A form with a radio buttons
+
+```html
+<form>
+  <label for="option1">Option 1</label>
+  <input type="radio" name="option1" id="option1" />
+
+  <label for="option2">Option 2</label>
+  <input type="radio" name="option2" id="option2" />
+
+  <label for="option3">Option 3</label>
+  <input type="radio" name="option3" id="option3" />
+
+  <button type="submit">Next Page</button>
+</form>
+```
+
+### A form with multiple checkbox options
+
+```html
+<form>
+  <h2>Please select all options relevant to you</h2>
+
+  <input type="checkbox" name="checkbox1" id="checkbox1" />
+  <label for="checkbox1">High School Graduate</label>
+
+  <input type="checkbox" name="checkbox2" id="checkbox2" />
+  <label for="checkbox2">Undergraduate Degree</label>
+
+  <input type="checkbox" name="checkbox3" id="checkbox3" />
+  <label for="checkbox3">PhD</label>
+
+  <button type="submit">Confirm Selection</button>
+</form>
+```
+
+## Form Events
+
+Now that we know how to create forms, there are events that go along with the forms. For example, there is a submit event when you submit the form, there is a change event when you change the value of the input by typing something in, among others, which we are going to look at below.
+
+<Callout type="info">
+  All events have the syntax:
+  
+  ```html
+  event_name=""
+  ```
+  
+  Where the attribute is given a JavaScript function.
+  
+  For example
+  
+  ```html
+  <form onsubmit="handleSubmit()"></form>
+  ```
+</Callout>
+
+### The `onsubmit` event
+
+This is the action that triggers when a user submits the form, either using the <kbd>Enter</kbd> key, or when they click the `Submit` button of the form. See the example below:
+
+```html
+<form onsubmit="handleSubmit()">
+ <!-- Rest of your form -->
+</form>
+```
+
+> The default behaviour for the form when a user submits it is to cause the entire webpage to reload. You can prevent this in JavaScript if you don't want this to happen. More on this in the JavaScript modules.
+
+Note that you can call the submit function on the form as in the example above, or you can add it to the submit button of the form. When you add it to the submit button, the event to use is `onclick` and no longer `onsubmit`. For example:
+
+```html
+<form>
+ <!-- Rest of your form -->
+ 
+ <button type="submit" onclick="handleSubmit()">Submit</button>
+</form>
+```
+
+You can add the submit function both on the form and on the button, as long as you use the correct event names.
+
+```html
+<!-- Submit function on the form -->
+<form onsubmit="handleSubmit()">
+ <!-- Rest of your form -->
+ 
+ <!-- Submit function on the button also -->
+ <button type="submit" onclick="handleSubmit()">Submit</button>
+</form>
+```
+
+<Callout type="info">
+  When you add the `submit` function on the button only and not on the form, what happens is called "event bubbling". This means that the event is propagated upwards from where it is fired - in this case the button when it is clicked - up until it reaches the parent element - in this case the form.
+</Callout>
+
+
+
+### The `onblur` event
+
+This event triggers when focus is lost on the form or on an input. It can be used to call a validation function immediately the user finishes typing in and clicks away, or it can be used for more subtle things like changing the background color of an input when the user clicks away, to show that they have filled in the input.
+
+The syntax is:
+
+```html
+<form onblur="handleBlur()"></form>
+```
+
+### The `onchange` event
+
+This is the event that fires whenever the value of an input changes. Not all inputs use the `onchange` event. For example, a checkbox will use the `onchecked` event.
+
+It has the syntax:
+
+```html
+<form onchange="handleChange()"></form>
+```
+
+### The `oncontextmenu` event
+
+This is the event that fires when the uses presses the Right-Click button on the mouse to open the context menu.
+
+It has the syntax:
+
+```html
+<form oncontextmenu="handleOpenContextMenu()"></form>
+```
+
+### The `onfocus` event
+
+This is the opposite of the `onblur` event - instead of performing an action when an element loses focus, the `onfocus` will trigger when an element if focussed on such as when it is clicked.
+
+It has the syntax:
+
+```html
+<form onfocus="handleFocus()"></form>
+```
