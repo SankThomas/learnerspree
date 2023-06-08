@@ -249,25 +249,25 @@ The above examples can be achieved by doing the following in your CSS:
 
 ```css
 /* Solid border */
-button {
+.btn-solid {
     border: 6px solid teal;
     padding: 8px 32px;
 }
 
 /* dotted border */
-button {
+.btn-dotted {
     border: 6px dotted teal;
     padding: 8px 32px;
 }
 
 /* Dashed border */
-button {
+.btn-dashed {
     border: 6px dashed teal;
     padding: 8px 32px;
 }
 
 /* Double border */
-button {
+.btn-double {
     border: 6px double teal;
     padding: 8px 32px;
 }
@@ -278,22 +278,22 @@ button {
 You can also add borders that you want whether on the top, right, bottom, or left. All you have to do is specify the direction you want. For example:
 
 ```css
-button {
+.btn-border-top {
     border-top: 2px solid teal;
     padding: 8px 32px;
 }
 
-button {
+.btn-border-right {
     border-right: 2px solid teal;
     padding: 8px 32px;
 }
 
-button {
+.btn-border-bottom {
     border-bottom: 2px solid teal;
     padding: 8px 32px;
 }
 
-button {
+.btn-border-left {
     border-left: 2px solid teal;
     padding: 8px 32px;
 }
@@ -313,7 +313,7 @@ This will result in the following:
 And it works with all border styles, i.e. solid, dotted, dashed and double.
 
 <Callout type="info">
-Borders also count towards the final widths and heights of elements. For example:
+Borders also count towards the final widths and heights of elements. For example, consider the `section` below:
 
 ```css
 section {
