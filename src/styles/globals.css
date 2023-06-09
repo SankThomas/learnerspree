@@ -8,6 +8,10 @@
   scroll-behavior: smooth;
 }
 
+::selection {
+  @apply bg-orange-300 text-white;
+}
+
 body {
   font-family: "Inter", sans-serif;
 }
