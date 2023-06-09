@@ -1,14 +1,14 @@
 export default {
   project: {
-    link: "https://github.com/SankThomas/eduketa",
+    link: "https://github.com/SankThomas/learner",
   },
-  logo: <strong>Eduketa</strong>,
+  logo: <strong>Learner</strong>,
   useNextSeoProps() {
     return {
-      titleTemplate: "Eduketa | %s",
+      titleTemplate: "Learner | %s",
     };
   },
-  docsRepositoryBase: "https://github.com/SankThomas/eduketa/tree/main/",
+  docsRepositoryBase: "https://github.com/SankThomas/learner/tree/main/",
   footer: {
     text: "Copyright Thomas Sankara 2023",
   },
