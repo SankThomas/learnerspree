@@ -3,7 +3,9 @@ import { Callout } from "nextra-theme-docs";
 # Working With Tables
 
 <Callout type="warning">
-  When on mobile devices, this page has an overflow on the x-axis (you can scroll horizontally). This is an intended feature, and the reason for it is explained in the [Tables on Mobile](#tables-on-mobile) section.
+  When on mobile devices, this page has an overflow on the x-axis (you can
+  scroll horizontally). This is an intended feature, and the reason for it is
+  explained in the [Tables on Mobile](#tables-on-mobile) section.
 </Callout>
 
 Tables are used to create - obviously - tabulated data. There are a number of elements available to use with the `table` element in order to make data presentable, alongside styling it with some attributes and with CSS as well.
@@ -19,7 +21,9 @@ The default structure of a table is to create a `table` tag. It is a block eleme
 With combination of other tags available is the `table` element such as `thead`, `tbody`, `tr` and `td`, you can create headings for the table as well as rows, columns and the data in the table.
 
 <Callout type="error">
-    Never use tables to layout your website. Only use tables when you want to present structured data (rows and columns). Tables were not designed to layout your entire website from the navigation links to the footer.    
+  Never use tables to layout your website. Only use tables when you want to
+  present structured data (rows and columns). Tables were not designed to layout
+  your entire website from the navigation links to the footer.
 </Callout>
 
 ## Simple table example
@@ -55,6 +59,7 @@ The code example above creates the following table:
 > It doesn't look like a table does it? This is because an attribute, as well as CSS styling need to be applied to it in order for the table to span the entire width.
 
 ### Table elements
+
 1. `tr` - Creates a table row
 2. `th` - Creates a table heading
 3. `td` - Adds table data to the cells.
@@ -65,7 +70,7 @@ The code example above creates the following table:
 ### Improved Example
 
 ```html
-<table width="100%" >
+<table width="100%">
   <tr>
     <th>Name</th>
     <th>Age</th>
@@ -142,7 +147,7 @@ When adding more data to your table, make sure that the columns correspond to th
     <th>Age</th>
   </tr>
 
-<!--
+  <!--
 Adding new items to the table. Notice that for each row,
 there are two table cells corresponding to the only two headings
 that we have
@@ -152,12 +157,12 @@ that we have
     <td>Tony</td>
     <td>25</td>
   </tr>
-  
+
   <tr>
     <td>Luke</td>
     <td>30</td>
   </tr>
-  
+
   <tr>
     <td>Thomas</td>
     <td>38</td>
@@ -194,7 +199,6 @@ The above example will output the following:
   </tr>
 </table>
 
-
 ## Advanced Tables
 
 Chances are that in your career as a web developer, you will have to build simple tables like the one above, as well as more advanced tables such as a school timetable.
@@ -205,7 +209,9 @@ Take a look at the example below which is a table that shows the Timetable for m
 
 ```html
 <table width="100%" style="text-align: left; border-collapse: collapse;">
-  <caption style="margin-bottom: 1rem">Timetable for TsbSankara's Totally Awesome School</caption>
+  <caption style="margin-bottom: 1rem">
+    Timetable for TsbSankara's Totally Awesome School
+  </caption>
 
   <thead>
     <tr>
@@ -217,7 +223,7 @@ Take a look at the example below which is a table that shows the Timetable for m
       <th>Friday</th>
     </tr>
   </thead>
-  
+
   <tbody>
     <tr>
       <td>8am - 9am</td>
@@ -227,7 +233,7 @@ Take a look at the example below which is a table that shows the Timetable for m
       <td>French</td>
       <td>Geography</td>
     </tr>
-    
+
     <tr>
       <td>10am - 11am</td>
       <td>Geography</td>
@@ -236,7 +242,7 @@ Take a look at the example below which is a table that shows the Timetable for m
       <td>Kiswahili</td>
       <td>French</td>
     </tr>
-    
+
     <tr>
       <td>12pm - 1pm</td>
       <td>Chemistry</td>
@@ -324,7 +330,7 @@ For example, in the example above, you will notice that the text is a bit too sq
       <th style="padding: 0.5rem 0.2rem;">Friday</th>
     </tr>
   </thead>
-  
+
   <tbody>
     <tr>
       <td style="padding: 0.5rem 0.2rem;">8am - 9am</td>
@@ -334,7 +340,7 @@ For example, in the example above, you will notice that the text is a bit too sq
       <td style="padding: 0.5rem 0.2rem;">French</td>
       <td style="padding: 0.5rem 0.2rem;">Geography</td>
     </tr>
-    
+
     <tr>
       <td style="padding: 0.5rem 0.2rem;">10am - 11am</td>
       <td style="padding: 0.5rem 0.2rem;">Geography</td>
@@ -343,7 +349,7 @@ For example, in the example above, you will notice that the text is a bit too sq
       <td style="padding: 0.5rem 0.2rem;">Kiswahili</td>
       <td style="padding: 0.5rem 0.2rem;">French</td>
     </tr>
-    
+
     <tr>
       <td style="padding: 0.5rem 0.2rem;">12pm - 1pm</td>
       <td style="padding: 0.5rem 0.2rem;">Chemistry</td>
@@ -357,49 +363,269 @@ For example, in the example above, you will notice that the text is a bit too sq
 ```
 
 The above will output:
+
 <br />
 
-<table width="100%" style={{
-  textAlign: "left",
-  borderCollapse: "collapse"
-}}>
+<table
+  width="100%"
+  style={{
+    textAlign: "left",
+    borderCollapse: "collapse",
+  }}
+>
   <thead>
     <tr>
-      <th style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Time</th>
-      <th style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Monday</th>
-      <th style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Tuesday</th>
-      <th style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Wednesday</th>
-      <th style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Thursday</th>
-      <th style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Friday</th>
+      <th
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Time
+      </th>
+      <th
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Monday
+      </th>
+      <th
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Tuesday
+      </th>
+      <th
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Wednesday
+      </th>
+      <th
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Thursday
+      </th>
+      <th
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Friday
+      </th>
     </tr>
   </thead>
-  
+
   <tbody>
     <tr>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>8am - 9am</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Maths</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>English</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Kiswahili</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>French</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Geography</td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        8am - 9am
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Maths
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        English
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Kiswahili
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        French
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Geography
+      </td>
     </tr>
-    
+
     <tr>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>10am - 11am</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Geography</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Maths</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>English</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Kiswahili</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>French</td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        10am - 11am
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Geography
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Maths
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        English
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Kiswahili
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        French
+      </td>
     </tr>
-    
+
     <tr>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>12pm - 1pm</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Chemistry</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Physics</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Agriculture</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Biology</td>
-      <td style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "0.2rem", paddingRight: "0.2rem" }}>Homescience</td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        12pm - 1pm
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Chemistry
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Physics
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Agriculture
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Biology
+      </td>
+      <td
+        style={{
+          paddingTop: "0.5rem",
+          paddingBottom: "0.5rem",
+          paddingLeft: "0.2rem",
+          paddingRight: "0.2rem",
+        }}
+      >
+        Homescience
+      </td>
     </tr>
   </tbody>
 </table>
@@ -412,7 +638,7 @@ And you can see that this is not only more readable, but also more presentable.
 
 If you have been using a mobile device, you must have noticed by now that the tables we have created so far are not responsive: i.e. they cause a horizontal overflow.
 
-What you can do to such tables is add the `style` and then add a  property called `overflow` and set it to `auto` so that when the table width or content is greater than the device width, it will automatically introduce a horizontal scrollbar for the table only - as opposed to a horizontal scrollbar for the entire website. You don't want that to happen because it will massively break your user's experience.
+What you can do to such tables is add the `style` and then add a property called `overflow` and set it to `auto` so that when the table width or content is greater than the device width, it will automatically introduce a horizontal scrollbar for the table only - as opposed to a horizontal scrollbar for the entire website. You don't want that to happen because it will massively break your user's experience.
 
 ```html
 <table style="overflow: auto"></table>
