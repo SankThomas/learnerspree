@@ -2,8 +2,6 @@ import { Callout } from "nextra-theme-docs";
 
 # CSS Selectors And How To Style Elements
 
-<Callout>This page is still under construction</Callout>
-
 CSS Selectors refers to the way in which we "find" or "get" particular elements in our HTML files so that we can apply CSS styling to them.
 
 ## Commonly Used Selectors
@@ -875,21 +873,205 @@ This will result in the following input:
 
 #### `:first-child`
 
+This is used to select the element that is the first child of its parent.
+
+**Example:**
+
+```html
+<section>
+  <p>My name is Shay Patrick Cormack</p>
+  <p>and I make my own luck</p>
+</section>
+```
+
+```css
+section p:first-child {
+  color: lightgreen;
+}
+```
+
+The example above will change the first paragraph to a lightgreen color, and it will not affect the second paragraph.
+
 #### `:focus`
+
+This is used to apply styles to the element has has focus, usually an input or a button.
+
+**Example:**
+
+```css
+input:focus {
+  background-color: orange;
+}
+```
+
+This will change the input color to orange when you focus on it: i.e when you click on it.
 
 #### `:last-child`
 
+This is used to select the element that is the last child of its parent.
+
+**Example:**
+
+```html
+<section>
+  <p>My name is Shay Patrick Cormack</p>
+  <p>and I make my own luck</p>
+</section>
+```
+
+```css
+section p:last-child {
+  color: lightgreen;
+}
+```
+
+The example above will change the last paragraph to a lightgreen color, and it will not affect the first paragraph.
+
 #### `:not(selector)`
+
+This matches every element that is not the specified element.
+
+**Example:**
+
+```css
+:not(p) {
+  width: 500px;
+  height: 200px;
+}
+```
+
+The above example will select every element that is not a paragraph, and will apply aa width of `500px` and a height of `200px` to all those elements.
 
 #### `:nth-child(n)`
 
+This matches every element that is the `nth` child of its parent.
+
+**Example:**
+
+```css
+section div:nth-child(2) {
+  background-color: green;
+}
+```
+
+This will match the second `div` and give it a green background color, and will leave all other `div`s unaffected.
+
+#### `:nth-child(even)`
+
+This will match all even elements.
+
+**Example:**
+
+```css
+section div:nth-child(even) {
+  background-color: red;
+}
+```
+
+This will select every even `div` and give it a red background color.
+
+> Using this, you can add the "zebra" effect that is usually present on tables or big volumes of data.
+
+#### `:nth-child(odd)`
+
+This will match all odd elements.
+
+**Example:**
+
+```css
+section div:nth-child(odd) {
+  background-color: red;
+}
+```
+
+This will select every odd `div` and give it a red background color.
+
+> Using this, you can add the "zebra" effect that is usually present on tables or big volumes of data.
+
 #### `:nth-of-type`
+
+This will select every element that is the `nth` child of the same type (element) of its parent.
+
+**Example:**
+
+```css
+div:nth-of-type(2) {
+  background-color: gray;
+}
+```
+
+This will select the second div and give it a background color of gray.
+
+**Other examples:**
+
+```css
+/* Selects the second li element in a list */
+li:nth-of-type(2) {
+  background: lightgreen;
+}
+
+/* Selects every third element among any group of siblings */
+:nth-of-type(3) {
+  background: yellow;
+}
+```
 
 #### `:root`
 
+This matches the document's root element. You will usually use this to declare global values for your entire web page, as well as CSS variables.
+
+**Example:**
+
+```css
+:root {
+  background: #222222;
+}
+```
+
+This will set the background of the entire document to dark gray.
+
 #### `:target`
 
+Sometimes you want to link to sections within the same page of your website. You do this using a hashtag(`#`) with the name of the section. We use `:target` to style this active section.
+
+**Example:**
+
+```html
+<a href="#section1">Section One</a>
+<a href="#section2">Section Two</a>
+
+<section id="section1">
+  It prepare is ye nothing blushes up brought. Or as gravity pasture limited
+  evening on. Wicket around beauty say she
+</section>
+<section id="news2">
+  Frankness resembled say not new smallness you discovery. Noisier ferrars yet
+  shyness weather ten colonel.
+</section>
+```
+
+```css
+:target {
+  border: 1px solid #d4d4d4;
+  background-color: #999999;
+}
+```
+
+Try out this code yourself to see the output.
+
 #### `:visited`
+
+This is used to style links that have been visited.
+
+**Example:**
+
+```css
+a:visited {
+  color: fuchsia;
+}
+```
+
+> `:visited` usually inherits styles from [`:link`](#link).
 
 ### Pseudo Elements
 
