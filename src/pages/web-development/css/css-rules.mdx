@@ -29,15 +29,168 @@ This defines the character set that the browser uses.
 > NOTE: When you define the character set in your HTML, it will override the character set that you define in your CSS.
 
 ### `@container`
+
 ### `@counter-style`
+
 ### `@font-face`
+
+This is used to load custom fonts to your webpage: For example when you download the font files to your workspace.
+
+**Example:**
+
+```css
+@font-face {
+  font-family: "my-custom-font";
+  src: url("Roboto.ttf");
+}
+
+body {
+  /* Usage */
+  font-family: "my-custom-font";
+}
+```
+
+This will import a font called "Roboto" with a "True Type Font"(ttf) format. The `font-family` property gives a custom name for your font, which can be whatever you want it to be.
+
+In order to use your custom font, simply use the `font-family` property and give it the value of the name you gave your font, as in the example above.
+
+You can also use other font types:
+
+**Example:**
+
+```css
+@font-face {
+  font-family: "my-custom-font";
+  src: url("custom.woff");
+}
+/* Usage of the font remains the same */
+```
+
 ### `@font-feature-values`
+
 ### `@font-palette-values`
+
 ### `@import`
+
+This is used to include an external CSS file inside your current file, as though the external file was located at that exact point.
+
+> Always insert this rule at the very top of your file.
+
+**Example:**
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+```
+
+This will get the `Roboto` font which you can then use in your HTML document.
+
 ### `@keyframes`
+
+This is used to define CSS animations by allowing you to define the default or start value of the animation, where you want it to pass through, and then the end value.
+
+**Example:**
+
+```css
+/* You need to add in these properties in order to use @keyframes to animate it
+Read more about these properties in the module about CSS Properties
+*/
+div {
+  height: 100px;
+  animation-name: animate; /* The name of your animation */
+  animation-duration: 10s; /* How long the animation will take */
+  animation-timing-function: linear; /* The speed curve of the animation */
+}
+
+@keyframes animate {
+  0% {
+    height: 100px;
+  }
+
+  50% {
+    height: 150px;
+  }
+
+  100% {
+    height: 200px;
+  }
+}
+```
+
+This will animate the `div` from `100px` to `200px` for 10s until the animation is complete.
+
 ### `@layer`
+
 ### `@media`
-### `@namespace`
+
+These are conditional statements used to tailor specific styles to apply when certain conditions have been met, such as when the device width is greater than, or less than a specified width.
+
+More on this rule in the module about [CSS Media Queries and Reponsiveness](/web-development/css/media-queries)
+
+**Example:**
+
+```css
+section {
+  height: 100px;
+}
+
+@media (min-width: 768px) {
+  section {
+    height: 200px;
+  }
+}
+```
+
+The above example will increase the height of the `section` element when the device width is greater than `768px`: i.e. tablet-sized screens and above.
+
 ### `@page`
+
+This describes styles that will be applied when printing the page.
+
+**Example from MDN Docs:**
+
+```css
+/* Targets all the pages */
+@page {
+  size: 8.5in 9in;
+  margin-top: 4in;
+}
+
+/* Targets all even-numbered pages */
+@page :left {
+  margin-top: 4in;
+}
+
+/* Targets all odd-numbered pages */
+@page :right {
+  size: 11in;
+  margin-top: 4in;
+}
+
+/* Targets all selectors with `page: wide;` set */
+@page wide {
+  size: a4 landscape;
+}
+```
+
 ### `@property`
+
 ### `@supports`
+
+This will test whether the browser supports a certain feature and the apply the styles on the elements when that condition is met.
+
+**Example from CSS Tricks:**
+
+```css
+@supports (display: flex) {
+  section {
+    display: flex;
+  }
+}
+
+/* Example using multiple conditions */
+@supports (display: flex) and (-webkit-appearance: checkbox) {
+  section {
+    display: flex;
+  }
+}
+```
