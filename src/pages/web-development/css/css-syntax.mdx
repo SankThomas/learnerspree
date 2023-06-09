@@ -25,7 +25,7 @@ div {
 
 The next prudent question to ask ourselves is, how do we add CSS to our HTML to make it appealing? Because HTML on it's own is actually quite terrible looking.
 
-There are three ways that you can add CSS to your HTML.
+There are four ways that you can add CSS to your HTML.
 
 ### 1. Inline CSS
 
@@ -121,3 +121,37 @@ This is the main way - and also the recommended way - that you will be using to 
 > NOTE: It is the recommended way. However, even when you have an external CSS file, always select the most convenient one for what you are currently doing. For example, sometimes you need to apply overriding styles to your elements. This is where [CSS Specificity](/css/cascading) comes in. More on this in that module.
 
 In the next module, we are going to talk about CSS Selectors.
+
+### 4. Using an external stylesheet
+
+This involves getting an external stylesheet and then linking it in your HTML, on in your CSS. You will find yourself having to link stylesheet such as when you want to add a custom font to your webpage (if you haven't downloaded it), or if you want to use a CSS framework.
+
+**Example:**
+
+```html
+<!-- Linking an external CSS file of a custom Google font -->
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<!-- Linking a CSS Framework -->
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    referrerpolicy="no-referrer"
+  />
+</head>
+```
+
+Or, in your CSS:
+
+```css
+/* Linking an external CSS file of a custom Google font  */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+```
