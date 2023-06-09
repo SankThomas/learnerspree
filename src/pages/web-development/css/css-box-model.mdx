@@ -2,6 +2,331 @@ import { Callout } from "nextra-theme-docs";
 
 # The CSS Box Model
 
-<Callout type="info">This page is under construction</Callout>
+## What is the CSS Box Model?
 
 The CSS box model defines how content is displayed on your webpage by defining the margin, padding, border and content.
+
+The simplest explanation of the CSS Box Model is that, paddings are applied to the inside of elements, and margins are applied to the outside of elements.
+
+Another way to think about it is to consider everthing in CSS to be a box.
+
+Boxes in CSS consist of the following elements:
+
+### 1. Content
+
+Defines the content of the box such as text, headings, and images.
+
+### 2. Padding
+
+Adds a transparent area inside the content of the box.
+
+### 3. Border
+
+Adds a border that encases the padding and the content.
+
+### 4. Margin
+
+Adds a transparent area outside the content of the box.
+
+Take a look at the illustration below:
+
+![css-box-model](https://link-to-css-box-model)
+
+<Callout type="info">
+    By default, HTML elements will stretch out to occupy the most available space they can - unless you define their content area in CSS using fixed widths and heights.
+</Callout>
+
+## Paddings and Margins
+
+We are going to dive a bit deeper to understand how paddings and margins are applied to elements in order to properly understand how the CSS Box Model works.
+
+### How to add padding and margin
+
+Sometimes, you only want to add a padding on one side of an element, such as on the top. You can achieve this in CSS by using the example below:
+
+```css
+/* Using paddings */
+section {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+/* Or when using margins */
+section {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+```
+
+> You don't have to use all the properties above if you only want to apply the margin or padding to one side of the element. This was just a demonstration.
+
+Imagine having to type out all the four properties whenever you want to add a margin or padding. That would be very cumbersome - especially because paddings and margins are properties that you will need to add to almost every element in your HTML webpage. To counter this, CSS has a shorthand property to add margins and properties to elements.
+
+**Example:**
+
+```css
+section {
+    padding: 10px;
+}
+```
+
+This will apply a `10px` padding all around the section: i.e, a padding on the top, on the right, on the bottom, and on the left.
+
+When only one value is passed in, CSS will take that to mean that you want to apply a padding all round. This is the same logic used for when applying margins. For example:
+
+```css
+section {
+    margin: 10px;
+}
+```
+
+This will also apply a margin all around the element. But then the question "What if I don't want a padding all round?" arises. Well, you can still use the same shorthand property, but pass in multiple values (up to 4 values), which will then be evaluated in a clockwise manner: i.e top, right, bottom, then left.
+
+**Multiple Examples:**
+
+> The examples use `padding` but you can safely substitute it with `margin` depending on your needs.
+
+```css
+section {
+    padding: 10px 20px;
+}
+```
+
+Because only two values have been defined, CSS takes that to mean that you want an equal margin / padding on the corresponding sides. How the above example is interpreted is: Apply a padding on the top and bottom of `10px` and then a padding of `20px` on the left and right of the element.
+
+```css
+section {
+    padding: 10px 20px 15px;
+}
+```
+
+The above means: Apply a padding of `10px` on the top, `20px` on the right, `15px` on the bottom, and `20px` on the left. Since the value for the left side has not been defined, CSS will take the value of the padding on the right side and apply to the left side as well.
+
+```css
+section {
+    padding: 10px 20px 15px 40px;
+}
+```
+
+Can you guess what the above example therefore means?
+
+<Callout type="info">
+    It is always recommended that you use the shorthand properties when adding unequal margins or paddings to your elements because they are easier to read and debug.
+    
+    If you want to add a margin or padding to only one side of your element, then you can use `padding-left` or `padding-right` or `padding-top` or `padding-bottom` depending on which side you want it to be applied.    
+</Callout>
+
+## Difference between margin and padding
+
+The core difference between the two is that margin is applied on the outside of elements. Padding is applied to the inside of elements. Both properties, however, count towards the final height and width of the element.
+
+**Example using paddings:**
+
+<br />
+
+<section className="bg-rose-400 p-4">
+    A section with a 16px padding applied
+</section>
+
+<section className="bg-emerald-400 p-4">
+    Another section with a 16px padding applied
+</section>
+
+**Example using margins:**
+
+<section className="bg-rose-400 m-4">
+    A section with a 16px margin applied
+</section>
+
+<section className="bg-emerald-400 m-4">
+    Another section with a 16px margin applied
+</section>
+
+See the difference when using margins and paddings? So if you wanted to separate the elements but also have padding applied to the sections, you would do the following:
+
+```css
+.section-one {
+    background-color: #FB7185;
+    padding: 16px; /* Padding all around the section */
+    margin-bottom: 16px; /* To separate it from the other section */
+}
+    
+.section-two {
+    background-color: #34D399;
+    padding: 16px; /* Padding all around the section */
+    margin: 0;
+    /* A bottom margin has already been applied on the top section,
+    so there is no need to add another margin on this section */
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="bg-rose-400 p-4 mb-4">
+    A section with margin and padding applied
+</section>
+
+<section className="bg-emerald-400 p-4">
+    Another section with padding applied
+</section>
+
+And that is how you separate elements using margins.
+
+## Calculating margin and padding
+
+Let's say you had a section with padding and margin and a fixed height as in the example below:
+
+```css
+section {
+    padding: 16px; 
+    /* Padding all around the element
+    i.e top, right, bottom and left of 16px each */
+    margin: 20px;
+    /* Margin all around the element
+    i.e top, right, bottom and left of 20px each */
+    height: 200px;
+    width: 300px;
+}
+```
+
+The way you calculate the final height of this element is by adding the `height` - because the height defines the content area of the element, plus the top and bottom margins, plus the top and bottom paddings.
+
+Therefore, such a section will have a final height of: `200px + 20px + 20px + 16px + 16px = 272px`
+
+The final width will be calculated the same way: `300px + 20px + 20px + 16px + 16px = 372px`
+
+
+## Borders
+
+The CSS `border` property applies a line around the element in which it is defined.
+
+**Example:**
+
+<br />
+
+<button className="border-2 border-teal-400 py-2 px-8">Get Started</button>
+
+The button above has a teal border with a padding of `8px` on the top and bottom, and `32px` on the left and right.
+
+In order to correctly apply a border to an element, you need to define the width of the border - which is how thick you want the border to be - as well as the border style - whether you want it to be a solid border, or a dotted border, and finally, the color of the border. See the example below:
+
+```css
+button {
+    border-width: 2px;
+    border-style: solid;
+    border-color: teal;
+}
+```
+
+However, there is a shorter and recommended way of doing this:
+
+```css
+button {
+    border: 2px solid teal;
+}
+```
+
+The above will apply the same styles to the button above, but without all the hassle of typing out three CSS properties for the same effect.
+
+You can achieve cool looking borders just by changing the width and style of the border. See the examples below:
+
+<br />
+
+<div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+<button className="border-[6px] border-teal-400 py-2 px-8">6px Solid Border</button>
+<button className="border-[6px] border-dotted border-teal-400 py-2 px-8">6px dotted border</button>
+<button className="border-[6px] border-dashed border-teal-400 py-2 px-8">6px dashed border</button>
+<button className="border-[6px] border-double border-teal-400 py-2 px-8">6px double border</button>
+</div>
+
+The above examples can be achieved by doing the following in your CSS:
+
+```css
+/* Solid border */
+.btn-solid {
+    border: 6px solid teal;
+    padding: 8px 32px;
+}
+
+/* dotted border */
+.btn-dotted {
+    border: 6px dotted teal;
+    padding: 8px 32px;
+}
+
+/* Dashed border */
+.btn-dashed {
+    border: 6px dashed teal;
+    padding: 8px 32px;
+}
+
+/* Double border */
+.btn-double {
+    border: 6px double teal;
+    padding: 8px 32px;
+}
+```
+
+> Borders can be applied to all HTML elements.
+
+You can also add borders that you want whether on the top, right, bottom, or left. All you have to do is specify the direction you want. For example:
+
+```css
+.btn-border-top {
+    border-top: 2px solid teal;
+    padding: 8px 32px;
+}
+
+.btn-border-right {
+    border-right: 2px solid teal;
+    padding: 8px 32px;
+}
+
+.btn-border-bottom {
+    border-bottom: 2px solid teal;
+    padding: 8px 32px;
+}
+
+.btn-border-left {
+    border-left: 2px solid teal;
+    padding: 8px 32px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+<button className="border-t-2 border-teal-400 py-2 px-8">Top border</button>
+<button className="border-r-2 border-teal-400 py-2 px-8">Right border</button>
+<button className="border-b-2 border-teal-400 py-2 px-8">Bottom border</button>
+<button className="border-l-2 border-teal-400 py-2 px-8">Left border</button>
+</div>
+
+And it works with all border styles, i.e. solid, dotted, dashed and double.
+
+<Callout type="info">
+Borders also count towards the final widths and heights of elements. For example, consider the `section` below:
+
+```css
+section {
+    padding: 16px; 
+    margin: 20px;
+    height: 200px;
+    width: 300px;
+    border: 8px solid teal;
+}
+```
+
+The total height for the section will now be `288px`: i.e `200px + 20px + 20px + 16px + 16px + 8px + 8px`
+
+And for the width will be `388px`: i.e. `300px + 20px + 20px + 16px + 16px + 8px + 8px`
+
+</Callout>
