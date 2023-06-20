@@ -503,6 +503,31 @@ Above, the animation will complete after 5 seconds.
 
 ### `animation-fill-mode`
 
+This describes the final state of your animation.
+
+**Example:**
+
+```css
+@keyframes increasefont {
+ from {
+   font-size: 16px;
+ } to {
+   font-size: 80px;
+ }
+}
+
+p.increase-font {
+  animation-name: increasefont;
+  animation-fill-mode: forwards;
+}
+```
+
+This will cause the `font-size` of the paragraph to increase from `16px` to `80px` and it will stay at the final font.
+
+<Callout>
+  The default behavior for an animation is to start and end, and then revert to the default or beginning properties. However, when you use `animation-fill-mode` you can ensure that the animation will stay with the end properties.
+</Callout>
+
 ### `animation-iteration-count`
 
 ### `animation-play-state`
