@@ -662,19 +662,136 @@ video {
 
 ### `backdrop-filter`
 
+This is used to apply a graphical effect to the area behind an element. For this property to work, the element or its background should be partially transparent.
+
+**Example:**
+
+```css
+div {
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+```
+
+<Callout type="info">
+  `-webkit-backdrop-filter` is an example of a Vendor Prefix. Read more about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+</Callout>
+
 ### `backface-visibility`
+
+This defines whether the back of an element should be visible to the user or not. This is especaially useful when you want to rotate an element, for example when you want a profile card to rotate to reveal more information when a user hovers over it with the mouse.
+
+**Example:**
+
+```css
+div {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+```
+
+<Callout type="info">
+  `-webkit-backface-visibility` is an example of a Vendor Prefix. Read more about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+</Callout>
 
 ## Background properties
 
 ### `background`
 
+This is used to set different background properties. It is a shorthand property for:
+1. `background-color`
+2. `background-image`
+3. `background-position`
+4. `background-size`
+5. `background-repeat`
+6. `background-origin`
+7. `background-clip`
+8. `background-attachment`
+
+**Example:**
+
+```css
+div {
+  background: red;
+  width: 100%;
+  height: 40px;
+}
+```
+
+This will give the `div` a red background color.
+
 ### `background-attachment`
+
+This defines whether a background image will scroll with the rest of the webpage or not.
+
+**Example:**
+
+```css
+body {
+  background-image: url("https://fastly.picsum.photos/id/42/200/300.jpg?hmac=RFAv_ervDAXQ4uM8dhocFa6_hkOkoBLeRR35gF8OHgs);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+```
+
+The image above will scroll with the rest of the webpage.
 
 ### `background-blend-mode`
 
+This specifies the how background layers, such as colors or images, should be blended with one another.
+
+**Example:**
+
+```css
+div {
+  background-repeat: no-repeat, repeat;
+  background-image: url("img_tree.gif"), url("paper.gif");
+  background-blend-mode: lighten;
+}
+```
+
+Other values that can be used with `background-blend-mode` include: `normal`, `multiply`, `screen`, `overlay`, `darken`, `lighten`, `color-dodge`, `saturation`, `color`, `luminosity`.
+
+You can test out [this](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_background-blend-mode&preval=darken) example from W3Schools to see how each of the values differ.
+
+### `background-clip`
+erlay`, `darkke
+
 ### `background-clip`
 
-### `background-color`
+This specifies how far the background (color or image) should extend within an element.
+
+**Example**
+
+```css
+div {
+  border: 10px dotted black;
+  padding: 15px;
+  background: lightblue;
+  background-clip: padding-box;
+}
+```
+
+It can also take in the following values: `padding-box`, `border-box`, `content-box`, `initial`, `inherit`.
+
+
+**Example:**
+
+```css
+div {
+  background-color: orange;
+}
+```## `background-color`
+
+
+```css
+div
+{
+  background-color: orange;
+<Callout type="warning">
+  The background color of an element does not include the margin applied to it - because margin is applied to the outside of elements. Read more about this in [The CSS Box Model](/web-development/css/css-box-model)
+</Callout>-model)
 
 ### `background-image`
 
