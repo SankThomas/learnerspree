@@ -516,25 +516,149 @@ This describes the final state of your animation.
  }
 }
 
-p.increase-font {
+p {
   animation-name: increasefont;
   animation-fill-mode: forwards;
 }
-```
+``` 
 
 This will cause the `font-size` of the paragraph to increase from `16px` to `80px` and it will stay at the final font.
 
-<Callout>
-  The default behavior for an animation is to start and end, and then revert to the default or beginning properties. However, when you use `animation-fill-mode` you can ensure that the animation will stay with the end properties.
+<Callout type="info">
+  The default behavior for an animation is to start, end, and then revert to the default or beginning properties. However, when you use `animation-fill-mode` you can ensure that the animation will stay with the end properties.
 </Callout>
+
+#### `animation-fill-mode: none`
+
+The animation will not apply any styles to the target when it's not executing. The element will instead be displayed using any other CSS rules applied to it. This is the default value.
+
+#### `animation-fill-mode: forwards`
+
+The target will retain the computed values set by the last keyframe encountered during execution. The last keyframe depends on the value of `animation-direction` and `animation-iteration-count`
+
+#### `animation-fill-mode: backwards`
+
+The animation will apply the values defined in the first relevant keyframe as soon as it is applied to the target, and retain this during the `animation-delay` period. The first relevant keyframe depends on the value of `animation-direction`
+
+#### `animation-fill-mode: both`
+
+The animation will follow the rules for both forwards and backwards, thus extending the animation properties in both directions.
 
 ### `animation-iteration-count`
 
+This specifies the number of times an animation should be played before stopping.
+
+**Example:**
+
+```css
+p {
+  animation-iteration-count: 4;
+}
+```
+
+This will play the animation four times before stopping. You can also specify decimal values for your iteration.
+
+The `animation-iteration-count` can also take in values such as `infinite`, `linear`, `inherit`, and `initial`.
+
 ### `animation-play-state`
+
+This sets whether an animation is playing or is paused. When you run a paused animation, it will start from when it was paused, rather than from the beginning.
+
+**Example:**
+
+```css
+p {
+  animation-play-state: paused;
+}
+
+p {
+  animation-play-state: running;
+}
+```
 
 ### `animation-timing-function`
 
+This sets how an animation progresses through the duration of each cycle.
+
+**Example:**
+
+```css 
+p {
+  animation-timing-function: linear;
+}
+```
+
+Here is a complete reference from MDN:
+
+```css
+/* Keyword values */
+animation-timing-function: ease;
+animation-timing-function: ease-in;
+animation-timing-function: ease-out;
+animation-timing-function: ease-in-out;
+animation-timing-function: linear;
+animation-timing-function: step-start;
+animation-timing-function: step-end;
+
+/* Function values */
+animation-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
+animation-timing-function: steps(4, end);
+
+/* Steps Function keywords */
+animation-timing-function: steps(4, jump-start);
+animation-timing-function: steps(10, jump-end);
+animation-timing-function: steps(20, jump-none);
+animation-timing-function: steps(5, jump-both);
+animation-timing-function: steps(6, start);
+animation-timing-function: steps(8, end);
+
+/* Multiple animations */
+animation-timing-function: ease, step-start, cubic-bezier(0.1, 0.7, 1, 0.1);
+
+/* Global values */
+animation-timing-function: inherit;
+animation-timing-function: initial;
+animation-timing-function: revert;
+animation-timing-function: revert-layer;
+animation-timing-function: unset;
+```
+
+<Callout type="info">
+  It is always recommended to use the shorthand `animation` property to define your animations, rather than having to type out all the properties you want to add in your elements every single time that you want to add an animation.
+  
+  For example. rather than doing this:
+  
+  ```css
+  p {
+    animation-name: play;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  ```
+  
+  You can do this:
+  
+  ```css
+  p {
+    animation: play 2s linear infinite;
+  }
+  ```
+  
+  As you can obviously tell, it is much faster than having to type out every single property.
+</Callout>
+
 ### `aspect-ratio`
+
+This defines the ratio between the width and height of an element. It is mostly used when the element often changes size and you want to preseve the ration between width and height, such as on an `iframe` or a `video`.
+
+**Example:**
+
+```css
+video {
+  aspect-ratio: 16 / 9;
+}
+```
 
 ### `backdrop-filter`
 
