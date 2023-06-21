@@ -756,9 +756,6 @@ Other values that can be used with `background-blend-mode` include: `normal`, `m
 You can test out [this](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_background-blend-mode&preval=darken) example from W3Schools to see how each of the values differ.
 
 ### `background-clip`
-erlay`, `darkke
-
-### `background-clip`
 
 This specifies how far the background (color or image) should extend within an element.
 
@@ -775,6 +772,9 @@ div {
 
 It can also take in the following values: `padding-box`, `border-box`, `content-box`, `initial`, `inherit`.
 
+### `background-color`
+
+This is used to add a background color to an element.
 
 **Example:**
 
@@ -782,22 +782,66 @@ It can also take in the following values: `padding-box`, `border-box`, `content-
 div {
   background-color: orange;
 }
-```## `background-color`
+```
 
-
-```css
-div
-{
-  background-color: orange;
 <Callout type="warning">
   The background color of an element does not include the margin applied to it - because margin is applied to the outside of elements. Read more about this in [The CSS Box Model](/web-development/css/css-box-model)
-</Callout>-model)
+</Callout>
 
 ### `background-image`
 
+This is used to define the background image of an element. Background images can be actual images or color gradients.
+
+You can also define multiple images for one element.
+
+**Example:**
+
+```css
+/* Sets a single image as the background */
+div {
+  background-image: url("my-background.png");
+}
+
+/* Sets multiple images as the background */
+div {
+  background-image: url("my-background.png"), url("image-two.png");
+}
+
+/* Linear gradient as the background */
+div {
+  background-image: linear-gradient(120deg, white, yellow);
+}
+```
+
+You can also use other gradients such as `conic-gradient()`, `radial-gradient()`, `repeating-conic-gradient()`, `repeating-radial-gradient()` and `repeating-linear-gradient()`
+
+To learn more about colors, see the module about [CSS Colors](/web-development/css/css-colors)
+
+> If you are using an image as the background, make sure to specify a height to the element, so that you can actually see the image.
+
 ### `background-origin`
 
+This specifies the origin of a background image.
+
+**Example:**
+
+```css
+div {
+  height: 500px;
+  background-image: url("tree-image.png");
+  background-position: content-box;
+}
+```
+
+> NOTE: This property has no effect if you set `background-attachment` to `fixed`.
+
+It also takes in other values such as `padding-box`, `border-box`, `content-box`, `initial` and `inherit`.
+
 ### `background-position`
+
+This sets the starting position of a background image.
+
+By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
 
 ### `background-position-x`
 
