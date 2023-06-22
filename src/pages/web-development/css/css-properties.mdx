@@ -817,7 +817,14 @@ You can also use other gradients such as `conic-gradient()`, `radial-gradient()`
 
 To learn more about colors, see the module about [CSS Colors](/web-development/css/css-colors)
 
-> If you are using an image as the background, make sure to specify a height to the element, so that you can actually see the image.
+
+<Callout type="info">
+  If you are using an image as the background, make sure to specify a height to the element, so that you can actually see the image.
+
+  By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+  
+  Read more about `background-repeat` [here](#background-repeat)
+</Callout>
 
 ### `background-origin`
 
@@ -833,7 +840,9 @@ div {
 }
 ```
 
-> NOTE: This property has no effect if you set `background-attachment` to `fixed`.
+<Callout>
+  This property has no effect if you set `background-attachment` to `fixed`.
+</Callout>
 
 It also takes in other values such as `padding-box`, `border-box`, `content-box`, `initial` and `inherit`.
 
@@ -841,13 +850,114 @@ It also takes in other values such as `padding-box`, `border-box`, `content-box`
 
 This sets the starting position of a background image.
 
-By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+<Callout type="info">
+  By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+  
+  Read more about `background-repeat` [here](#background-repeat)
+</Callout>
+
+**Example:**
+
+```css
+div {
+  background-image: url("my-background.png");
+  background-position: center;
+}
+```
+
+You can also specify multiple values for `background-position`. For example, if I wanted the image to start from the top left, I would do the following:
+
+```css
+  background-position: left top;
+```
+
+If you only specify one value, the other value defaults to `center`.
 
 ### `background-position-x`
 
+This sets the starting position of a background image on the x-axis.
+
+**Example:**
+
+```css
+div {
+  background-position-x: center;
+}
+```
+
 ### `background-positon-y`
 
+This sets the starting position of a background image on the y-axis.
+
+**Example:**
+
+```css
+div {
+  background-position-y: center;
+}
+```
+
 ### `background-repeat`
+
+This defines whether a background image should repeat or not.
+
+<Callout type="info">
+  By default, a background-image is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+</Callout>
+
+**Example:**
+
+```css
+/* This is the default behavior */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat;
+}
+
+/* Only repeat the image horizontally */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat-x;
+}
+
+/* Only repeat the image vertically */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat-y;
+}
+
+/* Image only shows once and does not repeat */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: no-repeat;
+}
+
+/* Set the ddefault property value */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: initial;
+}
+
+/* Inherit the value from the parent */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: inherit;
+}
+```
+
+`background-repeat` can also take in the values: `space` and `round`. Read more about these in [this](https://www.w3schools.com/cssref/pr_background-repeat.php) W3Schools Documentation.
+
+See the live demo below:
+
+<section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <div className="bg-repeat bg-gradient-to-r from-purple-800 to-pink-800 p-4">
+  Background Repeat
+</div>
+
+<div className="bg-no-repeat bg-gradient-to-r from-purple-800 to-pink-800 p-4">
+  No Repeat
+</div>
+</section>
 
 ### `background-size`
 
