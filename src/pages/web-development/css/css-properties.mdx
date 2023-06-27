@@ -330,55 +330,634 @@ section div {
 
 ### `align-self`
 
+This specifies the alignment in the block direction (downwards or top to bottom) for the selected items inside a flex a flex or grid container.
+
+**Example:**
+
+```html
+<section class="container">
+  <div></div>
+  <div class="self-div">This div has `align-self: flex-end` applied</div>
+  <div></div>
+  <div></div>
+</section>
+```
+
+```css
+.container {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #222222;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.container div {
+  width: 90%;
+  height: 150px;
+  background-color: lightblue;
+}
+
+.container .self-div {
+  background-color: coral;
+  align-self: flex-end;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="w-full h-[400px] border border-[#222222] grid grid-cols-2 gap-4">
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-orange-200 self-end text-[#222] p-4">
+    This div has `align-self: flex-end` applied
+  </div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+</section>
+
+Without `align-self: flex-end` applied, the result would have been the following:
+
+<br />
+
+<section className="w-full h-[400px] border border-[#222222] grid grid-cols-2 gap-4">
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-orange-200">
+  </div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+</section>
+
+<Callout type="info">
+  #### Points to note
+  
+  1. By default, `align-self` aligns items in the block direction (downwards). If you want to align items in the inline direction (left to right), use `justify-self` or `justify-items` instead.
+  2. Block and inline direction depend on the language. For example, inline direction for Arabic would be right to left.
+  3. The `align-self` property overrides the `align-items` property.
+  4. The `align-self` property can take in the following values: `auto`, `stretch`, `center`, `flex-start`, `flex-end`, `baseline`, `initial` and `inherit`.
+</Callout>
+
 ### `all`
+
+This reselts all properties to their initial or inherited value.
+
+**Example:**
+
+```css
+html {
+  font-size: 14px;
+  color: coral;
+}
+
+p {
+  font-size: 20px;
+  color: darkgray;
+}
+
+p.reset {
+  all: initial;
+}
+```
+
+This will make the paragraph that has a class of `reset` to reset its current styles to the default styles of the document.
 
 ## Animation properties
 
 ### `animation`
 
+This is used as a shorthand property to define the values of an animation.
+
+**Example:**
+
+```css
+section {
+  animation: spin 5s infinite;
+}
+```
+
+The animation properties are discussed below:
+
 ### `animation-delay`
+
+This specifies a delay before the start of an animation.
+
+```css
+section {
+  animation-delay: 2s;
+}
+```
+
+This will start the animation after 2 seconds. The time value should be specified in seconds (s) or milliseconds (ms).
+
+You can also use negative values for the animation delay, which will cause it to start as if it had already been playing for the amount of time specified.
+
+**Example:**
+
+```css
+section {
+  animation-delay: -5s;
+}
+```
 
 ### `animation-direction`
 
+This specifies whether the animation should be played forwards (normal), backwards(reverse) or in alternate cycles.
+
+```css
+/* Animation goes forwards */
+section {
+  animation-direction: normal;
+}
+
+/* Animation goes backwards */
+section {
+  animation-direction: reverse;
+}
+
+/* Animation goes forwards and then backwards */
+section {
+  animation-direction: alternate;
+}
+
+/* Animation goes backwards and then forwards */
+section {
+  animation-direction: alternate-reverse;
+}
+```
+
 ### `animation-duration`
+
+This specifies how long the animation should take to complete one cycle.
+
+**Example:**
+
+```css
+section {
+  animation-duration: 5s;
+}
+```
+
+Above, the animation will complete after 5 seconds.
 
 ### `animation-fill-mode`
 
+This describes the final state of your animation.
+
+**Example:**
+
+```css
+@keyframes increasefont {
+ from {
+   font-size: 16px;
+ } to {
+   font-size: 80px;
+ }
+}
+
+p {
+  animation-name: increasefont;
+  animation-fill-mode: forwards;
+}
+``` 
+
+This will cause the `font-size` of the paragraph to increase from `16px` to `80px` and it will stay at the final font.
+
+<Callout type="info">
+  The default behavior for an animation is to start, end, and then revert to the default or beginning properties. However, when you use `animation-fill-mode` you can ensure that the animation will stay with the end properties.
+</Callout>
+
+#### `animation-fill-mode: none`
+
+The animation will not apply any styles to the target when it's not executing. The element will instead be displayed using any other CSS rules applied to it. This is the default value.
+
+#### `animation-fill-mode: forwards`
+
+The target will retain the computed values set by the last keyframe encountered during execution. The last keyframe depends on the value of `animation-direction` and `animation-iteration-count`
+
+#### `animation-fill-mode: backwards`
+
+The animation will apply the values defined in the first relevant keyframe as soon as it is applied to the target, and retain this during the `animation-delay` period. The first relevant keyframe depends on the value of `animation-direction`
+
+#### `animation-fill-mode: both`
+
+The animation will follow the rules for both forwards and backwards, thus extending the animation properties in both directions.
+
 ### `animation-iteration-count`
+
+This specifies the number of times an animation should be played before stopping.
+
+**Example:**
+
+```css
+p {
+  animation-iteration-count: 4;
+}
+```
+
+This will play the animation four times before stopping. You can also specify decimal values for your iteration.
+
+The `animation-iteration-count` can also take in values such as `infinite`, `linear`, `inherit`, and `initial`.
 
 ### `animation-play-state`
 
+This sets whether an animation is playing or is paused. When you run a paused animation, it will start from when it was paused, rather than from the beginning.
+
+**Example:**
+
+```css
+p {
+  animation-play-state: paused;
+}
+
+p {
+  animation-play-state: running;
+}
+```
+
 ### `animation-timing-function`
+
+This sets how an animation progresses through the duration of each cycle.
+
+**Example:**
+
+```css 
+p {
+  animation-timing-function: linear;
+}
+```
+
+Here is a complete reference from MDN:
+
+```css
+/* Keyword values */
+animation-timing-function: ease;
+animation-timing-function: ease-in;
+animation-timing-function: ease-out;
+animation-timing-function: ease-in-out;
+animation-timing-function: linear;
+animation-timing-function: step-start;
+animation-timing-function: step-end;
+
+/* Function values */
+animation-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
+animation-timing-function: steps(4, end);
+
+/* Steps Function keywords */
+animation-timing-function: steps(4, jump-start);
+animation-timing-function: steps(10, jump-end);
+animation-timing-function: steps(20, jump-none);
+animation-timing-function: steps(5, jump-both);
+animation-timing-function: steps(6, start);
+animation-timing-function: steps(8, end);
+
+/* Multiple animations */
+animation-timing-function: ease, step-start, cubic-bezier(0.1, 0.7, 1, 0.1);
+
+/* Global values */
+animation-timing-function: inherit;
+animation-timing-function: initial;
+animation-timing-function: revert;
+animation-timing-function: revert-layer;
+animation-timing-function: unset;
+```
+
+<Callout type="info">
+  It is always recommended to use the shorthand `animation` property to define your animations, rather than having to type out all the properties you want to add in your elements every single time that you want to add an animation.
+  
+  For example. rather than doing this:
+  
+  ```css
+  p {
+    animation-name: play;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  ```
+  
+  You can do this:
+  
+  ```css
+  p {
+    animation: play 2s linear infinite;
+  }
+  ```
+  
+  As you can obviously tell, it is much faster than having to type out every single property.
+</Callout>
 
 ### `aspect-ratio`
 
+This defines the ratio between the width and height of an element. It is mostly used when the element often changes size and you want to preseve the ration between width and height, such as on an `iframe` or a `video`.
+
+**Example:**
+
+```css
+video {
+  aspect-ratio: 16 / 9;
+}
+```
+
 ### `backdrop-filter`
 
+This is used to apply a graphical effect to the area behind an element. For this property to work, the element or its background should be partially transparent.
+
+**Example:**
+
+```css
+div {
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+```
+
+<Callout type="info">
+  `-webkit-backdrop-filter` is an example of a Vendor Prefix. Read more about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+</Callout>
+
 ### `backface-visibility`
+
+This defines whether the back of an element should be visible to the user or not. This is especaially useful when you want to rotate an element, for example when you want a profile card to rotate to reveal more information when a user hovers over it with the mouse.
+
+**Example:**
+
+```css
+div {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+```
+
+<Callout type="info">
+  `-webkit-backface-visibility` is an example of a Vendor Prefix. Read more about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+</Callout>
 
 ## Background properties
 
 ### `background`
 
+This is used to set different background properties. It is a shorthand property for:
+1. `background-color`
+2. `background-image`
+3. `background-position`
+4. `background-size`
+5. `background-repeat`
+6. `background-origin`
+7. `background-clip`
+8. `background-attachment`
+
+**Example:**
+
+```css
+div {
+  background: red;
+  width: 100%;
+  height: 40px;
+}
+```
+
+This will give the `div` a red background color.
+
 ### `background-attachment`
+
+This defines whether a background image will scroll with the rest of the webpage or not.
+
+**Example:**
+
+```css
+body {
+  background-image: url("https://fastly.picsum.photos/id/42/200/300.jpg?hmac=RFAv_ervDAXQ4uM8dhocFa6_hkOkoBLeRR35gF8OHgs);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+```
+
+The image above will scroll with the rest of the webpage.
 
 ### `background-blend-mode`
 
+This specifies the how background layers, such as colors or images, should be blended with one another.
+
+**Example:**
+
+```css
+div {
+  background-repeat: no-repeat, repeat;
+  background-image: url("img_tree.gif"), url("paper.gif");
+  background-blend-mode: lighten;
+}
+```
+
+Other values that can be used with `background-blend-mode` include: `normal`, `multiply`, `screen`, `overlay`, `darken`, `lighten`, `color-dodge`, `saturation`, `color`, `luminosity`.
+
+You can test out [this](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_background-blend-mode&preval=darken) example from W3Schools to see how each of the values differ.
+
 ### `background-clip`
+
+This specifies how far the background (color or image) should extend within an element.
+
+**Example**
+
+```css
+div {
+  border: 10px dotted black;
+  padding: 15px;
+  background: lightblue;
+  background-clip: padding-box;
+}
+```
+
+It can also take in the following values: `padding-box`, `border-box`, `content-box`, `initial`, `inherit`.
 
 ### `background-color`
 
+This is used to add a background color to an element.
+
+**Example:**
+
+```css
+div {
+  background-color: orange;
+}
+```
+
+<Callout type="warning">
+  The background color of an element does not include the margin applied to it - because margin is applied to the outside of elements. Read more about this in [The CSS Box Model](/web-development/css/css-box-model)
+</Callout>
+
 ### `background-image`
+
+This is used to define the background image of an element. Background images can be actual images or color gradients.
+
+You can also define multiple images for one element.
+
+**Example:**
+
+```css
+/* Sets a single image as the background */
+div {
+  background-image: url("my-background.png");
+}
+
+/* Sets multiple images as the background */
+div {
+  background-image: url("my-background.png"), url("image-two.png");
+}
+
+/* Linear gradient as the background */
+div {
+  background-image: linear-gradient(120deg, white, yellow);
+}
+```
+
+You can also use other gradients such as `conic-gradient()`, `radial-gradient()`, `repeating-conic-gradient()`, `repeating-radial-gradient()` and `repeating-linear-gradient()`
+
+To learn more about colors, see the module about [CSS Colors](/web-development/css/css-colors)
+
+
+<Callout type="info">
+  If you are using an image as the background, make sure to specify a height to the element, so that you can actually see the image.
+
+  By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+  
+  Read more about `background-repeat` [here](#background-repeat)
+</Callout>
 
 ### `background-origin`
 
+This specifies the origin of a background image.
+
+**Example:**
+
+```css
+div {
+  height: 500px;
+  background-image: url("tree-image.png");
+  background-position: content-box;
+}
+```
+
+<Callout>
+  This property has no effect if you set `background-attachment` to `fixed`.
+</Callout>
+
+It also takes in other values such as `padding-box`, `border-box`, `content-box`, `initial` and `inherit`.
+
 ### `background-position`
+
+This sets the starting position of a background image.
+
+<Callout type="info">
+  By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+  
+  Read more about `background-repeat` [here](#background-repeat)
+</Callout>
+
+**Example:**
+
+```css
+div {
+  background-image: url("my-background.png");
+  background-position: center;
+}
+```
+
+You can also specify multiple values for `background-position`. For example, if I wanted the image to start from the top left, I would do the following:
+
+```css
+  background-position: left top;
+```
+
+If you only specify one value, the other value defaults to `center`.
 
 ### `background-position-x`
 
+This sets the starting position of a background image on the x-axis.
+
+**Example:**
+
+```css
+div {
+  background-position-x: center;
+}
+```
+
 ### `background-positon-y`
 
+This sets the starting position of a background image on the y-axis.
+
+**Example:**
+
+```css
+div {
+  background-position-y: center;
+}
+```
+
 ### `background-repeat`
+
+This defines whether a background image should repeat or not.
+
+<Callout type="info">
+  By default, a background-image is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+</Callout>
+
+**Example:**
+
+```css
+/* This is the default behavior */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat;
+}
+
+/* Only repeat the image horizontally */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat-x;
+}
+
+/* Only repeat the image vertically */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat-y;
+}
+
+/* Image only shows once and does not repeat */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: no-repeat;
+}
+
+/* Set the ddefault property value */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: initial;
+}
+
+/* Inherit the value from the parent */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: inherit;
+}
+```
+
+`background-repeat` can also take in the values: `space` and `round`. Read more about these in [this](https://www.w3schools.com/cssref/pr_background-repeat.php) W3Schools Documentation.
+
+See the live demo below:
+
+<section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <div className="bg-repeat bg-gradient-to-r from-purple-800 to-pink-800 p-4">
+  Background Repeat
+</div>
+
+<div className="bg-no-repeat bg-gradient-to-r from-purple-800 to-pink-800 p-4">
+  No Repeat
+</div>
+</section>
 
 ### `background-size`
 
