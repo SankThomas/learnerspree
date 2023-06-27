@@ -9,7 +9,7 @@
 }
 
 ::selection {
-  @apply bg-orange-300 text-white;
+  @apply bg-orange-700 text-white;
 }
 
 body {
