@@ -947,131 +947,1163 @@ div {
 
 `background-repeat` can also take in the values: `space` and `round`. Read more about these in [this](https://www.w3schools.com/cssref/pr_background-repeat.php) W3Schools Documentation.
 
-See the live demo below:
-
-<section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-  <div className="bg-repeat bg-gradient-to-r from-purple-800 to-pink-800 p-4">
-  Background Repeat
-</div>
-
-<div className="bg-no-repeat bg-gradient-to-r from-purple-800 to-pink-800 p-4">
-  No Repeat
-</div>
-</section>
-
 ### `background-size`
+
+This is used to specify the size of a background image.
+
+**Example:**
+
+```css
+div {
+  background: url("link-to-your-image.png");
+  background-size: cover;
+}
+```
+
+You can specify other values for the background size, all of which have their effects on your background image. See [this interactive demo](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_background-size) from W3Schools.
+
+You can also specify multiple values for your background image. See the example below:
+
+```css
+div {
+  background: url("link-to-your-image.png");
+  background-size: 60% 50%;
+}
+```
+
+In such a case as above, the first value specified is always set to the width of the background image. The second value is for the height. If you only specify one value, the second value of the height will be set to `auto`.
+
+Aside from using percentages, you can also use other CSS Units such as pixels (`px`) and viewport heights (`vh`).
 
 ## Border properties
 
 ### `border`
 
+The CSS `border` property applies a line around the element in which it is defined.
+
+**Example:**
+
+<br />
+
+<button className="border-2 border-teal-400 py-2 px-8">Get Started</button>
+
+The button above has a teal border with a padding of `8px` on the top and bottom, and `32px` on the left and right.
+
+In order to correctly apply a border to an element, you need to define the width of the border - which is how thick you want the border to be - as well as the border style - whether you want it to be a solid border, or a dotted border, and finally, the color of the border. See the example below:
+
+```css
+button {
+  border-width: 2px;
+  border-style: solid;
+  border-color: teal;
+}
+```
+
+However, there is a shorter and recommended way of doing this:
+
+```css
+button {
+  border: 2px solid teal;
+}
+```
+
+The above will apply the same styles to the button above, but without all the hassle of typing out three CSS properties for the same effect.
+
+You can achieve cool looking borders just by changing the width and style of the border. See the examples below:
+
+<br />
+
+<div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+  <button className="border-[6px] border-teal-400 py-2 px-8">
+    6px Solid Border
+  </button>
+  <button className="border-[6px] border-dotted border-teal-400 py-2 px-8">
+    6px dotted border
+  </button>
+  <button className="border-[6px] border-dashed border-teal-400 py-2 px-8">
+    6px dashed border
+  </button>
+  <button className="border-[6px] border-double border-teal-400 py-2 px-8">
+    6px double border
+  </button>
+</div>
+
+The above examples can be achieved by doing the following in your CSS:
+
+```css
+/* Solid border */
+.btn-solid {
+  border: 6px solid teal;
+  padding: 8px 32px;
+}
+
+/* dotted border */
+.btn-dotted {
+  border: 6px dotted teal;
+  padding: 8px 32px;
+}
+
+/* Dashed border */
+.btn-dashed {
+  border: 6px dashed teal;
+  padding: 8px 32px;
+}
+
+/* Double border */
+.btn-double {
+  border: 6px double teal;
+  padding: 8px 32px;
+}
+```
+
+> Borders can be applied to all HTML elements.
+
+You can also add borders that you want whether on the top, right, bottom, or left. All you have to do is specify the direction you want. For example:
+
+```css
+.btn-border-top {
+  border-top: 2px solid teal;
+  padding: 8px 32px;
+}
+
+.btn-border-right {
+  border-right: 2px solid teal;
+  padding: 8px 32px;
+}
+
+.btn-border-bottom {
+  border-bottom: 2px solid teal;
+  padding: 8px 32px;
+}
+
+.btn-border-left {
+  border-left: 2px solid teal;
+  padding: 8px 32px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+  <button className="border-t-2 border-teal-400 py-2 px-8">Top border</button>
+  <button className="border-r-2 border-teal-400 py-2 px-8">Right border</button>
+  <button className="border-b-2 border-teal-400 py-2 px-8">
+    Bottom border
+  </button>
+  <button className="border-l-2 border-teal-400 py-2 px-8">Left border</button>
+</div>
+
+And it works with all border styles, i.e. solid, dotted, dashed and double.
+
 ### `border-block`
+
+This is similar to the `border` property, with the exception of being dependent on the block direction.
+
+The block direction of a document in English is downwards, i.e. top to bottom.
+
+**Example:**
+
+```css
+div {
+  border-block: 2px solid teal;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+</Callout>
 
 ### `border-block-color`
 
-### `border-block-end-clor`
+This is used to set a color for borders in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-style: solid; /* This is a required property */
+  border-block-color: teal;
+}
+```
+
+<Callout type="info">
+  The `border-block-style` is a required property when using `border-block`
+</Callout>
+
+### `border-block-end-color`
+
+This sets the color of an element's border at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: solid;
+  border-block-end-color: pink;
+}
+```
+
+In order for this property to apply, `border-block-end-style` must be used. Otherwise, it has no effect on the element.
 
 ### `border-block-end-style`
 
+This sets the style of an element's border at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: dotted;
+}
+
+div {
+  border-block-end-style: solid;
+}
+```
+
+You can have different values just like for the `border` property.
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+</Callout>
+
 ### `border-block-end-width`
+
+This sets the width of an element's border at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: solid;
+  border-block-end-width: 10px;
+}
+```
+
+In order for this property to apply, `border-block-end-style` must be used. Otherwise, it has no effect on the element.
 
 ### `border-block-start-color`
 
+This sets the width of an element's border at the start in the block direction. It has the opposite effect of `border-block-end-color`.
+
+**Example:**
+
+```css
+div {
+  border-block-start-style: solid;
+  border-block-start-color: pink;
+}
+```
+
+In order for this property to apply, border-block-end-style must be used. Otherwise, it has no effect on the element.
+
 ### `border-block-start-style`
 
-### `border-block-style-width`
+This sets the style of an element's border at the start in the block direction. It has the opposite effect to `border-block-end-style`.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: dotted;
+}
+ 
+div {
+  border-block-end-style: solid;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+</Callout>
+
+### `border-block-start-width`
+
+This sets the width of an element's border at the start in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-start-style: solid;
+  border-block-start-width: 10px;
+}
+```
 
 ### `border-block-style`
 
+This sets the style of an element's borders in the block direction. If you specify two values, then the first value applies to the start of the border block, and the second value applies to the end of the border block. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-block-style: solid;
+}
+
+div {
+  border-block-style: dashed dotted;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+</Callout>
+
 ### `border-block-width`
+
+This sets the width of an element's borders in the block direction. If you specify two values, then the first value applies to the start of the border block, and the second value applies to the end of the border block. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-block-style: solid;
+  border-block-width: 10px;
+}
+
+div {
+  border-block-style: solid;
+  border-block-width: thin thick;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+</Callout>
 
 ### `border-bottom`
 
+This sets the styles for the bottom border of an element. It is the shorthand property for: 
+  - `border-bottom-width`
+  - `border-bottom-style`
+  - `border-bottom-color`
+
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-bottom: 5px solid red;
+}
+
+h2 {
+  border-bottom: 4px dotted blue;
+}
+
+div {
+  border-bottom: double;
+}
+```
+
+If no color is specified, `border-bottom` will inherit the color of the text.
+
 ### `border-bottom-color`
+
+This sets the color of an element's bottom border.
+
+**Example:**
+
+```css
+div {
+  border-bottom-color: coral;
+}
+```
 
 ### `border-bottom-left-radius`
 
+This property is used to add roundedness - called "radius" to the bottom left of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-left-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-left-radius: 25px 50px;
+}
+```
+
 ### `border-bottom-right-radius`
+
+This property is used to add roundedness - called "radius" to the bottom right of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-right-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-right-radius: 25px 50px;
+}
+```
 
 ### `border-bottom-style`
 
+This sets the style of an element's bottom border.
+
+**Example:**
+
+```css
+div {
+  border-bottom-style: dotted;
+}
+```
+
 ### `border-bottom-width`
+
+This sets the width of an element's bottom border.
+
+**Example:**
+
+```css
+div {
+  border-bottom-width: thin;
+}
+
+div {
+  border-bottom-width: 10px;
+}
+```
 
 ### `border-collapse`
 
+This sets whether table borders should collapse into a single border or be separated as in standard HTML.
+
+**Example:**
+
+```css
+.table-one {
+  border-collapse: separate;
+}
+
+.table-two {
+  border-collapse: collapse;
+}
+```
+
 ### `border-color`
+
+This sets the color of an element's four borders.
+
+**Example:**
+
+```css
+div {
+  border-color: coral;
+}
+```
+
+Read more about this [here](#border).
 
 ### `border-image`
 
+This property allows you to specify an image to be used as the border around an element. It is a shorthand property for:
+  - `border-image-source`
+  - `border-image-slice`
+  - `border-image-width`
+  - `border-image-outset`
+  - `border-image-repeat`
+
+**Example:**
+
+```css
+.border-img {
+  border-image: url(border.png) 30 round;
+}
+```
+
 ### `border-image-outset`
+
+This specifies the amount by which the border image area extends beyond the border box.
+
+**Example:**
+
+```css
+.border-img {
+  border-image-source: url(border.png);
+  border-image-outset: 10px;
+}
+```
 
 ### `border-image-repeat`
 
+This specifies whether the border image should be repeated, rounded, spaced or stretched.
+
+**Example:**
+
+```css
+.border-img {
+  border-image-source: url(border.png);
+  border-image-repeat: repeat;
+}
+```
+
 ### `border-image-slice`
+
+This specifies how to slice the image specified by `border-image-source`. The image is always sliced into nine sections: four corners, four edges and the middle.
+
+The "middle" part is treated as fully transparent, unless the fill keyword is set.
+
+**Example:**
+
+```css
+.border-img {
+  border-image-slice: 30%;
+}
+```
 
 ### `border-image-source`
 
+This specifies the path to the image to be used as a border.
+
+**Example:**
+
+```css
+div {
+  border-image-source: url(border.png);
+}
+```
+
 ### `border-image-width`
+
+This property specifies the width of the border image.
+
+**Example:**
+
+```css
+div {
+  border-image-source: url(border.png);
+  border-image-width: 10px;
+}
+```
 
 ### `border-inline`
 
+This specifies the border of an element in the inline direction. For English, the inline direction is usually left to right (unless specified otherwise).
+
+**Example:**
+
+```css
+h1 {
+  border-inline: 5px solid red;
+}
+
+h2 {
+  border-inline: 4px dotted blue;
+}
+
+div {
+  border-inline: double;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-inline` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document, as well as the [`text-orientation`](#text-orientation) and [`direction`](#direction) properties.
+</Callout>
+
 ### `border-inline-color`
+
+This is used to set a color for borders in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-style: solid; /* This is a required property */
+  border-inline-color: teal;
+}
+```
 
 ### `border-inline-end-color`
 
+This sets the color of an element's border at the end in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: solid;
+  border-inline-end-color: pink;
+}
+```
+
+In order for this property to apply, border-inline-end-style must be used. Otherwise, it has no effect on the element.
+
 ### `border-inline-end-style`
+
+This sets the style of an element's border at the end in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: dotted;
+}
+ 
+div {
+  border-inline-end-style: solid;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-inline` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document, as well as the [`text-orientation`](#text-orientation) and [`direction`](#direction) properties.
+</Callout>
 
 ### `border-inline-end-width`
 
+This sets the width of an element's border at the end in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: solid;
+  border-inline-end-width: 10px;
+}
+```
+
 ### `border-inline-start-color`
+
+This sets the width of an element's border at the start in the inline direction. It has the opposite effect of border-inline-end-color.
+
+**Example:**
+
+```css
+div {
+  border-inline-start-style: solid;
+  border-inline-start-color: pink;
+}
+```
+
+In order for this property to apply, `border-inline-end-style` must be used. Otherwise, it has no effect on the element.
 
 ### `border-inline-start-style`
 
+This sets the style of an element's border at the start in the inline direction. It has the opposite effect to border-inline-end-style.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: dotted;
+}
+ 
+div {
+  border-inline-end-style: solid;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-inline` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document, as well as the [`text-orientation`](#text-orientation) and [`direction`](#direction) properties.
+</Callout>
+
 ### `border-inline-start-width`
+
+This sets the width of an element's border at the start in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-start-style: solid;
+  border-inline-start-width: 10px;
+}
+```
 
 ### `border-inline-style`
 
+This sets the style of an element's borders in the inline direction. If you specify two values, then the first value applies to the start of the border inline, and the second value applies to the end of the border inline. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-inline-style: solid;
+}
+ 
+div {
+  border-inline-style: dashed dotted;
+}
+```
+
 ### `border-inline-width`
+
+This sets the width of an element's borders in the inline direction. If you specify two values, then the first value applies to the start of the border inline, and the second value applies to the end of the border inline. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-inline-style: solid;
+  border-inline-width: 10px;
+}
+ 
+div {
+  border-inline-style: solid;
+  border-inline-width: thin thick;
+}
+```
 
 ### `border-left`
 
+This sets the styles for the left border of an element. It is the shorthand property for:
+  - `border-left-width`
+  - `border-left-style`
+  - `border-left-color`
+  
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-left: 5px solid red;
+}
+ 
+h2 {
+  border-left: 4px dotted blue;
+}
+ 
+div {
+  border-left: double;
+}
+```
+
+If no color is specified, `border-left` will inherit the color of the text.
+
 ### `border-left-color`
+
+This sets the color of an element's left border.
+
+**Example:**
+
+```css
+div {
+  border-left-color: coral;
+}
+```
 
 ### `border-left-style`
 
+This sets the style of an element's left border.
+
+**Example:**
+
+```css
+div {
+  border-left-style: dotted;
+}
+```
+
 ### `border-left-width`
+
+This sets the width of an element's left border.
+
+**Example:**
+
+```css
+div {
+  border-left-width: thin;
+}
+ 
+div {
+  border-left-width: 10px;
+}
+```
 
 ### `border-radius`
 
+This is used to add rounded corners to elements.
+
+**Example:**
+
+```css
+/*
+25px rounded on all four corners
+*/
+div {
+  border: 2px solid red;
+  border-radius: 25px;
+}
+
+/*
+50px rounded on the top left and bottom right
+and 20px rounded on the top right and bottom left corners
+*/
+div {
+  border: 2px solid red;
+  border-radius: 50px 20px;
+}
+
+/*
+50px rounded on the top left corner
+20px rounded on the top right and bottom left corners
+and 30px rounded of the bottom right corner
+*/
+div {
+  border: 2px solid red;
+  border-radius: 50px 20px 30px;
+}
+
+/*
+50px rounded on the top left
+20px rounded on the top right
+30px rounded on the bottom right
+40px rounded of the bottom left
+*/
+div {
+  border: 2px solid red;
+  border-radius: 50px 20px 30px 40px;
+}
+```
+
 ### `border-right`
+
+This sets the styles for the right border of an element. It is the shorthand property for:
+  - `border-right-width`
+  - `border-right-style`
+  - `border-right-color`
+  
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-right: 5px solid red;
+}
+ 
+h2 {
+  border-right: 4px dotted blue;
+}
+ 
+div {
+  border-right: double;
+}
+```
+
+If no color is specified, `border-right` will inherit the color of the text.
 
 ### `border-right-color`
 
+This sets the color of an element's right border.
+
+**Example:**
+
+```css
+div {
+  border-right-color: coral;
+}
+```
+
 ### `border-right-style`
+
+This sets the style of an element's right border.
+
+**Example:**
+
+```css
+div {
+  border-right-style: dotted;
+}
+```
 
 ### `border-right-width`
 
+This sets the width of an element's right border.
+
+**Example:**
+
+```css
+div {
+  border-right-width: thin;
+}
+ 
+div {
+  border-right-width: 10px;
+}
+```
+
 ### `border-spacing`
+
+This property sets the distance between the borders of adjacent cells in a table. This property only works when `border-collapse` has a value of "separate".
+
+**Example:**
+
+```css
+table {
+  border-collapse: separate;
+  border-spacing: 15px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 15px 50px;
+}
+```
 
 ### `border-style`
 
+This property sets the style of an element's four borders. This property can have from one to four values.
+
+**Example:**
+
+```css
+/* 
+dotted border all round
+ */
+div {
+  border-style: dotted;
+}
+
+/* 
+dotted border on the top and bottom
+solid border on the left and right
+ */
+div {
+  border-style: dotted solid;
+}
+
+/* 
+dotted border on the top
+solid border on the left and right
+dashed border on the bottom
+ */
+div {
+  border-style: dotted solid dashed;
+}
+
+/* dotted border on the top
+solid border on the right
+dashed border on the bottom
+double border on the left
+ */
+div {
+  border-style: dotted solid dashed double;
+}
+```
+
 ### `border-top`
+
+This sets the styles for the top border of an element. It is the shorthand property for:
+  - `border-top-width`
+  - `border-top-style`
+  - `border-top-color`
+  
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-top: 5px solid red;
+}
+ 
+h2 {
+  border-top: 4px dotted blue;
+}
+ 
+div {
+  border-top: double;
+}
+```
+
+If no color is specified, `border-top` will inherit the color of the text.
 
 ### `border-top-color`
 
+This sets the color of an element's top border.
+
+**Example:**
+
+```css
+div {
+  border-top-color: coral;
+}
+```
+
 ### `border-top-left-radius`
+
+This property is used to add roundedness - called "radius" to the top left of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-left-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-left-radius: 25px 50px;
+}
+```
 
 ### `border-top-right-radius`
 
+This property is used to add roundedness - called "radius" to the top right of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-right-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-right-radius: 25px 50px;
+}
+```
+
 ### `border-top-style`
+
+This sets the style of an element's top border.
+
+**Example:**
+
+```css
+div {
+  border-top-style: dotted;
+}
+```
 
 ### `border-top-width`
 
+This sets the width of an element's top border.
+
+**Example:**
+
+```css
+div {
+  border-top-width: thin;
+}
+ 
+div {
+  border-top-width: 10px;
+}
+```
+
 ### `bottom`
+
+This property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
+
+**Example:**
+
+```css
+div.absolute {
+  position: absolute;
+  bottom: 10px;
+  width: 50%;
+  background-color: coral;
+}
+```
+
+Learn more about the `bottom` property in the module, [CSS Positioning](/web-development/css/css-positioning)
 
 ### `box-decoration-break`
 
+This property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented.
+
+The default value is `slice`.
+
+**Example:**
+
+```css
+span {
+  -webkit-box-decoration-break: clone;
+  -o-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+span {
+  -webkit-box-decoration-break: slice;
+  -o-box-decoration-break: slice;
+  box-decoration-break: slice;
+}
+```
+
+The above example outputs the following:
+
+<br />
+
+<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+  <article>
+    <h2 className="font-bold">box-decoration-break: clone:</h2>
+    <br />
+    <span className="box-decoration-clone bg-gradient-to-r from-indigo-400 to-pink-600 p-2 text-5xl font-bold">Hello <br /> World!</span>
+  </article>
+
+<article>
+  <h2 className="font-bold">box-decoration-break: slice:</h2>
+  <br />
+  <span className="box-decoration-slice bg-gradient-to-r from-indigo-400 to-pink-600 p-2 text-5xl font-bold">Hello <br /> World!</span>
+  </article>
+</div>
+
+<br />
+
+<Callout type="error">
+  Internet Explorer and Microsoft Edge do not suppor the `box-decoration-break` property.
+</Callout>
+
+> Notice how the color gradient is applied to the text when using `clone` and `slice`.
+
 ### `box-reflect`
+
+This property is used to create a reflection of an element. The values can be `top`, `bottom`, `left`, `right`, `above`, `below` and `none`.
+
+**Example:**
+
+```css
+img {
+  -webkit-box-reflect: below;
+}
+```
+
+<Callout type="info">
+  `box-reflect` is non-standard. Therefore, it must be written with the `-webkit` prefix.
+</Callout>
+
+See [this interactive demo](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_box-reflect) from W3Schools.
 
 ### `box-shadow`
 
