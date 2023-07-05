@@ -8,7 +8,7 @@ CSS has quite a number of properties that will help you to make your web page ap
 
 The properties are grouped together in alphabetical order so that it will be easier to follow along, or to look for a certain property if you're in a hurry.
 
-Use the search bar to find specific items quickly.
+Use the search bar to find specific items quickly, or use the in-built `CTRL + F` browser command.
 
 ### `accent-color`
 
@@ -36,12 +36,14 @@ This will render a checkbox which will have a light-red color when it is checked
     <input type="checkbox" id="checkbox1" />
   </article>
 
-  <article className="flex flex-col gap-2 border border-slate-100 dark:border-slate-800 p-4 rounded-lg">
-    <label htmlFor="checkbox2" className="block">
-      Checkbox with `accent-color` applied
-    </label>
-    <input type="checkbox" id="checkbox2" className="accent-rose-400" />
-  </article>
+{" "}
+
+<article className="flex flex-col gap-2 border border-slate-100 dark:border-slate-800 p-4 rounded-lg">
+  <label htmlFor="checkbox2" className="block">
+    Checkbox with `accent-color` applied
+  </label>
+  <input type="checkbox" id="checkbox2" className="accent-rose-400" />
+</article>
 
   <article className="flex flex-col gap-2 border border-slate-100 dark:border-slate-800 p-4 rounded-lg">
     <label htmlFor="range" className="block">
@@ -384,19 +386,20 @@ Without `align-self: flex-end` applied, the result would have been the following
 
 <section className="w-full h-[400px] border border-[#222222] grid grid-cols-2 gap-4">
   <div className="w-[90%] h-[150px] bg-blue-100"></div>
-  <div className="w-[90%] h-[150px] bg-orange-200">
-  </div>
+  <div className="w-[90%] h-[150px] bg-orange-200"></div>
   <div className="w-[90%] h-[150px] bg-blue-100"></div>
   <div className="w-[90%] h-[150px] bg-blue-100"></div>
 </section>
 
 <Callout type="info">
-  #### Points to note
-  
-  1. By default, `align-self` aligns items in the block direction (downwards). If you want to align items in the inline direction (left to right), use `justify-self` or `justify-items` instead.
-  2. Block and inline direction depend on the language. For example, inline direction for Arabic would be right to left.
-  3. The `align-self` property overrides the `align-items` property.
-  4. The `align-self` property can take in the following values: `auto`, `stretch`, `center`, `flex-start`, `flex-end`, `baseline`, `initial` and `inherit`.
+  #### Points to note 1. By default, `align-self` aligns items in the block
+  direction (downwards). If you want to align items in the inline direction
+  (left to right), use `justify-self` or `justify-items` instead. 2. Block and
+  inline direction depend on the language. For example, inline direction for
+  Arabic would be right to left. 3. The `align-self` property overrides the
+  `align-items` property. 4. The `align-self` property can take in the following
+  values: `auto`, `stretch`, `center`, `flex-start`, `flex-end`, `baseline`,
+  `initial` and `inherit`.
 </Callout>
 
 ### `all`
@@ -509,23 +512,26 @@ This describes the final state of your animation.
 
 ```css
 @keyframes increasefont {
- from {
-   font-size: 16px;
- } to {
-   font-size: 80px;
- }
+  from {
+    font-size: 16px;
+  }
+  to {
+    font-size: 80px;
+  }
 }
 
 p {
   animation-name: increasefont;
   animation-fill-mode: forwards;
 }
-``` 
+```
 
 This will cause the `font-size` of the paragraph to increase from `16px` to `80px` and it will stay at the final font.
 
 <Callout type="info">
-  The default behavior for an animation is to start, end, and then revert to the default or beginning properties. However, when you use `animation-fill-mode` you can ensure that the animation will stay with the end properties.
+  The default behavior for an animation is to start, end, and then revert to the
+  default or beginning properties. However, when you use `animation-fill-mode`
+  you can ensure that the animation will stay with the end properties.
 </Callout>
 
 #### `animation-fill-mode: none`
@@ -582,7 +588,7 @@ This sets how an animation progresses through the duration of each cycle.
 
 **Example:**
 
-```css 
+```css
 p {
   animation-timing-function: linear;
 }
@@ -675,7 +681,9 @@ div {
 ```
 
 <Callout type="info">
-  `-webkit-backdrop-filter` is an example of a Vendor Prefix. Read more about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+  `-webkit-backdrop-filter` is an example of a Vendor Prefix. Read more about
+  Vendor Prefixes in the module, [CSS Vendor
+  Prefixes](/web-development/css/css-vendor-prefixes)
 </Callout>
 
 ### `backface-visibility`
@@ -692,7 +700,9 @@ div {
 ```
 
 <Callout type="info">
-  `-webkit-backface-visibility` is an example of a Vendor Prefix. Read more about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+  `-webkit-backface-visibility` is an example of a Vendor Prefix. Read more
+  about Vendor Prefixes in the module, [CSS Vendor
+  Prefixes](/web-development/css/css-vendor-prefixes)
 </Callout>
 
 ## Background properties
@@ -700,6 +710,7 @@ div {
 ### `background`
 
 This is used to set different background properties. It is a shorthand property for:
+
 1. `background-color`
 2. `background-image`
 3. `background-position`
@@ -785,7 +796,9 @@ div {
 ```
 
 <Callout type="warning">
-  The background color of an element does not include the margin applied to it - because margin is applied to the outside of elements. Read more about this in [The CSS Box Model](/web-development/css/css-box-model)
+  The background color of an element does not include the margin applied to it -
+  because margin is applied to the outside of elements. Read more about this in
+  [The CSS Box Model](/web-development/css/css-box-model)
 </Callout>
 
 ### `background-image`
@@ -817,13 +830,13 @@ You can also use other gradients such as `conic-gradient()`, `radial-gradient()`
 
 To learn more about colors, see the module about [CSS Colors](/web-development/css/css-colors)
 
-
 <Callout type="info">
   If you are using an image as the background, make sure to specify a height to the element, so that you can actually see the image.
 
-  By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
-  
-  Read more about `background-repeat` [here](#background-repeat)
+By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+
+Read more about `background-repeat` [here](#background-repeat)
+
 </Callout>
 
 ### `background-origin`
@@ -851,9 +864,9 @@ It also takes in other values such as `padding-box`, `border-box`, `content-box`
 This sets the starting position of a background image.
 
 <Callout type="info">
-  By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
-  
-  Read more about `background-repeat` [here](#background-repeat)
+  By default, a `background-image` is placed at the top-left corner of an
+  element, and repeated both vertically and horizontally. Read more about
+  `background-repeat` [here](#background-repeat)
 </Callout>
 
 **Example:**
@@ -868,7 +881,7 @@ div {
 You can also specify multiple values for `background-position`. For example, if I wanted the image to start from the top left, I would do the following:
 
 ```css
-  background-position: left top;
+background-position: left top;
 ```
 
 If you only specify one value, the other value defaults to `center`.
@@ -902,7 +915,8 @@ div {
 This defines whether a background image should repeat or not.
 
 <Callout type="info">
-  By default, a background-image is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+  By default, a background-image is placed at the top-left corner of an element,
+  and repeated both vertically and horizontally.
 </Callout>
 
 **Example:**
@@ -1112,7 +1126,9 @@ div {
 ```
 
 <Callout type="info">
-  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
 </Callout>
 
 ### `border-block-color`
@@ -1166,7 +1182,9 @@ div {
 You can have different values just like for the `border` property.
 
 <Callout type="info">
-  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
 </Callout>
 
 ### `border-block-end-width`
@@ -1209,14 +1227,16 @@ This sets the style of an element's border at the start in the block direction. 
 div {
   border-block-end-style: dotted;
 }
- 
+
 div {
   border-block-end-style: solid;
 }
 ```
 
 <Callout type="info">
-  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
 </Callout>
 
 ### `border-block-start-width`
@@ -1249,7 +1269,9 @@ div {
 ```
 
 <Callout type="info">
-  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
 </Callout>
 
 ### `border-block-width`
@@ -1271,15 +1293,18 @@ div {
 ```
 
 <Callout type="info">
-  In order to better understand the `border-block` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document.
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
 </Callout>
 
 ### `border-bottom`
 
-This sets the styles for the bottom border of an element. It is the shorthand property for: 
-  - `border-bottom-width`
-  - `border-bottom-style`
-  - `border-bottom-color`
+This sets the styles for the bottom border of an element. It is the shorthand property for:
+
+- `border-bottom-width`
+- `border-bottom-style`
+- `border-bottom-color`
 
 In that order.
 
@@ -1422,11 +1447,12 @@ Read more about this [here](#border).
 ### `border-image`
 
 This property allows you to specify an image to be used as the border around an element. It is a shorthand property for:
-  - `border-image-source`
-  - `border-image-slice`
-  - `border-image-width`
-  - `border-image-outset`
-  - `border-image-repeat`
+
+- `border-image-source`
+- `border-image-slice`
+- `border-image-width`
+- `border-image-outset`
+- `border-image-repeat`
 
 **Example:**
 
@@ -1522,7 +1548,11 @@ div {
 ```
 
 <Callout type="info">
-  In order to better understand the `border-inline` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document, as well as the [`text-orientation`](#text-orientation) and [`direction`](#direction) properties.
+  In order to better understand the `border-inline` property, read more about
+  the [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document, as well as the
+  [`text-orientation`](#text-orientation) and [`direction`](#direction)
+  properties.
 </Callout>
 
 ### `border-inline-color`
@@ -1563,14 +1593,18 @@ This sets the style of an element's border at the end in the inline direction.
 div {
   border-inline-end-style: dotted;
 }
- 
+
 div {
   border-inline-end-style: solid;
 }
 ```
 
 <Callout type="info">
-  In order to better understand the `border-inline` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document, as well as the [`text-orientation`](#text-orientation) and [`direction`](#direction) properties.
+  In order to better understand the `border-inline` property, read more about
+  the [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document, as well as the
+  [`text-orientation`](#text-orientation) and [`direction`](#direction)
+  properties.
 </Callout>
 
 ### `border-inline-end-width`
@@ -1611,14 +1645,18 @@ This sets the style of an element's border at the start in the inline direction.
 div {
   border-inline-end-style: dotted;
 }
- 
+
 div {
   border-inline-end-style: solid;
 }
 ```
 
 <Callout type="info">
-  In order to better understand the `border-inline` property, read more about the [`writing-mode`](#writing-mode) property which is used to change the block direction of a document, as well as the [`text-orientation`](#text-orientation) and [`direction`](#direction) properties.
+  In order to better understand the `border-inline` property, read more about
+  the [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document, as well as the
+  [`text-orientation`](#text-orientation) and [`direction`](#direction)
+  properties.
 </Callout>
 
 ### `border-inline-start-width`
@@ -1644,7 +1682,7 @@ This sets the style of an element's borders in the inline direction. If you spec
 div {
   border-inline-style: solid;
 }
- 
+
 div {
   border-inline-style: dashed dotted;
 }
@@ -1661,7 +1699,7 @@ div {
   border-inline-style: solid;
   border-inline-width: 10px;
 }
- 
+
 div {
   border-inline-style: solid;
   border-inline-width: thin thick;
@@ -1671,10 +1709,11 @@ div {
 ### `border-left`
 
 This sets the styles for the left border of an element. It is the shorthand property for:
-  - `border-left-width`
-  - `border-left-style`
-  - `border-left-color`
-  
+
+- `border-left-width`
+- `border-left-style`
+- `border-left-color`
+
 In that order.
 
 **Example:**
@@ -1683,11 +1722,11 @@ In that order.
 h1 {
   border-left: 5px solid red;
 }
- 
+
 h2 {
   border-left: 4px dotted blue;
 }
- 
+
 div {
   border-left: double;
 }
@@ -1729,7 +1768,7 @@ This sets the width of an element's left border.
 div {
   border-left-width: thin;
 }
- 
+
 div {
   border-left-width: 10px;
 }
@@ -1784,10 +1823,11 @@ div {
 ### `border-right`
 
 This sets the styles for the right border of an element. It is the shorthand property for:
-  - `border-right-width`
-  - `border-right-style`
-  - `border-right-color`
-  
+
+- `border-right-width`
+- `border-right-style`
+- `border-right-color`
+
 In that order.
 
 **Example:**
@@ -1796,11 +1836,11 @@ In that order.
 h1 {
   border-right: 5px solid red;
 }
- 
+
 h2 {
   border-right: 4px dotted blue;
 }
- 
+
 div {
   border-right: double;
 }
@@ -1842,7 +1882,7 @@ This sets the width of an element's right border.
 div {
   border-right-width: thin;
 }
- 
+
 div {
   border-right-width: 10px;
 }
@@ -1910,10 +1950,11 @@ div {
 ### `border-top`
 
 This sets the styles for the top border of an element. It is the shorthand property for:
-  - `border-top-width`
-  - `border-top-style`
-  - `border-top-color`
-  
+
+- `border-top-width`
+- `border-top-style`
+- `border-top-color`
+
 In that order.
 
 **Example:**
@@ -1922,11 +1963,11 @@ In that order.
 h1 {
   border-top: 5px solid red;
 }
- 
+
 h2 {
   border-top: 4px dotted blue;
 }
- 
+
 div {
   border-top: double;
 }
@@ -2016,7 +2057,7 @@ This sets the width of an element's top border.
 div {
   border-top-width: thin;
 }
- 
+
 div {
   border-top-width: 10px;
 }
@@ -2082,7 +2123,8 @@ The above example outputs the following:
 <br />
 
 <Callout type="error">
-  Internet Explorer and Microsoft Edge do not suppor the `box-decoration-break` property.
+  Internet Explorer and Microsoft Edge do not suppor the `box-decoration-break`
+  property.
 </Callout>
 
 > Notice how the color gradient is applied to the text when using `clone` and `slice`.
@@ -2100,28 +2142,227 @@ img {
 ```
 
 <Callout type="info">
-  `box-reflect` is non-standard. Therefore, it must be written with the `-webkit` prefix.
+  `box-reflect` is non-standard. Therefore, it must be written with the
+  `-webkit` prefix.
 </Callout>
 
 See [this interactive demo](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_box-reflect) from W3Schools.
 
 ### `box-shadow`
 
+This is used to set one or more shadows to an element.
+
+`box-shadow` is defined in terms of:
+
+1. Horizontal offset - this is a required value that places the shadow on the right of the element. A negative value will put the shadow on the left.
+2. Vertical offset - this is a required value that places the shadow below the element. A negative value will put the shadow above it.
+3. Blur radius - defines the bluriness of the shadow. The higher the value, the more blurry it becomes.
+4. Spread radius - defines the size (spread) of the shadow. A positive value increases it while a negative value reduces it.
+5. Shadow color - the color of the shadow. It can be a block color with no transparency, or you can add transparency to it. Read more about colors in the module [CSS Colors](/web-development/css/css-colors)
+6. Other properties - such as `inset` which changes the shadow from an outer shadow into an inner shadow, and `initial` which sets the default values of the box shadow, and `inherit` which takes the properties of the parent element.
+
+> Only the horizontal and vertical offsets of the `box-shadow` property are required. The others are all optional.
+
+And it has the syntax:
+
+```css
+element {
+  box-shadow: h-offset v-offset blur spread color;
+}
+```
+
+**Example:**
+
+```css
+div {
+  height: 150px;
+  width: 300px;
+  box-shadow: 5px 10px red;
+}
+```
+
+If you don't define a color for the box shadow, it defaults to the text color.
+
+**Example:**
+
+```css
+/* This box shadow color defaults to the text color */
+div {
+  height: 150px;
+  width: 300px;
+  box-shadow: 5px 10px;
+}
+```
+
+You can also define multiple box shadows as follows:
+
+```css
+div {
+  height: 150px;
+  width: 300px;
+  /* Notice the comma-separated values */
+  box-shadow: 5px 10px red, 10px 20px green, 20px 30px blue;
+}
+```
+
 ### `box-sizing`
+
+This defines how the width and height of an element are defines. That is, whether the padding and borders should be included in an element's final height and width.
+
+**Example:**
+
+```css
+div {
+  box-sizing: content-box;
+}
+```
+
+This defines the width and height of an element without including paddings and borders.
+
+**Example 2:**
+
+```css
+div {
+  box-sizing: border-box;
+}
+```
+
+This defines the width and height of an element including paddings and borders.
+
+A good practice is to set the `box-sizing` property universally so that you don't have to keep defining it for every single element that you have. You can do this using the unviersal selector (`*`).
+
+**Example:**
+
+```css
+* {
+  box-sizing: border-box;
+}
+
+/* OR */
+
+* {
+  box-sizing: content-box;
+}
+```
+
+> `border-box` is the more widely used value for `box-sizing` because it is much easier for developers to know what to expect as the behaviour of elements when they add paddings, margins and borders to them.
+
+Another way you will hear developers defining `box-sizing: border-box` is: "Place paddings on the inside of elements, and place margins on the outside of elements."
 
 ### `break-after`
 
+This defines whether or not a page break, column break, or region break should occur after the specified element.
+
+**Example:**
+
+```css
+/* Always add a page break after the footer element */
+footer {
+  break-after: always;
+}
+```
+
+See [this website](https://www.w3schools.com/cssref/pr_break-after.php) for a complete reference.
+
 ### `break-before`
+
+This defines whether or not a page break, column break, or region break should occur before the specified element.
+
+```css
+/* Always add a page break before the footer element */
+footer {
+  break-before: always;
+}
+```
+
+See [this website](https://www.w3schools.com/cssref/pr_break-before.php) for a complete reference.
 
 ### `break-inside`
 
+This defines whether or not a page break, column break, or region break should occur inside the specified element.
+
+```css
+/* Always add a page break inside the footer element */
+footer {
+  break-inside: always;
+}
+```
+
+See [this website](https://www.w3schools.com/cssref/pr_break-inside.php) for a complete reference.
+
 ### `caption-side`
+
+This defines the placement of a table caption.
+
+**Example:**
+
+```css
+table {
+  caption-side: top;
+}
+```
 
 ### `caret-color`
 
+This is used to define the color of the cursor on an input or any other editable element.
+
+**Example:**
+
+```css
+input {
+  caret-color: indigo;
+}
+```
+
 ### `@charset`
 
+This defines the character set that the browser uses.
+
+**Usage:**
+
+```css
+@charset "utf-8";
+```
+
+> NOTE: When you define the character set in your HTML, it will override the character set that you define in your CSS.
+
 ### `clear`
+
+This controls the flow next to floated elements. It specifies what should happen with the element that is next to a floating element.
+
+**Example:**
+
+```css
+img {
+  float: left;
+}
+
+p.clear {
+  clear: left;
+}
+```
+
+See the images below for a better understanding:
+
+<br />
+
+<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+  <article>
+    <h2 className="text-xl">Clear None</h2>
+    ![css-clear-none-property](src/assets/clear-none.png)
+  </article>
+
+{" "}
+<article>
+  <h2 className="text-xl">Clear Left</h2>
+  ![css-clear-left-property](src/assets/clear-left.png)
+</article>
+
+  <article>
+    <h2 className="text-xl">Clear Both</h2>
+    ![css-clear-both-property](src/assets/clear-both.png)
+  </article>
+</div>
 
 ### `clip`
 
