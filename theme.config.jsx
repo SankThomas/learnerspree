@@ -2,7 +2,7 @@ export default {
   project: {
     link: "https://github.com/SankThomas/learnerspree",
   },
-  logo: <strong>learnerspree</strong>,
+  logo: <strong>Learnerspree</strong>,
   useNextSeoProps() {
     return {
       titleTemplate: "Learnerspree | %s",
