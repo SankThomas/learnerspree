@@ -1,14 +1,14 @@
 export default {
   project: {
-    link: "https://github.com/SankThomas/learner",
+    link: "https://github.com/SankThomas/learnerspree",
   },
-  logo: <strong>Learner</strong>,
+  logo: <strong>learnerspree</strong>,
   useNextSeoProps() {
     return {
-      titleTemplate: "Learner | %s",
+      titleTemplate: "Learnerspree | %s",
     };
   },
-  docsRepositoryBase: "https://github.com/SankThomas/learner/tree/main/",
+  docsRepositoryBase: "https://github.com/SankThomas/learnerspree/tree/main/",
   footer: {
     text: "Copyright Thomas Sankara 2023",
   },

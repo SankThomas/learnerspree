@@ -31,7 +31,7 @@ Replace `PATH_TO_IMAGE` to the actual path of the image which you can have local
 <img src="./local-image.png" alt="This is a local image" />
 
 <!-- An image from the internet -->
-<img src="https://learner.com/logo.png" alt="Image from the internet" />
+<img src="https://learnerspree.com/logo.png" alt="Image from the internet" />
 ```
 
 <Callout type="info">
@@ -143,7 +143,7 @@ The `src` attribute represents the path to the image. It can be a local image th
 <img src="./local-image.png" alt="This is a local image" />
 
 <!-- An image from the internet -->
-<img src="https://learner.com/logo.png" alt="Image from the internet" />
+<img src="https://learnerspree.com/logo.png" alt="Image from the internet" />
 ```
 
 ## The `alt` attribute
@@ -159,29 +159,41 @@ The alt text can be displayed: if you have a slow network, if you don't have act
 <img src="./slow-network.png" alt="Slow network shows the alt text" />
 
 <!-- No active internet show the alt text -->
-<img src="https://learner.com/logo.png" alt="Inactive internet show this" />
+<img
+  src="https://learnerspree.com/logo.png"
+  alt="Inactive internet show this"
+/>
 
 <!-- Path to image has changed -->
 <img src="PATH_HAS_CHANGED.svg" alt="Wrong image path shows this text" />
 
 <!-- Wrong path to image shows the alt text -->
-<img src="https://learner.com/wrong-path.jpg" alt="Wrong path to image" />
+<img src="https://learnerspree.com/wrong-path.jpg" alt="Wrong path to image" />
 
 <!-- Wrong file extension shows the alt text -->
-<img src="https://learner.com/no-image.jpeeg" alt="Wrong image extension" />
+<img
+  src="https://learnerspree.com/no-image.jpeeg"
+  alt="Wrong image extension"
+/>
 ```
 
 The above example is going to render the following:
 
 <img src="./slow-network.png" alt="Slow network shows the alt text" />
 
-<img src="https://learner.com/logo.png" alt="Inactive internet show this" />
+<img
+  src="https://learnerspree.com/logo.png"
+  alt="Inactive internet show this"
+/>
 
 <img src="PATH_HAS_CHANGED.svg" alt="Wrong image path shows this text" />
 
-<img src="https://learner.com/wrong-path.jpg" alt="Wrong path to image" />
+<img src="https://learnerspree.com/wrong-path.jpg" alt="Wrong path to image" />
 
-<img src="https://learner.com/no-image.jpeeg" alt="Wrong image extension" />
+<img
+  src="https://learnerspree.com/no-image.jpeeg"
+  alt="Wrong image extension"
+/>
 
 ## The `picture` element
 
@@ -239,7 +251,7 @@ In order to fix this, you can add `width` and `height` attributes to limit the w
 
 ```html
 <img
-  src="https://learner.com/logo.png"
+  src="https://learnerspree.com/logo.png"
   height="200px"
   width="300px"
   alt="This is a very large image that has been reduced using `height` and `width` attributes"
@@ -250,7 +262,7 @@ Another way to add `height` and `width` to an image is to apply CSS styling to i
 
 ```html
 <img
-  src="https://learner.com/logo.png"
+  src="https://learnerspree.com/logo.png"
   alt="This is a very large image that is styled using CSS `height` and `width` properties"
   style="height: 200px; width: 300px;"
 />
@@ -328,7 +340,7 @@ You can also add in animated images such as `gif`s using the same syntax to add 
 **Example:**
 
 ```html
-<img src="https://learner.com/animation.gif" alt="An animated image" />
+<img src="https://learnerspree.com/animation.gif" alt="An animated image" />
 ```
 
 ## Images as a link
