@@ -214,6 +214,83 @@ For example:
 
 The above styles will apply if one, or both of the conditions return TRUE. If both conditions evaluate to FALSE, the media query will not apply.
 
+## How, Then, Does One Write Media Queries?
+
+Let's say you wanted to change the background color of a section from purple to orange once the device width becomes greater than 700 pixels. How would you do that?
+
+First, you would give the section a background color of purple as below:
+
+```css
+section {
+    background-color: purple
+}
+```
+
+and then later add a media query to change it to orange, as in the example below:
+
+```css
+@media (min-width: 700px) {
+    section {
+        background-color: orange;
+    }
+}
+```
+
+So that the full code would look like this:
+
+```css
+/* Default background color for all devices before the media query is applied */
+section {
+    background-color: purple
+}
+
+@media (min-width: 700px) {
+    section {
+        background-color: orange;
+    }
+}
+```
+
+This is referred to as "building for mobile first". So, what if you didn't want to build for mobile first, but you still wanted the section to have a background color of orange on large devices, and a purple background on smaller devices? Well, you would do something similar, with a minor change in the media query condition:
+
+```css
+/*
+Now the default background color for all devices
+(before the media query) is orange
+*/
+section {
+    background-color: orange
+}
+
+/* Notice the condition is now max-width and not min-width */
+@media (max-width: 700px) {
+    section {
+        background-color: purple;
+    }
+}
+```
+
+The above condition for the media query means that the styles inside will apply for every device smaller than and up to 700px. Devices larger than 700px will not have the styles applied.
+
+<Callout type="info">
+### Caution!
+    When adding media queries, make sure that the CSS selectors you use correspond to how you styled them before the media query. Otherwise, you might find the styles in your media query not applying at all, or you might run into bugs in your code which are very hard to debug because vanilla CSS doesn't give you any kind of error handling. For example, don't do this:
+
+    ```css
+    section {
+        background-color: purple;
+    }
+
+    @media (min-width: 700px) {
+        .section-class {
+            background-color: orange;
+        }
+    }
+    ```
+
+    Because CSS will intepret this to be two different elements.
+</Callout>
+
 ## Mobile-First Responsive Development
 
 This refers to building the mobile version of the website or web app first and then scaling it up to fit tablets, laptops and desktops. This is the more preferrable way of building since you only need to change a few styles before getting the design you want on desktop.
@@ -272,7 +349,7 @@ Sometimes, you have to use both `min-width` and `max-width` in order to achieve 
 
 ## Practical Example
 
-Let's put our knowledge to the test. If you wanted to create a cool-looking and responsive profile card like the one below, how would you do it?
+Let's put our knowledge to the test. If you wanted to create a cool-looking and responsive profile card like the one below, how would you do it? (Don't stare too much at the photo 😅 - I was very young 😁).
 
 <br />
 
