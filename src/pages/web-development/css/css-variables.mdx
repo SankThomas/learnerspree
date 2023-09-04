@@ -3,3 +3,45 @@ import { Callout } from "nextra-theme-docs";
 # CSS Variables
 
 <Callout type="info">This page is under construction</Callout>
+
+In programming, variables are defined as pieces of state containing specific information that can be reused in a computer program. For example, in a school management system, you can keep track of a student's progress through a variable called `current_class` and setting it equal to the student's current class, and then once the school year is over, it automatically increments the variable by one.
+
+By doing that, you don't have to manually set a custom variable for every single student. You can use the same variable name and just update its value for every student.
+
+Now armed with the knowledge about variables, let's bring it to CSS with an example about website buttons.
+
+Many times, you will have to create a button for your website or web app. See the example button below:
+
+<br />
+<button className="bg-blue-400 text-white font-bold py-2 px-6 rounded hover:bg-blue-500 transition-all duration-150">Get Started</button>
+
+I'm sure you have seen this kind of button before. So what if you wanted to have the same blue color of the button in some other section? Well you could probably just add the background color on the section as below:
+
+```css
+button {
+    background-color: #60A5FA;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition: all 150ms ease-in-out;
+}
+
+button:hover {
+    background-color: #3B82F6;
+}
+
+section {
+    background-color: #60A5FA;
+}
+```
+
+Now, this is just one example using colors. What if you had the same properties on ten, or a hundred elements and you wanted them to inherit the same styles? Do you see where I'm going with this? For small apps, it is easy to just manually add the colors, but for huge apps where you have to remember so many things, it becomes very cumbersome.
+
+## Enter variables
+
+Take the following example:
+
+```css
+
+```
