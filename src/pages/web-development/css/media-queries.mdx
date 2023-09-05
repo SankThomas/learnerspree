@@ -147,7 +147,7 @@ Bootstrap defines breakpoints as:
 
 Now, if you're new to web development, you might be wondering how people just decide what widths they want to use as the device breakpoints.
 
-Well, it's simple. We just use the device widths from phone manufacturers. For example, the JioPhone 2 has a device width of 240px, the Galaxy Fold has a width of 280px, the iPhone 4 has a width of 320px, the Samsung Galaxy is 360px, the iPad Mini is 768px, the iPad Air is 820px, most laptops are 1024px, large desktops are 1920px and above.
+Well, it's simple. We just use the device widths from phone manufacturers. For example, the JioPhone 2 has a device width of 240px, the Galaxy Fold has a width of 280px, the iPhone 4 has a width of 320px, the Samsung Galaxy is 360px, the iPad Mini is 768px, the iPad Air is 820px, most laptops are 1024px and large desktops are 1920px and above.
 
 When you think about it, there's not really many media queries that you will need to add in order to make your website responsive on all, or most, devices. For example, the styles you apply for the Galaxy Fold can apply till the Google Pixel 4 phone which is about 400px. In the same way, the styles you apply for a laptop of screen width 1280px can apply to another computer of screen width 1600px - almost a 400px difference.
 
@@ -188,7 +188,7 @@ You can combine media queries using the logical `and` operator. This can be usef
 
 Because of the logical AND, the styles in the example above will only apply when both conditions evaluate to TRUE. If one of them evaluates to FALSE, then the media query will not apply.
 
-If you wanted to targer a specific device such as the Samsung Galaxy S20 Ultra, you would do something similar to the example below:
+If you wanted to target a specific device such as the Samsung Galaxy S20 Ultra, you would do something similar to the example below:
 
 ```css
 @media ((min-width: 1px) and (max-width: 412px) and (min-height: 1px) and (max-height: 915px)) {
@@ -373,7 +373,7 @@ Create a new folder wherever you want on your machine. You can call it <strong>P
 
 In your workspace, create a new file called `index.html`. In this file, add in the following code:
 
-```html
+```html filename="index.html" copy
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -405,7 +405,7 @@ Inside the `body` element, we are creating a `section` element which is going to
 
 Create a new file called `index.css`. Inside, add the following code to reset the default styles for all HTML elements:
 
-```css
+```css filename="index.css" copy
 * {
     margin: 0;
     padding: 0;
@@ -417,10 +417,10 @@ Create a new file called `index.css`. Inside, add the following code to reset th
 
 Of course, if you try to save your work, you won't see any change because you need to link your CSS file in your HTML. Go ahead and add the following line right before the `title` tag in your `head` element.
 
-```html
+```html filename="index.html" copy {3}
 <!-- Other code -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="index.css" rel="stylesheet" /> <!-- Added line -->
+<link href="index.css" rel="stylesheet" />
 <title>Profile Card</title>
 <!-- Rest of your code -->
 ```
@@ -431,7 +431,7 @@ Double click on the `index.html` file wherever it is located in your file explor
 
 Since it is easier to scale things up than down, we are going to build the mobile version first and then scale it up. Let's begin by adding classnames to our HTML so that we can target the specific elements.
 
-```html
+```html filename="index.html" copy
 <section class="container">
     <div class="profile">
         <!-- Rest of code -->
@@ -443,7 +443,7 @@ These are the only two classes we are going to need. Reload your page, nothing s
 
 We have reset the styles, but the page is still looking ugly, with the image taking up too much space. Let's fix that by adding the following code, which will force the image to take up only 100% of the container in which it is placed without overflowing.
 
-```css
+```css filename="index.css" copy
 img {
     max-width: 100%;,
     width: 80px;
@@ -456,7 +456,7 @@ This will limit the image to 80px width and height, and adding a border radius o
 
 Next, let's give the profile class a background color of white to distinguish it from the parent section element.
 
-```css
+```css filename="index.css" copy
 .profile {
     background-color: #ffffff;
 }
@@ -464,7 +464,7 @@ Next, let's give the profile class a background color of white to distinguish it
 
 Try reloading the webpage. We can't see the changes to the profile class because everything currently has a background color of white. Let's fix that. Inside the .container class, and above the `.profile` styles, add the following styles:
 
-```css
+```css filename="index.css" copy
 .container {
     background-image: linear-gradient(180deg, #BAD7FE, #3D83F6);
     padding: 32px;
@@ -474,7 +474,7 @@ Try reloading the webpage. We can't see the changes to the profile class because
 
 Now, you should be able to see the background color as well as the profile class distinctively, but still ugly looking. Let's change the font family of the webpage. Above, the `img` styles, add the following:
 
-```css
+```css filename="index.css" copy
 body {
     font-family: "Arial", sans-serif;
 }
@@ -482,7 +482,7 @@ body {
 
 Let's also add more padding on the profile class to push the content inwards and to make it better looking:
 
-```css
+```css filename="index.css" copy
 .profile {
     background-color: #ffffff;
     padding: 32px;
@@ -494,7 +494,7 @@ This will add some "breathable" space between the content and the edges of your 
 
 Everything is coming together nicely, but it's still looking ugly. Let's limit the width of the container so that it doesn't stretch out over the entire screen, and then lets also push it inwards a bit, because it's edges are touching the edges of the browser window.
 
-```css
+```css filename="index.css" copy
 .container {
     max-width: 700px;
     /* The margin here is to center the container */
@@ -512,7 +512,7 @@ For the purposes of this example, however, we are going to need to change and up
 
 First, we need the image and the text to display side by side. We will use CSS Grid to achieve this. (You can also use CSS Flexbox). More on Grid and Flexbox in their Deep Dive Modules.
 
-```css
+```css filename="index.css" copy
 @media (min-width: 1024px) {
     .profile {
         display: grid;
@@ -525,7 +525,7 @@ Above, we are adding two grids to the profile class. The first grid is the `img`
 
 Next, we need to resize the image so that it is no longer circular, and it takes up all the space it can in the grid in which it is located.
 
-```css
+```css filename="index.css" copy
 @media (min-width: 1024px) {
     img {
         width: 100%;
@@ -539,7 +539,7 @@ Next, we need to resize the image so that it is no longer circular, and it takes
 
 See how the text is now located to the top, let's bring it down to the center by adding another property on the profile class:
 
-```css
+```css filename="index.css" copy
 @media (min-width: 1024px) {
     .profile {
         display: grid;
@@ -551,7 +551,7 @@ See how the text is now located to the top, let's bring it down to the center by
 
 And then let's bring the text to the left:
 
-```css
+```css filename="index.css" copy
 @media (min-width: 1024px) {
     .profile {
         display: grid;
@@ -564,13 +564,13 @@ And then let's bring the text to the left:
 
 It's coming together quite nicely right? Remember how we added a padding on the profile so that the content would not touch it's edges? Now, let's remove it so that the content touches the edges 😁.
 
-```css
+```css filename="index.css" copy {6}
 @media (min-width: 1024px) {
     .profile {
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
-        padding: 0; /* Added line */
+        padding: 0;
         text-align: left;
     }
 }
@@ -579,7 +579,7 @@ It's coming together quite nicely right? Remember how we added a padding on the 
 Now, we notice sometihing. Even though the profile class has a border radius around it to make it rounded on the vertices, the image doesn't seem to respect that. Also, the image and the text are too close to one another. Let's fix that:
 
 
-```css
+```css filename="index.css" {6} copy
 @media (min-width: 1024px) {
     .profile {
         display: grid;
@@ -596,7 +596,7 @@ Now, we notice sometihing. Even though the profile class has a border radius aro
 <Callout type="info">
 If you don't want to add `overflow: hidden` as above, you can also go inside the image and give it a rounded border on the top left and bottom left as below:
 
-```css
+```css filename="index.css" copy
 @media (min-width: 1024px) {
     img {
     border-radius: 16px 0 0 16px; /* Shorthand property*/
@@ -615,7 +615,7 @@ And this will have the same effect. When you do this however, make sure to give 
 
 ### HTML
 
-```html
+```html filename="index.html" copy
 <!DOCTYPE html>
 <html lang="en">
 
@@ -643,7 +643,7 @@ And this will have the same effect. When you do this however, make sure to give 
 
 ### CSS
 
-```css
+```css filename="index.css" copy
 * {
   margin: 0;
   padding: 0;
