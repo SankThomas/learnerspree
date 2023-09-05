@@ -12,4 +12,7 @@ export default {
   footer: {
     text: "Copyright Thomas Sankara 2023",
   },
+  chat: {
+    link: "https://discord.com"
+  }
 };
