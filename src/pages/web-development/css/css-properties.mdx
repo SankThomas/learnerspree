@@ -2364,25 +2364,147 @@ See the images below for a better understanding:
   </article>
 </div>
 
-### `clip`
+### `clip-path`
+
+This property lets you clip an element to a basic shape or to an SVG source.
+
+See [this interactive example](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_clip-path) from W3Schools to learn how the `clip-path` property works.
 
 ### `color`
 
+This sets the text color for elements.
+
+**Example:**
+
+```css
+body {
+  color: pink;
+}
+
+h1 {
+  color: orange;
+}
+
+p {
+  color: purple;
+}
+```
+
 ### `column-count`
+
+This specifies the number of columns that an element should be divided into. You know, the way newspapers look like.
+
+**Example:**
+
+```html
+<!-- Some long text to demonstrate the column-count property -->
+<p>
+  Up am intention on dependent questions oh elsewhere september.
+  No betrayed pleasure possible jointure we in throwing.
+  And can event rapid any shall woman green. Hope they dear who its bred.
+  Smiling nothing affixed he carried it clothes calling he no.
+  Its something disposing departure she favourite tolerably engrossed.
+  Truth short folly court why she their balls.
+  Excellence put unaffected reasonable mrs introduced conviction she.
+  Nay particular delightful but unpleasant for uncommonly who.
+</p>
+```
+
+```css
+p {
+  column-count: 2,
+}
+```
 
 ### `column-fill`
 
+This specifies how to fill columns and can either have the value of `auto` or `balance`. See the example below:
+
+<br />
+<p className="columns-1 sm:columns-2 md:columns-3 bg-gradient-to-b from-purple-800 to-blue-600 via-purple-700 p-4 rounded-lg">
+  Up am intention on dependent questions oh elsewhere september.
+  No betrayed pleasure possible jointure we in throwing.
+  And can event rapid any shall woman green. Hope they dear who its bred.
+  Smiling nothing affixed he carried it clothes calling he no.
+  Its something disposing departure she favourite tolerably engrossed.
+  Truth short folly court why she their balls.
+  Excellence put unaffected reasonable mrs introduced conviction she.
+  Nay particular delightful but unpleasant for uncommonly who.
+</p>
+
 ### `column-gap`
+
+This adds a gap between the columns in a grid, flexbox, or a multi-column layout.
+
+**Example:**
+
+```css
+div {
+  column-gap: 40px;
+}
+```
 
 ### `column-rule`
 
+This specifies the width, style, and color of the rule between columns. It is a shorthand property to style the `column-rule-width`, `column-rule-style` and `column-rule-color`.
+
+**Example:**
+
+```css
+div {
+  column-rule: 6px double purple;
+}
+```
+
+> Just like for the `border`, the `column-rule` can be double, dotted, dashed or solid.
+
 ### `column-rule-color`
+
+This specifies the color of the rule between columns.
+
+**Example:**
+
+```css
+div {
+  column-rule-color: purple;
+}
+```
 
 ### `column-rule-style`
 
+This specifies the style of the rule between columns. It can be solid, dotted, dashed or double.
+
+**Example:**
+
+```css
+div {
+  column-rule-style: solid;
+}
+```
+
 ### `column-rule-width`
 
+This specifies the width of the rule between columns.
+
+**Example:**
+
+```css
+div {
+  column-rule-width: 6px;
+}
+```
+
 ### `column-span`
+
+This specifies how many columns an element should span across. It takes in the values of `all` or `none`.
+
+**Example:**
+
+```css
+h2 {
+  column-span: all;
+}
+```
 
 ### `column-width`
 

@@ -2,4 +2,165 @@ import { Callout } from "nextra-theme-docs";
 
 # CSS Global Styles
 
-<Callout type="info">This page is under construction</Callout>
+By now, you have probaly realized that you will most always have to write more CSS than HTML, and you would like to streamline the process so that you don't have to type out the same styles for your Landing Page in your About Page and Contacts Page, and 10 other pages.
+
+CSS Frameworks already have this covered, and they leverage a rule in computer programming that we are going to cover in this module: the ability to reuse code.
+
+The ability to reuse code is something you should strive for when building software as it will help you build and write code faster.
+
+<Callout type="warning">
+    Be careful when striving to write reusable code. If you're trying to write code "So that I don't have to rewrite it later", then you are headed in the wrong direction.
+
+    As much as you want reusable code, refactoring code should never be out of the picture, and often times, it can be very beneficial.
+</Callout>
+
+In CSS, we achieve reusable code using classes. Remember that we cannot reuse ids in HTML, but we can reuse class names. Take a look at the example below, which outputs a contact form.
+
+```html filename="contact-us.html" copy
+<form>
+    <input type="text" name="username" placeholder="Enter your username" />
+    <input type="email" name="email" placeholder="Enter your email" />
+    <textarea rows="10" cols="30" placeholder="Enter your message"></textarea>
+</form>
+```
+
+What you will usually see on websites is that inputs will have the same styles applied to them. The code above outputs the following form:
+
+<br />
+<form className="bg-zinc-800 p-8 rounded-lg">
+    <input type="text" name="username" placeholder="Enter your username" />
+    <input type="email" name="email" placeholder="Enter your email" />
+    <textarea rows="10" cols="30" placeholder="Enter your message"></textarea>
+</form>
+
+Let's style out the first input:
+
+```css filename="contacts-us.css" copy
+input[type="text"] {
+    font-size: 16px;
+    padding: 10px 24px;
+    outline: none;
+    border: 2px solid #111827;
+    width: 100%;
+}
+```
+
+This will output the following:
+
+<br />
+<form className="bg-zinc-800 p-8 rounded-lg">
+    <input type="text" name="username" placeholder="Enter your username" className="text-base py-2 px-6 outline-none border-2 border-[#111827] w-full" />
+    <input type="email" name="email" placeholder="Enter your email" />
+    <textarea rows="10" cols="30" placeholder="Enter your message"></textarea>
+</form>
+
+Now the first input is looking suave, but the second and third are looking quite horrible. Well the obvious solution would be to style them out as below:
+
+```css filename="contacts-us.css" copy
+input[type="text"] {
+    font-size: 16px;
+    padding: 10px 24px;
+    outline: none;
+    border: 2px solid #111827;
+    width: 100%;
+}
+
+input[type="email"] {
+    font-size: 16px;
+    padding: 10px 24px;
+    outline: none;
+    border: 2px solid #111827;
+    width: 100%;
+}
+
+textarea {
+    font-size: 16px;
+    padding: 10px 24px;
+    outline: none;
+    border: 2px solid #111827;
+    width: 100%;
+}
+```
+
+Well, the inputs now all look okay, but we have written so much code. What if we had a similar looking form on say, a donation page? We would have to write out the same code again. Really? Is that the best solution? No. A better solution would be to create one class that styles all the inputs, and then pass in the same class over all the inputs we want. Take a look at the example below:
+
+```html filename="contact-us.html" copy
+<form>
+    <input type="text" name="username" placeholder="Enter your username" class="custom-input" />
+    <input type="email" name="email" placeholder="Enter your email" class="custom-input" />
+    <textarea rows="10" cols="30" placeholder="Enter your message" class="custom-input"></textarea>
+</form>
+```
+
+We give all the inputs the same class name, and then style out the class name in our CSS.
+
+```css filename="contacts-us.css" copy
+.custom-input {
+    font-size: 16px;
+    padding: 10px 24px;
+    outline: none;
+    border: 2px solid #111827;
+    width: 100%;
+}
+```
+
+Look at that! We are able to achieve the same UI using so much lesser code. That right there, that's good business.
+
+You can use this for any styles you want to reuse, such as buttons, links, images, even hover states.
+
+For example:
+
+```html filename="index.html" copy
+<section class="banner">
+    <h1 class="heading">Awesome Learning Platform It is.</h1>
+    <p class="heading-text">Welcome to Learnerspree: the best learning platform in the entire universe.</p>
+    <button class="primary-button">Get Started</button>
+</section>
+```
+
+```html filename="about.html" copy
+<section class="banner">
+    <h1 class="heading">Awesome About Page</h1>
+    <button class="primary-button">Subscribe</button>
+</section>
+```
+
+```css filename="index.css" copy
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 1px);
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.heading {
+    font-size: 46px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.heading-text {
+    color: #ffffff98;
+    margin-bottom: 24px;
+}
+
+.primary-button {
+    font-weight: 600;
+    background-color: #222;
+    color: #fff;
+    padding: 10px 24px;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.primary-button:hover {
+    background-color: #333;
+}
+```
+
+In the above example, the homepage and about page both have the same class names which are styled in the `index.css` file. Now, even if you added another file called `donation.html` and you wanted to reuse the styles, you could - just remember to link the CSS file containing the custom styles.

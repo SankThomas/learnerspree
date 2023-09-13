@@ -1,9 +1,19 @@
 {
-  "index": "Welcome To learnerspree",
+  "index": "Welcome To Learnerspree",
   "home": "Getting Started",
   "web-development": "Web Development",
   "react-native": "Mobile App Development",
   "cybersecurity": "Cybersecurity",
   "projects": "Projects",
-  "transcription": "Learn Transcription"
+  "transcription": "Learn Transcription",
+  "contact": {
+    "title": "Contact",
+    "type": "page",
+    "href": "https://twitter.com/tsbsankara",
+    "newWindow": true
+  },
+  "about": {
+    "title": "About The Author",
+    "type": "page"
+  }
 }
