@@ -1,0 +1,51 @@
+import {Callout} from "nextra-theme-docs";
+
+# Cross Browser Compatibility
+
+Cross Browser Compatibility refers to the ability of different web browsers to support your website or web application identically.
+
+With the different specifications of browsers all around, and with all of them having some kind of way to implement CSS, it has given web developers a hard time to be able to create an amazing website or web application that will work great on one browser without breaking on another.
+
+One way to counteract this and to make sure that your web app is accessible on all browsers is Vendor Prefixes, which you can go through in the module with the same name.
+
+Sometimes, however, browser specifications don't allow for certain properties to apply. For example, some browsers don't support properties for adding color gradients such as `conic-gradient` and `linear-gradient`.
+
+Take the example below:
+
+```css
+section {
+    height: 80vh;
+    background-image: linear-gradient(orange, purple);
+}
+```
+
+The above example will work on Chromium-based web browsers such as Google Chrome, Brave and Microsoft Edge. However, you might find that another browser such as Opera or Safari will not render a linear gradient as you would expect. The most notorious browser for not supporting CSS styles is Internet Explorer - and I am very thankful that they discontinued it. In such a case, you have to define a fallback in the following way:
+
+```css {3}
+section {
+    height: 80vh;
+    background-color: orange;
+    background-image: linear-gradient(orange, purple);
+}
+```
+
+What the above block of code does is that it will render the background color in case the `background-image` property is not supported. It works because of CSS Specificity - the more to the bottom you are in your stylesheet, the more specificity you have.
+
+Therefore, you should define fallback styles in order of specificity just to make sure that they apply correctly.
+
+Take note, however, that even if you were to define the styles in a different order, the browser will just skip the ones it cannot evaluate until it reaches the styles it understands. Therefore, even the following is okay (but not a recommended convention):
+
+```css
+section {
+    height: 80vh;
+    background-image: linear-gradient(orange, purple);
+    background-color: orange;
+}
+```
+
+A good way to check whether you styles apply is to test out your application on various browsers. I have Google Chrome, Firefox, Edge, Brave and Opera browser installed on my machine just for this purpose 😅.
+
+## Using Frameworks
+
+When you are using a CSS framework such as Bootstrap or Tailwind, they already have this caveat sealed so that when they compile your CSS to render it on the browser, they generate vendor prefixes as well as fallback styles for maximum Cross Browser Compatibility.
+
