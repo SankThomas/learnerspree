@@ -4,17 +4,65 @@ import { Callout } from "nextra-theme-docs";
 
 <Callout type="info">This page is under construction</Callout>
 
-## attr()
-Returns the value of an attribute of the selected element
+In programming, functions are a series of specific instructions that are packaged together to perform a specific task. For example, a function is JavaScript would have a look typical to this:
+
+```javascript
+function getSum() {
+    return 8 + 8;
+}
+```
+
+In CSS, however, functions don't have such a complicated structure, but only the following syntax:
+
+```css
+.class {
+    property_name: function_name(values);
+}
+```
+
+Of course the function will take in at least one value, but that's the typical structure for all CSS functions. Below is not an exhaustive list of all CSS functions, but they are the most commonly used ones. For a comprehensive list, visit the MDN Docs.
 
 ## calc()
-Allows you to perform calculations to determine CSS property values
+This allows you to perform calculations to determine CSS property values. It has the following syntax:
+
+```css
+selector {
+    property_name: calc(valueOne + valueTwo)
+}
+```
+
+You can perform any kind of arithmetic operation using the `calc()` function. However, you **MUST** make sure to add a space before and after the Mathematical symbol you are using. Look at the two examples below:
+
+```css
+/* Example 1 */
+section {
+    height: calc(100vh-20px);
+}
+
+/* Example 2 */
+section {
+    height: calc(100vh - 50px);
+}
+```
+
+**Example 1** will not evaluate because of wrong syntax. **Example 2**, however, will evaluate correctly.
+
+<Callout type="error">
+    The space before and after the Mathematical symbol when using the `calc()` function are **MUST HAVES!**
+</Callout>
 
 ## conic-gradient()
-Creates a conic gradient
+Creates a color transition rotated about a center point - a conic gradient. For example:
 
-## counter()
-Returns the current value of the named counter
+```css
+section {
+    background-image: conic-gradient(orange, yellow);
+}
+```
+
+You must define at least two color stops for the conic gradient.
+
+More about Conic Gradient in [Color Gradients](/web-development/css/color-gradients).
 
 ## cubic-bezier()
 Defines a Cubic Bezier curve
