@@ -1,0 +1,20 @@
+{
+  "javascript": "Introduction to JavaScript",
+  "variables": "Variables",
+  "functions": "Functions",
+  "arrow-functions": "Arrow Functions",
+  "arrays": "Arrays",
+  "objects": "Objects",
+  "strings": "Strings",
+  "classes": "Classes",
+  "control-flow": "Control Flow",
+  "loops": "Loops",
+  "callbacks": "Callbacks",
+  "promises": "Promises",
+  "async-await": "Async / Await",
+  "closures": "Closures",
+  "bigint": "BigInt",
+  "error-handling": "Error Handling",
+  "hoisting": "Hoisting",
+  "dates": "Dates"
+}
