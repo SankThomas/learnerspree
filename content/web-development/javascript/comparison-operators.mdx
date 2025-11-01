@@ -1,0 +1,157 @@
+# Comparison Operators
+
+Comparison operators are used to compare two values to determine equality or the difference between values. Comparison operators use a combination of logical operators and arithmetic operators.
+
+## `==`
+
+This is used to compare the equality of two values.
+
+**For Example:**
+
+``` javascript
+let x = 10;
+let y = 20;
+
+x == y; // Returns false, because the two values are different
+
+let a = 5;
+let b = 5;
+
+a == b; // Returns true
+```
+
+When using the double equal sign, you can compare integers and strings as well...but take care, because if the integer has the same value as the string, the comparison will also return true. See the example below:
+
+``` javascript
+let a = 5;
+let b = "5";
+
+a == b; // Returns true
+```
+
+If you want to circumvent this, you need to use triple equal signs because it checks for equality as well as type.
+
+## `===`
+
+This is called **strict comparison**. It used to check whether values are equal and of the same type.
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 5;
+
+a === b; // Returns true
+```
+
+Using this, comparing integers and strings will now return false - because they might be the same value, but they are of different types.
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = "5";
+
+a === b; // Returns false
+```
+
+## `!=`
+
+Means "Not Equal".
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 8;
+
+a != b; // Returns true, because 5 and 8 are not equal
+```
+
+## `!==`
+
+This checks for whether values are not of equal value and not of equal type. It's basically the opposite of `===`
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 5;
+
+a !== b; // Returns false
+```
+
+The above example returns `false` because the values for `a` and `b` are equal. But because we have added the Logical Not (`!`), it negates it. Hence, it returns `false`.
+
+## `>`
+
+Is used to check whether one value is greater than another value.
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 8;
+
+a > b; // Returns false
+
+let a = 20;
+let b = 8;
+
+a > b; // Returns true
+```
+
+## `<`
+
+Is used to check whether one value is less than another value.
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 8;
+
+a <> b; // Returns true
+
+let a = 20;
+let b = 8;
+
+a < b; // Returns false
+```
+
+## `>=`
+
+Is used to check whether one value is greater than or equal to anther value.
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 8;
+
+a >= b; // Returns true - because they are of equal value.
+
+let a = 20;
+let b = 8;
+
+a >= b; // Returns true - because 20 is greater than 8
+```
+
+## `<=`
+
+Is used to check whether one value is less than or equal to another value.
+
+**For Example:**
+
+``` javascript
+let a = 5;
+let b = 8;
+
+a <= b; // Returns true
+
+let a = 20;
+let b = 8;
+
+a <= b; // Returns false
+```
+

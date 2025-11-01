@@ -1,0 +1,44 @@
+import { Callout } from "nextra/components";
+
+# What Are Hooks?
+
+React hooks are a way to use React state and lifecycle methods while inside function components. They help us to tap into React's full capabilities.
+
+This means that hooks can only be used inside function components, and this therefore means that, in all the code examples we are going to write, we are only going to be working inside function components, unless explicitly stated otherwise.
+
+React hooks were introduced in React version 16.8 in order to better create and manage state in React applications.
+
+Before hooks, the only way to create and manage state in your application was to use class components. Class components gave us access to lifecycle methods such as **componentDidMount** and **componentDidUnmount** as well as the **render** method used to build the UI.
+
+### Example of a class component
+
+A typical class component looks like this:
+
+```js copy
+class Book extends React.Component {
+  render() {
+    return <h2>Black Jack Point</h2>;
+  }
+}
+```
+
+We can change it into a function component like this:
+
+```js copy
+export default function Book() {
+  return <h2>Black Jack Point</h2>;
+}
+```
+
+If you tried to run your application, you would get the exact same thing shown in the UI, but you can already tell that you write less code when using function components.
+
+### Advice on class components
+
+Right now, React is moving away from class components and it is very rare that you will encounter code written using class components unless you are viewing code from about 6 or 7 years ago (The year is 2025 as I write this). However, you can learn their basic structure in order to understand legacy code.
+
+<Callout type="info">
+  While proofreading this, I don't think I can strongly recommend class components anymore because it seems as though no one is using them at all. React has progressed enough to where even their own team recommends using function components and frameworks like NextJs and Gatsby.
+
+At the time of writing this, the stable version of React 19.0.0 has been released. Take note of this if you are reading this in the future when more changes have come in.
+
+</Callout>

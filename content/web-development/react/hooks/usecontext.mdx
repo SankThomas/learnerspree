@@ -1,0 +1,233 @@
+import { Callout, Steps } from "nextra/components";
+
+# useContext
+
+Imagine this: you’re coding in Java or Python and you create a variable. A thousand lines of code later, you need to reuse that variable you created. Well that’s easy enough – just use the variable name. This works very well in Java and in Python. However, with React’s component-based approach, i.e in React, everything is a component, it can be quite hard to share data between components because they are all separate entities.
+
+Let’s keep imagining and say you have five components. The fifth component needs access to a variable that is only available in the first component. The solution for this would be to use what is (un)officially called **Prop-drilling** which means that you pass your variables or functions as though they were extra properties in your component. See the example below:
+
+## A section about Props
+
+Props is a shortened form for properties. Props are used in components as follows:
+
+```js
+<Questions question={question} />
+```
+
+In the above code, we have a Questions component and we are creating a property (prop) called **question** and setting it equal to a value (variable) also called **question**. Naming of the prop is completely optional and depends on how you want to name them, as long as you refer to the correct state value or function you want your prop to point to.
+
+Even though you can name your props anything you want, do make them descriptive.
+
+## Accessing props
+
+Using the same example from above, if we wanted to get access to the questions state value in our Questions components, we would:
+
+1. Use props and dot notation
+2. Use object destructuring.
+
+<Steps>
+### Using dot notation
+
+Take a look at the example below:
+
+```js
+export default function Questions(props) {
+  return <h1>{props.question}</h1>;
+}
+```
+
+First of all, we pass in props as an argument in our function component and then, using dot notation to access deeply nested properties, we can display our data.
+
+### Using object destructuring
+
+Take a look at this other example:
+
+```js
+export default function Questions({ question }) {
+  return <h1>{question}</h1>;
+}
+```
+
+Using object destructuring, we can immediately get the data that we need instead of having to use dot notation which can become very cumbersome when dealing with deeply nested object structures. Take note, however, that this is not to say that using one method is better than the other. Use the one that is most convenient to you. Also take note that when you are destructuring your props, use the same name that you gave your prop. So if you called it milkshake, better destructure it as milkshake.
+
+**For example**
+
+Passing the props:
+
+```js
+<Questions milkshake={question}>
+```
+
+Destructuring the props:
+
+```js
+export default function Questions({ milkshake }) {
+  return <h1>{milkshake}</h1>;
+}
+```
+
+</Steps>
+
+## When to use Context
+
+Even though the Context API seems like the best solution to prop-drilling, it is not recommended to use it in all situations. In some cases, it is much better, easier, and recommended to use prop-drilling.
+
+Therefore, the question becomes, when should you use Context? When your component tree becomes very large and data needs to be passed down efficiently to the components in your tree, then it is recommended to use Context. However, if you only have three components that need props, you don’t need to use context – because setting up context is a bit of an overhead that simply using prop-drilling in this case.
+
+So, really, it comes down to knowing when you are willing to go through the process of setting up the context API such that it is beneficial in the long run for your application.
+
+## Setting up the Context API
+
+The useContext hook leverages a functionality of React called The Context API. The Context API is basically a way to make props available to every component in your component tree without having to manually pass them down.
+
+It is recommended; that is, it is a convention, that when you’re setting up context, you place your context file inside a folder called context. This is recommended, but is not usually necessary for small applications. Therefore, because we want to keep in line with the convention, create a new folder inside your **src** folder and call it **context**. Inside this file, create a new file called **context.js**.
+
+**Note**: You should name your file descriptively based on the function it performs. For example, if you’re creating context that manages state, you can call it **state.js**. If you’re creating context to manage authentication, you can call it auth.js or authentication.js...and so on.
+
+Inside our newly created file, add the following:
+
+```js copy
+import { useState, createContext } from "react";
+```
+
+We are simply importing our state hook because we are going to set up some state values that we will use for demonstration. We also import **createContext** which returns a context object. The context object represents what kind of information your components will provide or have access to.
+
+Next, we need to create our actual context which we will use to wrap our entire application with, so that every component we create will have access to our context.
+
+```js
+export const State = createContext();
+```
+
+With this line, we now have access to a **Provider** with which we will be able to pass in all our state to make it available everywhere. The Provider is a React component that allows consuming components, that is, components that are in the file tree, to have access to the context. Once you create a context, then you automatically have access to the Provider component.
+
+After that, we need to define our parent component and then return our Provider as follows:
+
+```js copy
+// Updated line
+import { useState, useContext, createContext } from "react";
+
+export default function StateContext({ children }) {
+  // Added lines
+  const [users, setUsers] = useState([]);
+
+  function deleteUser() {
+    // Some code block
+  }
+
+  const context = { users, setUsers, deleteUser };
+
+  return <State.Provider value={context}>{children}</State.Provider>;
+}
+```
+
+> In React 19, you no longer simply render your context as a provider, instead of Component.Provider. That is, you can replace this line:
+
+> ```js
+> <State.Provider value={context}>{children}</State.Provider>
+> ```
+
+> with
+
+> ```js
+> <State value={context}>{children}</State>
+> ```
+
+**So what is happening above?**
+
+1. We update our imports to include the useState hook.
+2. We set up our state values.
+3. We set up a dummy function called deleteUser to simulate that you can have some kind of functions in your context as well.
+4. We then destructure all the data that our entire application needs to have access to, and set it equal to a variable called context. This name is completely up to you, I just named it context because we are dealing with the Context API.
+5. Finally, in our return, we access the Provider component of the State we created when we called createContext(). This takes in a value prop which is equal to the context object that we destructured above.
+
+<Callout type="info">
+  You do not need this line:
+
+```js
+const context = { users, setUsers, deleteUser };
+```
+
+You can simply pass the values directly inside your Provider as follows:
+
+```js
+return (
+  <State.Provider value={{ users, setUsers, deleteUser }}>
+    {children}
+  </State.Provider>
+);
+```
+
+Notice the double curly braces which means that you are passing in an object. If you use single braces, you will get an error.
+
+</Callout>
+
+Inside the Provider, we pass in **children** which is a prop that high level components have access to – and this is what it means: that since we are going to be wrapping our entire app in the context we have just created, then every other component is going to be the child of the state. Therefore, these children of the state are what we are able to access in our state.
+
+## Passing context to our parent component
+
+Try to save that and see what happens. Nothing, yes.
+
+To fix this, navigate to your **index.js** file and update it as follows:
+
+```js copy
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import StateContext from "./context/StateContext";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <StateContext>
+      <App />
+    </StateContext>
+  </React.StrictMode>,
+);
+```
+
+Notice that we import the actual component name that we called **StateContext** and we are not importing the Provider, and then we wrap the App component inside StateContext.
+
+Therefore, we can now use all state values and functions that we had in our state (provided we passed them in the value of the Provider), anywhere within our application, as follows:
+
+```js copy
+// In the App.js file for example:
+import { useContext } from "react";
+import StateContext from "./context/StateContext";
+
+export default function App() {
+  const { users, deleteUser } = useContext(StateContext);
+
+  return (
+    <div>
+      <p>There are {users.length} users</p>
+
+      <button onClick={deleteUser}>Delete user</button>
+    </div>
+  );
+}
+```
+
+1. First, we import the useContext hook from React.
+2. We then import our actual context component.
+3. We destructure all the values we want to use from our context and set it equal to useContext - which takes in our context component as a parameter.
+4. We can then describe our UI however we want depending on the values that we are getting from the context.
+
+**NOTE**: You don’t have to wrap your entire application in a context provider if that is not the functionality you are looking for. You can simply wrap the components you want to have access to your context and use the context within them instead. See the example below:
+
+```js
+export default function Home() {
+  return (
+    <div>
+      <ContextProvider>
+        <User />
+        <Settings />
+      </ContextProvider>
+    </div>
+  );
+}
+```
+
+Above, we are assuming that only two components – **User** and **Settings** – require context, and so, we are only wrapping the two components in our context, instead of the entire application. I don’t know if this has any performance issues or if it is considered a good or bad practice – I haven’t seen it anywhere else, but I think it is important for people to know that you can do it.
+
+And with that, we are done with the useContext hook and you are ready to begin using it in your projects! On to the next one!

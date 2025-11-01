@@ -1,0 +1,119 @@
+import { Steps } from "nextra/components";
+
+# useState
+
+The useState hook is arguably the most commonly used React hook, simply because you can use it to store and manipulate state in your application. It is so common in fact, that you will rarely use another hook without also using the useState hook.
+
+It has the following syntax:
+
+```js
+const [stateValue, updateFunction] = useState(initialValue);
+```
+
+## Example
+
+```js copy
+import { useState } from "react";
+
+export default function StateHook() {
+  const [name, setName] = useState("Thomas");
+
+  return <div>{name}</div>;
+}
+```
+
+The syntax above for defining the values of the useState hook is called **Array Destructuring**. Destructuring means getting the values in an array or an object.
+
+The first value, in this case: **name** is called the **state value**. This is what we will usually use to display the current value of the variable in our React application. The second value, in this case: **setName** is the function that controls how the state value is accessed or changed. That is, if you want to change the value of **name** to something else, you could do this:
+
+```js
+function updateName() {
+  setName("Sankara");
+}
+```
+
+And that would update the state value.
+
+The initial value of the state can be anything you need it to be for your application. See the example below:
+
+```js
+const [name, setName] = useState("Thomas"); // A string
+const [age, setAge] = useState(27); // A number
+const [countries, setCountries] = useState([]); // An empty array
+const [name, setName] = useState(null); // null
+const [name, setName] = useState(undefined); // undefined
+const [savedData, setSavedData] = useState(getLocalStorage()); // A function
+const [country, setCountry] = useState({
+  name: "Kenya",
+  population: "50 million",
+  region: "East Africa",
+}); // An object
+```
+
+## Naming conventions
+
+You will notice that in the examples above, the update function is always prefixed with **set**. This is just a naming convention but you don't have to use it. However, I recommend that you use it because thinking of unique function names becomes harder the larger your codebase becomes. But, it is completely safe to do something like this:
+
+```js
+const [name, updateFullName] = useState("Thomas Sankara");
+
+// OR THIS
+const [fullName, setFullName] = useState("Thomas Sankara");
+```
+
+If you are new to React, I recommend using the recommended naming convention until you are comfortable [working and thinking in React](https://react.dev/learn/thinking-in-react). This will help you to better understand and write React code.
+
+## Examples
+
+We have already seen an example above of how you can initialize the useState hook and display its value in the UI. Here are some more examples:
+
+### Managing inputs
+
+```js copy
+import { useState } from "react";
+
+export default function TheStateHook() {
+  const [name, setName] = useState("");
+
+  return (
+    <div>
+      <form>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="What is your name?"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </form>
+
+      <p>Your name is: {name}</p>
+    </div>
+  );
+}
+```
+
+Can you guess what the code above is doing? Can you visualize what the UI looks like before running the example?
+
+#### Explaining the code
+
+<Steps>
+
+### First
+
+First, we import our state hook and initialize our state value to an empty string. Next, we create a form with a single input with the usual attributes of type, name, id and placeholder. We also add another attribute called “value” which is set to our state value.
+
+If you were to run your application at this point, and try to type inside the input, you will notice that nothing happens, and it seems like your input is broken. It’s actually not broken, and it is doing exactly what you have programmed it to do. This is because, in React, when you define a “value” attribute and set it equal to some kind of state that you have created – if you do not have the onChange event handler, you cannot actually doctor (avoiding to use the word change again) the default value of the input.
+
+### Second
+
+The solution, therefore, is to define an onChange event handler to capture the text typed inside the input. Try to run your application and you will see that it’s back to normal. This is what is called a Controlled Input in React.
+
+### Third
+
+Below the form, we render a paragraph that is set to display the value of whatever is typed into the input – hopefully the user will just type in their name and get a meaningful message.
+
+</Steps>
+
+In the next chapter about the useEffect hook, we will use the useState hook as well to build a timer as well as to get data from an API. Check out those examples as well.

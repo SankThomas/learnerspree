@@ -1,0 +1,559 @@
+import { Steps, Callout } from "nextra/components";
+
+# useOptimistic
+
+The useOptimistic hook is used to show immediate updates to the UI while waiting for server responses. Think of how, on a social media app, when you tap the like button, you will see immediate feedback on the UI such as the thumbs up icon turning blue...but, also notice that if you tap the like button, and then immediately navigate out of the page and then come back, you _might_ notice that the like was not processed on the server. That is called _optimistic updates_.
+
+Optimism means that you are confident that the action will succeed and you should, therefore, update the UI as you wait on the server. If the server response fails, the UI reverts back.
+
+## Syntax
+
+```js
+const [optimisticState, addOptimistic] = useOptimistic(
+  actualState,
+  (currentState, optimisticValue) => {
+    // Return new state with optimistic update applied
+  },
+);
+```
+
+The useOptimistic hook takes in two parameters:
+
+1. Current State - the actual data you have
+2. Update function - the function that will apply optimistic updates to your data
+
+It returns an array with:
+
+1. Optimistic state - the state with pending optimistic updates applied.
+2. Add optimistic update function - the function to add a new optimistic update.
+
+### Why use useOptimistic
+
+1. It gives a better user experience by providing immediate feedback.
+2. Apps feel faster and more responsive because of perceived performance, as feedback to actions is received immediately.
+3. If the request fails, the UI reverts to its previous state.
+4. Less need for loading spinners as you wait for servers to respond.
+
+### When to use
+
+1. When actions you are performing rarely fail, such as likes and user follows.
+2. When users expect immediate feedback on their actions, once again, such as a like button.
+3. Non-critial actions, when some brief inconsistency is acceptable.
+4. Frequent user interactions
+
+### Example 1: Like Button
+
+```js copy
+import React, { useState, useOptimistic } from "react";
+import { Heart } from "lucide-react"; // Importing the Heart icon from an icon library called lucide-react.
+// You can use any icon you want.
+
+export default function LikeButton() {
+  // Actual server state
+  const [serverLikes, setServerLikes] = useState(42);
+  const [isLiked, setIsLiked] = useState(false);
+
+  // Optimistic state that includes pending updates
+  const [optimisticLikes, addOptimisticLike] = useOptimstic(
+    {
+      likes: serverLikes,
+      liked: isLiked,
+    },
+    (currentState, newLikedStatus) => ({
+      likes: newLikedStatus ? currentState.likes + 1 : currentState.likes - 1,
+      liked: newLikedStatus,
+    }),
+  );
+
+  const handleLike = async () => {
+    const newLikedStatus = !isLiked;
+
+    // Immediately update the UI
+    addOptimisticLike(newLikedStatus);
+
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Update actual state when the server responds
+      setIsLiked(newLikedStatus);
+      setServerLiked((prev) => (newLikedStatus ? prev + 1 : prev - 1));
+    } catch (error) {
+      console.error("Failed to update like:", error);
+    }
+  };
+
+  return (
+    <div className="mx-auto flex max-w-sm flex-col items-center rounded-lg bg-gray-50 p-8">
+      <div className="mb-4 text-center">
+        <h3 className="mb-2 text-lg font-semibold">Amazing Cat Video</h3>
+        <img
+          src="https://placekitten.com/200/150"
+          alt="Cat"
+          className="mb-4 rounded-lg"
+        />
+      </div>
+
+      <button
+        onClick={handleLike}
+        className={`flex items-center gap-2 rounded-full px-4 py-2 transition-all ${
+          optimisticLikes.liked
+            ? "bg-red-100 text-red-600 hover:bg-red-200"
+            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+        }`}
+      >
+        <Heart
+          size={20}
+          fill={optimisticLikes.liked ? "currentColor" : "none"}
+        />
+        <span>{optimisticLikes.likes} likes</span>
+      </button>
+
+      <div className="mt-4 text-sm text-gray-500">
+        Click the heart to see optimistic updates in action!
+      </div>
+    </div>
+  );
+}
+```
+
+### Example 2: Todo List
+
+```js copy
+import React, { useState, useOptimistic } from "react";
+import { Plus, Trash2, Check } from "lucide-react"; // Once again, icons are coming from lucide-react but you can use any icons you want
+
+export default function TodoList() {
+  // Server state, i.e, the server already has 2 items in the ToDo list
+  const [serverTodos, setServerTodos] = useState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build a todo app", completed: true },
+  ]);
+
+  const [newTodo, setNewTodo] = useState("");
+  const [nextId, setNextId] = useState(3);
+
+  // Optimistic updates
+  const [optimisticTodos, addOptimisticUpdate] = useOptimistic(
+    serverTodos,
+    (currentTodos, update) => {
+      switch (update.type) {
+        case "add":
+          return [...currentTodos, update.todo];
+        case "delete":
+          return currentTodos.filter((todo) => todo.id !== update.id);
+        case "toggle":
+          return currentTodos.map((todo) =>
+            todo.id === update.id
+              ? { ...todo, completed: !todo.completed }
+              : todo,
+          );
+        default:
+          return currentTodos;
+      }
+    },
+  );
+
+  const addTodo = async () => {
+    if (!newTodo.trim()) return;
+
+    const tempTodo = {
+      id: nextId,
+      text: newTodo.trim(),
+      completed: false,
+    };
+
+    // Optimistically add the todo items
+    addOptimisticUpdate({ type: "add", todo: tempTodo });
+    setNewTodo("");
+
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      // Update server state
+      setServerTodos((prev) => [...prev, tempTodo]);
+      setNextId((prev) => prev + 1);
+    } catch (error) {
+      console.error("Failed to add todo:", error);
+      alert("Failed to add todo. Please try again.");
+    }
+  };
+
+  const deleteTodo = async (id) => {
+    // Optimistically remove the todo
+    addOptimisticUpdate({ type: "delete", id });
+
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      // Update server state
+      setServerTodos((prev) => prev.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.error("Failed to delete todo:", error);
+      alert("Failed to delete todo. Please try again.");
+    }
+  };
+
+  const toggleTodo = async (id) => {
+    // Optimistically toggle completion
+    addOptimisticUpdate({ type: "toggle", id });
+
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Update server state
+      setServerTodos((prev) =>
+        prev.map((todo) =>
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+        ),
+      );
+    } catch (error) {
+      console.error("Failed to toggle todo:", error);
+      alert("Failed to update todo. Please try again.");
+    }
+  };
+
+  return (
+    <div className="mx-auto max-w-md rounded-lg bg-white p-6 shadow-lg">
+      <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
+        Optimistic Todo List
+      </h2>
+
+      {/* Add new todo */}
+      <div className="mb-6 flex gap-2">
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          onKeyPress={(e) => e.key === "Enter" && addTodo()}
+          placeholder="Add a new todo..."
+          className="flex-1 rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <button
+          onClick={addTodo}
+          className="flex items-center rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+        >
+          <Plus size={18} />
+        </button>
+      </div>
+
+      {/* Todo list */}
+      <div className="space-y-2">
+        {optimisticTodos.map((todo) => (
+          <div
+            key={todo.id}
+            className={`flex items-center gap-3 rounded-lg border p-3 transition-all ${
+              todo.completed
+                ? "border-green-200 bg-green-50"
+                : "border-gray-200 bg-gray-50"
+            }`}
+          >
+            <button
+              onClick={() => toggleTodo(todo.id)}
+              className={`rounded-full p-1 transition-colors ${
+                todo.completed
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              <Check size={16} />
+            </button>
+
+            <span
+              className={`flex-1 ${
+                todo.completed ? "text-gray-500 line-through" : "text-gray-800"
+              }`}
+            >
+              {todo.text}
+            </span>
+
+            <button
+              onClick={() => deleteTodo(todo.id)}
+              className="rounded-full p-1 text-red-500 transition-colors hover:bg-red-50"
+            >
+              <Trash2 size={16} />
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {optimisticTodos.length === 0 && (
+        <div className="py-8 text-center text-gray-500">
+          No todos yet. Add one above!
+        </div>
+      )}
+
+      <div className="mt-6 text-center text-sm text-gray-500">
+        Try adding, completing, or deleting todos.
+        <br />
+        Notice how the UI updates instantly!
+      </div>
+    </div>
+  );
+}
+```
+
+### Example 3: Comment System
+
+<details>
+  <summary>Expand code</summary>
+
+```js copy
+import React, { useState, useOptimistic } from "react";
+import { Send, ThumbsUp, MessageCircle, User } from "lucide-react";
+
+export default function OptimisticComments() {
+  // Server state
+  const [serverComments, setServerComments] = useState([
+    {
+      id: 1,
+      author: "Sarah Chen",
+      text: "Great article! Really helpful insights.",
+      likes: 5,
+      likedByUser: false,
+      timestamp: "2 hours ago",
+      isPending: false,
+    },
+    {
+      id: 2,
+      author: "Mike Johnson",
+      text: "I had the same question. Thanks for clarifying!",
+      likes: 3,
+      likedByUser: true,
+      timestamp: "1 hour ago",
+      isPending: false,
+    },
+  ]);
+
+  const [newComment, setNewComment] = useState("");
+  const [nextId, setNextId] = useState(3);
+
+  // Optimistic state for comments
+  const [optimisticComments, addOptimisticUpdate] = useOptimistic(
+    serverComments,
+    (currentComments, update) => {
+      switch (update.type) {
+        case "add_comment":
+          return [...currentComments, update.comment];
+        case "like":
+          return currentComments.map((comment) =>
+            comment.id === update.id
+              ? {
+                  ...comment,
+                  likes: comment.likedByUser
+                    ? comment.likes - 1
+                    : comment.likes + 1,
+                  likedByUser: !comment.likedByUser,
+                }
+              : comment,
+          );
+        case "update_pending":
+          return currentComments.map((comment) =>
+            comment.id === update.id
+              ? { ...comment, isPending: update.isPending }
+              : comment,
+          );
+        default:
+          return currentComments;
+      }
+    },
+  );
+
+  const addComment = async () => {
+    if (!newComment.trim()) return;
+
+    const tempComment = {
+      id: nextId,
+      author: "You",
+      text: newComment.trim(),
+      likes: 0,
+      likedByUser: false,
+      timestamp: "Just now",
+      isPending: true, // Mark as pending to show loading state
+    };
+
+    // Optimistically add the comment
+    addOptimisticUpdate({ type: "add_comment", comment: tempComment });
+    setNewComment("");
+
+    try {
+      // Simulate API call with random delay
+      await new Promise((resolve) =>
+        setTimeout(resolve, Math.random() * 1500 + 500),
+      );
+
+      // Update server state
+      const finalComment = { ...tempComment, isPending: false };
+      setServerComments((prev) => [...prev, finalComment]);
+      setNextId((prev) => prev + 1);
+    } catch (error) {
+      console.error("Failed to add comment:", error);
+      alert("Failed to post comment. Please try again.");
+    }
+  };
+
+  const likeComment = async (id) => {
+    // Optimistically update like
+    addOptimisticUpdate({ type: "like", id });
+
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      // Update server state
+      setServerComments((prev) =>
+        prev.map((comment) =>
+          comment.id === id
+            ? {
+                ...comment,
+                likes: comment.likedByUser
+                  ? comment.likes - 1
+                  : comment.likes + 1,
+                likedByUser: !comment.likedByUser,
+              }
+            : comment,
+        ),
+      );
+    } catch (error) {
+      console.error("Failed to like comment:", error);
+      alert("Failed to update like. Please try again.");
+    }
+  };
+
+  return (
+    <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-lg">
+      <div className="mb-6">
+        <h2 className="mb-2 text-2xl font-bold text-gray-800">
+          Understanding React Hooks
+        </h2>
+        <p className="text-gray-600">
+          A comprehensive guide to modern React development patterns and best
+          practices.
+        </p>
+      </div>
+
+      {/* Comments section */}
+      <div className="border-t pt-6">
+        <div className="mb-4 flex items-center gap-2">
+          <MessageCircle size={20} className="text-blue-500" />
+          <h3 className="text-lg font-semibold text-gray-800">
+            Comments ({optimisticComments.length})
+          </h3>
+        </div>
+
+        {/* Add comment form */}
+        <div className="mb-6 rounded-lg bg-gray-50 p-4">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Share your thoughts..."
+            className="w-full resize-none rounded-lg border border-gray-300 p-3 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            rows="3"
+          />
+          <div className="mt-3 flex justify-end">
+            <button
+              onClick={addComment}
+              disabled={!newComment.trim()}
+              className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-gray-300"
+            >
+              <Send size={16} />
+              Post Comment
+            </button>
+          </div>
+        </div>
+
+        {/* Comments list */}
+        <div className="space-y-4">
+          {optimisticComments.map((comment) => (
+            <div
+              key={comment.id}
+              className={`rounded-lg border p-4 transition-all ${
+                comment.isPending
+                  ? "border-blue-200 bg-blue-50 opacity-75"
+                  : "border-gray-200 bg-white"
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300">
+                  <User size={16} className="text-gray-600" />
+                </div>
+
+                <div className="flex-1">
+                  <div className="mb-1 flex items-center gap-2">
+                    <span className="font-medium text-gray-800">
+                      {comment.author}
+                    </span>
+                    <span className="text-sm text-gray-500">
+                      {comment.timestamp}
+                    </span>
+                    {comment.isPending && (
+                      <span className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600">
+                        Posting...
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="mb-3 text-gray-700">{comment.text}</p>
+
+                  <button
+                    onClick={() => likeComment(comment.id)}
+                    disabled={comment.isPending}
+                    className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm transition-colors ${
+                      comment.likedByUser
+                        ? "bg-blue-100 text-blue-600"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    } disabled:cursor-not-allowed disabled:opacity-50`}
+                  >
+                    <ThumbsUp
+                      size={14}
+                      fill={comment.likedByUser ? "currentColor" : "none"}
+                    />
+                    <span>{comment.likes}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {optimisticComments.length === 0 && (
+          <div className="py-8 text-center text-gray-500">
+            No comments yet. Be the first to share your thoughts!
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 rounded-lg bg-blue-50 p-4">
+        <p className="text-sm text-blue-700">
+          <strong>Try it out:</strong> Post a comment or like existing ones.
+          Notice how the UI updates immediately while requests are processed in
+          the background!
+        </p>
+      </div>
+    </div>
+  );
+}
+```
+
+</details>
+
+<Callout type="info">
+  <Steps>
+    ### 1.
+    
+    Always validate your data on the server because optimistic updates are
+    just for the UI. 
+    
+    ### 2.
+
+    Always provide clear feedback to the user if optimistic updates fail.
+
+    ### 3.
+
+    Handle failed optimistic updates gracefully.
+
+  </Steps>
+</Callout>

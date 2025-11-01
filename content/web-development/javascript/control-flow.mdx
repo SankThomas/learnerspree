@@ -1,0 +1,293 @@
+import { Callout } from "nextra/components";
+
+# Control Flow and Conditional Statements
+
+From MDN Docs:
+
+"Control flow is the order in which the computer executes statements in a script."
+
+## if
+
+This describes a block of code that should be executed if a condition evaluates to true. It has the syntax:
+
+``` javascript
+if (condition) {
+  // Block of code to be executed
+}
+```
+
+**For Example:**
+
+``` javascript
+if (age > 18) {
+  alert("Get a job");
+}
+```
+
+## if else
+
+This describes a block of code that is executed when the condition in the `if` statement evaluates to false. It has the syntax:
+
+``` javascript
+if (condition) {
+  // Do something
+} else {
+  // Do something else
+}
+```
+
+**For Example:**
+
+``` javascript
+if (age < 18) {
+  alert("Get a job");
+} else {
+  alert("Go to college first");
+}
+```
+
+## else if
+
+This is used to describe a new condition if the first condition evaluates to false. It has the syntax:
+
+``` javascript
+if (condition) {
+  // Do something
+} else if (condition2) {
+  // Do backup condition thing
+} else {
+  // Do something else when condition one and two evaluate to false.
+}
+```
+
+**For Example:**
+
+``` javascript
+if (age < 12) {
+  alert("This is a minor");
+} else if (age < 20) {
+  alert("This is a teenager");
+} else {
+  alert("Time to adult");
+}
+```
+
+## Ternary Operator
+
+This is a short form of the `if else` statement. It has the syntax:
+
+``` javascript
+condition ? expressionOne : expressionTwo;
+```
+
+Meaning, if the condition is true, execute expression one. Otherwise, execute expression two. The question mark and full colon are part of the syntax for the ternary operator. The question mark is the **True** part, and the colon is the **False** part.
+
+**For Example:**
+
+``` javascript
+function checkAge() {
+  let age = 20;
+
+  age > 20 ? console.log("This is an adult") : console.log("This is still a teenager");
+}
+```
+
+We are checking for whether the age of a person is greater than 20. If it is greater than 20, then we log "This is an adult" to the console. If the age is less than 20, we log "This is still a teenager" to the console.
+
+> The ternary operator has seen more widespread use because of React Frameworks such as ReactJs.
+
+### Chaining Ternary Operators
+
+You can chain ternary operators to make big code blocks just like in an `if else` statement.
+
+**For Example:**
+
+``` javascript
+function person() {
+  let age = 25;
+  console.log(age < 12 ? "Minor" : age <= 19 ? "Teenager" : age > 22 ? "Adult" : "Old person");
+}
+```
+
+<Callout type="info">
+  The bigger the chain becomes, the harder it becomes to read. Therefore, always keep ternary operators short and simple to read.
+</Callout>
+
+## switch
+
+The switch statement is used to compare many different conditions and then execute a certain code block. `switch` is used to remove the cumbersome nature of `if else` statements. It has the syntax:
+
+``` javascript
+switch (expression) {
+  case a: // Take note of the full colon - it is not a semicolon
+    // some code to execute if the expression is true
+    break; // Breaks out of the statement if the expression is true
+  case b:
+    // some code to execute if the expression is true
+    break;
+  default:
+    // Executes if none of the cases matches the expression
+}
+```
+
+**For Example:**
+
+``` javascript copy
+let age = 25;
+switch(age) {
+  case 12:
+    console.log("Minor");
+    break;
+  case 18:
+    console.log("Still a teenager");
+    break;
+  case 22:
+    console.log("Young adult");
+    break;
+  case 25:
+    console.log("Still figuring things out");
+    break;
+  case 30:
+    console.log("Older than 25 years");
+    break;
+  default:
+    console.log("You age is unidentified");
+}
+```
+
+**Another Example:**
+
+This example will get the current day of the week and log it to the console.
+
+``` javascript copy
+switch (new Date().getDay()) {
+  case 0:
+    console.log("Sunday");
+    break;
+  case 1:
+    console.log("Monday");
+    break;
+  case 2:
+    console.log("Tuesday");
+    break;
+  case 3:
+   	console.log("Wednesday");
+    break;
+  case 4:
+    console.log("Thursday");
+    break;
+  case 5:
+    console.log("Friday");
+    break;
+  case 6:
+    console.log("Saturday");
+}
+```
+
+The above example uses a JavaScript method called `getDay()` which gets the days of the week as a number between 0 and 6 (Because there are 7 days in a week). We then use the values as the cases we want to check for. 0 is Sunday, 1 is Monday...all the way to 6 which is Saturday.
+
+### The `break` statement
+
+This is used to break out of the flow of the switch condition. Otherwise, it would continue executing in perpetuity throughout the universe...well not really, but it will execute the next case even if the case does not match the condition.
+
+### The `default` case
+
+This specifies the code block to run when no specific case matches. This doesn't have to be the last thing in the `switch` statement. If it is not the last thing, it must always include the `break` statement, to avoid perpetual code execution. However, if it is the last thing, you don't need the `break` statement.
+
+**For Example:**
+
+``` javascript
+let age = 25;
+switch(age) {
+  default: // No longer the last case
+    console.log("You age is unidentified");
+    break; // Notice the break statement
+  case 12:
+    console.log("Minor");
+    break;
+  case 18:
+    console.log("Still a teenager");
+    break;
+  case 22:
+    console.log("Young adult");
+    break;
+  case 25:
+    console.log("Still figuring things out");
+    break;
+  case 30:
+    console.log("Older than 25 years"); // No longer needs a break statement because it is the last item
+}
+```
+
+<Callout type="info">
+  Switch statements use strict comparison (`===`). The values you are comparing must match in value and in type in order for the switch statement to execute.
+</Callout>
+
+## try...catch
+
+This is a block of code that allows you to define a block of code that you want to test for errors as it is being executed. The `try` block contains the code, and the `catch` block contains the exception, i.e, the code that you want to "catch" in case an error is encountered in the `try` block.
+
+It has the syntax:
+
+``` javascript
+try {
+  // Some code block
+} catch (optionalVar) {
+  // Block of code to handle errors
+}
+```
+
+The **optionalVar** is the name you will give to the variable that will hold the data associated with the `catch` block. It is completely optional, and should be used when if you want to do something with the caught data. If you won't be using this data is some way, you can safely omit it.
+
+**For Example:**
+
+``` javascript
+try {
+  const response = fetch("https://api.spacexdata.com/v4/rockets").then((data) => console.log(data));
+} catch(error) {
+  console.error(error);
+}
+```
+
+The example above fetches data from the SpaceX API and then logs it to the console. In case an error occurs in the `try` block, such as if the GET request to the API fails for some reason, the `catch` block will run and then it will log the error it encountered to the console.
+
+You don't have to log your errors to the console. You can execute some other kind of code that you want inside the `catch` block. The above was simply for a visual demonstration.
+
+<Callout type="info">
+  Unlike the `if` and `if else` statements that you can reduce to one line if you're only executing one line of code, the `try...catch` block **MUST** be a block of code...that is, it must be enclosed in curly brackets(`{}`).
+</Callout>
+
+### try...catch...finally
+
+You can also add a `finally` block inside `try...catch` and this block will always be executed regardless of whether the `try` passes or fails, or whether the `catch` block passes or fails.
+
+**For Example:**
+
+``` javascript {5-6}
+try {
+  const response = fetch("https://api.spacexdata.com/v4/rockets").then((data) => console.log(data));
+} catch(error) {
+  console.error(error);
+} finally {
+  console.log("This is a GET request to the SpaceX API"); // Will always be executed
+}
+```
+
+
+### try...finally
+
+You can also safely omit the `catch` block and just have the `try` and `finally` block.
+
+**For Example:**
+
+``` javascript
+try {
+  const response = fetch("https://api.spacexdata.com/v4/rockets").then((data) => console.log(data));
+} finally {
+  console.log("This is a GET request to the SpaceX API");
+}
+```
+
+<Callout type="info">
+  The `catch` of the `try...catch` block is optional. You can include it if you want to see the exceptions you will be catching. However, you can safely remove it and your code will still run.
+</Callout>

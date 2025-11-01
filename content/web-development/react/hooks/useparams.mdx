@@ -1,0 +1,156 @@
+import { Callout } from "nextra/components";
+
+# useParams
+
+<Callout type="info">
+  This hook is only available in NextJs (App Router)
+</Callout>
+
+useParams allows you to access dynamic route parameters from the URL.
+
+Suppose you have the following:
+
+```bash
+/app/products/[id]/page.jsx
+```
+
+Above, `[id]` is the dynamic segment of the route. You can access it as follows:
+
+```js copy
+"use client";
+
+import { useParams } from "next/navigation";
+
+export default function ProductPage() {
+  const params = useParams(); // returns an object
+
+  return <h1>Product ID: {params.id}</h1>;
+}
+```
+
+If you log `params` to the console, you will see something of the sort:
+
+```js
+{
+  id: "some-id",
+}
+```
+
+Alternatively, you can destructure what you need from the parameters:
+
+```js copy
+"use client";
+
+import { useParams } from "next/navigation";
+
+export default function ProductPage() {
+  const { id } = useParams();
+
+  return <h1>Product ID: {id}</h1>;
+}
+```
+
+And the above will still show the same thing. Take note that, when destructuring, the value has to be the same name as then name of your dynamic segment. Otherwise, you will just run into an error. So, if your dynamic route is called `[id]`, you cannot destructure it as `{ userId }`.
+
+<Callout type="info">
+  The useParams hook is useful for fetching data because it exposed the dynamic
+  part of the URL which you can use in your http request, and, because you get
+  the route parameters, you can also use it to customize the UI based on the
+  URL.
+</Callout>
+
+## Examples
+
+### Getting a user profile by the ID
+
+```js copy
+// app/users/[userId]/page.jsx
+"use client";
+
+import { useParams } from "next/navigation";
+
+export default function UserProfile() {
+  const { userId } = useParams();
+
+  return <div>Viewing profile for user: {userId}</div>;
+}
+```
+
+### Rendering blog posts
+
+```js copy
+// app/blog/[slug]/page.jsx
+"use client";
+
+import { useParams } from "next/navigation";
+
+export default function BlogPost() {
+  const { slug } = useParams();
+
+  return <h1>Reading post: {slug}</h1>;
+}
+```
+
+### Getting multiple params
+
+When you have multiple params, useParams will return an object with each key being the param name. For example, if you have a route like:
+
+```bash
+app/products/[name]/[category]/[id]/page.jsx
+```
+
+Then useParams would return:
+
+```bash
+{
+  name: "some-name",
+  category: "some-category",
+  id: 123,
+}
+```
+
+> Every value returned is a string, even if they look like numbers.
+
+**For example:**
+
+```js copy
+// app/products/[name]/[category]/[id]/page.jsx
+"use client";
+
+import { useParams } from "next/navigation";
+
+export default function SingleProduct() {
+  const { name, category, id } = useParams();
+
+  return (
+    <div>
+      <h2>Product name: {name}</h2>
+      <p>Category: {category}</p>
+      <small>ID: {id}</small>
+    </div>
+  );
+}
+```
+
+On the line:
+
+```js
+const { name, category, id } = useParams();
+```
+
+We have used object destructuring. You can optionally do this:
+
+```js
+const params = useParams();
+```
+
+And then access the objects within using dot notation:
+
+```js
+<h2>Product name: {params.name}</h2>
+```
+
+<Callout type="info">
+  useParams cannot be used to access query parameters. For that, you need to use
+  [useSearchParams](/usesearchparams) instead.
+</Callout>

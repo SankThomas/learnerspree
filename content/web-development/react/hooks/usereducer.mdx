@@ -1,0 +1,1041 @@
+import { Callout } from "nextra/components";
+
+# useReducer
+
+<Callout type="info">
+  The code on this page is quite large, so I have placed them inside clickable
+  blocks to expand them.
+</Callout>
+
+The useReducer hook is used to manage complex state in your application, in a more organized manner. Sometimes in your application, you will need to have a lot of state values so that you application can work as expected. For example, if you were building a shopping cart, you would need to have some state values such as:
+
+```js
+const [items, setItems] = useState([]);
+const [total, setTotal] = useState(0);
+const [discount, setDiscount] = useState(0);
+const [tax, setTax] = useState(0);
+```
+
+among others. When the application grows, you will need more and more state to manage your application.
+
+In order to be able to manage all that state in a predicatable way, you can use the useReducer hook.
+
+## Syntax
+
+```js
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+The reducer follows this pattern:
+
+```js
+function reducer(state, action) {
+  switch (action.type) {
+    case "ACTION_TYPE":
+      return { ...state /* updates */ };
+    default:
+      return state;
+  }
+}
+```
+
+## Why use useReducer?
+
+1. You can manage all your state in one place, making it easier to understand and debug.
+2. Reducer actions clearly describe what is happening, making your code more predictable.
+3. It is perfect for state changes that need to be updated together.
+4. Since reducers are pure functions, they are easy to test in isolation.
+5. It is easy to implement undo / redo funcitionality.
+
+## When to use
+
+Even though useReducer has all these benefits, you will not use it in every app that you build. Therefore:
+
+1. Use `useState` when:
+
+- State is simple.
+- State updates are independent of each other.
+- You have a few state values.
+
+2. Use `useReducer` when:
+
+- State have multiple related values that often update together.
+- The next state depends on the previous state in complex ways.
+- You want to optimize performance by using useReducer with useCallback to prevent re-renders.
+
+### Example 1: Shopping cart
+
+<details>
+  <summary>reducer.js code (Click to expand)</summary>
+
+```js copy filename="reducer.js"
+// Initial state of the shopping cart
+const initialState = {
+  items: [],
+  subtotal: 0,
+  discount: 0,
+  tax: 0,
+  total: 0,
+  discountCode: "",
+  discountApplied: false,
+};
+
+// Available products
+const products = [
+  { id: 1, name: "Wireless Headphones", price: 99.99, image: "🎧" },
+  { id: 2, name: "Smart Watch", price: 249.99, image: "⌚" },
+  { id: 3, name: "Laptop Stand", price: 49.99, image: "💻" },
+  { id: 4, name: "Coffee Mug", price: 19.99, image: "☕" },
+];
+
+// Reducer function
+export function cartReducer(state, action) {
+  switch (action.type) {
+    case "ADD_ITEM": {
+      const existingItem = state.items.find(
+        (item) => item.id === action.product.id,
+      );
+      let newItems;
+
+      if (existingItem) {
+        // If item exists, increase quantity
+        newItems = state.items.map((item) =>
+          item.id === action.product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        );
+      } else {
+        // If new item, add to cart
+        newItems = [...state.items, { ...action.product, quantity: 1 }];
+      }
+
+      const newSubTotal = newItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+      const newTax = newSubTotal * 0.08; // 8% tax
+      const newTotal = newSubTotal + newTax - state.discount;
+
+      return {
+        ...state,
+        items: newItems,
+        subTotal: newSubTotal,
+        tax: newTax,
+        total: newTotal,
+      };
+    }
+    case "REMOVE_ITEM": {
+      const newItems = state.items.filter(
+        (item) => item.id !== action.productId,
+      );
+      const newSubtotal = newItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+      const newTax = newSubtotal * 0.08;
+      const newTotal = newSubtotal + newTax - state.discount;
+
+      return {
+        ...state,
+        items: newItems,
+        subtotal: newSubtotal,
+        tax: newTax,
+        total: newTotal,
+      };
+    }
+
+    case "UPDATE_QUANTITY": {
+      const newItems = state.items
+        .map((item) =>
+          item.id === action.productId
+            ? { ...item, quantity: Math.max(0, action.quantity) }
+            : item,
+        )
+        .filter((item) => item.quantity > 0);
+
+      const newSubtotal = newItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+      const newTax = newSubtotal * 0.08;
+      const newTotal = newSubtotal + newTax - state.discount;
+
+      return {
+        ...state,
+        items: newItems,
+        subtotal: newSubtotal,
+        tax: newTax,
+        total: newTotal,
+      };
+    }
+
+    case "APPLY_DISCOUNT": {
+      let discountAmount = 0;
+      let discountApplied = false;
+
+      if (action.code === "SAVE10") {
+        discountAmount = state.subtotal * 0.1; // 10% off
+        discountApplied = true;
+      } else if (action.code === "FLAT20") {
+        discountAmount = 20; // $20 off
+        discountApplied = true;
+      }
+
+      const newTotal = state.subtotal + state.tax - discountAmount;
+
+      return {
+        ...state,
+        discount: discountAmount,
+        total: newTotal,
+        discountCode: action.code,
+        discountApplied,
+      };
+    }
+
+    case "CLEAR_CART": {
+      return initialState;
+    }
+
+    default:
+      return state;
+  }
+}
+```
+
+</details>
+
+<details>
+  <summary>ShoppingCart.jsx code (Click to expand)</summary>
+
+```js copy filename="ShoppingCart.jsx"
+import React, { useReducer } from "react";
+import { Plus, Minus, Trash2, ShoppingCart, Tag } from "lucide-react";
+import { cartReducer } from "../path-to-reducer.js";
+
+export default function ShoppingCart() {
+  const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  const addToCart = (product) => {
+    dispatch({ type: "ADD_ITEM", product });
+  };
+
+  const removeFromCart = (productId) => {
+    dispatch({ type: "REMOVE_ITEM", productId });
+  };
+
+  const updateQuantity = (productId, quantity) => {
+    dispatch({ type: "UPDATE_QUANTITY", productId, quantity });
+  };
+
+  const applyDiscount = (code) => {
+    dispatch({ type: "APPLY_DISCOUNT", code });
+  };
+
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
+
+  return (
+    <div className="mx-auto min-h-screen max-w-4xl bg-gray-50 p-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Products Section */}
+        <div className="rounded-lg bg-white p-6 shadow-lg">
+          <h2 className="mb-4 text-2xl font-bold text-gray-800">Products</h2>
+          <div className="space-y-4">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="flex items-center justify-between rounded-lg border p-4"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="text-2xl">{product.image}</div>
+                  <div>
+                    <h3 className="font-semibold">{product.name}</h3>
+                    <p className="text-gray-600">${product.price.toFixed(2)}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => addToCart(product)}
+                  className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cart Section */}
+        <div className="rounded-lg bg-white p-6 shadow-lg">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="flex items-center gap-2 text-2xl font-bold text-gray-800">
+              <ShoppingCart size={24} />
+              Cart ({state.items.length})
+            </h2>
+            {state.items.length > 0 && (
+              <button
+                onClick={clearCart}
+                className="text-sm text-red-500 hover:text-red-700"
+              >
+                Clear Cart
+              </button>
+            )}
+          </div>
+
+          {state.items.length === 0 ? (
+            <div className="py-8 text-center text-gray-500">
+              Your cart is empty
+            </div>
+          ) : (
+            <>
+              {/* Cart Items */}
+              <div className="mb-4 space-y-3">
+                {state.items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="text-xl">{item.image}</div>
+                      <div>
+                        <h4 className="font-medium">{item.name}</h4>
+                        <p className="text-sm text-gray-600">
+                          ${item.price.toFixed(2)} each
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                        className="rounded p-1 hover:bg-gray-200"
+                      >
+                        <Minus size={16} />
+                      </button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                        className="rounded p-1 hover:bg-gray-200"
+                      >
+                        <Plus size={16} />
+                      </button>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="ml-2 rounded p-1 text-red-500 hover:bg-red-50"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Discount Code */}
+              <div className="mb-4 rounded-lg bg-green-50 p-3">
+                <div className="mb-2 flex items-center gap-2">
+                  <Tag size={16} className="text-green-600" />
+                  <span className="font-medium text-green-800">
+                    Discount Codes
+                  </span>
+                </div>
+                <div className="mb-2 flex gap-2">
+                  <button
+                    onClick={() => applyDiscount("SAVE10")}
+                    className="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
+                  >
+                    SAVE10 (10% off)
+                  </button>
+                  <button
+                    onClick={() => applyDiscount("FLAT20")}
+                    className="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
+                  >
+                    FLAT20 ($20 off)
+                  </button>
+                </div>
+                {state.discountApplied && (
+                  <p className="text-sm text-green-700">
+                    ✓ Discount "{state.discountCode}" applied!
+                  </p>
+                )}
+              </div>
+
+              {/* Cart Summary */}
+              <div className="border-t pt-4">
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Subtotal:</span>
+                    <span>${state.subtotal.toFixed(2)}</span>
+                  </div>
+                  {state.discount > 0 && (
+                    <div className="flex justify-between text-green-600">
+                      <span>Discount:</span>
+                      <span>-${state.discount.toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span>Tax (8%):</span>
+                    <span>${state.tax.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between border-t pt-2 text-lg font-bold">
+                    <span>Total:</span>
+                    <span>${state.total.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+</details>
+
+### Example 2: Form with validation
+
+<details>
+<summary>Form with validation using reducers (Click to expand)</summary>
+
+```js copy filename="sign-up.jsx"
+import React, { useReducer } from "react";
+import { User, Mail, Lock, Eye, EyeOff, Check, X } from "lucide-react";
+
+const initialState = {
+  values: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  },
+  errors: {},
+  touched: {},
+  isSubmitting: false,
+  isValid: false,
+  submitAttempted: false,
+};
+
+const validateField = (name, value, allValues) => {
+  switch (name) {
+    case "firstName":
+      if (!value.trim()) return "First name is required";
+      if (value.trime().length < 2)
+        return "First name must be at least 2 characters";
+      return "";
+    case "lastName":
+      if (!value.trim()) return "Last name is required";
+      if (value.trim().length < 2)
+        return "Last name must be at least 2 characters";
+      return "";
+    case "email":
+      if (!value.trim()) return "Email is required";
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) return "Please enter a valid email address";
+      return "";
+    case "password":
+      if (!value) return "Password is required";
+      if (value.length < 8) return "Password must be at least 8 characters";
+      if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+        return "Password must contain uppercase, lowercase, and number";
+      }
+      return "";
+    case "confirmPassword":
+      if (!value) return "Please confirm your password";
+      if (value !== allValues.password) return "Passwords do not match";
+      return "";
+    default:
+      return "";
+  }
+};
+
+// Form reducer
+function formReducer(state, action) {}
+
+export default function SignUp() {
+  const [state, dispatch] = useReducer(formReducer, initialState);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+  const handleFieldChange = (field, value) => {
+    dispatch({ type: 'SET_FIELD', field, value });
+  };
+
+  const handleFieldBlur = (field) => {
+    dispatch({ type: 'SET_TOUCHED', field });
+  };
+
+  const handleSubmit = async () => {
+
+    // Validate all fields
+    dispatch({ type: 'VALIDATE_ALL' });
+
+    if (!state.isValid) {
+      return;
+    }
+
+    dispatch({ type: 'SET_SUBMITTING', isSubmitting: true });
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      alert('Account created successfully!');
+      dispatch({ type: 'RESET_FORM' });
+
+    } catch (error) {
+      alert('Failed to create account. Please try again.');
+    } finally {
+      dispatch({ type: 'SET_SUBMITTING', isSubmitting: false });
+    }
+  };
+
+  const getFieldError = (field) => {
+    return state.touched[field] && state.errors[field];
+  };
+
+  const getFieldClass = (field) => {
+    const baseClass = "w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-colors";
+    if (state.touched[field]) {
+      return state.errors[field]
+        ? `${baseClass} border-red-300 focus:ring-red-500 focus:border-red-500`
+        : `${baseClass} border-green-300 focus:ring-green-500 focus:border-green-500`;
+    }
+    return `${baseClass} border-gray-300 focus:ring-blue-500 focus:border-blue-500`;
+  };
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">Create Account</h2>
+        <p className="text-gray-600 mt-2">Sign up for a new account</p>
+      </div>
+
+      <div className="space-y-4">
+        {/* First Name */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            First Name
+          </label>
+          <div className="relative">
+            <User size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            <input
+              type="text"
+              value={state.values.firstName}
+              onChange={(e) => handleFieldChange('firstName', e.target.value)}
+              onBlur={() => handleFieldBlur('firstName')}
+              className={getFieldClass('firstName')}
+              placeholder="Enter your first name"
+            />
+            {state.touched.firstName && (
+              <div className="absolute right-3 top-2.5">
+                {state.errors.firstName ? (
+                  <X size={18} className="text-red-500" />
+                ) : (
+                  <Check size={18} className="text-green-500" />
+                )}
+              </div>
+            )}
+          </div>
+          {getFieldError('firstName') && (
+            <p className="text-red-500 text-sm mt-1">{state.errors.firstName}</p>
+          )}
+        </div>
+
+        {/* Last Name */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Last Name
+          </label>
+          <div className="relative">
+            <User size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            <input
+              type="text"
+              value={state.values.lastName}
+              onChange={(e) => handleFieldChange('lastName', e.target.value)}
+              onBlur={() => handleFieldBlur('lastName')}
+              className={getFieldClass('lastName')}
+              placeholder="Enter your last name"
+            />
+            {state.touched.lastName && (
+              <div className="absolute right-3 top-2.5">
+                {state.errors.lastName ? (
+                  <X size={18} className="text-red-500" />
+                ) : (
+                  <Check size={18} className="text-green-500" />
+                )}
+              </div>
+            )}
+          </div>
+          {getFieldError('lastName') && (
+            <p className="text-red-500 text-sm mt-1">{state.errors.lastName}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Email
+          </label>
+          <div className="relative">
+            <Mail size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            <input
+              type="email"
+              value={state.values.email}
+              onChange={(e) => handleFieldChange('email', e.target.value)}
+              onBlur={() => handleFieldBlur('email')}
+              className={getFieldClass('email')}
+              placeholder="Enter your email"
+            />
+            {state.touched.email && (
+              <div className="absolute right-3 top-2.5">
+                {state.errors.email ? (
+                  <X size={18} className="text-red-500" />
+                ) : (
+                  <Check size={18} className="text-green-500" />
+                )}
+              </div>
+            )}
+          </div>
+          {getFieldError('email') && (
+            <p className="text-red-500 text-sm mt-1">{state.errors.email}</p>
+          )}
+        </div>
+
+        {/* Password */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Password
+          </label>
+          <div className="relative">
+            <Lock size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={state.values.password}
+              onChange={(e) => handleFieldChange('password', e.target.value)}
+              onBlur={() => handleFieldBlur('password')}
+              className={getFieldClass('password')}
+              placeholder="Create a password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+          {getFieldError('password') && (
+            <p className="text-red-500 text-sm mt-1">{state.errors.password}</p>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Confirm Password
+          </label>
+          <div className="relative">
+            <Lock size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              value={state.values.confirmPassword}
+              onChange={(e) => handleFieldChange('confirmPassword', e.target.value)}
+              onBlur={() => handleFieldBlur('confirmPassword')}
+              className={getFieldClass('confirmPassword')}
+              placeholder="Confirm your password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
+            >
+              {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+          {getFieldError('confirmPassword') && (
+            <p className="text-red-500 text-sm mt-1">{state.errors.confirmPassword}</p>
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={state.isSubmitting}
+          className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
+            state.isSubmitting
+              ? 'bg-gray-400 cursor-not-allowed'
+              : state.isValid
+              ? 'bg-green-500 hover:bg-green-600 text-white'
+              : 'bg-blue-500 hover:bg-blue-600 text-white'
+          }`}
+        >
+          {state.isSubmitting ? 'Creating Account...' : 'Create Account'}
+        </button>
+        </div>
+
+      {/* Form Status */}
+      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+        <h3 className="font-medium text-gray-800 mb-2">Form Status:</h3>
+        <div className="space-y-1 text-sm">
+          <div className="flex justify-between">
+            <span>Valid:</span>
+            <span className={state.isValid ? 'text-green-600' : 'text-red-600'}>
+              {state.isValid ? '✓ Yes' : '✗ No'}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span>Fields Touched:</span>
+            <span>{Object.keys(state.touched).length}/5</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Errors:</span>
+            <span className="text-red-600">
+              {Object.values(state.errors).filter(Boolean).length}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+}
+```
+
+</details>
+
+### Example 3: Tic-tac-toe game state management
+
+<details>
+<summary>Reducer File (Click to expand)</summary>
+
+```js copy filename="reducer.js"
+import React, { useReducer } from "react";
+import { RotateCcw, Trophy, Users } from "lucide-react";
+
+export function gameReducer(state, action) {
+  switch (action.type) {
+    case "MAKE_MOVE": {
+      const { position } = action;
+
+      // Do not make a move if the game is over or the position is taken
+      if (state.gameStatus !== "playing" || state.board[position]) {
+        return state;
+      }
+
+      // Make the move
+      const newBoard = [...state.board];
+      newBoard[position] = state.currentPlayer;
+
+      // Check for winner
+      const winResult = checkWinner(newBoard);
+      const isBoardFull = newBoard.every((cell) => cell !== null);
+
+      let newGameStatus = "playing";
+      let newWinner = null;
+      let newScore = { ...state.score };
+
+      if (winResult) {
+        newGameStatus = "won";
+        newWinner = winResult.winner;
+        newScore[winResult.winner]++;
+      } else if (isBoardFull) {
+        newGameStatus = "draw";
+        newScore.draws++;
+      }
+
+      return {
+        ...state,
+        board: newBoard,
+        currentPlayer: state.currentPlayer === "X" ? "O" : "X",
+        winner: newWinner,
+        gameStatus: newGameStatus,
+        score: newScore,
+        moveHistory: [
+          ...state.moveHistory,
+          {
+            position,
+            player: state.currentPlayer,
+            moveNumber: state.moveHistory.length + 1,
+          },
+        ],
+        winningLine: winResult?.winningLine || null,
+      };
+    }
+
+    case "NEW_GAME": {
+      return {
+        ...state,
+        board: Array(9).fill(null),
+        currentPlayer: "X",
+        winner: null,
+        gameStatus: "playing",
+        moveHistory: [],
+        gameCount: state.gameCount + 1,
+        winningLine: null,
+      };
+    }
+
+    case "RESET_SCORES": {
+      return {
+        ...initialState,
+        gameCount: 0,
+      };
+    }
+
+    case "UNDO_MOVE": {
+      if (state.moveHistory.length === 0 || state.gameStatus !== "playing") {
+        return state;
+      }
+
+      const newHistory = state.moveHistory.slice(0, -1);
+      const newBoard = Array(9).fill(null);
+
+      // Replay moves, except for the last one
+      newHistory.forEach((move) => {
+        newBoard[move.position] = move.player;
+      });
+
+      // Get current player
+      const newCurrentPlayer = newHistory.length % 2 === 0 ? "X" : "O";
+
+      return {
+        ...state,
+        board: newBoard,
+        currentPlayer: newCurrentPlayer,
+        winner: null,
+        gameStatus: "playing",
+        moveHistory: newHistory,
+        winningLine: null,
+      };
+    }
+
+    default:
+      return state;
+  }
+}
+
+// Export the intial state because we need it in the component file
+export const initialState = {
+  board: Array(9).fill(null),
+  currentPlayer: "X",
+  winner: null,
+  gameStatus: "playing",
+  score: { X: 0, O: 0, draws: 0 },
+  moveHistory: [],
+  gameCount: 0,
+};
+
+// Check for winner
+const checkWinner = (board) => {
+  const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8], // Rows
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8], // Columns
+    [0, 4, 8],
+    [2, 4, 6], // Diagonals
+  ];
+
+  for (let combination of winningCombinations) {
+    const [a, b, c] = combination;
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return { winner: board[a], winningLine: combination };
+    }
+  }
+
+  return null;
+};
+```
+
+</details>
+
+<details>
+<summary>Component File (Click to expand)</summary>
+
+```js copy filename="tictactoe.js"
+import React, { useReducer } from "react";
+import { RotateCcw, Trophy, Users } from "lucide-react";
+import { gameReducer, initialState } from "@/reducer";
+import { Repeat } from "lucide-react";
+import { gameReducer, initialState } from "@/reducer.js"; // Import the 2 functions from your reducer
+
+export default function Home() {
+  const [state, dispatch] = useReducer(gameReducer, initialState);
+
+  const makeMove = (position) => {
+    dispatch({ type: "MAKE_MOVE", position });
+  };
+
+  const startNewGame = () => {
+    dispatch({ type: "NEW_GAME" });
+  };
+
+  const resetScores = () => {
+    dispatch({ type: "RESET_SCORES" });
+  };
+
+  const undoMove = () => {
+    dispatch({ type: "UNDO_MOVE" });
+  };
+
+  const getStatusMessage = () => {
+    if (state.gameStatus === "won") {
+      return `Player ${state.winner} wins!`;
+    } else if (state.gameStatus === "draw") {
+      return "It's a draw!";
+    } else {
+      return `Player ${state.currentPlayer}'s turn`;
+    }
+  };
+
+  const getCellClass = (index) => {
+    const baseClass =
+      "w-20 h-20 border-2 border-gray-400 flex items-center justify-center text-4xl font-bold cursor-pointer transition-all hover:bg-gray-100";
+
+    if (state.winningLine && state.winningLine.includes(index)) {
+      return `${baseClass} bg-green-200 border-green-400`;
+    }
+
+    if (state.board[index]) {
+      return `${baseClass} cursor-not-allowed`;
+    }
+
+    return baseClass;
+  };
+
+  const getCellColor = (value) => {
+    if (value === "X") return "text-blue-600";
+    if (value === "O") return "text-red-600";
+    return "";
+  };
+
+  return (
+    <div className="mx-auto my-16 max-w-2xl rounded-lg bg-neutral-800 p-6 px-4 shadow-lg">
+      <div className="mb-6 text-center">
+        <h1 className="mb-2 text-3xl font-bold">Tic-Tac-Toe</h1>
+        <p>Game #{state.gameCount + 1}</p>
+      </div>
+
+      {/* Score board */}
+      <div className="mb-6 rounded-lg bg-neutral-700 p-4">
+        <div className="mb-3 flex items-center justify-center gap-2">
+          <Trophy size={20} className="text-yellow-500" />
+          <h2 className="text-lg font-semibold">Score Board</h2>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="rounded-lg bg-blue-700 p-3">
+            <div className="text-2xl font-bold">X</div>
+            <div className="text-xl font-semibold">{state.score.X}</div>
+            <div className="text-sm text-neutral-400">wins</div>
+          </div>
+
+          <div className="rounded-lg bg-neutral-100 p-3">
+            <div className="text-2xl font-bold text-gray-600">🤝</div>
+            <div className="text-xl font-semibold">{state.score.draws}</div>
+            <div className="text-sm text-gray-600">draws</div>
+          </div>
+
+          <div className="rounded-lg bg-red-100 p-3">
+            <div className="text-2xl font-bold text-red-600">O</div>
+            <div className="text-xl font-semibold text-red-500">
+              {state.score.O}
+            </div>
+            <div className="text-sm text-gray-600">wins</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Game status */}
+      <div className="mb-6 text-center">
+        <div
+          className={`rounded-lg p-3 text-xl font-semibold ${
+            state.gameStatus === "won"
+              ? "bg-green-100 text-green-800"
+              : state.gameStatus === "draw"
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-blue-100 text-blue-800"
+          }`}
+        >
+          {getStatusMessage()}
+        </div>
+      </div>
+
+      {/* Game board */}
+      <div className="mb-6 flex justify-center">
+        <div className="grid grid-cols-3 gap-1 rounded-lg bg-gray-600">
+          {state.board.map((cell, index) => (
+            <button
+              key={index}
+              onClick={() => makeMove(index)}
+              className={getCellClass(index)}
+              disabled={state.gameStatus !== "playing" || cell !== null}
+            >
+              <span className={getCellColor(cell)}>{cell}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Game controls */}
+      <div className="mb-6 flex justify-center gap-3">
+        <button
+          onClick={startNewGame}
+          className="y-2 flex items-center gap-2 rounded-lg bg-green-500 px-4 text-white transition-colors hover:bg-green-600"
+        >
+          <RotateCcw size={18} />
+          New Game
+        </button>
+
+        <button
+          onClick={undoMove}
+          disabled={
+            state.moveHistory.length === 0 || state.gameStatus !== "playing"
+          }
+          className="flex items-center gap-2 rounded-lg bg-gray-500 px-4 py-2 text-white transition-colors hover:bg-gray-600 disabled:cursor-not-allowed disabled:bg-gray-300"
+        >
+          <Repeat size={18} />
+          Undo Move
+        </button>
+
+        <button
+          onClick={resetScores}
+          className="rounded-lg bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600"
+        >
+          Reset Scores
+        </button>
+      </div>
+
+      {/* Move history */}
+      {state.moveHistory.length > 0 && (
+        <div className="rounded-lg bg-neutral-700 p-4">
+          <h3 className="mb-3 flex items-center gap-2 font-semibold">
+            <Users sie={18} />
+            Move History
+          </h3>
+
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            {state.moveHistory.map((move, index) => (
+              <div key={index} className="flex justify-between rounded">
+                <span>Move: {move.moveNumber}</span>
+                <span className={`font-medium ${getCellColor(move.player)}`}>
+                  Player: {move.player} &rarr; Position {move.position + 1}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+</details>

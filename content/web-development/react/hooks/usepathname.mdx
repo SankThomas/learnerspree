@@ -1,0 +1,113 @@
+import { Callout } from "nextra/components";
+
+# usePathname
+
+<Callout type="info">
+  This hook is only available in NextJs (App Router)
+</Callout>
+
+The usePathname hook returns the current URL pathname, that is, the part of the URL after the domain name, but not including query parameters or hash segments (#section).
+
+It is also imported from `next/navigation`.
+
+**Example:**
+
+```js
+"use client";
+
+import { usePathname } from "next/navigation";
+
+export default function CurrentPath() {
+  const pathname = usePathname();
+
+  return <p>You are currently at: {pathname}</p>;
+}
+```
+
+If you have the following code inside a path like `/dashboard/profiles`, the output will be:
+
+```bash
+You are currently at: /dashboard/profiles
+```
+
+<Callout type="info">usePathname always returns a string</Callout>
+
+## Use cases
+
+1. When you want to conditionally render the UI depending on the current route.
+2. You want to highlight active links, such as on a sidebar or navigation menu.
+3. You want to track the page the user is on.
+4. You want to get the full static pathname (such as in the example above).
+
+## Examples
+
+### Hightlight active link
+
+```js copy
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+export default function Navbar() {
+  const pathname = usePathname();
+
+  return (
+    <nav>
+      <Link href="/" className={pathname === "/" ? "text-blue-500" : ""}>
+        Home
+      </Link>
+      <Link
+        href="/about"
+        className={pathname === "/about" ? "text-blue-500" : ""}
+      >
+        About
+      </Link>
+    </nav>
+  );
+}
+```
+
+We are checking whether the pathname is the same as the current path that the user is on, and then applying custom styles to highlight the link.
+
+### Conditionally render the UI
+
+```js copy
+"use client";
+
+import { usePathname } from "next/navigation";
+
+export default function Banner() {
+  const pathname = usePathname();
+
+  if (pathname === "/login" || pathname === "/register") {
+    return null; // hide banner on auth pages
+  }
+
+  return <div>Welcome to our site!</div>;
+}
+```
+
+In the example above, we are checking whether the user is currently on the login or register page, and then we are hiding the banner. If not, the banner is displayed.
+
+### Logging page view for analytics
+
+Using this example, you can set up an analytics service so that every page the user visits will be logged. Notice that we need to use the useEffect hook also.
+
+```js copy
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+
+export default function PageLogger() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log(`Page changed to: ${pathname}`);
+    // send to analytics service here
+  }, [pathname]);
+
+  return null;
+}
+```

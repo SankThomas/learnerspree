@@ -1,0 +1,82 @@
+import { Callout } from "nextra/components";
+
+# CSS Vendor Prefixes
+
+Vender prefixes are a way to ensure compatibility of CSS styles with all browsers. That is to say, there are some styles that work very well with the Google Chrome Browser, but will most likely not work at all with other browsers such as Safari, Mozilla, or Opera.
+
+In order to bridge the gap between how browsers implement CSS, vendor prefixes were introduced. For example, if I wanted to add a transition normally, I would do this:
+
+```css
+div {
+    transition: all 0.5s ease-in-out;
+}
+```
+
+This creates a transition that animates all the properties of a `div` element for 500ms (0.5 seconds), which softly animates in and out for the cubic bezier curve.
+
+The above transition works well when you are using a browser that has the WebKit engine at its core, i.e Google Chrome and Safari. However, when you switch to another browser such as Firefox, things can quickly break.
+
+<Callout type="info">
+    ### NOTE 
+    
+    The `transition` property works on all browsers, without having to add any vendor prefixes. However, I have chosen it for this example because all browsers have their own vendor prefix for the `transition` property that you can add if you want.    
+</Callout>
+
+In order to make this transition work on Mozilla Firefox, then you will need to add the correct vendor prefix. See the example below:
+
+```css
+div {
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+```
+
+Notice that the vendor prefix comes before the property that you want to add. This is to ensure maximum compatibility. Remember how CSS evaluates properties in a Cascading nature, i.e. from top to bottom? In this case, it will evaluate the vendor prefixes first to check which one will match with the browser you are currently using in order to give you the best experience.
+
+Using the same example above, we can add compatibility for the Opera browser, as well as iOS and Android, by adding the following lines:
+
+```css
+div {
+    /* For Google Chrome, Safari, iOS and Android, WebKit
+    and other Chromium-based browsers such as Brave and Edge*/
+    -webkit-transition: all 0.5s ease;
+    
+    /* For Mozilla Firefox */
+    -moz-transition: all 0.5s ease;
+    
+    /* For Internet Explorer and Microsoft Edge
+    (before they started using the Chromium Engine) */
+    -ms-transition: all 0.5s ease;
+    
+    /* Older versions of the Opera Browser
+    (before they started using the Chromium engine) */
+    -o-transition: all 0.5s ease;
+    
+    /* The default CSS property */
+    transition: all 0.5s ease;
+}
+```
+
+Vendor prefixes usually have the syntax:
+
+```css
+    /* Notice the beginning hyphen */
+    -vendor-prefix: value;
+    default-property: value;
+    
+    /* Example */
+    div {
+        -webkit-background-color: red;
+        background-color: red;
+    }
+```
+
+There are some other properties that might look totally different the first time you see them, such as for `background-image`, for example:
+
+```css
+div {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(red), to(green));
+    background-image: -o-linear-gradient(red, green);
+    background-image: linear-gradient(red, green);
+}
+```

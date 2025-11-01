@@ -1,0 +1,61 @@
+import { Callout } from "nextra/components";
+
+# CSS Pseudo Elements
+
+<Callout>This page is under construction</Callout>
+
+A pseudo element is a keyword added to a selector that lets you style a specific part of the selected element or elements. It has the syntax:
+
+```css
+selector::pseudo-selector {
+  property: value;
+}
+```
+
+<Callout type="info">
+  Pseudo elements are distinguished from Pseudo classes by their double colon. However, browsers currently support the single colon syntax for the original four pseudo elements namely: `::before`, `::after`, `::first-line` and `::first-letter`.
+</Callout>
+
+## `::after`
+This creates a pseudo-element that is the last child of the selected element. It is usually used to add some content after the element alongside the `content` property.
+
+**Example:**
+```css
+a::after {
+  content: "url(https://url-to-some-image.png)",
+}
+```
+
+If the `content` property is not defined, or has "normal" or "none" as a value, then the `::after` pseudo element will behave as though it is set to `display: none` and will not be rendered.
+
+## `::before`
+This creates a pseudo-element that is the first child of the selected element. It is usually used to add some content before the element alongside the `content` property.
+
+**Example:**
+```css
+a::before {
+  content: "url(https://url-to-some-image.png)",
+}
+```
+
+If the `content` property is not defined, or has "normal" or "none" as a value, then the `::after` pseudo element will behave as though it is set to `display: none` and will not be rendered.
+
+## `::backdrop`
+## `::cue`
+## `::cue()`
+## `::file-selector-button`
+## `::first-letter`
+## `::first-line`
+## `::grammar-error`
+## `::highlight()`
+## `::marker`
+## `::part()`
+## `::placeholder`
+## `::selection`
+## `::slotted()`
+## `::spelling-error`
+## `::view-transition`
+## `::view-transition-image-pair()`
+## `::view-transition-group()`
+## `::view-transition-new()`
+## `::view-transition-old()`

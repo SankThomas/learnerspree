@@ -1,0 +1,111 @@
+# useDeferredValue
+
+The Deferred Value hook is also a top-level React hook that allows you to prevent loading part of the UI until a certain condition is met. For example, take a look at any social media’s search functionality. Every keystroke triggers the search function, but the results on your screen will not update immediately – but they will update almost instantaneously. Does that make sense? Take a look at the diagram below:
+
+![Illustration of the useDeferredValue hook](/assets/usedeferredvalue.png)
+
+When you type something in the input search box, a function is triggered that sends a request to the API or database that will get an item or a list of items and then send it back to you, the client. Let’s think about this for a moment:
+
+1. With every keystroke, the search function has to be triggered. Imagine searching for a friend called “Jon Snow'' on Facebook. You will get results for “Jon Snow” and you will also most likely get results for “John Snow” as well as “Johnny Snow” and “Jon King of the North Snow”. And this is Facebook that has over 2 billion daily active users! You might argue that with an application such as Facebook, you might circumvent this by binding the search function to the Enter key or submit button…but then I will ask you, when was the last time you pressed the submit button when searching for someone on Facebook? In fact, it might be considered a bad user experience.
+
+2. When you have such a large data pool, what happens when you accidentally type something wrong? Well, the search function is still going to run and you are still going to get some kind of results.
+
+Obviously, this racks up so many requests to your API or database which is going to make it overly slow to use and very hard to maintain.
+
+## **Enter useDeferredValue**
+
+When you implement the useDeferredValue hook, it will hold the previous value so that the current function can execute, and then only update the values when the function is finished. As you can already tell, this is a much better user experience because the user will always have some kind of data to work with in a place where you would have placed a loading animation.
+
+So, using the same example above about searching for a friend on Facebook, you can wrap your search results into a useDeferredValue hook so that if you make a mistake when typing out the name, then the results won’t be updated when you correct it and type the correct name. This greatly limits hits to your API and you won’t rack up as much of a bill if you’re using a freemium web application such as Vercel, Netlify and Sanity – which I have accidentally done before.
+
+## Syntax
+
+Just like with other hooks, you will need the state hook along with the defer hook to implement your functionality. It has the following syntax:
+
+```js copy
+const [results, setResults] = useState([]);
+const deferredResults = useDeferredValue(results);
+```
+
+Above, we have a state value that holds our hypothetical search results, and then we define our value that we want to defer called deferredResults.
+
+### Here is an example of how to use the defer hook:
+
+```js
+import { Suspense, useState, useDeferredValue } from 'react';
+import SearchResults from './SearchResults.js';
+
+export default function App() {
+  const [query, setQuery] = useState('');
+  const deferredQuery = useDeferredValue(query);
+  const isStale = query !== deferredQuery;
+
+  return (
+    <>
+      <label>
+        Search albums:
+        <input value={query} onChange={e => setQuery(e.target.value)} />
+      </label>
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <div style={{
+          opacity: isStale ? 0.5 : 1,
+          transition: isStale ? 'opacity 0.2s 0.2s linear' : 'opacity 0s 0s linear'
+        }}>
+          <SearchResults query={deferredQuery} />
+        </div>
+      </Suspense>
+    </>
+  );
+}
+```
+
+**Let’s go through the code:**
+
+1. We import **Suspense**, **useState** and **useDeferredValue** from React.
+> Suspense is a built-in component that allows us to have a fallback just in case we, or our users encounter an error in the application. This helps improve user experience because, instead of them seeing an Uncaught Error with a long explanation about it, they can instead see something meaningful like, “Please reload the page.”
+
+2. We import a component called **SearchResults** which will display our search results.
+3. We set up our state value of query which will hold the data for our search input.
+4. We set our **deferredQuery** value which will show the previous data before the new query is finished.
+5. **isStale** is a variable to add styling for when the query is new, and for when it is old, that is, when it is deferred. It is also used to add a transition.
+6. In our return, we have a label and an input to capture the user input.
+7. We set up our Suspense component with a fallback of “Loading” just in case something happens to our SearchResults component that prevents it from rendering to the UI, and then finally, we also render the SearchResults component.
+
+You can see this example in action by visiting the React website and navigating to the useDeferredValue hook.
+
+### Here is another (working) example
+
+```js copy
+import { useState, useDeferredValue, useMemo } from 'react';
+
+const users = Array.from({ length: 10000 }, (_, i) => `User ${i + 1}`);
+
+function SearchUsers() {
+  const [query, setQuery] = useState('');
+  const deferredQuery = useDeferredValue(query);
+
+  const filteredUsers = useMemo(() => {
+    return users.filter(user => user.toLowerCase().includes(deferredQuery.toLowerCase()));
+  }, [deferredQuery]);
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={query}
+        placeholder="Search users"
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <ul>
+        {filteredUsers.map(user => (
+          <li key={user}>{user}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+In the example above, we are also memoizing the results using useMemo. [Here is a refresher](/usememo) about the useMemo hook.
+
+Try to run the example above, and then remove useDeferredValue and run it again. Do you see the difference?

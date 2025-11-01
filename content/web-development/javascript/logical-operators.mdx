@@ -1,0 +1,75 @@
+import { Callout } from "nextra/components";
+
+# Logical Operators
+
+Logical operators in programming refer to symbols that connect two or more expressions in a way where the value returned depends on the original expression and the logical operator used. There are only three logical operators: **AND**, **OR**, and **NOT**.
+
+They have the syntax:
+
+``` javascript
+expression OPERATOR expression
+```
+
+## Logical AND `&&`
+
+The logical AND operator returns `true` when both the expression on the left and right of it are also true. It is symbolised using two ampersands: `&&`
+
+**For Example:**
+
+``` javascript
+if (10 > 5) && (8 / 2 === 4) {
+  alert("Sankara is the greatest programmer that's ever lived");
+}
+```
+
+The example above will return `true` because the expression on the left evaluates to true, and that on the right also evaluates to true. However, if one of them were to return a falsy value, then the entire thing would return `false` as well. See the example below:
+
+**For Example:**
+
+``` javascript
+if (10 < 5) && (8 / 2 === 4) {
+  alert("Sankara is the greatest programmer that's ever lived");
+}
+```
+
+This time, the alert will not show because the expression on the right evaluates to false, even though the one on the left is true.
+
+## Logical OR `||`
+
+The logical OR operator returns `true` when one or more expressions evaluate to true, and it returns `false` otherwise. It is represented by two straight slashes: `||`.
+
+Using the same example above:
+
+``` javascript
+if (10 < 5) || (8 / 2 === 4) {
+  alert("Sankara is the greatest programmer that's ever lived");
+}
+```
+
+This will show the alert because the right expression is true, and even though the left one is false, the logical OR still evaluates to true.
+
+## Logical NOT `!`
+
+This is used to negate the value of an expression and it is represented by an exclamation mark `!`. Therefore, you can use it to turn falsy values true, and truthy values false.
+
+**For Example:**
+
+``` javascript
+!false; // will return true
+!true; // will return false 
+!9 < 5; // returns true
+```
+
+You can combine logical operators into convoluted expressions such as:
+
+``` javascript
+if (10 / 2 !== 5) && (30 % 5 === 6) {
+  // Do something here
+}
+
+if ((10 / 2 !== 5) && (30 % 5 === 6)) || ((9 < 5) && (10 > 6)) {
+  // Do something here
+}
+```
+
+You probably won't need to do this most of the time, however, it's good to know that you can.

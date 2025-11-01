@@ -1,0 +1,204 @@
+import { Callout } from "nextra/components";
+
+# CSS Pseudo Classes
+
+<Callout type="info">This page is under construction</Callout>
+
+Pseudo classes are a special type of CSS classes that are used to add styles to selectors, but only when those selectors meet certain conditions. They are divived into the following types:
+
+1. Element display state pseudo classes
+2. Input pseudo classes
+3. Linguistic pseudo classes
+4. Location pseudo classes
+5. Resource state pseudo classes
+6. Time-dimensional pseudo classes
+7. Tree-structural pseudo classes
+8. User action pseudo classes
+9. Functional pseudo classes
+
+They have the following syntax:
+
+```css
+selector:pseudo-class {
+  property: value;
+}
+```
+
+## Element Display State
+
+These pseudo classes select elements based on their display states.
+
+### `:fullscreen`
+Matches an element that is currently in fullscreen mode.
+
+**Example:**
+
+```css filename="index.css" copy
+div {
+  background-color: orange;
+}
+
+div:fullscreen {
+  background-color: skyblue;
+}
+```
+
+In the above example, when the browser is not in fullscreen mode, the `div` will have a background color of orange. When fullscreen mode is requested by the user, the `div` will have a background color of skyblue.
+
+Here is some additional HTML and JavaScript code that will toggle fullscreen mode so that you can see it in action:
+
+```html filename="index.html" copy
+<div>
+  <h1>Fullscreen mode demo</h1>
+  <p>Orange background when not in fullscreen and skyblue background when in fullscreen</p>
+  <button>Toggle Fullscreen</button>
+</div>
+```
+
+```js filename="index.js" copy
+document.querySelector("button").addEventListener("click", () => {
+  // Checks if the document is already in fullscreen mode
+  // and toggles out of fullscreen if it already is.
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+    return;
+  }
+
+  // Toggle fullscreen mode if the document is not in fullscreen
+  document.querySelector("div").requestFullscreen();
+});
+```
+
+### `:modal`
+
+This is used to target an element that is in a modal state - a state in which it prevents interactions with elements outside until it has been dismissed.
+
+**[Example from MDN:](https://developer.mozilla.org/en-US/docs/Web/CSS/:modal)**
+
+```html filename="index.html" copy
+<p>Would you like to see a new random number?</p>
+<button id="showNumber">Show me</button>
+
+<dialog id="favDialog">
+  <form method="dialog">
+    <p>Lucky number is: <strong id="number"></strong></p>
+    <button>Close dialog</button>
+  </form>
+</dialog>
+```
+
+```css filename="index.css" copy
+button {
+  display: block;
+  margin: auto;
+  width: 10rem;
+  height: 2rem;
+}
+
+:modal {
+  background-color: beige;
+  border: 2px solid burlywood;
+  border-radius: 5px;
+}
+
+p {
+  color: black;
+}
+```
+
+```js filename="index.js" copy
+const showNumber = document.getElementById('showNumber');
+const favDialog = document.getElementById('favDialog');
+const number = document.getElementById('number');
+
+showNumber.addEventListener('click', () => {
+  number.innerText = Math.floor(Math.random() * 1000);
+  favDialog.showModal();
+});
+```
+
+Run this example on your machine to see how `:modal` works, or [view it on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/:modal)
+
+### `:picture-in-picture`
+
+This targets elements that are displaying in picture-in-picture mode: usually videos.
+
+> `picture-in-picture` is not supported on Firefox and Firefox for Android.
+
+**Example:**
+
+```css
+:picture-in-picture {
+  padding: 1.5rem;
+  background-color: rebeccapurple;
+}
+```
+
+## Input
+### `:autofill`
+### `:enabled`
+### `:disabled`
+### `:read-only`
+### `:read-write`
+### `:placeholder-shown`
+### `:default`
+### `:checked`
+### `:indeterminate`
+### `:blank`
+### `:valid`
+### `:invalid`
+### `:in-range`
+### `:out-of-range`
+### `:required`
+### `:optional`
+### `:user-valid`
+### `:user-invalid`
+
+## Linguistic
+### `:dir()`
+### `:lang()`
+
+## Location
+### `:any-link`
+### `:link`
+### `:visited`
+### `:local-link`
+### `:target`
+### `:target-within`
+### `:scope`
+
+## Resource State
+### `:playing`
+### `:paused`
+
+## Time-dimensional
+### `:current`
+### `:past`
+### `:future`
+
+## Tree-structural
+### `:root`
+### `:empty`
+### `:nth-child`
+### `:nth-last-child`
+### `:first-child`
+### `:last-child`
+### `:only-child`
+### `:nth-of-type`
+### `:nth-last-of-type`
+### `:first-of-type`
+### `:last-of-type`
+### `:only-of-type`
+
+## User Action
+### `:hover`
+### `:active`
+### `:focus`
+### `:focus-visible`
+### `:focus-within`
+
+## Functional
+### `:is()`
+### `:not()`
+### `:where()`
+### `:has()

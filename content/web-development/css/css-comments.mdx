@@ -1,0 +1,28 @@
+import { Callout } from "nextra/components";
+
+# Comments In CSS
+
+Comments are like annotations in a book. They are used to explain more about the code, and to give future developers of your app more information about what the code does...At least that's the main purpose of comments.
+
+You will find yourself using comments to debug your code, to disable parts of your code that you don't want to execute, or to leave a ToDo list for yourself.
+
+Comments are ignored by compilers and interpreters when they are executed. Compilers and interpreters are applications used to execute code.
+
+We add comments in CSS by using the following syntax:
+
+```css
+/* Type comment here */
+```
+
+> You will find yourself using this syntax to add comments for every other normal programming language out there.
+
+That's it! Any text you write in the space between the slashes and asterisks will be considered a comment and skipped over. You can use this to disable parts of your code that you don't want to execute for reasons such as it causes an error in the application. For example:
+
+```css
+body {
+  background-color: aliceblue;
+  /* color: pink; */
+  /* The line above won't be executed */
+  padding: 20px;
+}
+```

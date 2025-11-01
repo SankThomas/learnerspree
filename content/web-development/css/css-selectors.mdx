@@ -1,0 +1,1211 @@
+import { Callout } from "nextra/components";
+
+# CSS Selectors And How To Style Elements
+
+CSS Selectors refers to the way in which we "find" or "get" particular elements in our HTML files so that we can apply CSS styling to them.
+
+## Commonly Used Selectors
+
+The following are the commonly used CSS Selectors:
+
+1. [Element names](#element-names)
+2. [Class names](#class-names)
+3. [Id names](#id-names)
+4. [The Universal selector](#the-universal-selector)
+5. [Combinators](#combinators)
+
+### Element Names
+
+This refers to simply targeting the element by its name, such as `div`, or `section`, or `button`, or `input` or any other element name that you have present in your HTML document.
+
+**Example:**
+
+```css
+div {
+  background-color: indigo;
+}
+
+button {
+  color: white;
+}
+```
+
+### Class Names
+
+This involves giving the elements a `class` attribute which you can then use in your CSS.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section class="mysection">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
+
+And in your CSS file:
+
+```css
+.mysection {
+  background-color: gray;
+  color: white;
+}
+```
+
+Notice how, when defining the styles for the section above in our CSS, we use a dot(`.`) before the name of the class: that is: `.mysection` and not just `mysection`.
+
+This is consistent with how you write CSS code for classes. The dot tells the browser that it is a CSS class that has been applied, and it should check the CSS file for the corresponding class name and apply the styles therein.
+
+Class attributes can be reused on whatever elements you want to have the styles that you have defined. For example:
+
+```html
+<!-- In your HTML -->
+<section class="mysection">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+
+<section class="mysection">
+  <p>I burnt it all to make a fire</p>
+</section>
+```
+
+And in your CSS file:
+
+```css
+/* In your CSS */
+.mysection {
+  background-color: gray;
+  color: white;
+}
+```
+
+Sometimes, you want to style only one element out of a number of elements. For example, on this website, the active link or page that you are viewing has a light blue background color, with dark blue text. You can add such styles in CSS by doing the following:
+
+```html
+<!-- In your HTML -->
+<ul>
+  <li><a href="/what-is-css.html">What Is CSS?</a></li>
+  <li><a href="/comments.html">Comments In CSS</a></li>
+  <li><a href="/css-selectors.html" class="active">CSS Selectors</a></li>
+</ul>
+```
+
+```css
+/* And in your CSS */
+/* Style all links to be white by default */
+a {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+}
+
+/* Style the active link */
+a.active {
+  background-color: lightblue;
+  color: blue;
+}
+```
+
+<Callout>
+  You can use the syntax above if you want to have conditional classes: classes
+  that will only apply when certain conditions have been met - or classes that
+  will only apply on particular elements.
+</Callout>
+
+What the above means is that, all the links, by default, will have a transparent background, with white text and some padding to increase the space they take up. However, when the user navigates to a certain link, it will make it active, and will add a class of `active` on the link so that the styles for an active link will apply and make it blue. This will involve the use of JavaScript as well, but the basics are in CSS.
+
+> You can call the class whatever you want. A good naming convention is to call it `active` because it is easy to understand. However, you can call it `rum` even - but remember, you might have to look at this code after a long time and you don't want to keep guessing what your own code does. Therefore, always make the names descriptive to the function they perform.
+
+<Callout type="info">
+  It is important to note that, when changing the styles of an element that
+  already has styles applied to it - such as the example about the active link
+  above, the styles that are changed as well as the styles already applied above
+  will be applied (unless you also change them to something else). Therefore,
+  the property of a 10 pixel padding will apply to the active link as well,
+  because both the `background-color` and `color` properties have been changed
+  when adding the custom style. This is an important behaviour to know about.
+</Callout>
+
+You can also add multiple classes for in a single element. All you need to do is separate the different class names with a single space. For example:
+
+```html
+<section class="mysection showcase platform banner-section">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
+
+### Id Names
+
+This involves adding an `id` attribute to your HTML element, and then using the id name to style the element in your CSS. When using `id`s, prefix it with a hashtag (`#`).
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section id="mysection">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
+
+And in your CSS file:
+
+```css
+#mysection {
+  background-color: gray;
+  color: white;
+}
+```
+
+Notice the difference when you are using `class`es, and when you are using `id`s. The downside to using `id`s is that they have to be unique in your entire HTML document. This means that you cannot reuse the styles above for any other element - even if you intend for them to have the same styles.
+
+> It is always recommended that you use classes when styling your web page. You can use other types of selectors, but it is always more recommended that you use classes because they are reusable.
+
+Just like with classes, you can also style elements differently depending on whether they have a custom `id` or not.
+
+For example:
+
+```html
+<p>This is an excerpt from Alice In Wonderland</p>
+
+<p id="aliceblue">And without a second thought, down went Alice after it.</p>
+```
+
+```css
+p {
+  background-color: pink;
+  color: white;
+  padding: 10px;
+}
+
+/* Style the custom paragraph text color */
+p#aliceblue {
+  color: aliceblue;
+}
+```
+
+In this case, we are now saying that the paragraph that has a custom `id` attribute of "aliceblue" will have its text changed to the `aliceblue` text color.
+
+<Callout type="info">
+  It is important to note that, when changing the styles of an element that
+  already has styles applied to it - such as the example about the aliceblue
+  paragraph above, the styles that are changed as well as the styles already
+  applied above will be applied (unless you also change them to something else).
+  Therefore, the properties of a pink background color as well as a 10 pixel
+  padding will apply to the aliceblue paragraph as well, because the only style
+  that has been changed is the text color. This is an important behaviour to
+  know about.
+</Callout>
+
+You can add multiple ids in single element. All you need to do is separate the different id names with a single space. For example:
+
+```html
+<section id="mysection showcase platform banner-section">
+  <p>Yes, but why is the rum gone?</p>
+</section>
+```
+
+### The Universal Selector
+
+The universal selector is denoted by an asterisk (`*`). It is used to add styles that will apply to all elements in your HTML document.
+
+In HTML, elements usually have some kind of margins and paddings applied to them. That is the reason why, even though you have not applied any CSS, elements will still push away from one another.
+
+A good habit to get in to is to always remove the default margins and paddings that elements have by default. You can do that using the universal selector as follows:
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+```
+
+This ensures that elements will not have any kind of styling applied to them, and you can add in your own styles without interference. For example, all headings always have margins by default, and lists (`ol` and `ul`) and `button`s have a padding on them.
+
+The interference comes in when you have not reset the margins and paddings, and then you also add more margins and paddings when you're styling individual elements. This is sometimes hard to catch but you can always tell when elements don't behave as they should.
+
+The line `box-sizing: border-box` tells the browser to use [The CSS Box Model](/web-development/css/css-box-model). More on this in that module.
+
+### Combinators
+
+CSS combinators are symbols that explain the relationship between selectors.
+
+There are 4 types of combinator selectors:
+
+#### 1. Descendant selector
+
+This is used to find and access elements directly in the element hierarchy.
+
+**Example:**
+
+```html
+<section>
+  <article>
+    <p>Dare to invent the future</p>
+  </article>
+</section>
+```
+
+In the example above, if I wanted to style the article, I would do the following:
+
+```css
+section article {
+  background-color: red;
+}
+```
+
+And if I wanted to style the paragraph, I would do this:
+
+```css
+section article p {
+  color: aliceblue;
+}
+```
+
+This syntax works even when you are using classes or ids or any other selector that you want - just make sure that you are using the correct notation: that is, a dot (`.`) for classes, and a hashtag (`#`) for ids.
+
+More on this in the module about [Deeply Nested Elements](/css/deeply-nested-elements)
+
+<Callout type="warning">
+  Using the descendant selector will select all the elements in the hierarchy
+  that match. Therefore, if you had multiple paragraphs in the example above,
+  they would all be styled in the same way - even if they were inside other
+  elements! This is a good thing because it allows you to add styles once and
+  not every single time you encounter that element. However, It is something to
+  take note of in case you want to have different styles for particular
+  elements. If that is the case, you can use class names, or you can use [pseudo
+  classes](#pseudo-classes)
+</Callout>
+
+#### 2. Child selector
+
+This is denoted by a "greater than" symbol: `>`. It is used to select all child elements that match.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>Dare to invent the future</p>
+
+  <p>
+    You cannot carry out fundamental change without a certain amount of madness.
+  </p>
+
+  <p>
+    Problems cannot be solved at the same level of awareness that created them.
+  </p>
+</section>
+```
+
+And in your CSS:
+
+```css
+section > p {
+  background-color: red;
+}
+```
+
+This will select all child paragraph elements and apply a red background to them. However, there is something to note about using this selector, that is: it selects only the immediate children. So, if you break the hierarchy just a bit, then your styles also break.
+
+See the example below:
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>Dare to invent the future</p>
+
+  <p>
+    You cannot carry out fundamental change without a certain amount of madness.
+  </p>
+
+  <article>
+    <p>
+      Problems cannot be solved at the same level of awareness that created
+      them.
+    </p>
+  </article>
+</section>
+```
+
+And in your CSS:
+
+```css
+section > p {
+  background-color: red;
+}
+```
+
+With the introduction of the article, the hierarchy is now broken and the paragraph inside the article will not have any of the styles applied.
+
+> Take note of this behaviour as you can use it to cleverly manipulate elements - or it can seriously make you feel stupid.
+
+Another - perhaps easier - way of thinking about the example above is that it will select all `p` elements that have a `section` as the parent element. So any `p` elements that have a different parent element will remain unaffected.
+
+#### 3. Adjacent sibling selector
+
+This is denoted by a "plus" (`+`) symbol. It is used to select elements that are directly after a specified element.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>We must dare to invent the future</p>
+</section>
+
+<p>Fundamentals of programming</p>
+```
+
+And in your CSS:
+
+```css
+section + p {
+  background-color: red;
+}
+```
+
+In the above example, the paragraph inside the `section` element will remain unchanged. However, the paragraph outside of the `section` will have a background color of red. That is how the adjacent sibling selector works.
+
+So, what if you had more paragraphs outside of the `section`? Well, only the immediate paragraph will be affected, and all others will remain unchanged. Try it out using the example below:
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>We must dare to invent the future</p>
+</section>
+
+<p>Fundamentals of programming</p>
+
+<!-- This paragraph is unaffected because it is not 
+the immediate sibling of the section -->
+<p>Fundamentals of HTML and CSS</p>
+```
+
+However, if I added another section before a paragraph, then the styles will apply to that paragraph. See the example below:
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>We must dare to invent the future</p>
+</section>
+
+<p>Fundamentals of programming</p>
+
+<section>
+  <!-- Some content here -->
+</section>
+
+<!-- Now this paragraph will have a red background color
+because it comes after a section element -->
+<p>Fundamentals of HTML and CSS</p>
+```
+
+#### 4. General sibling selector
+
+This is denoted by the "wave dash" symbol (`~`). It works the same as the adjacent sibling selector with the only difference being that it will select all sibling elements while the other only selects the immediate sibling elements.
+
+**Example:**
+
+```html
+<!-- In your HTML -->
+<section>
+  <p>We must dare to invent the future</p>
+</section>
+
+<p>Fundamentals of programming</p>
+```
+
+And in your CSS:
+
+```css
+section ~ p {
+  background-color: red;
+}
+```
+
+This will change the paragraph background color to red. And even if you added more paragraphs, they would all have a red background color. See the example below:
+
+```html
+<section>
+  <p>We must dare to invent the future</p>
+</section>
+
+<p>Fundamentals of programming</p>
+
+<p>Fundamentals of HTML and CSS</p>
+
+<p>Charles Darwin</p>
+```
+
+All the paragraphs above will have red backgrounds.
+
+However, if you break the hierarchy by introducing another element, the the paragraph will remain unchanged. For example:
+
+```html
+<section>
+  <p>We must dare to invent the future</p>
+</section>
+
+<p>Fundamentals of programming</p>
+
+<article>
+  <p>Fundamentals of HTML and CSS</p>
+</article>
+```
+
+This is because the paragraph is no longer a sibling element of the section, and therefore, it remains unchanged.
+
+## Advanced Selectors
+
+There are also more advanced selectors - advanced in that you can go "inside" the element and select elements based on certain characteristics. For example:
+
+1. [Attribute Selectors](#attribute-selectors)
+2. [Pseudo Selectors](#attribute-selectors)
+
+### Attribute Selectors
+
+In CSS, you can select elements to style based on their attributes, or attribute names.
+
+Read more about [HTML Attributes](/web-development/html/html-attributes) in that module.
+
+The most commonly used syntax for attribute selectors is as follows:
+
+```css
+div[attribute_name="attribute_value"] {
+  /* css properties */
+}
+```
+
+<Callout type="error">
+  Note that there is no space between the selector and the opening square
+  bracket. If you add a space, it becomes an error in your code. Take caution.
+</Callout>
+
+**Example:**
+
+```css
+input[type="text"] {
+  background-color: yellow;
+}
+```
+
+The above example will find all inputs that have a `type` of `text` and apply a yellow background color to all of them.
+
+There are other ways to select elements based on their attributes. See the examples below:
+
+#### Using `[attribute]`
+
+You can select an element based on just its attribute name.
+
+**Example:**
+
+```css
+input[type] {
+  background-color: yellow;
+}
+```
+
+This will select all input with an attribute of `type` and apply a yellow background to all of them.
+
+#### Using `[attribute~="value"]`
+
+This is used to select elements that have the specified value. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">Some content here</section>
+
+<section id="something else">Some content here</section>
+
+<section id="something-flower">Some content here</section>
+```
+
+And in your CSS:
+
+```css
+section[id~="something"] {
+  background-color: indigo;
+}
+```
+
+This will select the first and second `section` elements because they have an `id` attribute that contains the value of `something`. The third `section` will not be selected because its attribute does not match the value that we are looking for.
+
+#### Using `[attribute|="value"]`
+
+This is used to select elements that have the specified value, or part of the value that matches. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">Some content here</section>
+
+<section id="something else">Some content here</section>
+
+<section id="something-flower">Some content here</section>
+```
+
+And in your CSS:
+
+```css
+section[id|="something"] {
+  background-color: indigo;
+}
+```
+
+In the example above, the first and third sections will be selected and will have a background color of indigo. However, the second section will not be selected. Why?
+
+Because this attribute selector will match the element whose value is the exact value, or the value, followed by a hyphen (`-`).
+
+#### Using `[attribute^="value"]`
+
+This is used to select elements whose attribute values starts with the specified value. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">Some content here</section>
+
+<section id="something else">Some content here</section>
+
+<section id="something-flower">Some content here</section>
+```
+
+And in your CSS:
+
+```css
+section[id^="some"] {
+  background-color: indigo;
+}
+```
+
+This will select all three sections because they all contain an `id` attribute that starts with the value of `some` which is our specified value.
+
+#### Using `[attribute$="value"]`
+
+This is used to select elements whose attribute values end with with specified value. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">Some content here</section>
+
+<section id="something else">Some content here</section>
+
+<section id="something-flower">Some content here</section>
+```
+
+And in your CSS:
+
+```css
+section[id$="thing"] {
+  background-color: indigo;
+}
+```
+
+This will select only the first section because it is the only section that has an `id` attribute that ends with `thing`.
+
+> The second section ends with `else` and not `thing`. And the third section ends with `flower`. Take note.
+
+#### Using `[attribute*="value"]`
+
+This is used to select elements whose attribute value matches the value you have specified. For example:
+
+```html
+<!-- In your HTML -->
+<section id="something">Some content here</section>
+
+<section id="something else">Some content here</section>
+
+<section id="something-flower">Some content here</section>
+```
+
+And in your CSS:
+
+```css
+section[id*="thin"] {
+  background-color: indigo;
+}
+```
+
+This will match to all three sections and change their background color to indigo.
+
+### Using Attribute Selectors With Forms
+
+You can also use attribute selectors to style out your form inputs. For example:
+
+```css
+/* Selects inputs with a type of "text" */
+input[type="text"] {
+  background-color: yellow;
+}
+
+/* Selects inputs with a type of "number" */
+input[type="number"] {
+  background-color: indigo;
+}
+
+/* Selects inputs with a type of "email" */
+input[type="email"] {
+  background-color: pink;
+}
+
+/* Selects inputs with a type of "date" */
+input[type="date"] {
+  background-color: firebrick;
+}
+```
+
+## Pseudo Classes and Pseudo Elements
+
+### Pseudo Classes
+
+CSS pseudo classes are used to define a special state of an element, such as when you hover over a button and the background color changes, or when you click a link and it is no longer blue in color but purple.
+
+CSS pseudo classes can be used to improve the user experience of your web application. They have the syntax:
+
+```css
+selector:pseudo-class {
+  /* Your CSS code */
+}
+```
+
+> Pseudo class names always have a full colon, and can be used with element names, class names, id attributes, and other types of CSS selectors.
+
+Below are examples of the most commonly used CSS Pseudo classes.
+
+#### `:hover`
+
+This is used to define what happens to the element when the user hovers over it with the mouse.
+
+> The `hover` state on mobile is a long-press. If you want to test it out, you long-press on the element that has the `hover` state applied to it.
+
+**Example:**
+
+```html
+<button>Get Started</button>
+```
+
+```css
+/* Default styles of the button element */
+button {
+  background-color: pink;
+  color: black;
+  padding: 8px 30px;
+}
+
+/* The hover state for the button */
+button:hover {
+  background-color: navy;
+  color: white;
+}
+```
+
+The example above will render the button below. Try to hover over it with your mouse - or long press it if you are on mobile:
+
+<br />
+
+<button className="bg-[pink] hover:bg-[navy] text-black hover:text-white py-[8px] px-[32px]">
+  Get Started
+</button>
+
+The `hover` state can also be used to create those nice little tooltips that pop up when you hover over elements to give you more information about them.
+
+**Example:**
+
+```html
+<article>
+  Hover over me
+
+  <p>These are the things they only want you to show</p>
+</article>
+```
+
+```css
+article p {
+  display: none;
+}
+
+article:hover p {
+  display: block;
+}
+```
+
+In the example above, you are going to end up with an `article` element which, when you hover over, will show you the content inside it: i.e. the paragraph.
+
+#### `:link`
+
+This selects and styles all univisited links.
+
+**Example:**
+
+```css
+a:link {
+  color: indigo;
+  text-decoration: underline;
+}
+```
+
+All unvisited links will have a text color of indigo with an underline.
+
+#### `:active`
+
+This is used to style the active state of elements. It is usually used on links, but can be used on all elements.
+
+<Callout type="info">
+  When using `:active`, make sure that it comes after `:hover` if you are using
+  the `:hover` pseudo selector. If it appears before, it won't work.
+</Callout>
+
+An element get the `:active` pseudo selector when the user clicks on it.
+
+**Example:**
+
+```html
+<a href="https://twitter.com/tsbsankara">Thomas Sankara Twitter</a>
+
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+```
+
+```css
+a:active {
+  color: #10b581;
+}
+
+p:active {
+  background-color: #10b581;
+}
+```
+
+The above examples will render a link which, when you click on it to activate the `:active` state, will have a green text color, as well as a paragraph that will have a green background color when it is active.
+
+See the interactive examples below:
+
+<br />
+
+<div className="flex flex-col md:flex-row gap-8">
+  <a
+    href="https://twitter.com/tsbsankara"
+    target="_blank"
+    rel="noreferrer"
+    className="active:text-emerald-500 lg:text-xl"
+  >
+    Thomas Sankara Twitter
+  </a>
+
+  <p className="active:bg-emerald-500 lg:text-xl">
+    Lorem ipsum dolor sit amet consectetur adipiscing elit.
+  </p>
+</div>
+
+#### `:checked`
+
+This is used to selected inputs that have been checked. It only works for checkboxes, radio buttons, and the `<option>` element.
+
+**Example:**
+
+```css
+input:checked {
+  background-color: yellow;
+  padding: 1rem 2rem;
+}
+
+option:checked {
+  width: 100px;
+}
+```
+
+#### `:disabled`
+
+This matches all disabled inputs in a form.
+
+**Example:**
+
+```html
+<input type="text" disabled />
+```
+
+```css
+input:disabled {
+  background-color: #999;
+  border: 1px solid #888;
+}
+```
+
+This will result in the following input:
+
+<br />
+
+<input
+  type="text"
+  disabled
+  placeholder="This input is disabled"
+  className="bg-gray-500 border border-gray-600 placeholder-gray-800"
+/>
+
+> `:disabled` also works for the `<option>` element.
+
+#### `:enabled`
+
+This is the opposite of the `:disabled` selector. It selects all inputs which have been enabled.
+
+**Example:**
+
+```html
+<input type="text" enabled />
+```
+
+```css
+input:enabled {
+  background-color: #10b581;
+}
+```
+
+This will result in the following input:
+
+<br />
+
+<input
+  type="text"
+  enabled
+  placeholder="This input is enabled"
+  className="bg-emerald-500 placeholder-white"
+/>
+
+> `:enabled` also works for the `<option>` element.
+
+#### `:first-child`
+
+This is used to select the element that is the first child of its parent.
+
+**Example:**
+
+```html
+<section>
+  <p>My name is Shay Patrick Cormack</p>
+  <p>and I make my own luck</p>
+</section>
+```
+
+```css
+section p:first-child {
+  color: lightgreen;
+}
+```
+
+The example above will change the first paragraph to a lightgreen color, and it will not affect the second paragraph.
+
+#### `:focus`
+
+This is used to apply styles to the element has has focus, usually an input or a button.
+
+**Example:**
+
+```css
+input:focus {
+  background-color: orange;
+}
+```
+
+This will change the input color to orange when you focus on it: i.e when you click on it.
+
+#### `:last-child`
+
+This is used to select the element that is the last child of its parent.
+
+**Example:**
+
+```html
+<section>
+  <p>My name is Shay Patrick Cormack</p>
+  <p>and I make my own luck</p>
+</section>
+```
+
+```css
+section p:last-child {
+  color: lightgreen;
+}
+```
+
+The example above will change the last paragraph to a lightgreen color, and it will not affect the first paragraph.
+
+#### `:not(selector)`
+
+This matches every element that is not the specified element.
+
+**Example:**
+
+```css
+:not(p) {
+  width: 500px;
+  height: 200px;
+}
+```
+
+The above example will select every element that is not a paragraph, and will apply aa width of `500px` and a height of `200px` to all those elements.
+
+#### `:nth-child(n)`
+
+This matches every element that is the `nth` child of its parent.
+
+**Example:**
+
+```css
+section div:nth-child(2) {
+  background-color: green;
+}
+```
+
+This will match the second `div` and give it a green background color, and will leave all other `div`s unaffected.
+
+#### `:nth-child(even)`
+
+This will match all even elements.
+
+**Example:**
+
+```css
+section div:nth-child(even) {
+  background-color: red;
+}
+```
+
+This will select every even `div` and give it a red background color.
+
+> Using this, you can add the "zebra" effect that is usually present on tables or big volumes of data.
+
+#### `:nth-child(odd)`
+
+This will match all odd elements.
+
+**Example:**
+
+```css
+section div:nth-child(odd) {
+  background-color: red;
+}
+```
+
+This will select every odd `div` and give it a red background color.
+
+> Using this, you can add the "zebra" effect that is usually present on tables or big volumes of data.
+
+#### `:nth-of-type`
+
+This will select every element that is the `nth` child of the same type (element) of its parent.
+
+**Example:**
+
+```css
+div:nth-of-type(2) {
+  background-color: gray;
+}
+```
+
+This will select the second div and give it a background color of gray.
+
+**Other examples:**
+
+```css
+/* Selects the second li element in a list */
+li:nth-of-type(2) {
+  background: lightgreen;
+}
+
+/* Selects every third element among any group of siblings */
+:nth-of-type(3) {
+  background: yellow;
+}
+```
+
+#### `:root`
+
+This matches the document's root element. You will usually use this to declare global values for your entire web page, as well as CSS variables.
+
+**Example:**
+
+```css
+:root {
+  background: #222222;
+}
+
+/* Declaring variables */
+:root {
+  --variable-name: 111827;
+}
+```
+
+More about `:root` in the module about [CSS Variables](/web-development/css/css-variables#declaring-global-variables)
+
+This will set the background of the entire document to dark gray.
+
+#### `:target`
+
+Sometimes you want to link to sections within the same page of your website. You do this using a hashtag(`#`) with the name of the section. We use `:target` to style this active section.
+
+**Example:**
+
+```html
+<a href="#section1">Section One</a>
+<a href="#section2">Section Two</a>
+
+<section id="section1">
+  It prepare is ye nothing blushes up brought. Or as gravity pasture limited
+  evening on. Wicket around beauty say she
+</section>
+<section id="news2">
+  Frankness resembled say not new smallness you discovery. Noisier ferrars yet
+  shyness weather ten colonel.
+</section>
+```
+
+```css
+:target {
+  border: 1px solid #d4d4d4;
+  background-color: #999999;
+}
+```
+
+Try out this code yourself to see the output.
+
+#### `:visited`
+
+This is used to style links that have been visited.
+
+**Example:**
+
+```css
+a:visited {
+  color: fuchsia;
+}
+```
+
+> `:visited` usually inherits styles from [`:link`](#link).
+
+### Pseudo Elements
+
+Pseudo elements are used to style specific parts of an element. For example, they can be used to change the color of your highlight when selecting text on a website, or they can be used to insert content before an element.
+
+> Pseudo elements have a double colon (`::`) as opposed to the single colon (`:`) of pseudo classes.
+
+They have the syntax:
+
+```css
+selector::pseudo-element {
+  /* CSS properties */
+}
+```
+
+Below are all the CSS Pseudo Elements in CSS.
+
+#### `::after`
+
+This is used to insert some content after an element.
+
+**Example:**
+
+```html
+<p>Omae wa mou shindeiru</p>
+```
+
+```css
+p::after {
+  content: url(surprised.gif);
+}
+```
+
+#### `::before`
+
+This is used to insert some content before an element.
+
+**Example:**
+
+```html
+<p>Omae wa mou shindeiru</p>
+```
+
+```css
+p::before {
+  content: url(surprised.gif);
+}
+```
+
+This will insert an `gif` image before the paragraph.
+
+#### `::first-letter`
+
+This is used to style the first letter of some text. It can only be used with block elements.
+
+**Example:**
+
+```html
+<p>Captain Scarlet, you are virtually indestructible!</p>
+```
+
+```css
+p::first-letter {
+  color: crimson;
+}
+```
+
+This will change the first letter of the paragraph to a crimson-red color as below:
+
+<br />
+
+<p className="first-letter:text-red-500">
+  Captain Scarlet, you are virtually indestructible!
+</p>
+
+#### `::first-line`
+
+This is used to apply styles to the first line of text, and it can only be applied to block elements.
+
+**Example:**
+
+```html
+<p>Captain Scarlet, you are virtually indestructible!</p>
+```
+
+```css
+p::first-line {
+  color: rebeccapurple;
+}
+```
+
+The above example will result in the following:
+
+<br />
+
+<p className="first-line:text-purple-500">
+  Captain Scarlet, you are virtually indestructible!
+</p>
+
+> CSS counts the first line as the top one alone - even if you have multiple sentences. This also means that if a line is incomplete and it breaks onto the next line, then the next line will not be viable to have the styles applied to it.
+
+#### `::marker`
+
+This is used to select the markers of list items. You can use this to style out the numbers or bullets of list items.
+
+**Example:**
+
+```css
+::marker {
+  color: beige;
+  font-size: 1.25rem;
+}
+```
+
+This will make the bullets or numbers that you will have in your HTML document to have a beige color, with increased font size of 1.25rem (usually 20px if the default font size has not been changed).
+
+#### `::selection`
+
+This is used to style out how your text or content will look like when highlighted.
+
+**Example:**
+
+```css
+::selection {
+  background-color: rebeccapurple;
+  color: pink;
+}
+```
+
+This will result in the highlighted text having a purple background color with pink text.

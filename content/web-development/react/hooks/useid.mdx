@@ -1,0 +1,125 @@
+import { Callout } from "nextra/components";
+
+# useId
+
+The useId hook was introduced in React 18 in order to solve accessibility issues, as well as to prevent hydration errors between the server and the client.
+
+It is used to generate unique Ids for each component instance. It is mostly used when you need:
+
+1. Unique IDs for form elements - such as when you want to associate labels with inputs.
+2. Stable identifiers that will not change across renders.
+
+A hydration error looks like this:
+
+```js
+Warning: Text content did not match. Server: "id-123" Client: "id-456"
+```
+
+Because there is a mismatch between the server and the client.
+
+## What about UUID?
+
+UUID is a package that can be used to generate unique IDs just like the useId hook. So, why not just use this instead?
+
+1. Because it generates unique IDs across every render unless you memoize the value - meaning you also need to set up the useMemo hook. So you need a lot more configuration before you can use UUIDs successfully.
+2. It can cause a mismatch between the server and the client which causes the hydration error.
+3. You need to install it before you can use it.
+
+useId solves the above by:
+
+1. Generating a unique and consistent ID per component instance.
+2. Being consistent on the server and the client, and improving accessibility.
+3. Since it is built into React, you do not need any extra config or install before you can use it.
+
+## Syntax
+
+```js
+const id = useId();
+```
+
+The above will generate a unique id such as:
+
+```js
+"react-aria123-:r0:";
+```
+
+## Examples
+
+### Labeling a form field
+
+When building forms, something that you always need is unique IDs in order to link labels to the correct inputs. The useId can help you do that in the following way:
+
+```js copy
+import { useId } from "react";
+
+export default function CustomForm() {
+  const id = useId();
+
+  return (
+    <div>
+      <label htmlFor={id}>Name:</label>
+      <input id={id} type="text" />
+    </div>
+  );
+}
+```
+
+Now the label will be linked to the input.
+
+### Example with multiple components
+
+See the example below:
+
+```js copy
+import { useId } from "react";
+
+export default function App() {
+  return (
+    <>
+      <Checkbox label="Accept Terms" />
+      <Checkbox label="Subscribe to our Newsletter" />
+    </>
+  );
+}
+
+function Checkbox({ label }) {
+  const id = useId();
+
+  return (
+    <div>
+      <input type="checkbox" id={id} />
+      <label htmlFor={id}>{label}</label>
+    </div>
+  );
+}
+```
+
+Notice that the Checkbox component is rendered twice in the App component. Therefore, useId will generate a unique ID for both instances and there will not be a conflict.
+
+You can `console.log` the IDs in order to see the two different IDs.
+
+### Improving accessibility
+
+The example below improves accessibility for screen readers by adding an **ARIA** attribute.
+
+```js copy
+import { useId } from "react";
+
+export default function App() {
+  const id = useId();
+
+  return (
+    <div>
+      <input type="text" aria-describedby={id} />
+      <p id={id}>We'll never share your email with anyone else.</p>
+    </div>
+  );
+}
+```
+
+<Callout type="info">
+  Even though you can use the useId hook to generate unique ID values, you do not need to use it in all situations. For example, if you manually create IDs and you are referencing them correctly in your application, then you do not need to set up this hook.
+
+And as always, the scope and scale of your application will determine whether or not you will use this hook. In a small application where you can keep track of all IDs you create, you will not need this hook. However, in a large team application, you can use this hook in order to keep the consistency.
+
+</Callout>

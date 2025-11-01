@@ -1,0 +1,380 @@
+import { Callout, Steps } from "nextra/components";
+
+# Custom Hooks
+
+A powerful concept of programming is called DRY - Don't Repeat Yourself. Simply meaning that don't write the same code in your application over and over again when you can refactor it and reuse it.
+
+Creating your own custom hooks is something you will occasionally do especially for redundant tasks such as a timer that you want to reuse in multiple components, or when you have many components that rely on some API data.
+
+In this chapter, we are going to transform the Timer and API example from the previous chapter into reusable custom hooks. Let's begin.
+
+<Steps>
+
+### Custom hook for a timer
+
+To begin, create a new file inside your workspace (assuming you already have a react app running in some kind of way such as on your local machine or on codesandbox) and call it useTimer.
+
+Remember the rules for writing hooks? We should always begin hooks names with use. Inside this new file, copy and paste in the code for the timer as below:
+
+```js copy
+import { useState, useEffect } from "react";
+
+export default function useTimer() {
+  const [seconds, setSeconds] = useState();
+
+  useEffect(() => {
+    if (seconds <= 0) return;
+
+    const timeout = setTimeout(() => {
+      setSeconds(seconds - 1);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [seconds]);
+
+  return { seconds };
+}
+```
+
+**Changes in the code:**
+
+1. The useState hook is now empty by default: we are no longer initializing it to 60 because we are going to create a function that will accept the number as an argument and then start the timer from the number we pass in.
+2. We are no longer returning a heading, but we return our state value of “seconds” so that we can access it from within other components.
+3. We have added in a dependency called **seconds** which is also our state value. This means that the useEffect hook will re-run every time that the seconds state value changes, that is, every second.
+
+Next, let’s create our function to start the timer from a number that we pass in. Below the useEffect hook, add in the following block of code:
+
+```js copy
+function startTimer(seconds) {
+  setSeconds(seconds);
+}
+```
+
+We have now created a function called **startTimer** which will accept a number value of seconds, i.e between one to infinity. Inside it, we call our setSeconds function that will update our state value of seconds whenever it changes.
+
+Let’s also add our startTimer function to our return:
+
+```js copy
+return { seconds, startTimer };
+```
+
+The entire code block now looks like this:
+
+```js copy
+import { useState, useEffect } from "react";
+
+export default function useTimer() {
+  const [seconds, setSeconds] = useState();
+
+  useEffect(() => {
+    if (seconds <= 0) return;
+
+    const timeout = setTimeout(() => {
+      setSeconds(seconds - 1);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [seconds]);
+
+  function startTimer(seconds) {
+    setSeconds(seconds);
+  }
+
+  return { seconds, startTimer };
+}
+```
+
+Now let’s jump back into the `App.js` file so that we can test out our timer. In the App.js file (or any other file in which you want to use this hook), import it right below the main React imports, and then destructure seconds and startTimer so that we can use them.
+
+```js copy
+// other imports
+
+import useTimer from "./useTimer";
+
+export default function App() {
+  const { seconds, startTimer } = useTimer();
+}
+```
+
+<Callout type="info">
+**Important**
+
+We import all other hooks as named imports from “react” i.e: inside curly brackets. However, for our custom hook, we have not used any curly brackets. This is because when we created our hook, we made it a default export. If you wanted to turn this into a named import, first change the default export in your useTimer file to a named export as follows:
+
+```js
+export const useTimer = () => {};
+```
+
+OR
+
+```js
+export default useTimer() {};
+```
+
+And then import it in your file as follows:
+
+```js
+import { useTimer } from "./useTimer"; // Ensure that the path to the file is correct
+```
+
+</Callout>
+
+Continuing, let’s destructure the values that we need from our useTimer hook. Add the following line at the top level of your application because, even though it is a custom hook, all rules of hooks still apply.
+
+```js copy
+const { seconds, startTimer } = useTimer();
+```
+
+Above, we are basically destructuring the values that we passed in the return statement in the useTimer file.
+
+Next, let’s create a function that will call our startTimer function. Inside a useEffect block, add the following code:
+
+```js copy
+useEffect(() => {
+  function remainingTime() {
+    startTimer(90);
+  }
+
+  remainingTime();
+}, []);
+```
+
+Above, we have created a function called **remainingTime**. Inside it, we pass in our startTimer function with a default value – in this case 90, but you can initialize it to whatever you want depending on your needs. Finally we call our function before closing the useEffect hook with an empty dependency array.
+
+At this point, everything is working correctly, but we can’t see anything on the screen. So, inside our return statement, add a second level heading to show the current value of the timer:
+
+```js copy
+return <h2>{seconds}</h2>;
+```
+
+Now, you should be able to see your timer counting down from whatever value you passed in your function. And just like that, you have created a custom timer that you can reuse anywhere else in your application.
+
+The full code example is as below:
+
+**In your useTimer file:**
+
+```js copy
+import { useState, useEffect } from "react";
+
+export const useTimer = () => {
+  const [seconds, setSeconds] = useState();
+
+  useEffect(() => {
+    if (seconds <= 0) return;
+
+    const timeout = setTimeout(() => {
+      setSeconds(seconds - 1);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [seconds]);
+
+  function startTimer(seconds) {
+    setSeconds(seconds);
+  }
+
+  return { seconds, startTimer };
+};
+```
+
+**In your App.js file**
+
+```js copy
+import useTimer from "./useTimer";
+
+export default function App() {
+  const { seconds, startTimer } = useTimer();
+
+  useEffect(() => {
+    function remainingTime() {
+      startTimer(90);
+    }
+
+    remainingTime();
+  }, []);
+
+  return <h2>{seconds}</h2>;
+}
+```
+
+### Custom hook to make an API call
+
+Just like with the useTimer hook, the first thing we are going to do is to create a new file called **useFetch** for our custom hook.
+
+Note, though, that the names you give your custom hooks are up to you, and it depends on what kind of hook you are creating.
+
+In our newly created file, let’s add in the following code:
+
+```js copy
+import { useState, useEffect } from "react";
+
+export default function useFetch(url) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(url);
+      const data = await res.json();
+      setData(data);
+    }
+
+    fetchData();
+  }, []);
+
+  return [data];
+}
+```
+
+Most of the code above is familiar. The only new thing is that when we are declaring our hook, we pass in an argument called url because most APIs are urls to some kind of endpoint. Of course this is just a variable name and even if you call it milkshake, it will still work as expected, provided you rename every instance to milkshake as well.
+
+The other new thing is that we return the array called **data** which is the name of our state value.
+
+Now we can jump into our App.js file, or whichever file you want to use the hook in, and add in the following code:
+
+```js copy
+import useFetch from "./useFetch";
+
+export default function App() {
+  const [data] = useFetch("https://restcountries.com/v3.1/all");
+
+  return <>{data && <h2>{data.length}</h2>}</>;
+}
+```
+
+In the code above, we first import our custom hook. Next, we pass in a link to an API endpoint to our useFetch hook and then set that to our data state value.
+
+In our return statement, we check for whether data exists or not (so that we don’t get any errors before the GET request can run) and then display the number of items returned from the API.
+
+Simple as that, we now have another custom hook that we can use to get some kind of data from almost any API that we are given.
+
+**Important to note**
+
+I mentioned before that it is recommended to place your custom hooks in a folder named “hooks” in your workspace. But I have not done that in the two examples above. So, why? It is because, for small applications, you don’t have to strictly stick to every single recommendation because they are also easy to debug. However, for large applications such as your website, I do recommend sticking to most coding conventions.
+
+### Custom useDebounce hook
+
+(In the book, this is a chapter on its own. But on the website, I've added it here because it is more relevant as an example, and it uses the same concepts)
+
+Debouncing is a technique in programming which delays the execution of a function after its last invocation. Therefore, it prevents unnecessary execution of the same function. Sounds just like the useMemo, useCallback, useDeferredValue and useTransition hooks right? That’s because in execution, they all seem to do the same thing only with very slight differences that cause all of them to have a different name.
+
+Debouncing is mainly used to prevent expensive tasks from happening too many times too often. Tasks such as making API calls depending on user input, updating the DOM and making complex calculations.
+
+**Use Cases**
+
+<Steps>
+
+#### An elevator
+
+A really good example that helped me understand debouncing is this: an elevator. When you get into an elevator and press the button for the floor you are going to, the doors do not immediately close. It waits for a moment and then closes the door – and if it just so happens that someone blocks the door from closing, the timer for the doors is reset and it waits again before closing. Now imagine you call an elevator – it doesn’t come to your floor immediately, but it waits a moment. This helps to save the amount of energy it uses and that is exactly how debouncing works. When you are typing in an input, for example, the function is not executed until you stop typing for a certain amount of time to limit the amount of function calls it has to make. If you happen to make another keystroke before this timer elapses, the timer is reset and it waits again.
+
+#### A submit button
+
+Sometimes developers don’t usually do this, but you can also debounce a submit button. This will make the submit function wait for a moment before beginning to process the input and will prevent double execution of the function if you accidentally or on purpose, press the button again, which is something we all do sometimes.
+
+#### A search input
+
+A search input will need to be debounced as explained in case 1 above.
+
+#### Browser scroll events
+
+Browser scroll events might also need to be debounced. For example, if you wanted to show a Back to top button when your browser scrolls down to a certain height, you can debounce the function to ensure that the button does not pop up in case there’s a slight or accidental scroll.
+
+</Steps>
+
+To begin, create a new file in your workspace where you will need to import all the necessary hooks and define the custom debounce hook:
+
+```js copy
+import { useState, useEffect, useRef } from "react";
+
+export const useDebouce(value, delay = 3000) {
+  // Delay is initialized to 3000 milliseconds, i.e 3 seconds
+	const [debouncedValue, setDebouncedValue] = useState("");
+  const ref = useRef();
+
+ 	return debouncedValue;
+}
+```
+
+The code block above defines our state value which is initialized to an empty string. We also define a custom ref using the useRef hook which we will use to reset the timer for the debounce function.
+
+[Read about the useRef hook](/useref)
+
+For our return, we only want the debounced value which is what we will be using in our components. Let’s flesh out our function using the useEffect hook so that it actually works. Below the useRef hook definition, add the following code:
+
+```js copy
+useEffect(() => {
+  ref.current = setTimeout(() => setDebouncedValue(value), delay);
+
+  return () => {
+    clearTimeout(ref.current);
+  };
+}, [value, delay]);
+```
+
+This takes the current value of the ref attribute and updates our state value accordingly. We then return a cleanup function so as not to end up with a bloated app that leaks memory. In our list of dependency arrays, we pass in the value and the delay of our function so that the function only runs when the value changes and when the time for the delay passes. Here is the full example:
+
+```js copy
+import { useState, useEffect, useRef } from "react";
+
+export const useDebouce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState("");
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = setTimeout(() => setDebouncedValue(value), delay);
+
+    return () => {
+        clearTimeout(ref.current);
+      }
+    }, [value, delay]);
+
+  return debouncedValue;
+}
+```
+
+**Let's use our new custom hook**
+
+In our component file – in this case it is the App.js file, but you can use it wherever you need it – import the useState hook as well as your custom debounce hook.
+
+```js copy
+import { useState } from "react";
+
+// Make sure to import the correct file from the correct path.
+import { useDebounce } from "path-to-usedebounce-file.js";
+
+export default function App() {
+  const [value, setValue] = useState("");
+  const debouncedValue = useDebounce(value, 3000);
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
+  );
+}
+```
+
+In the code above, we are initializing a state value called value, as well as getting our debouncedValue from our custom hook and passing in the state value above called value as one of its parameters, and a delay of 3000ms as its second parameter. Then we are simply returning a controlled input to get whatever is typed in by the user. Next, let’s add a function to get some data from an API, and our useEffect to call said function:
+
+```js copy
+const search = useCallback(async() => {
+ 	const res = await fetch(`https://demo.dataverse.org/api/search?q=${debouncedValue}`);
+   const data  await res.json();
+}, [debouncedValue]);
+
+useEffect(() => {
+	search();
+}, [debouncedValue, search])
+```
+
+We are implementing the useCallback hook so that the function call is memoized. Take note of our GET request, that we are hitting the /search endpoint of the API and then appending our debouncedValue as its parameter. Now, when the user types in something, it will be added to the debouncedValue which is populated by our controlled input. Take note that the useCallback hook takes the debouncedValue as a dependency so that the function will rerun when its value changes – and its value changes when the user types in the input but is only updated after 3000 milliseconds by our debouncing function.
+
+Finally, we call the search function inside our useEffect hook which also contains as dependencies, the debouncedValue and the search function.
+
+And that is how you create a custom useDebounce hook for your application.
+
+</Steps>

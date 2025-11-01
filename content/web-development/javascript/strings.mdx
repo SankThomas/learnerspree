@@ -1,0 +1,177 @@
+import { Callout, Steps } from "nextra/components";
+
+# The string data type
+
+A string is zero or more characters written inside quotation marks. For example:
+
+```js
+let name = "";
+let firstName = "Thomas";
+let lastName = 'Sankara';
+let fullName = `Thomas Sankara`;
+```
+
+The first example initializes `name` to an empty string. The second example uses double quotation marks. The third example uses single quotation marks, and the fourth example uses [template literals](#template-literals) which are represented by the backticks or tilde symbol (`).
+
+All the above are ways that you can use to define strings in JavaScript. The preference falls to the developer or the team definitions on a particular project.
+
+## String concatenation
+
+This refers to "adding" string values, but it is more definite to say that it refers to linking string values together, because that is the English definition of **"concatenate"**. For example:
+
+```js
+const firstName = "Thomas";
+const lastName = "Sankara";
+const fullName = firstName + " " + lastName;
+
+// This can also be written as
+const fullName = "Thomas" + " Sankara";
+```
+
+Notice that we are also adding a whitespace when adding the two string variables so that the end result is readable and not smooshed together. Also notice the whitespace in ` Sankara` to make the end result text readable.
+
+#### Adding strings to integers
+
+In JavaScript, it is also possible to add integers to strings and strings to integers. But use this with caution because JavaScript evaluates these two cases weirdly:
+
+```js
+const age = 28;
+const name = "Thomas";
+console.log(age + name);
+```
+
+The above will evaluate to `28Thomas`. Let's reverse the example:
+
+```js
+const age = 28;
+const name = "Thomas";
+console.log(name + age);
+```
+
+This will now print `Thomas28`. Nothing confusing yet...until we introduce anther integer:
+
+```js
+const age = 28;
+const year = 2024;
+const name = "Thomas";
+console.log(age + year + name);
+```
+
+This will now print `2052Thomas`. Okay, fair enough because we can see that it is adding the age and the year first. But what happens when we have the `name` come first before the integers?
+
+```js
+const age = 28;
+const year = 2024;
+const name = "Thomas";
+console.log(name + age + year);
+```
+
+This will now print `Thomas202428`. It no longer adds the two numbers. The reason why adding strings and integers behaves in this way has to do with how JavaScript evaluates expressions.
+
+JavaScript evaluates expressions from left to right. So, when it meets a string as the first value, it will treat the entire expression as a string. Therefore, when adding the name, age and year, to JavaScript, the expression is evaluated as:
+
+```js
+console.log(name + year + age); 
+// becomes
+console.log("Thomas" + "2024" + "28");
+// Which logs Thomas 202428 just like adding strings together
+```
+
+But when the integers come first, it treats the entire expression as an integer to be added. So the string is also treated as one big integer as follows:
+
+```js
+console.log(age + year + name);
+// becomes
+console.log(28 + 2024 + "Thomas"); 
+// Which will log 2052Thomas because it first adds the numbers and then the string
+```
+
+### Using different types of quotations
+
+Whenever you are working with strings, you will find yourself wanting to use either double, single quotes or template literals in your string variables. For example, if you had a variable such as `Thomas's vehicle`, how would you define it? Well, that's simple:
+
+```js
+const owner = "Thomas's vehicle";
+```
+
+What if you wanted to represent the name of a book like `"Harry Potter"?
+
+```js
+const book = "I've been reading "Harry Potter"";
+```
+
+Now that becomes a problem. JavaScript solves this in three ways:
+
+<Steps>
+### Using different type quotation marks
+
+Using the above book example, we can fix the error by using single quotes on the opening and the double quotes for the book name, or vice versa:
+
+```js
+const book = "I've been reading 'Harry Potter'";
+```
+
+But wait: Using single quotes on the outside doesn't exactly work well with that example because of the English possessive "I've":
+
+```js
+const book = 'I've been reading "Harry Potter"';
+```
+
+How do you fix that? We can use the escape character, or template literals.
+
+### Using template literals
+
+Using template literals, the erroring example above will be corrected to:
+
+```js
+const book = `I've been reading "Harry Potter"`;
+```
+
+Template literals provide a very nice way to always declare your strings without having to worry about conflicts of quotation marks. However, remember that template literals are not supported in Internet Explorer.
+
+### Using the escape character
+
+The escape character in JavaScript is the backslash(`\`). Using this, we can tell JavaScript to ignore a character that would normally cause issues. Let's fix the two examples above by escaping them:
+
+```js
+const owner = 'Thomas\'s vehicle';
+const book = 'I\'ve been reading "Harry Potter"'; // or
+const book = "I've been reading \"Harry Potter\"";
+```
+
+The escape character is placed before the character you want to escape.
+</Steps>
+
+### Template literals
+
+Template literals were introduced in ES6 (ECMAScript 6) or ECMAScript 2015 which was published in 2015. They are strings defined using backticks and allow both single and double quotes to be used inside them, as we have seen from the examples above. They also allow for multiline strings:
+
+**Example:**
+
+```js
+const optimusPrime = `
+But the day will never come
+when we forsake this planet
+or it's people.
+`
+```
+
+Template literals allow us to append variables to strings. Beforehand, we have already seen the syntax we used (Just to be clear, we still use this syntax depending on the use case and preference):
+
+```js
+const age = 28;
+console.log("Thomas " + age);
+```
+
+But now, we can do this:
+
+```js
+const age = 28;
+console.log(`Thomas ${age}`);
+```
+
+When adding a variable using template literals, we use the dollarsign curly brackets syntax: 
+
+```js
+${variable_name}
+```

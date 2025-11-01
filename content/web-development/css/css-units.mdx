@@ -1,0 +1,49 @@
+import { Callout } from "nextra/components";
+
+# CSS Units
+
+<Callout type="info">This page is under construction</Callout>
+
+Just like how we use metres and kilometres to express distance, CSS has a couple of units that we can use when specifying values such as width, height and font size. We have already seen some of these units in previous chapters.
+
+
+<Callout type="warning">
+  When using units in CSS, do not add a space between the declaration and the unit. However, if your unit is a zero(0), then you can safely omit the unit. See the example below:
+
+  ``` css
+  h2 {
+    font-size: 32 px; /* This is wrong*/
+  }
+
+  h2 {
+    font-size: 32px; /* This is correct */
+  }
+
+  h2 {
+    font-size: 0; /* This is also correct */
+  }
+  ```
+</Callout>
+
+These units are further divided into **Absolute units** and **Relative units**.
+
+## Absolute units
+
+Absolute units are fixed units. Therefore, anything specified in these units will appear as exactly the size specified. It is not recommended to use absolute units unless you know beforehand the exact medium you are going to use, such as print media.
+
+They are called absolute units because they are not relative to anything else.
+
+| Unit  | Description  |
+|-------|--------------|
+| cm  | centimeters  |
+| mm  | millimeters  |
+| in  | inches  |
+| px  | pixels  |
+| pt  | points  |
+| pc  | picas   |
+
+## Relative units
+
+<Callout type="info">
+  For some CSS units such as margin, you can use negative numbers.
+</Callout>

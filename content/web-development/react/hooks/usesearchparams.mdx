@@ -1,0 +1,109 @@
+import { Callout } from "nextra/components";
+
+# useSearchParams
+
+<Callout type="info">
+  This hook is only available in NextJs (App Router)
+</Callout>
+
+The useSearchParams hook allows you to read the URL query string parameters in your component. For example:
+
+```js
+http://localhost:3000/products?page=2&filter=featured
+```
+
+You can use the useSearchParams hook to read everything after `/products`.
+
+It returns the read-only version of the [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) interface.
+
+```js copy
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export default function SearchBar() {
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("search");
+
+  // URL -> `/dashboard?search=my-project`
+  // `search` -> 'my-project'
+  return <>Search: {search}</>;
+}
+```
+
+## Examples
+
+### Reading a search terms
+
+Suppose you have a URL like this:
+
+```bash
+/products?search=shoes
+```
+
+You can use this hook to get the query parameters as follows:
+
+```js copy
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export default function ProductList() {
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get("search");
+
+  return <h1>Searching for: {searchTerm}</h1>;
+}
+```
+
+### Pagination
+
+```bash
+/blog?page=2
+```
+
+```js copy
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export default function Blog() {
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1");
+
+  // parseInt() is used to return an integer
+
+  return <p>You are on page {page}</p>;
+}
+```
+
+### Toggle view modes
+
+```bash
+/dashboard?view=grid
+```
+
+```js copy
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export default function Dashboard() {
+  const searchParams = useSearchParams();
+  const viewMode = searchParams.get("view") || "list";
+
+  return (
+    <div>
+      <p>View mode: {viewMode}</p>
+      {viewMode === "grid" ? <GridView /> : <ListView />}
+    </div>
+  );
+}
+```
+
+<Callout type="info">
+  1. useSearchParams does not cause re-renders when the URL changes using the
+  browser back and forward buttons. 2. If you want to reload the page, use a
+  combination of useSearchParams and useEffect.
+</Callout>

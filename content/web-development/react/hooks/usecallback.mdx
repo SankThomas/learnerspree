@@ -1,0 +1,59 @@
+import { Callout } from "nextra/components";
+
+# useCallback
+
+<Callout type="info">
+  React 19 comes with the React Compiler which handles automatic re-renders,
+  effectively rendering the useCallback hook useless. However, at the time of
+  writing this, this feature is still in development and is opt-in. So if you
+  choose to use it, then you don’t need the useCallback hook anymore. If you
+  don’t choose to use it, then the useCallback hook is still useful to you.
+</Callout>
+
+The useCallback hook returns a memoized **callback function**. A callback function is a function that is passed to another function as an argument. This allows a function to call another function.
+
+### What is memoization?
+
+This was a concept that was hard for me to understand in the beginning because **“memoization is an optimization technique used primarily to speed up computer programs by storing the results of expensive function calls to pure functions and returning the cached result when the same input occurs again.”** Yeah, that was very hard for me to understand. The words make sense, the statement just didn’t click. In this section, I am going to attempt to explain memoization in a manner that is easy to understand.
+
+First of all, let’s break down the word. **Memoization** sounds so similar to memorization, and yes, they do mean the same thing – to remember. Just like you memorize something and you can remember it for a long time, memoization refers to your computer program remembering calculations (or functions) that you have done before so that it doesn’t have to redo them every single time that a similar calculation (or function) is required.
+
+For example, imagine you have a recursive function (a function that calls itself) such as one to “look” into the folders on your desktop to get a certain file. In such a case, you would need to store the previous value when you go into one folder so that when you open up your program again, you can continue from that exact point. A good example of this is how saving images works. When you save one image in your Downloads folder for example, your computer will remember the folder for the next time that you save another image.
+
+This is very beneficial because you don’t have to navigate into a folder that is ten stages deep every single time you want to save an image; and, as you can already tell, that is great even for user experience.
+
+Have you ever had to get the factorial of a number? Or had to build a file explorer? These are good examples where you can use memoization.
+
+Just like the useEffect and useMemo hooks, the useCallback hook will only run when one of its dependencies updates.
+
+It has the following syntax:
+
+```js
+const functionName = useCallback(() => {
+  // Some block of code
+}, [dependencies]);
+```
+
+We create a function and then wrap the block of code around the useCallback hook, before finally adding a dependency array which will ensure that the useCallback will only run when this dependency updates.
+
+**For example:**
+
+```js
+import { useState, useCallback } from "react";
+
+export default function TodoList() {
+  const [items, setItems] = useState([]);
+
+  const addListItem = useCallback(() => {
+    setItems(items.map((item) => item));
+  }, [items]);
+}
+```
+
+Above, we have a component called TodoList which, hypothetically, should return a list of todo list items. We have our state value using the useState hook, and then we create our function called **addListItem** which is going to add the todo items to our list.
+
+However, notice that this function is wrapped with the useCallback hook. What this will do is that, when you add a list item, then the function will rerun and the component will re-render with the new items. This is possible because we store our list items inside a state value called **items** – and **items** is also what we pass in as the dependency array to useCallback. This means that when we update our state value by adding a new item to our todo list, then the useCallback will also rerun, because we have updated its dependency array.
+
+[Here is a link to one of my videos](https://www.youtube.com/watch?v=VWmv485y4jY) to help you understand the useCallback hook better.
+
+Also, in the previous chapter about [custom hooks](/custom-hooks#custom-usedebounce-hook), we created a **useDebounce** hook that used the useCallback hook.

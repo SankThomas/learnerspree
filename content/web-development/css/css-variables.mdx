@@ -1,0 +1,173 @@
+import { Callout } from "nextra/components";
+
+# CSS Variables
+
+In programming, variables are defined as pieces of state containing specific information that can be reused in a computer program. For example, in a school management system, you can keep track of a student's progress through a variable called `current_class` and setting it equal to the student's current class, and then once the school year is over, it automatically increments the variable by one.
+
+By doing that, you don't have to manually set a custom variable for every single student. You can use the same variable name and just update its value for every student.
+
+Now armed with the knowledge about variables, let's bring it to CSS with an example about website buttons.
+
+Many times, you will have to create a button for your website or web app. See the example button below:
+
+<br />
+<button className="bg-blue-400 text-white font-bold py-2 px-6 rounded hover:bg-blue-500 transition-all duration-150">Get Started</button>
+
+I'm sure you have seen this kind of button before. So what if you wanted to have the same blue color of the button in some other section? Well you could probably just add the background color on the section as below:
+
+```css copy
+button {
+    background-color: #60A5FA;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition: all 150ms ease-in-out;
+}
+
+button:hover {
+    background-color: #3B82F6;
+}
+
+section {
+    background-color: #60A5FA;
+}
+```
+
+Now, this is just one example using colors. What if you had the same properties on ten, or a hundred elements and you wanted them to inherit the same styles? Do you see where I'm going with this? For small apps, it is easy to just manually add the colors, but for huge apps where you have to remember so many things, it becomes very cumbersome.
+
+## Enter variables
+
+Take the following example:
+
+```css filename="index.css" copy
+button {
+    background-color: #60A5FA;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition: all 150ms ease-in-out;
+}
+
+button:hover {
+    background-color: #3B82F6;
+}
+
+section {
+    background-color: #60A5FA;
+}
+
+section p {
+    color: #60A5FA;
+    font-weight: bold;
+}
+
+section p:hover {
+    transition: all 150ms ease-in-out;
+}
+```
+
+From the example above, there are properties that have the same values. In such a small example, it's easy to type them out every single time. How about if you had a thousand lines in your CSS file? Well, then it becomes cumbersome. You fix that by adding variables in your CSS file. See the example below:
+
+
+## Declaring Global Variables
+
+You declare global variables in CSS using the `:root` pseudo class.
+
+```css filename="index.css" copy
+:root {
+    --background-color: #60A5FA;
+    --transition: all 150ms ease-in-out;
+}
+```
+
+`:root` is a pseudo class that matches the main element of a document - the `html` element. It is practically the same as the `html` element, only that it has a higher specificity.
+
+> Take note that variable names in CSS are declared with two preceding hyphens `--` and then the variable name afterwards. Without the hyphens, it is not considered a variable.
+
+<Callout type="info">
+    Give variables names descriptive of the function for which you want to use them. For example, a variable for changing the background color could be called `--background-color` or `--bg-color` or even `--primary-color`.
+
+    If you want, you can even name it `--android-is-better` but remember, someone is going to have to type that variable name every time it appears in your program, and in 6 months, you the author might not even remember what it does! Do you want that kind of torture?
+</Callout>
+
+## Using Variables In Your CSS
+
+Now that you already know how to declare your awesome variables, how do you use them in your CSS? Let's make our example above better:
+
+```css filename="index.css" copy
+:root {
+    --background-color: #60A5FA;
+    --hover-bg-color: #3B82F6;
+    --transition: all 150ms ease-in-out;
+}
+
+button {
+    background-color: var(--background-color);
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+ 
+button:hover {
+    background-color: var(--hover-bg-color);
+}
+ 
+section {
+    background-color: var(--background-color);
+}
+ 
+section p {
+    color: var(--background-color);
+    font-weight: bold;
+}
+ 
+section p:hover {
+    transition: var(--transition);
+}
+```
+
+Does the code above look familiar even just a little bit? It uses the `var` function. The `var` function, as we saw in the previous chapter, is used to access variables and pass them to the property name. That is what is happening in the above code.
+
+One proper advantage of using variables is that it's a change-once change-everywhere kind of relationship. Can you imaging if you had only 5 CSS files for your website, but they all reused the same color and you wanted to change it to a different color? Can you imagine manually changing every single occurrence of that color in all five files? Now imagine you have a CSS files containing the colors as global variables. All you would do is change that single occurrence and it would apply everywhere. Now that's good business.
+
+A very good use case for using variables is when you want to create different color palettes for a website or web app such as a light mode and a dark mode which has become extremely popular these days. You can define the colors you want to use for the light theme, and the colors you want to use for the dark theme; and then, using a little bit of JavaScript, you can toggle the themes and wow your users.
+
+Speaking of multiple CSS files, how would you declare variables? Simple, just declare your variables in a single CSS file, and then import it everywhere that you want them to be applied. For example:
+
+```css filename="globals.css" copy
+:root {
+    --primary-color: orange;
+    --background-color: paleblue;
+    --border-radius: 10px;
+    --box-shadow: 4px 4px 4px #11111198;
+    --transition: all 500ms ease-in-out;
+}
+```
+
+If you had multiple html files, then you would simply link this file as you would a CSS file:
+
+```html filename="index.html" copy
+<!-- Some boilerplate code above -->
+<link rel="stylesheet" href="globals.css" />
+<!-- Other CSS files -->
+
+<!-- Rest of code -->
+```
+
+And in another file called `about.html` for example:
+
+```html filename="about.html" copy
+<!-- Some boilerplate code above -->
+<link rel="stylesheet" href="globals.css" />
+<!-- Other CSS files -->
+
+<!-- Rest of code -->
+```
+
+Just make sure that you are referencing the file correctly. The above example assumes that the HTML files are located in the same folder as the CSS files.
+
+And I think that covers it for CSS Variables. On to the next chapter!

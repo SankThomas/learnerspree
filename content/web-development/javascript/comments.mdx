@@ -1,0 +1,73 @@
+import { Callout } from "nextra/components";
+
+# Comments in JavaScript
+
+Comments are like annotations in a book. They are used to explain more about the code, and to give future developers of your app more information about what the code does...At least that's the main purpose of comments.
+
+You will find yourself using comments to debug your code, to disable parts of your code that you don't want to execute, or to leave a ToDo list for yourself.
+
+Comments are ignored by compilers and interpreters when they are executed. Compilers and interpreters are applications used to execute code.
+
+We add comments in JavaScript by using the following syntax:
+
+```javascript
+/* Type comment here */
+```
+
+> You will find yourself using this syntax to add comments for every other normal programming language out there.
+
+That's it! Any text you write in the space between the slashes and asterisks will be considered a comment and skipped over. You can use this to disable parts of your code that you don't want to execute for reasons such as it causes an error in the application. For example:
+
+``` javascript
+  const name = "Thomas";
+  const name = "Sankara";
+```
+
+The code above causes the error **Identifier name has already been declared**. Therefore it causes your app not to function the way it should. You can circumvent this by commenting out the line you don't need, as in the example below:
+
+``` javascript
+  const name = "Thomas";
+  /* const name = "Sankara"; */
+```
+
+However, there are two different types of comments to be used depending on the situation. Single-line comments and multi-line comments.
+
+## Single-line comments
+
+As the name suggests, these comments should be used when you are commenting out only one single line of code. It is represented by double forward slashes at the beginning of the line you want to comment out.
+
+Therefore, refactoring the example above, it would look like this:
+
+``` javascript
+  const name = "Thomas";
+  // const name = "Sankara";
+```
+
+## Multi-line comments
+
+These type of comments are the most common, and span multiple lines of code. You should use these comments when you want to comment out huge chunks of code for debugging or testing, or when you want to document your code. For example:
+
+``` javascript
+  function openNavbar() {
+    const nav = document.getElementById("navbar");
+    const menuButton = document.getElementById("menu-button");
+
+
+    // The code block below is causing an error on runtime
+
+    /* 
+      menuButton.addEventListener("click", () => {
+        nav.classList.toggle("open");
+      })
+    */
+
+   // Test whether the button is visible in the DOM
+   console.log(menuButton);
+  }
+```
+
+Above, we have demonstrated that we can document, debug and test code using comments.
+
+<Callout type="info">
+  Any code written in comments will not be executed.
+</Callout>

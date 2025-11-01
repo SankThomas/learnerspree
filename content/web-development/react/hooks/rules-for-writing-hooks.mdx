@@ -1,0 +1,68 @@
+import { Steps } from "nextra/components";
+
+# Rules For Writing Hooks?
+
+Just like with everything in programming, you need some predefined boundaries to stick to in order to write clean code. So, here are some rules to follow when writing React hooks:
+
+The rules are numbered, but that does not mean that this is their order.
+
+<Steps>
+### Rule 1
+
+Always begin hook names with the word use. You will notice that all hooks MUST be prefixed with the word “use”, and then the name of the hooks. For example, useState, useEffect. Take note, however, that React also now has a hook called use.
+
+### Rule 2
+
+Always declare hooks at the top level of your component. This means that when you want to use any hook, it must come before your render method, i.e, you cannot place React hooks inside a return statement – they must be placed as the first item in your component as you will see in the examples.
+
+### Rule 3
+
+Always use hooks in function components – because they don’t work outside of function components anyway.
+
+### Rule 4
+
+You can only use hooks on the client-side. Therefore, if you are using a server-side React framework like NextJs, you may not be able to use hooks until you transform the file into a client component using the directive:
+
+```js
+"use client"
+```
+
+at the top of your file.
+
+### Convention
+
+When you create custom hooks, place them inside a folder named “hooks” in your workspace. This will help you separate your logic for hooks from the rest of your application, and will allow you to import your hooks as necessary into whatever component might require them. This is not a rule per se, but a recommended convention that will help you to debug as well as read older code easily.
+
+</Steps>
+
+When writing hooks, there are two ways you can use them:
+
+<Steps>
+### As a named import
+
+All hooks are always imported as named imports, that is, inside curly brackets, from the React library. However, there is a way you can use the hooks without importing them, as shown below:
+
+```js {4}
+import { useState } from "react";
+
+export default function TheStateHook() {
+  const [name, setName] = useState("Sankara");
+
+  return <div>{name}</div>;
+}
+```
+
+### Using the React Library
+
+You can import the React library which will give you access to all the functions and hooks in React. You just have to write them as `React.hookName` and you will be good to go.
+
+```js {4}
+import React from "react";
+
+export default function TheStateHook() {
+  const [name, setName] = React.useState("Sankara");
+
+  return <div>{name}</div>;
+}
+```
+</Steps>

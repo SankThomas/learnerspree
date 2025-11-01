@@ -1,0 +1,134 @@
+import { Callout, Steps } from "nextra/components";
+
+# useLayoutEffect
+
+The useLayoutEffect is a React hook that runs synchronously after all DOM mutations, but before the browser paints the UI. It blocks the browser from painting anything until your code has run.
+
+## Syntax
+
+```js
+useLayoutEffect(() => {
+  // DOM read or write
+  return () => {
+    // cleanup (optional)
+  };
+}, [dependencies]);
+```
+
+It is nearly identical to the useEffect hook, the only difference being that it runs syncronously before the browser paints, while useEffect runs asynchronously after the browser paints.
+
+<Callout type="info">
+  ### When to use
+
+  1. To measure DOM elements, such as when getting the size of a `div` using `getBoundingClientRect()`.
+  2. To update styles or scroll positions immediately, such as when using `scrollTo`.
+  3. To prevent layout shift or flicker
+
+  ### When not to use
+  Do not substitute it with the useEffect hook. Therefore, do not use it for things such as:
+  1. Fetching data from an API
+  2. Creating timers
+  3. Updating state unrelated to layout
+</Callout>
+
+Here are some examples:
+
+## Example 1: Measuring layout before paint
+
+```js copy
+import { useRef, useState, useLayoutEffect } from 'react';
+
+function Box() {
+  const boxRef = useRef(null);
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    if (boxRef.current) {
+      const rect = boxRef.current.getBoundingClientRect();
+      setWidth(rect.width);
+    }
+  }, []);
+
+  return (
+    <div>
+      <div
+        ref={boxRef}
+        style={{ width: '50%', background: 'lightblue', height: 100 }}
+      >
+        Resize me
+      </div>
+      <p>The box is {width}px wide</p>
+    </div>
+  );
+}
+```
+
+## Example 2: Preventing layout shift
+
+```js copy
+import { useLayoutEffect, useRef, useState } from 'react';
+
+function ToggleBox() {
+  const [show, setShow] = useState(false);
+  const boxRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!show && boxRef.current) {
+      // This is applied before the browser paints, and therefore prevents awkward visual jumps
+      boxRef.current.style.display = 'none';
+    }
+  }, [show]);
+
+  return (
+    <>
+      <button onClick={() => setShow(!show)}>
+        {show ? 'Hide' : 'Show'} Box
+      </button>
+      <div
+        ref={boxRef}
+        style={{
+          width: 200,
+          height: 100,
+          background: 'skyblue',
+          marginTop: 10,
+        }}
+      >
+        I am the box
+      </div>
+    </>
+  );
+}
+```
+
+## Example 3: Scroll to bottom after DOM update
+
+This example is a chat box that automatically scrolls to the latest message as soon as they are rendered:
+
+```js copy
+import { useLayoutEffect, useRef } from 'react';
+
+export function Chat({ messages }) {
+  const endRef = useRef(null);
+
+  useLayoutEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'auto' });
+  }, [messages]);
+
+  return (
+    <div style={{ height: 200, overflowY: 'auto', border: '1px solid gray' }}>
+      {messages.map((msg, index) => (
+        <div key={index}>{msg}</div>
+      ))}
+      <div ref={endRef} />
+    </div>
+  );
+}
+```
+
+<Callout type="warning">
+
+### Note:
+
+  1. useLayoutEffect blocks the UI, which can lead to performance issues if you overuse it.
+  2. You cannot use this hook in server-rendered apps since, like all other hooks, it should only be used on the client-side.
+</Callout>

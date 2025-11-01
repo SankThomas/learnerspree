@@ -1,0 +1,71 @@
+import { Callout, Steps, Tabs, Tab } from "nextra/components";
+
+# How to build your React Native App for the App Store
+
+When you have successfully built your mobile app, just like a website, the only thing that remains is to package it and share it out to your target users.
+
+For this particular section, I will be covering how to package an Android app and share it to the Google Play Store...because I've never owned an iPhone and I don't know the requirements. Of course, I could just Google it and paste it here, but I find the content more relatable when it's someone who has the experience writing it.
+
+<Callout>
+  This section assumes that you have some basic knowledge of Android Studio and Mobile app development using Android Studio and React Native.
+
+If you want to learn how to get started with Android Studio, React Native, and Expo, check out [Mobile App Development](/react-native/introduction)
+
+</Callout>
+
+## Packaging your App using bare React Native
+
+## Packaging your App using Expo
+
+When using Expo, you will need the Expo (EAS) CLI.
+
+EAS stands for Expo Application Services, and CLI is command line interface. This will allow you to build your apps and upload them to the Expo Cloud, and you will be provided with a link which you can share with testers and eventual users to download and install your app.
+
+The downside to this is that your mobile phone will probable detect this application as a foreign app, and therefore label it as harmful. For most users, they might not install this application on their phone, but for the purposes of testing, you can safely ignore this warning and Install Anyway.
+
+<Steps>
+  ### Step 1 - Install the Expo CLI globally on your machine
+
+{" "}
+
+<Tabs items={["npm", "yarn", "pnpm"]}>
+  <Tabs.Tab>`npm install --global eas-cli`</Tabs.Tab>
+  <Tabs.Tab>`yarn global add eas-cli`</Tabs.Tab>
+  <Tabs.Tab>`pnpm install --global eas-cli`</Tabs.Tab>
+</Tabs>
+
+### Step 2 - Build your application apk
+
+This part will build and bundle your app to an APK file which you can install on your physical device or emulator if you will be testing with Android Studio.
+
+`eas build -p android profile preview`
+
+<Callout type="info">
+  `eas build` starts the build process.
+
+`-p` specifies the platform you're building for. You can specify `android` or `ios` or `all` if you're building for both platforms.
+
+`profile preview` is the name that you will use to identify your application on the
+Expo Dashboard. It can be substituted with either `local` or `emulator`
+depending on your use case.
+
+</Callout>
+
+### Step 3 - Wait
+
+Now all you have to do is wait for the process to finish, copy the link that will be provided for you in your terminal and download and install your app. Simple!
+
+<Callout>
+  When using `eas build`, your app is only stored in the Expo Cloud for 30 days
+  if you're on the free tier. However, whoever installed the app before this
+  time expired will still have the app on their device even after the 30 days.
+  Of course, you can upgrade depending on your needs.
+</Callout>
+
+</Steps>
+
+## Sharing your App in the App Store
+
+Before you can share your app with everyone in the App store, you will need about 25 of the US dollar to register for a Developer Account. It is a one time payment so that they can register your account in accordance with the Data Protection and Privacy Stuff.
+
+**TL;DR:** Once you make the $25 one-time-payment, you will be able to build and upload as many apps as you want on the Play Store.

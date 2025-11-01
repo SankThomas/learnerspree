@@ -1,0 +1,139 @@
+import { Callout } from "nextra/components";
+
+# useDebugValue
+
+This is a unique hook in React because it does not affect the app's behaviour or the UI. Instead, it is used to label custom hooks so that, as a developer, you will be able to inspect your application and get the most useful information.
+
+<Callout type="info">
+  useDebugValue is a special hook for debugging custom hooks. By this chapter, you should know how to create custom hooks. If not, [read this chapter](/custom-hooks)
+</Callout>
+
+## React DevTools
+In order to inspect your hooks, you need to install the React DevTools Extension.
+
+React DevTools is a browser extension available on Google Chrome, Microsoft Edge and Mozilla Firefox that helps us to inspect React components. In this inspection, it also allows us to edit props and identify performance issues with our application, that is, it helps us to debug our application. I recommend downloading and installing this extension in your browser of choice because it is not only easy to use, but also very beneficial in enhancing your productivity.
+
+With this tool installed, you get access to two extra tabs in your browser’s developer tools: **Components** and **Profiler**. See the image below:
+
+![React devtools illustration](/assets/react-devtools.png)
+
+On the left section of the image above, you can clearly see the component hierarchy – First the App is the parent component, then the List component, then the ListItem component – which is highlighted. On the right section of the image, we can clearly see that the **ListItem** component which has been highlighted, has some props: one is the **item** prop which is an object, followed by the functions: **removeItem** and **toggleItem** respectively.
+
+Below that, the component has access to two hooks – really it’s one hook but it shows as two because it has been used twice within the component. This hook is the useCallback hook.
+
+And finally we can see the component hierarchy, that the ListItem component is rendered by the List component, which is rendered by the App component.
+
+### Installation
+
+1. Google Chrome – Install from the Chrome web store.
+2. Firefox – Install it as an addon from Mozilla Addons.
+3. Edge – Install the extension from the Microsoft store.
+
+For Safari and other browsers:
+
+Install it from a terminal window as follows:
+
+#### Using Yarn
+
+```yarn copy
+yarn global add react-devtools
+```
+
+#### Using Npm
+
+```npm copy
+npm install -g react-devtools
+```
+
+And then you can open the developer tools as follows:
+
+```npm copy
+react-devtools
+```
+
+
+## Syntax
+
+It has the following syntax:
+
+```js copy
+useDebugValue(value)
+```
+
+You can also pass an optional formatting function:
+
+```js
+useDebugValue(value, value => formatValue(value));
+```
+
+<Callout type="info">
+  useDebugValue does not return anything
+</Callout>
+
+### Example 1: A custom hook to check if a user is online
+
+```js copy
+import { useState, useEffect, useDebugValue } from 'react';
+
+export default function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    function handleOnline() {
+      setIsOnline(true);
+    }
+
+    function handleOffline() {
+      setIsOnline(false);
+    }
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // This will show "Online" or "Offline" in React DevTools
+  useDebugValue(isOnline ? 'Online' : 'Offline');
+
+  return isOnline;
+}
+```
+
+In React DevTools, whenever you use this custom hook, it will show a debug label as follows:
+
+```js
+Hooks
+  ▶ useOnlineStatus: "Online"
+```
+
+### Example 2: With format function
+
+```js copy
+import { useEffect, useState, useDebugValue } from "react";
+
+export default function useUser(id) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Fake async fetch
+    setTimeout(() => {
+      setUser({ id, name: 'Alice' });
+    }, 1000);
+  }, [id]);
+
+  useDebugValue(user, user => user ? `User: ${user.name}` : 'Loading...');
+
+  return user;
+}
+```
+
+Once again, whenever you use the custom hook in your application, React DevTools will show something along the following lines:
+
+```js
+Hooks
+  ▶ useUser: "User: Alice"
+```

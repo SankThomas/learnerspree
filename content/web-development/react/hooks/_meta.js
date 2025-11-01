@@ -1,0 +1,28 @@
+const meta = {
+  about: "About This Section",
+  "what-are-hooks": "What Are Hooks?",
+  "rules-for-writing-hooks": "Rules For Writing Hooks",
+  usestate: "useState",
+  useeffect: "useEffect",
+  "custom-hooks": "Creating custom hooks",
+  useref: "useRef",
+  usecallback: "useCallback",
+  usememo: "useMemo",
+  usecontext: "useContext",
+  usedebugvalue: "useDebugValue",
+  usedeferredvalue: "useDeferredValue",
+  useinsertioneffect: "useInsertionEffect",
+  uselayouteffect: "useLayoutEffect",
+  usereducer: "useReducer",
+  useimperativehandle: "useImperativeHandle",
+  usesyncexternalstore: "useSyncExternalStore",
+  usetransition: "useTransition",
+  useid: "useId",
+  useoptimistic: "useOptimistic",
+  useparams: "useParams",
+  usepathname: "usePathname",
+  userouter: "useRouter",
+  usesearchparams: "useSearchParams",
+};
+
+export default meta;

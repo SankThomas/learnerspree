@@ -1,0 +1,130 @@
+import { Callout } from "nextra/components";
+
+# useImperativeHandle
+
+The useImperativeHandle hook is used to expose specific methods or values from a child component to its parent using `ref`, rather than exposing the entire DOM node.
+
+<Callout>
+  Use this hook sparingly, because overusing it can lead to code that is hard to
+  maintain and test.
+</Callout>
+
+## Syntax
+
+```js
+useImperativeHandle(ref, createHandle, dependencies?)
+```
+
+1. `ref` - the ref object passed from the parent component.
+2. `createHandle` - a function that returns the object you want to expose to the parent.
+3. `dependencies` - an array of dependencies that will update the handle when updated.
+
+##
+
+In order to use useImperativeHandle, your child component must be wrapped with `forwardRef`. This allows the parent to pass a `ref` that can be customized using useImperativeHandle.
+
+## Example: Focusing an input from the parent
+
+In your app.jsx file:
+
+```js copy filename="app.jsx"
+import Input from "./components/input";
+import React, { useRef } from "react";
+
+export default function Home() {
+  const inputRef = useRef();
+
+  return (
+    <div>
+      <Input inputRef={inputRef} />
+      <button onClick={() => inputRef.current.focus()}>Focus input</button>
+    </div>
+  );
+}
+```
+
+And then in your custom component:
+
+```js copy filename="input.jsx"
+import React, { useRef, useImperativeHandle } from "react";
+
+export default function Input({ inputRef }) {
+  const internalRef = useRef();
+
+  useImperativeHandle(
+    inputRef,
+    () => ({
+      focus: () => {
+        internalRef.current.focus();
+      },
+    }),
+    [],
+  );
+
+  return <input ref={internalRef} />;
+}
+```
+
+If you run this example, you will be able to click the button to focus on the input. But note that the button is in the parent component, but it has access to the ref which is in the input component, and can, therefore, toggle focus on the input.
+
+## Example 2: Modal component with `open` and `close` methods
+
+In the example below, we need the parent component to be able to imperatively open or close a modal component.
+
+```js copy filename="modal.jsx"
+import React, {
+  useRef,
+  useImperativeHandle,
+  useState,
+  forwardRef,
+} from "react";
+
+const Modal = forwardRef((_, ref) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    open: () => setIsVisible(true),
+    close: () => setIsVisible(false),
+  }));
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <p>This is a modal</p>
+        <button onClick={() => setIsVisible(false)}>Close</button>
+      </div>
+    </div>
+  );
+});
+
+export default Modal;
+```
+
+And then in your parent component:
+
+```js copy filename="app.jsx"
+import React, { useRef } from "react";
+import Modal from "./Modal";
+
+function App() {
+  const modalRef = useRef();
+
+  return (
+    <div>
+      <button onClick={() => modalRef.current.open()}>Open Modal</button>
+      <Modal ref={modalRef} />
+    </div>
+  );
+}
+```
+
+With this example, you will be able to open or close the modal directly from the parent.
+
+<Callout type="info">
+  In the examples above, the parent component does not know about the internal
+  state of the child component. It only interacts with the imperative interface
+  provided. This helps encapsulate logic while still allowing controlled access
+  when necessary.
+</Callout>

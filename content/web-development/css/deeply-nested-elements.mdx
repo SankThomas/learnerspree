@@ -1,0 +1,142 @@
+import { Callout } from "nextra/components";
+
+# Deeply Nested Elements
+
+In this module, we are going to talk about how to style Deeply Nested Elements in your HTML.
+
+Usually, your HTML structure will not be like the examples we have been using with only one parent element as below:
+
+```html
+<section>
+    <p>This paragraph is the child element of the <code>section</code> element</p>
+</section>
+```
+
+In order to achieve complex User Interfaces (UIs), you will have to integrate multiple elements and then style them appropriately. For example:
+
+```html
+<section class="banner">
+   <div class="container">
+       <article class="profile">
+           <img src="https://tsbsankara.com/static/media/portrait.f011507fb84b0bb03607.jpg"
+           alt="Profile avatar" />
+           <ul>
+               <li>Thomas Sankara</li>
+               <li>Front-end Web Developer</li>
+           </ul>
+       </article>
+       
+       <article>
+           <h2>About Myself</h2>
+           <p>
+             Merry alone do it burst me songs. Sorry equal
+             charm joy her those folly ham. In they no is
+             many both. Recommend new contented intention
+             improving bed performed age.
+            </p>
+       </article>
+   </div> 
+</section>
+```
+
+Using the above example, let's say that you wanted to style the first `<li>` list item. There are two ways you can do this, and both have their merits and demerits.
+
+## 1. Going down the hierarchy
+
+The first, most obvious, and most common method of styling this element would be to go down the waterfall till you get to it, and then apply your styles.
+
+**Example:**
+
+```css
+section div article:first-child ul li {
+    /* Apply your styles */
+}
+```
+
+**Example using the class names above:**
+
+```css
+.banner .container .profile ul li {
+    /* Apply your styles */
+}
+```
+
+The most obvious problem with this, however, becomes the continuous and tediuos typing that you are going to have to do, and even more if you will have to add media queries for responsiveness.
+
+Therefore, you would want an easier, perhaps simpler way to style the same list item, but without having to go through all that hassle. There is...and you might do something like this:
+
+**Example:**
+
+```css
+section div article ul li {
+    /* Apply your styles */
+}
+```
+
+Or, to make it even shorter:
+
+```css
+section div ul li {
+    /* Apply your styles */
+}
+```
+
+The above two examples work. The problem with doing this, however, is that you are specifying all the list items that are inside a `div` element that is located inside a `section`.
+
+So, if we were to amend our HTML example above to something like this:
+
+```html
+<section class="banner">
+   <div class="container">
+       <article class="profile">
+           <img src="https://tsbsankara.com/static/media/portrait.f011507fb84b0bb03607.jpg"
+           alt="Profile avatar" />
+           <ul>
+               <li>Thomas Sankara</li>
+               <li>Front-end Web Developer</li>
+           </ul>
+       </article>
+       
+       <!-- Notice the introduction of a second unordered list -->
+       <article>
+           <div>
+               <h3>Professional skills</h3>
+               <ul>
+                   <li>Web Design</li>
+                   <li>Full stack web development</li>
+               </ul>
+           </div>
+       </article>
+   </div> 
+</section>
+```
+
+and you still styled the `ul` element like so:
+
+```css
+section div ul li {
+    /* Apply your styles */
+}
+```
+
+You will end up styling even the second `ul` because it can still be accessed the same way. One way to subvert this is to use pseudo classes as below:
+
+```css
+section article:nth-child(2) div ul li {
+    /* Apply your styles */
+}
+```
+
+This will target only the list item in the second `article` element.
+
+You can also use class names, for example:
+
+```css
+section div ul.second-list li {
+    /* Apply your styles */
+}
+```
+
+This will look for the unordered list that has the class of `second-list` and only style the list items inside.
+
+And that is how you style deeply nested elements.

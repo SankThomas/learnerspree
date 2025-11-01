@@ -1,0 +1,104 @@
+# Arithmetic Operators
+
+Just like in Basic Maths, we can do Mathematical operations in a programming language. Think of addition, subtraction, division (without the long), multiplication, exponentiation, and modulus.
+
+### Addition `+`
+
+Represented by the `plus` symbol. It is used to add two operands together.
+
+**Example:**
+
+``` javascript
+let total = 20 + 30;
+```
+
+In JavaScript, you can add numbers to strings - but it behaves in a weird way. See the example below:
+
+``` javascript
+let x = 10;
+let y = 20;
+let name = "Sankara";
+
+let sum = x + y + name; // Will return 30Sankara
+let sum2 = name + x + y; // Will return Sankara1020
+```
+
+The value of `sum` will be `30Sankara` because the first value encountered is an integer, then another integer, then a `string` value. Therefore, the integers will be added and then the string will be appended to the end of the sum because strings are not integers.
+
+In the second case however, because the string value is the one that begins, then the entire expression is treated as a string. So, even `x` and `y` in the second expression are considered strings. Therefore, the values are concatenated and not added. Read more about this in [String Concatenation](/web-development/javascript/strings) and [Data Types](/web-development/javascript/data-types#string-concatenation).
+
+### Subtraction `-`
+
+Represented by the `minus` symbol. It used to get the difference between two operands.
+
+**Example:**
+
+``` javascript
+let difference = 20 - 30; // Just like in Maths, numbers can be in the negative.
+```
+
+### Multiplication `*`
+
+Represented by the `asterisk`. Since computers understand the letter X as the letter X, we cannot use it for multiplication like we do when writing. So, we use the asterisk symbol to multiply operands.
+
+**Example:**
+
+``` javascript
+let product = 20 * 30;
+```
+
+### Division `/`
+
+Represented by the forward slash. This is used to get the quotient between two operands.
+
+**Example:**
+
+``` javascript
+let quotient = 20 / 4;
+```
+
+### Modulus `%`
+
+Represented by the percent symbol. It is used to get the remainder of a division.
+
+**Example:**
+
+``` javascript
+let modulus = 19 % 4; // Returns 3
+```
+
+> When you use modulus, the value you get back will be the remainder after division is done.
+
+### Exponentiation `**`
+
+Represented by double asterisks. It is used to get the power - to a certain value - of an operand.
+
+**Example:**
+
+``` javascript
+let product2 = 20 ** 2; // 20 raised to the power of 2
+let product3 = 20 ** 3; // 20 raised to the power of 3
+let product4 = 20 ** 4; // 20 raised to the power of 4
+```
+
+## Operator precedence
+
+Operator precedence means the order of execution of operations depending on the Mathematical Symbol used, i.e **BODMAS**.
+
+BODMAS stands for **B**rackets, **O**rder of powers (also called **O**f), **D**ivision, **M**ultiplicataion, **A**ddition, and **S**ubtraction, and it behaves the same way in programming as it does in Mathametics:
+
+Operands in brackets are executed first, then the order of powers, then divided, then multiplied, added and finally subtracted. Take a look at the example below:
+
+``` javascript
+let total = (40 - 20) / 3 * 10; // Returns 66.66 recurring
+```
+
+In the above example, we first get the value of `40 - 20` because they are in brackets, then we divide this new value by `3`, and then finally multiply it by `10`. Try to solve the examples below:
+
+``` javascript
+let total = 10 * 10 + 10;
+let profit = 10 / 10 * 10;
+let grossProfit = (2400 - 1500) / 12 * 100;
+```
+
+That is going to be it about Arithmetic Operators. Next, we are going to look at Logical Operators.

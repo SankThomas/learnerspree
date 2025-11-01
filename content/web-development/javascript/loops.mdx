@@ -1,0 +1,196 @@
+import { Callout, Steps } from "nextra/components";
+
+# Loops
+
+Loops are a way to execute a certain command or block of code, repeatedly, or over a set number of times. Looping over items is called **iteration**.
+
+To iterate means to perform something again and again.
+
+The way loops work is that they iterate over your code block until a certain condition is met, after which they stop, or until they encounter the [`break`](#the-break-statement) statement - just like in a [`switch`](/web-development/javascript/control-flow#switch)
+
+## The `for` loop
+
+The `for` loop repeats until your condition evaluates to false, after which it breaks out of the loop. It has the syntax:
+
+``` javascript
+for (initialization; condition; afterthought) {
+  // Some code block
+}
+```
+
+> Note that we use semicolons and not commas!
+
+**For Example:**
+
+``` javascript
+for (let age = 10; age < 8; age++) {
+  console.log("This is a minor");
+}
+```
+
+The above code block will be executed in the following way:
+
+<Steps>
+### Initialization
+
+First, a variable with the name `age` will be initialized to a value of `10`. This initialization can also be defined outside of the `for` loop in the following way:
+
+``` javascript {1}
+let age = 10;
+for (age; age < 8; age++) {
+  console.log("This is a minor");
+}
+```
+
+### Check the condition
+
+Next, JavaScript will move to check whether the condition you have passed in evaluates to either `true` or `false`. If it evaluates to `true` then the loop will continue to the next phase which is the `afterthought` where something like an increment or decrement to your conditional value happens. However, if it evaluates to false, then JavaScript will break out of the loop and stop its execution.
+
+In the example above, our condition evaluates to `true`. Therefore, we move on to the `afterthought`.
+
+### The Afterthought
+
+Here, you can do something like increment or decrement your conditinoal value so that at one time, the condition will have to evaluate to false so that you don't end up with an infinite loop.
+
+In our example above, we increment our `age` value by 1 for every time that the condition is `true`. This will make the loop run only two times - because we will increment `age` from 8 to 10 only two times. When this happens, our condition for the age being less than 10 is now no longer being met. Therefore, it breaks out of the loop and it evaluates to `false`.
+</Steps>
+
+## The `for...in` loop
+
+This is used to loop over the properties of an object. It has the syntax:
+
+``` javascript
+for (let i in objectname) {
+  // Some code block
+}
+```
+
+**For Example:**
+
+``` javascript
+// Create an object
+const person = {
+  name: "Thomas",
+  age: 27,
+}
+
+// Loop over the object properties
+for (let i in person) {
+  console.log(person[i]); // Will return Thomas and 27 as indivdual object values.
+}
+```
+
+It can also be used to loop over an array:
+
+**For Example:**
+
+``` javascript
+const numbers = [45, 4, 9, 16, 25];
+
+for (let i in numbers) {
+  console.log(numbers[i]); // Will return the individual elements of the numbers array
+}
+```
+
+## The `for...of` loop
+
+The `for...of` loop is used to iterate over iterable objects, such as arrays, strings, Maps and NodeLists or an object that has iterable properties.
+
+**For Example:**
+
+``` javascript
+let languages = ["JavaScript", "Python", "Java"];
+
+for (let x of language) {
+  console.log(x); // Will log out the individual languages
+}
+```
+
+<Callout type="info">
+  ### The difference between `for...of` and `for...in`
+  
+  Using the example above, the `for...of` loop will display the values of the array, but if you use `for...in`, it will log out the index of the items.
+</Callout>
+
+## The `while` loop
+
+The while loop iterates through a block of code as long as the specified condition is true. It has the following syntax:
+
+```js
+while (condition) {
+  // Do something
+  // Increment / Decrement
+}
+```
+
+For example, if you wanted to print a list of numbers between 0 and 10, you could do the following:
+
+```js
+let i = 0;
+
+while (i < 10) {
+  console.log(i);
+  i++;
+}
+```
+
+It is important to ensure that with every loop you create, the condition will at one time evaluate to **false** to prevent an infinite loop. Therefore, always test your loops to ensure the condition will fail at one time so that the loop breaks.
+
+## The `do...while` loop
+
+Contrary to other loops, the `do...while` loop will always run at least once - even if the condition evaluates to false at the first load. This is because of the syntax which ensures that the `do` statement runs before the `while` statement checks for the condition.
+
+A simpler explanation: It defines a code block to be executed once and then repeated as long as the condition is true.
+
+ It has the syntax:
+
+```js
+do {
+  // Code block to be executed when the condition is true
+} while (condition)
+```
+
+**Example:**
+
+```js
+let i = 0;
+
+do {
+  console.log(i);
+  i++
+} while (i < 10);
+```
+
+## The `break` statement
+
+This is used to break out of a loop and stop its immediate execution. For example:
+
+```js
+let i = 0;
+
+do {
+  console.log(i);
+  i++;
+  if (i === 5) break;
+} while (i < 10);
+```
+
+The above example will break the loop cycle when `i` evaluates to 5. Using the statement resourcefully can help to ensure you don't accidentally ship out infinite loops which can break your users' browsers.
+
+You will usually see the `break` statement being used with the [`switch` statement](/web-development/javascript/control-flow#switch).
+
+## The `continue` statement
+
+This is used to skip over a value when executing a loop. For example:
+
+```js
+let i;
+
+do {
+  console.log(i);
+  i++;
+  if (i === 5) continue;
+} while (i < 10);
+```
+
+When the value of `i` equal 5 in the example above, it will not be logged to the console, and the loop will continue to execute until the condition becomes false.

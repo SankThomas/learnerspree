@@ -1,0 +1,400 @@
+import { Callout, Steps } from "nextra/components";
+
+# Variables
+
+Variables are "containers" in your code that hold specific values called identifiers. For example:
+
+``` javascript
+age = 26;
+```
+
+Above, `age` is the identifier and `26` is the value assigned to it.
+
+## Syntax
+
+The syntax for variables is in the following way:
+
+``` javascript
+let age = 26;
+```
+
+Where `let age` is the declaration, `=` is the [Assignment Operator](#javascript-assignment-operator), and `26` is the initialized value.
+
+## Rules for writing variables
+
+<Steps>
+### Variables should be declared before they are used
+
+It goes without saying that you should declare a variable before you attempt to use it in your code, especially when you are using strict mode and don't want to run into many errors.
+
+### Identifiers are case-sensitive
+
+JavaScript is a case-sensitive language. Therefore, any user-defined identifiers are also case sensitive. This means that `number = 20` and `Number = 20` are two different variables.
+
+### Names can contain letters, digits, underscores and dollar signs
+
+The following declarations are all correct, and define three different variables with the same value.
+
+``` javascript
+  const number = 20;
+  const number20 = 20;
+  const $number = 20;
+  const _number20 = 20;
+```
+
+### Names cannot be reserved words
+
+Reserved words are words that JavaScript has set apart to be used to perform certain functions. For example, `let` and `const` are reserved words used to declare variables. Therefore, something similar to the example below will result in an error:
+
+``` javascript
+  let const = 20;
+  const let = 20;
+```
+
+However, this is correct:
+
+``` javascript
+  let number = 20;
+  const age = 20;
+```
+</Steps>
+
+## Naming conventions
+
+<Steps>
+
+Casing refers to capitalization of words. In programming, always use lowercase letters unless you absolutely cannot, because lowercase letters are easier to read. Another reason is because, in some JavaScript frameworks, variables beginning with uppercase letters are considered code components in that framework, and might break your app. Such frameworks include ReactJs.
+
+This works when the variable name is only one word. However, when writing compound words, you can use one of two methods:
+
+### camelCasing
+
+camelCasing refers to writing the first word of a compound word in small letters, and the second word beginning with a capital letter followed by small letters. For example:
+
+``` javascript
+  let numberOfYears = 20;
+  const ageGroup = "Young adult";
+```
+
+This is the preferred method of writing variable names and even function names in programming languages.
+
+### PascalCasing
+
+PascalCasing refers to writing the first letters of compound words in capital, followed by small letters. For example:
+
+``` javascript
+  let NumberOfYears = 20;
+  let AgeGroup = 20;
+```
+
+<Callout type="info">
+  You can use whatever naming convention is preferrable to you. However, the more recommended method is camelCasing because it is easier to read.
+
+  Make sure to stick with whatever naming convention you begin with so that the code you write remains consistent across the entire application. Do not mix naming conventions unless the situation explicitly requires it. Even then, ensure to document your code well to explain to other members of your team, or whoever will be reading your code later.
+</Callout>
+</Steps>
+
+## How to declare variables in JavaScript
+
+In JavaScript, variables can be declared in 5 ways:
+
+<Steps>
+  ### Automatically
+
+  In JavaScript, you can declare variables automatically by not using any of the keywords `var`, `let` or `const`. This results in a global variable that is accessible anywhere in your application. This is called **global scope**. For example:
+
+  ``` javascript
+  age = 26; // This is a global variable
+  ```
+
+  However, it is not recommended that you declare variables in this way because it may result in unintended consequences in your application. For example, you might reuse the same variable name in a different part of your application and reassign the value to it - which nullifies the initial declaration. Therefore, if some code was relying on the initial declaration, it is now moot. Do you get it?
+
+  In order to curb this, in 2009, ECMAScript5 (ES5) introduced `strict mode` which throws an error if you use an undeclared variable.
+  
+  <Callout type="info">
+    > Strict mode prohibits some JS syntax and eliminates silent errors by making them throw errors.
+
+    > ECMAScript is a standard for scripting languages, most popularly JavaScript, but also JScript and ActionScript and other scripting languages, that ensures interoperability of web pages across different browsers.
+  </Callout>
+
+  ### Using the `var` keyword
+
+  The `var` keyword has both a global scope and block scope. A global scope means it is available to the entire application. A block scope means that the variable will only be available within the function block in which it is declared.
+
+  When you use `var` outside of a function block, it is assigned the global scope. When you use it within a function block, it is assigned the function scope.
+
+  **For example:**
+
+  ``` javascript
+  var greeting = "Hello world!";
+
+  function myCustomGreeting() {
+    var customGreeting = "Hello JavaScript!";
+  }
+  ```
+
+  In the above example, `greeting` is globally scoped because it is defined outside of the `myCustomGreeting` function. Meaning, `customGreeting` is function scoped because it is defined within the  `myCustomGreeting` function. This further means that if we try to get the value of `customGreeting` outside of the function, we will get an error. See the example below:
+
+  ``` javascript
+  var greeting = "Hello world!";
+
+  function myCustomGreeting() {
+    var customGreeting = "Hello JavaScript!";
+    console.log(greeting); // No error, because greeting is global scoped
+  }
+
+  console.log(customGreeting); // Results in an error: customGreeting is not defined, i.e it is function scoped
+  ```
+
+  Variables declared using `var` can also be redeclared. Therefore, the two examples below are corret:
+
+  ``` javascript
+  // Example 1
+  var greet = "Hello";
+  var greet = "Hello world!";
+
+  // Example 2
+  var greet = "Hello";
+  greet = "Hello world!";
+  ```
+
+  However, note that this only works when the variables are of the same scope, that is, both must either be function scopes or block scoped. It will not work if one is function scoped and another is block scoped. 
+
+  #### How is `var` hoisted?
+
+  Hoisting is a topic of its own which will be covered [later](/web-development/javascript/hoisting), but I would like to introduce now because it is beneficial in order for us to understand how to declare variables and how JavaScript interprets it.
+
+  Hoisting refers to how JavaScript moves up variables and function declarations to the top of their scope before being executed...like hoisting of a flag. Therefore, we can do this:
+
+  ``` javascript
+  console.log(greet);
+  var greet = "Hello world";
+  ```
+
+  and it will be interpreted as:
+
+  ``` javascript
+  var greet; // Hoisted to the top
+  console.log(greet); // Returns `undefined` because it has not been initialized to any value
+  greet = "Hello world";
+  ```
+
+  <Callout type="info">
+    If you do not initialize a variable when using `var`, its default value is `undefined`.
+  </Callout>
+
+  #### The problem with `var`
+
+  `var` has one simple problem. It can be redefined and re-updated at any point in your code block. Take a look at the example below:
+
+  ``` javascript
+  var greetMe = "Hello there";
+  var numberOfTimes = 2;
+
+  if (numberOfTimes > 1) {
+    var greetMe = "Hello there Sankara";
+  }
+
+  console.log(greetMe);
+  ```
+
+  When the above code executes, `greetMe` will be updated to `Hello there Sankara` instead of the initial value of `Hello there`. This is okay if it's the behaviour you are expecting. However, if you do not intend for this to happen, it can have unintended and costly effects to your web application.
+
+  So how do you circumvent this issue? Well, you use `let` and `const`.
+
+  <Callout type="warning">
+    You should only use the `var` keyword if you want your web app to be completely compatible with old browsers. In newer code, use `let` and `const`.
+  </Callout>
+
+  ### Using the `let` keyword
+
+  In 2015, ECMAScript6 (ES6) was introduced, and with it came massive improvements to JavaScript including `let` and `const` which solve the issue presented by `var` above.
+
+  `let` is block scoped. Therefore, it can be updated, but not re-declared like `var` above. Take a look at the example below:
+
+  ``` javascript
+  let greetMe = "Hello there";
+  let numberOfTimes = 2;
+
+  if (numberOfTimes > 1) {
+    let greeting = "Hello there Sankara";
+    console.log(greeting); // Returns "Hello there Sankara"
+  }
+
+  console.log(greeting); // Returns undefined because let is block scoped...greeting is outside the scope
+  ```
+
+  When you declare a variable with `let`, its value can be updated if they are in the same scope. However, a variable declared with `let` cannot be updated within the same scope. Therefore, this will work:
+
+  ``` javascript
+  let greetMe = "Hello there";
+  greetMe = "Hello there Sankara";
+  ```
+
+  but this will not work:
+
+  ``` javascript
+  let greetMe = "Hello there";
+  let greetMe = "Hello there Sankara"; // error: Identifier greetMe has already been declared
+  ```
+
+  However, the example below will work:
+
+  ``` javascript
+  let greetMe = "Hello there";
+
+  if (true) {
+    let greetMe = "Hello there Sankara";
+    console.log(greetMe); // Returns: "Hello there Sankara"
+  }
+
+  console.log(greetMe); // Returns: "Hello there"
+  ```
+
+  This is because they are not of the same scope...that is, they are separated by a block of code, which is represented by opening and closing curly braces: `{}`. This therefore means that you can reuse names of variables when using `let` because if you use them in the same scope, it throws an error, and if you use them in different scopes, then you application works. This, therefore, makes `let` a better choice than `var`.
+
+  #### How is `let` hoisted?
+
+  `let` is hoisted just like `var`, but unlike `var` which is initialized with a value of `undefined`, `let` is not initialized at all. Therefore, if you try to use a variable declared with `let` before initilization, you will get a `Reference Error`.
+
+  Read more about [Hoisting](/web-development/javascript/hoisting). 
+
+  ### Using the `const` keyword
+
+  `const` stands for "constant". Therefore, variables declared using `const` cannot have their values reassigned, updated, or redeclared.
+
+  `const` is also block scoped like `let`. Therefore, you cannot access such a variable outside of its scope.
+
+  **Example 1:**
+
+  ``` javascript
+  const greetMe = "Hello there";
+  greetMe = "Hello there Sankara"; // Returns an error: assignment to a constant variable
+  ```
+
+  **Example 2:**
+
+  ``` javascript
+  const greetMe = "Hello there";
+  const greetMe = "Hello there Sankara"; // Returns an error: Identifier greetMe has already been declared
+  ```
+
+  Since you cannot reassign a value to a constant variable, it means that every variable declared using `const` must be initialized at the time of declaration.
+
+  We can use `const` to create objects, and this is a very interesting behavior because, even though we cannot the constant object, we can update its properties. Therefore, if we have an object such as this:
+
+  ``` javascript
+  const vehicle = {
+    brand: "Toyota",
+    horsepower: 500,
+  }
+  ```
+
+  we can do this:
+
+  ``` javascript
+  vehicle.horsepower = 400;
+  ```
+
+  but we cannot do this:
+
+  ``` javascript
+  vehicle = {
+    torque = "1000Nm",
+    year: 2018
+  } // Error: Assignment to a constant variable
+  ```
+
+  Because the above counts as reassigning the values of a constant variable. So, the error you will get is **Error: Assignment to a constant variable**
+
+  #### How is `const` hoisted?
+
+  `const` behaves in the exact same way as `let`. It is hoisted to the top, and its declaration is not initialized.
+
+  Read more about [Hoisting](/web-development/javascript/hoisting).
+
+  ### Destructuring
+  
+  Destructuring refers to pulling out certain values that you want from an object or an array, and leaving out all the ones you don't want - like unpacking items from a bag. You can destructure arrays and objects.
+
+  #### Destructuring an object
+
+  <Callout type="info">
+    If you're having trouble understanding objects, read through [this topic about objects](/web-development/javascript/objects)
+  </Callout>
+
+  Take a look at the example below:
+
+  ``` javascript
+  const person = {
+    firstName: "Thomas",
+    lastName: "Sankara",
+    age: 26,
+    job: "Front-end Developer",
+    residence: "Nairobi",
+    country: "Kenya"
+  }
+  ```
+
+  Let's say we only want the name of the person and their age. Using destrucutring, we can do this:
+
+  ``` javascript
+  const { firstName, lastName, age } = person;
+  ```
+
+  This is the destructuring syntax, and it is equivalent to:
+
+  ``` javascript
+  const firstName = person.firstName;
+  const lastName = person.lastName;
+  const age = person.age;
+  ```
+
+  We will talk more about destructuring in the topic, [Array and Object Destructuring](/web-development/javascript/destructuring).
+
+</Steps>
+
+## JavaScript Assignment Operator
+
+In all of the above examples, you have noticed that we have used the `=` sign. In JavaScript, this not the Equal Sign. It is the Assignment Operator. Meaning, it assigns the value on the right, to the identifier on the left.
+
+If you want the Equal Sign in JavaScript, you use double equal signs, i.e `==`.
+
+And if you want strict equality, that is, if you want to check whether two operands are equal and of the same type, you use triple equal signs: `===`.
+
+Take a look at the example below:
+
+``` javascript
+const name = "Thomas";
+const age = 28;
+
+console.log(name === age);
+```
+
+The above will return `false` because `name` is a string and `age` is an integer, and because they are not equal. Take a look at this second example:
+
+``` javascript
+const name = "Thomas";
+const newName = "Thomas";
+
+console.log(name === newName);
+```
+
+The following will output `true` because both `name` and `newName` are of the same type: they are both strings, and they are of equal value. Therefore, the following examples will also return `true`:
+
+```js
+// First example
+const name = undefined;
+const newName = undefined;
+console.log(name === newName);
+
+// Second example:
+const name = null;
+const newName = null;
+console.log(name === newName);
+```
+
+<Callout type="info">
+  When checking the type of a variable using the [typeof](/web-development/javascript/the-typeof-operator) operand, `null` returns **object** and `undefined` returns **undefined**. Therefore, in the first example above, both variables are of the same type of `undefined` and in the second example, both variables are of the same type of `object`. Take note.
+</Callout>
+

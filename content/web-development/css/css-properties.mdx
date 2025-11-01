@@ -1,0 +1,4422 @@
+import { Callout } from "nextra/components";
+
+# CSS Properties
+
+<Callout type="info">This page is under construction</Callout>
+
+CSS has quite a number of properties that will help you to make your web page appealing to look at, to add animations, and even interactivity to your website. In this module, we are going to discuss the list of CSS properties.
+
+The properties are grouped together in alphabetical order so that it will be easier to follow along, or to look for a certain property if you're in a hurry.
+
+Use the search bar to find specific items quickly, or use the in-built `CTRL + F` browser command.
+
+### `accent-color`
+
+Specifies the color to use for user-interface controls such as a checkbox, radio button or range slider.
+
+The default accent color is light-blue, but you can change it to match the color palette of your website by doing something similar to the example below:
+
+**Example:**
+
+```css
+input[type="checkbox"] {
+  accent-color: #fb7185;
+}
+```
+
+This will render a checkbox which will have a light-red color when it is checked. See the demonstration below which use checkboxes and a range slider.
+
+<br />
+
+<form className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+  <article className="flex flex-col gap-2 border border-slate-100 dark:border-slate-800 p-4 rounded-lg">
+    <label htmlFor="checkbox1" className="block">
+      Default checkbox
+    </label>
+    <input type="checkbox" id="checkbox1" />
+  </article>
+
+{" "}
+
+<article className="flex flex-col gap-2 border border-slate-100 dark:border-slate-800 p-4 rounded-lg">
+  <label htmlFor="checkbox2" className="block">
+    Checkbox with `accent-color` applied
+  </label>
+  <input type="checkbox" id="checkbox2" className="accent-rose-400" />
+</article>
+
+  <article className="flex flex-col gap-2 border border-slate-100 dark:border-slate-800 p-4 rounded-lg">
+    <label htmlFor="range" className="block">
+      Range slider with a pink `accent-color` applied. Default is blue.
+    </label>
+    <input type="range" id="range" className="accent-fuchsia-400" />
+  </article>
+</form>
+
+### `align-content`
+
+> This property should be used together with `display: flex`. Otherwise, it has no effect on the element in which it is defined.
+
+Defines how flex items are distributed along the cross axis of a flexbox container.
+
+The cross axis is the axis opposite to the default one set in the parent container. The default is usually horizonal rows, but can be changes to vertical columns.
+
+If the container is set to rows, the cross axis becomes the column, and vice versa.
+
+The `align-content` property can take in a number of values, described below:
+
+#### `align-content: center`
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 100px;
+  height: 300px;
+  border: 1px solid #eeeeee;
+}
+
+/* Child elements */
+section div {
+  width: 250px;
+  height: 250px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-center w-[250px] h-[300px] border border-[#eeeeee]">
+  <div className="w-[50px] h-[50px] bg-rose-400"></div>
+  <div className="w-[50px] h-[50px] bg-fuchsia-400"></div>
+  <div className="w-[50px] h-[50px] bg-purple-400"></div>
+  <div className="w-[50px] h-[50px] bg-pink-400"></div>
+</section>
+
+#### `align-content: flex-start`
+
+Aligns items to the start of the flex container
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 100px;
+  height: 300px;
+  border: 1px solid #eeeeee;
+}
+
+/* Child elements */
+section div {
+  width: 250px;
+  height: 250px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-start w-[250px] h-[300px] border border-[#eeeeee]">
+  <div className="w-[50px] h-[50px] bg-rose-400"></div>
+  <div className="w-[50px] h-[50px] bg-fuchsia-400"></div>
+  <div className="w-[50px] h-[50px] bg-purple-400"></div>
+  <div className="w-[50px] h-[50px] bg-pink-400"></div>
+</section>
+
+#### `align-content: flex-end`
+
+Aligns items to the end of the flex container
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  width: 100px;
+  height: 300px;
+  border: 1px solid #eeeeee;
+}
+
+/* Child elements */
+section div {
+  width: 250px;
+  height: 250px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-end w-[250px] h-[300px] border border-[#eeeeee]">
+  <div className="w-[50px] h-[50px] bg-rose-400"></div>
+  <div className="w-[50px] h-[50px] bg-fuchsia-400"></div>
+  <div className="w-[50px] h-[50px] bg-purple-400"></div>
+  <div className="w-[50px] h-[50px] bg-pink-400"></div>
+</section>
+
+#### `align-content: normal`
+
+Aligns items normally in the flex container.
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: normal;
+  width: 100px;
+  height: 300px;
+  border: 1px solid #eeeeee;
+}
+
+/* Child elements */
+section div {
+  width: 250px;
+  height: 250px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-normal w-[250px] h-[300px] border border-[#eeeeee]">
+  <div className="w-[50px] h-[50px] bg-rose-400"></div>
+  <div className="w-[50px] h-[50px] bg-fuchsia-400"></div>
+  <div className="w-[50px] h-[50px] bg-purple-400"></div>
+  <div className="w-[50px] h-[50px] bg-pink-400"></div>
+</section>
+
+#### `align-content: space-between`
+
+Places items to fit the entire width (or height depending on your cross axis) of the flex container.
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  height: 300px;
+}
+
+/* Child elements */
+section div {
+  width: 100%;
+  height: 40px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-between h-[300px] lg:h-[400px] border border-[#eeeeee]">
+  <div className="w-full h-[50px] bg-rose-400"></div>
+  <div className="w-full h-[50px] bg-fuchsia-400"></div>
+  <div className="w-full h-[50px] bg-purple-400"></div>
+  <div className="w-full h-[50px] bg-pink-400"></div>
+</section>
+
+Notice how all the elements are evenly spaced between the parent element, starting from the top of the parent element to the bottom.
+
+#### `align-content: space-evenly`
+
+Places items to fit the entire width (or height depending on your cross axis) of the flex container.
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  height: 300px;
+}
+
+/* Child elements */
+section div {
+  width: 100%;
+  height: 40px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-evenly h-[300px] lg:h-[400px] border border-[#eeeeee]">
+  <div className="w-full h-[50px] bg-rose-400"></div>
+  <div className="w-full h-[50px] bg-fuchsia-400"></div>
+  <div className="w-full h-[50px] bg-purple-400"></div>
+  <div className="w-full h-[50px] bg-pink-400"></div>
+</section>
+
+Notice how all the elements are evenly spaced evenly the parent element, but they don't start from the top. Also, the amount of space is equal all round.
+
+#### `align-content: space-around`
+
+Places items to fit the entire width (or height depending on your cross axis) of the flex container.
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  height: 300px;
+}
+
+/* Child elements */
+section div {
+  width: 100%;
+  height: 40px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="flex flex-wrap content-around h-[300px] lg:h-[400px] border border-[#eeeeee]">
+  <div className="w-full h-[50px] bg-rose-400"></div>
+  <div className="w-full h-[50px] bg-fuchsia-400"></div>
+  <div className="w-full h-[50px] bg-purple-400"></div>
+  <div className="w-full h-[50px] bg-pink-400"></div>
+</section>
+
+Notice how all the elements are evenly spaced around the parent element, but they don't start from the top. In this case, only the space between the elements is equal. Take not of this slight difference between `space-around` and `space-evenly`.
+
+### `align-items`
+
+This is used to define the alignment of items inside a flex or grid container. Just like `align-content`, it also takes the same property values such as `flex-end`, `flex-start`, `space-between`, `space-evenly`, `space-around`.
+
+> Remember to use `display: flex` or `display: grid` on the parent element. Otherwise, `align-items` will have no effect.
+
+**Example:**
+
+```css
+/* Parent container */
+section {
+  display: flex;
+  align-items: center;
+}
+
+/* Child elements */
+section div {
+  width: 100%;
+  height: 40px;
+}
+```
+
+### `align-self`
+
+This specifies the alignment in the block direction (downwards or top to bottom) for the selected items inside a flex a flex or grid container.
+
+**Example:**
+
+```html
+<section class="container">
+  <div></div>
+  <div class="self-div">This div has `align-self: flex-end` applied</div>
+  <div></div>
+  <div></div>
+</section>
+```
+
+```css
+.container {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #222222;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.container div {
+  width: 90%;
+  height: 150px;
+  background-color: lightblue;
+}
+
+.container .self-div {
+  background-color: coral;
+  align-self: flex-end;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<section className="w-full h-[400px] border border-[#222222] grid grid-cols-2 gap-4">
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-orange-200 self-end text-[#222] p-4">
+    This div has `align-self: flex-end` applied
+  </div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+</section>
+
+Without `align-self: flex-end` applied, the result would have been the following:
+
+<br />
+
+<section className="w-full h-[400px] border border-[#222222] grid grid-cols-2 gap-4">
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-orange-200"></div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+  <div className="w-[90%] h-[150px] bg-blue-100"></div>
+</section>
+
+<Callout type="info">
+  #### Points to note
+
+  1. By default, `align-self` aligns items in the block
+  direction (downwards). If you want to align items in the inline direction
+  (left to right), use `justify-self` or `justify-items` instead.
+
+  2. Block and
+  inline direction depend on the language. For example, inline direction for Arabic would be right to left, and for English is left to right.
+
+  3. The `align-self` property overrides the
+  `align-items` property.
+
+  4. The `align-self` property can take in the following
+  values: `auto`, `stretch`, `center`, `flex-start`, `flex-end`, `baseline`, `initial` and `inherit`.
+</Callout>
+
+### `all`
+
+This reselts all properties to their initial or inherited value.
+
+**Example:**
+
+```css
+html {
+  font-size: 14px;
+  color: coral;
+}
+
+p {
+  font-size: 20px;
+  color: darkgray;
+}
+
+p.reset {
+  all: initial;
+}
+```
+
+This will make the paragraph that has a class of `reset` to reset its current styles to the default styles of the document.
+
+## Animation Properties
+
+### `animation`
+
+This is used as a shorthand property to define the values of an animation.
+
+**Example:**
+
+```css
+section {
+  animation: spin 5s infinite;
+}
+```
+
+The animation properties are discussed below:
+
+### `animation-delay`
+
+This specifies a delay before the start of an animation.
+
+```css
+section {
+  animation-delay: 2s;
+}
+```
+
+This will start the animation after 2 seconds. The time value should be specified in seconds (s) or milliseconds (ms).
+
+You can also use negative values for the animation delay, which will cause it to start as if it had already been playing for the amount of time specified.
+
+**Example:**
+
+```css
+section {
+  animation-delay: -5s;
+}
+```
+
+### `animation-direction`
+
+This specifies whether the animation should be played forwards (normal), backwards(reverse) or in alternate cycles.
+
+```css
+/* Animation goes forwards */
+section {
+  animation-direction: normal;
+}
+
+/* Animation goes backwards */
+section {
+  animation-direction: reverse;
+}
+
+/* Animation goes forwards and then backwards */
+section {
+  animation-direction: alternate;
+}
+
+/* Animation goes backwards and then forwards */
+section {
+  animation-direction: alternate-reverse;
+}
+```
+
+### `animation-duration`
+
+This specifies how long the animation should take to complete one cycle.
+
+**Example:**
+
+```css
+section {
+  animation-duration: 5s;
+}
+```
+
+Above, the animation will complete after 5 seconds.
+
+### `animation-fill-mode`
+
+This describes the final state of your animation.
+
+**Example:**
+
+```css
+@keyframes increasefont {
+  from {
+    font-size: 16px;
+  }
+  to {
+    font-size: 80px;
+  }
+}
+
+p {
+  animation-name: increasefont;
+  animation-fill-mode: forwards;
+}
+```
+
+This will cause the `font-size` of the paragraph to increase from `16px` to `80px` and it will stay at the final font.
+
+<Callout type="info">
+  The default behavior for an animation is to start, end, and then revert to the
+  default or beginning properties. However, when you use `animation-fill-mode`
+  you can ensure that the animation will stay with the end properties.
+</Callout>
+
+#### `animation-fill-mode: none`
+
+The animation will not apply any styles to the target when it's not executing. The element will instead be displayed using any other CSS rules applied to it. This is the default value.
+
+#### `animation-fill-mode: forwards`
+
+The target will retain the computed values set by the last keyframe encountered during execution. The last keyframe depends on the value of `animation-direction` and `animation-iteration-count`
+
+#### `animation-fill-mode: backwards`
+
+The animation will apply the values defined in the first relevant keyframe as soon as it is applied to the target, and retain this during the `animation-delay` period. The first relevant keyframe depends on the value of `animation-direction`
+
+#### `animation-fill-mode: both`
+
+The animation will follow the rules for both forwards and backwards, thus extending the animation properties in both directions.
+
+### `animation-iteration-count`
+
+This specifies the number of times an animation should be played before stopping.
+
+**Example:**
+
+```css
+p {
+  animation-iteration-count: 4;
+}
+```
+
+This will play the animation four times before stopping. You can also specify decimal values for your iteration.
+
+The `animation-iteration-count` can also take in values such as `infinite`, `linear`, `inherit`, and `initial`.
+
+### `animation-play-state`
+
+This sets whether an animation is playing or is paused. When you run a paused animation, it will start from when it was paused, rather than from the beginning.
+
+**Example:**
+
+```css
+p {
+  animation-play-state: paused;
+}
+
+p {
+  animation-play-state: running;
+}
+```
+
+### `animation-timing-function`
+
+This sets how an animation progresses through the duration of each cycle.
+
+**Example:**
+
+```css
+p {
+  animation-timing-function: linear;
+}
+```
+
+Here is a complete reference from MDN:
+
+```css
+/* Keyword values */
+animation-timing-function: ease;
+animation-timing-function: ease-in;
+animation-timing-function: ease-out;
+animation-timing-function: ease-in-out;
+animation-timing-function: linear;
+animation-timing-function: step-start;
+animation-timing-function: step-end;
+
+/* Function values */
+animation-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
+animation-timing-function: steps(4, end);
+
+/* Steps Function keywords */
+animation-timing-function: steps(4, jump-start);
+animation-timing-function: steps(10, jump-end);
+animation-timing-function: steps(20, jump-none);
+animation-timing-function: steps(5, jump-both);
+animation-timing-function: steps(6, start);
+animation-timing-function: steps(8, end);
+
+/* Multiple animations */
+animation-timing-function: ease, step-start, cubic-bezier(0.1, 0.7, 1, 0.1);
+
+/* Global values */
+animation-timing-function: inherit;
+animation-timing-function: initial;
+animation-timing-function: revert;
+animation-timing-function: revert-layer;
+animation-timing-function: unset;
+```
+
+<Callout type="info">
+  It is always recommended to use the shorthand `animation` property to define your animations, rather than having to type out all the properties you want to add in your elements every single time that you want to add an animation.
+
+  For example. rather than doing this:
+
+  ```css
+  p {
+    animation-name: play;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  ```
+
+  You can do this:
+
+  ```css
+  p {
+    animation: play 2s linear infinite;
+  }
+  ```
+
+  As you can obviously tell, it is much faster than having to type out every single property.
+</Callout>
+
+### `aspect-ratio`
+
+This defines the ratio between the width and height of an element. It is mostly used when the element often changes size and you want to preseve the ration between width and height, such as on an `iframe` or a `video`.
+
+**Example:**
+
+```css
+video {
+  aspect-ratio: 16 / 9;
+}
+```
+
+### `backdrop-filter`
+
+This is used to apply a graphical effect to the area behind an element. For this property to work, the element or its background should be partially transparent.
+
+**Example:**
+
+```css
+div {
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+```
+
+<Callout type="info">
+  `-webkit-backdrop-filter` is an example of a Vendor Prefix. Read more about
+  Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+</Callout>
+
+### `backface-visibility`
+
+This defines whether the back of an element should be visible to the user or not. This is especaially useful when you want to rotate an element, for example when you want a profile card to rotate to reveal more information when a user hovers over it with the mouse.
+
+**Example:**
+
+```css
+div {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+```
+
+<Callout type="info">
+  `-webkit-backface-visibility` is an example of a Vendor Prefix. Read more
+  about Vendor Prefixes in the module, [CSS Vendor Prefixes](/web-development/css/css-vendor-prefixes)
+</Callout>
+
+## Background Properties
+
+### `background`
+
+This is used to set different background properties. It is a shorthand property for:
+
+1. `background-color`
+2. `background-image`
+3. `background-position`
+4. `background-size`
+5. `background-repeat`
+6. `background-origin`
+7. `background-clip`
+8. `background-attachment`
+
+**Example:**
+
+```css
+div {
+  background: red;
+  width: 100%;
+  height: 40px;
+}
+```
+
+This will give the `div` a red background color.
+
+### `background-attachment`
+
+This defines whether a background image will scroll with the rest of the webpage or not.
+
+**Example:**
+
+```css
+body {
+  background-image: url("https://fastly.picsum.photos/id/42/200/300.jpg?hmac=RFAv_ervDAXQ4uM8dhocFa6_hkOkoBLeRR35gF8OHgs);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+```
+
+The image above will scroll with the rest of the webpage.
+
+### `background-blend-mode`
+
+This specifies the how background layers, such as colors or images, should be blended with one another.
+
+**Example:**
+
+```css
+div {
+  background-repeat: no-repeat, repeat;
+  background-image: url("img_tree.gif"), url("paper.gif");
+  background-blend-mode: lighten;
+}
+```
+
+Other values that can be used with `background-blend-mode` include: `normal`, `multiply`, `screen`, `overlay`, `darken`, `lighten`, `color-dodge`, `saturation`, `color`, `luminosity`.
+
+You can test out [this](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_background-blend-mode&preval=darken) example from W3Schools to see how each of the values differ.
+
+### `background-clip`
+
+This specifies how far the background (color or image) should extend within an element.
+
+**Example**
+
+```css
+div {
+  border: 10px dotted black;
+  padding: 15px;
+  background: lightblue;
+  background-clip: padding-box;
+}
+```
+
+It can also take in the following values: `padding-box`, `border-box`, `content-box`, `initial`, `inherit`.
+
+### `background-color`
+
+This is used to add a background color to an element.
+
+**Example:**
+
+```css
+div {
+  background-color: orange;
+}
+```
+
+<Callout type="warning">
+  The background color of an element does not include the margin applied to it -
+  because margin is applied to the outside of elements. Read more about this in
+  [The CSS Box Model](/web-development/css/css-box-model)
+</Callout>
+
+### `background-image`
+
+This is used to define the background image of an element. Background images can be actual images or color gradients.
+
+You can also define multiple images for one element.
+
+**Example:**
+
+```css
+/* Sets a single image as the background */
+div {
+  background-image: url("my-background.png");
+}
+
+/* Sets multiple images as the background */
+div {
+  background-image: url("my-background.png"), url("image-two.png");
+}
+
+/* Linear gradient as the background */
+div {
+  background-image: linear-gradient(120deg, white, yellow);
+}
+```
+
+You can also use other gradients such as `conic-gradient()`, `radial-gradient()`, `repeating-conic-gradient()`, `repeating-radial-gradient()` and `repeating-linear-gradient()`
+
+To learn more about colors, see the module about [CSS Colors](/web-development/css/css-colors)
+
+<Callout type="info">
+  If you are using an image as the background, make sure to specify a height to the element, so that you can actually see the image.
+
+By default, a `background-image` is placed at the top-left corner of an element, and repeated both vertically and horizontally.
+
+Read more about `background-repeat` [here](#background-repeat)
+
+</Callout>
+
+### `background-origin`
+
+This specifies the origin of a background image.
+
+**Example:**
+
+```css
+div {
+  height: 500px;
+  background-image: url("tree-image.png");
+  background-position: content-box;
+}
+```
+
+<Callout>
+  This property has no effect if you set `background-attachment` to `fixed`.
+</Callout>
+
+It also takes in other values such as `padding-box`, `border-box`, `content-box`, `initial` and `inherit`.
+
+### `background-position`
+
+This sets the starting position of a background image.
+
+<Callout type="info">
+  By default, a `background-image` is placed at the top-left corner of an
+  element, and repeated both vertically and horizontally. Read more about
+  `background-repeat` [here](#background-repeat)
+</Callout>
+
+**Example:**
+
+```css
+div {
+  background-image: url("my-background.png");
+  background-position: center;
+}
+```
+
+You can also specify multiple values for `background-position`. For example, if I wanted the image to start from the top left, I would do the following:
+
+```css
+background-position: left top;
+```
+
+If you only specify one value, the other value defaults to `center`.
+
+### `background-position-x`
+
+This sets the starting position of a background image on the x-axis.
+
+**Example:**
+
+```css
+div {
+  background-position-x: center;
+}
+```
+
+### `background-positon-y`
+
+This sets the starting position of a background image on the y-axis.
+
+**Example:**
+
+```css
+div {
+  background-position-y: center;
+}
+```
+
+### `background-repeat`
+
+This defines whether a background image should repeat or not.
+
+<Callout type="info">
+  By default, a background-image is placed at the top-left corner of an element,
+  and repeated both vertically and horizontally.
+</Callout>
+
+**Example:**
+
+```css
+/* This is the default behavior */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat;
+}
+
+/* Only repeat the image horizontally */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat-x;
+}
+
+/* Only repeat the image vertically */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: repeat-y;
+}
+
+/* Image only shows once and does not repeat */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: no-repeat;
+}
+
+/* Set the ddefault property value */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: initial;
+}
+
+/* Inherit the value from the parent */
+div {
+  background-image: url("link-to-image.png");
+  background-repeat: inherit;
+}
+```
+
+`background-repeat` can also take in the values: `space` and `round`. Read more about these in [this](https://www.w3schools.com/cssref/pr_background-repeat.php) W3Schools Documentation.
+
+### `background-size`
+
+This is used to specify the size of a background image.
+
+**Example:**
+
+```css
+div {
+  background: url("link-to-your-image.png");
+  background-size: cover;
+}
+```
+
+You can specify other values for the background size, all of which have their effects on your background image. See [this interactive demo](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_background-size) from W3Schools.
+
+You can also specify multiple values for your background image. See the example below:
+
+```css
+div {
+  background: url("link-to-your-image.png");
+  background-size: 60% 50%;
+}
+```
+
+In such a case as above, the first value specified is always set to the width of the background image. The second value is for the height. If you only specify one value, the second value of the height will be set to `auto`.
+
+Aside from using percentages, you can also use other CSS Units such as pixels (`px`) and viewport heights (`vh`).
+
+## Border Properties
+
+### `border`
+
+The CSS `border` property applies a line around the element in which it is defined.
+
+**Example:**
+
+<br />
+
+<button className="border-2 border-teal-400 py-2 px-8">Get Started</button>
+
+The button above has a teal border with a padding of `8px` on the top and bottom, and `32px` on the left and right.
+
+In order to correctly apply a border to an element, you need to define the width of the border - which is how thick you want the border to be - as well as the border style - whether you want it to be a solid border, or a dotted border, and finally, the color of the border. See the example below:
+
+```css
+button {
+  border-width: 2px;
+  border-style: solid;
+  border-color: teal;
+}
+```
+
+However, there is a shorter and recommended way of doing this:
+
+```css
+button {
+  border: 2px solid teal;
+}
+```
+
+The above will apply the same styles to the button above, but without all the hassle of typing out three CSS properties for the same effect.
+
+You can achieve cool looking borders just by changing the width and style of the border. See the examples below:
+
+<br />
+
+<div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+  <button className="border-[6px] border-teal-400 py-2 px-8">
+    6px Solid Border
+  </button>
+  <button className="border-[6px] border-dotted border-teal-400 py-2 px-8">
+    6px dotted border
+  </button>
+  <button className="border-[6px] border-dashed border-teal-400 py-2 px-8">
+    6px dashed border
+  </button>
+  <button className="border-[6px] border-double border-teal-400 py-2 px-8">
+    6px double border
+  </button>
+</div>
+
+The above examples can be achieved by doing the following in your CSS:
+
+```css
+/* Solid border */
+.btn-solid {
+  border: 6px solid teal;
+  padding: 8px 32px;
+}
+
+/* dotted border */
+.btn-dotted {
+  border: 6px dotted teal;
+  padding: 8px 32px;
+}
+
+/* Dashed border */
+.btn-dashed {
+  border: 6px dashed teal;
+  padding: 8px 32px;
+}
+
+/* Double border */
+.btn-double {
+  border: 6px double teal;
+  padding: 8px 32px;
+}
+```
+
+> Borders can be applied to all HTML elements.
+
+You can also add borders that you want whether on the top, right, bottom, or left. All you have to do is specify the direction you want. For example:
+
+```css
+.btn-border-top {
+  border-top: 2px solid teal;
+  padding: 8px 32px;
+}
+
+.btn-border-right {
+  border-right: 2px solid teal;
+  padding: 8px 32px;
+}
+
+.btn-border-bottom {
+  border-bottom: 2px solid teal;
+  padding: 8px 32px;
+}
+
+.btn-border-left {
+  border-left: 2px solid teal;
+  padding: 8px 32px;
+}
+```
+
+This will result in the following:
+
+<br />
+
+<div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+  <button className="border-t-2 border-teal-400 py-2 px-8">Top border</button>
+  <button className="border-r-2 border-teal-400 py-2 px-8">Right border</button>
+  <button className="border-b-2 border-teal-400 py-2 px-8">
+    Bottom border
+  </button>
+  <button className="border-l-2 border-teal-400 py-2 px-8">Left border</button>
+</div>
+
+And it works with all border styles, i.e. solid, dotted, dashed and double.
+
+### `border-block`
+
+This is similar to the `border` property, with the exception of being dependent on the block direction.
+
+The block direction of a document in English is downwards, i.e. top to bottom.
+
+**Example:**
+
+```css
+div {
+  border-block: 2px solid teal;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
+</Callout>
+
+### `border-block-color`
+
+This is used to set a color for borders in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-style: solid; /* This is a required property */
+  border-block-color: teal;
+}
+```
+
+<Callout type="info">
+  The `border-block-style` is a required property when using `border-block`
+</Callout>
+
+### `border-block-end-color`
+
+This sets the color of an element's border at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: solid;
+  border-block-end-color: pink;
+}
+```
+
+In order for this property to apply, `border-block-end-style` must be used. Otherwise, it has no effect on the element.
+
+### `border-block-end-style`
+
+This sets the style of an element's border at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: dotted;
+}
+
+div {
+  border-block-end-style: solid;
+}
+```
+
+You can have different values just like for the `border` property.
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
+</Callout>
+
+### `border-block-end-width`
+
+This sets the width of an element's border at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: solid;
+  border-block-end-width: 10px;
+}
+```
+
+In order for this property to apply, `border-block-end-style` must be used. Otherwise, it has no effect on the element.
+
+### `border-block-start-color`
+
+This sets the width of an element's border at the start in the block direction. It has the opposite effect of `border-block-end-color`.
+
+**Example:**
+
+```css
+div {
+  border-block-start-style: solid;
+  border-block-start-color: pink;
+}
+```
+
+In order for this property to apply, border-block-end-style must be used. Otherwise, it has no effect on the element.
+
+### `border-block-start-style`
+
+This sets the style of an element's border at the start in the block direction. It has the opposite effect to `border-block-end-style`.
+
+**Example:**
+
+```css
+div {
+  border-block-end-style: dotted;
+}
+
+div {
+  border-block-end-style: solid;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
+</Callout>
+
+### `border-block-start-width`
+
+This sets the width of an element's border at the start in the block direction.
+
+**Example:**
+
+```css
+div {
+  border-block-start-style: solid;
+  border-block-start-width: 10px;
+}
+```
+
+### `border-block-style`
+
+This sets the style of an element's borders in the block direction. If you specify two values, then the first value applies to the start of the border block, and the second value applies to the end of the border block. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-block-style: solid;
+}
+
+div {
+  border-block-style: dashed dotted;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
+</Callout>
+
+### `border-block-width`
+
+This sets the width of an element's borders in the block direction. If you specify two values, then the first value applies to the start of the border block, and the second value applies to the end of the border block. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-block-style: solid;
+  border-block-width: 10px;
+}
+
+div {
+  border-block-style: solid;
+  border-block-width: thin thick;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-block` property, read more about the
+  [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document.
+</Callout>
+
+### `border-bottom`
+
+This sets the styles for the bottom border of an element. It is the shorthand property for:
+
+- `border-bottom-width`
+- `border-bottom-style`
+- `border-bottom-color`
+
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-bottom: 5px solid red;
+}
+
+h2 {
+  border-bottom: 4px dotted blue;
+}
+
+div {
+  border-bottom: double;
+}
+```
+
+If no color is specified, `border-bottom` will inherit the color of the text.
+
+### `border-bottom-color`
+
+This sets the color of an element's bottom border.
+
+**Example:**
+
+```css
+div {
+  border-bottom-color: coral;
+}
+```
+
+### `border-bottom-left-radius`
+
+This property is used to add roundedness - called "radius" to the bottom left of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-left-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-left-radius: 25px 50px;
+}
+```
+
+### `border-bottom-right-radius`
+
+This property is used to add roundedness - called "radius" to the bottom right of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-right-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-bottom-right-radius: 25px 50px;
+}
+```
+
+### `border-bottom-style`
+
+This sets the style of an element's bottom border.
+
+**Example:**
+
+```css
+div {
+  border-bottom-style: dotted;
+}
+```
+
+### `border-bottom-width`
+
+This sets the width of an element's bottom border.
+
+**Example:**
+
+```css
+div {
+  border-bottom-width: thin;
+}
+
+div {
+  border-bottom-width: 10px;
+}
+```
+
+### `border-collapse`
+
+This sets whether table borders should collapse into a single border or be separated as in standard HTML.
+
+**Example:**
+
+```css
+.table-one {
+  border-collapse: separate;
+}
+
+.table-two {
+  border-collapse: collapse;
+}
+```
+
+### `border-color`
+
+This sets the color of an element's four borders.
+
+**Example:**
+
+```css
+div {
+  border-color: coral;
+}
+```
+
+Read more about this [here](#border).
+
+### `border-image`
+
+This property allows you to specify an image to be used as the border around an element. It is a shorthand property for:
+
+- `border-image-source`
+- `border-image-slice`
+- `border-image-width`
+- `border-image-outset`
+- `border-image-repeat`
+
+**Example:**
+
+```css
+.border-img {
+  border-image: url(border.png) 30 round;
+}
+```
+
+### `border-image-outset`
+
+This specifies the amount by which the border image area extends beyond the border box.
+
+**Example:**
+
+```css
+.border-img {
+  border-image-source: url(border.png);
+  border-image-outset: 10px;
+}
+```
+
+### `border-image-repeat`
+
+This specifies whether the border image should be repeated, rounded, spaced or stretched.
+
+**Example:**
+
+```css
+.border-img {
+  border-image-source: url(border.png);
+  border-image-repeat: repeat;
+}
+```
+
+### `border-image-slice`
+
+This specifies how to slice the image specified by `border-image-source`. The image is always sliced into nine sections: four corners, four edges and the middle.
+
+The "middle" part is treated as fully transparent, unless the fill keyword is set.
+
+**Example:**
+
+```css
+.border-img {
+  border-image-slice: 30%;
+}
+```
+
+### `border-image-source`
+
+This specifies the path to the image to be used as a border.
+
+**Example:**
+
+```css
+div {
+  border-image-source: url(border.png);
+}
+```
+
+### `border-image-width`
+
+This property specifies the width of the border image.
+
+**Example:**
+
+```css
+div {
+  border-image-source: url(border.png);
+  border-image-width: 10px;
+}
+```
+
+### `border-inline`
+
+This specifies the border of an element in the inline direction. For English, the inline direction is usually left to right (unless specified otherwise).
+
+**Example:**
+
+```css
+h1 {
+  border-inline: 5px solid red;
+}
+
+h2 {
+  border-inline: 4px dotted blue;
+}
+
+div {
+  border-inline: double;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-inline` property, read more about
+  the [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document, as well as the
+  [`text-orientation`](#text-orientation) and [`direction`](#direction)
+  properties.
+</Callout>
+
+### `border-inline-color`
+
+This is used to set a color for borders in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-style: solid; /* This is a required property */
+  border-inline-color: teal;
+}
+```
+
+### `border-inline-end-color`
+
+This sets the color of an element's border at the end in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: solid;
+  border-inline-end-color: pink;
+}
+```
+
+In order for this property to apply, border-inline-end-style must be used. Otherwise, it has no effect on the element.
+
+### `border-inline-end-style`
+
+This sets the style of an element's border at the end in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: dotted;
+}
+
+div {
+  border-inline-end-style: solid;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-inline` property, read more about
+  the [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document, as well as the
+  [`text-orientation`](#text-orientation) and [`direction`](#direction)
+  properties.
+</Callout>
+
+### `border-inline-end-width`
+
+This sets the width of an element's border at the end in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: solid;
+  border-inline-end-width: 10px;
+}
+```
+
+### `border-inline-start-color`
+
+This sets the width of an element's border at the start in the inline direction. It has the opposite effect of border-inline-end-color.
+
+**Example:**
+
+```css
+div {
+  border-inline-start-style: solid;
+  border-inline-start-color: pink;
+}
+```
+
+In order for this property to apply, `border-inline-end-style` must be used. Otherwise, it has no effect on the element.
+
+### `border-inline-start-style`
+
+This sets the style of an element's border at the start in the inline direction. It has the opposite effect to border-inline-end-style.
+
+**Example:**
+
+```css
+div {
+  border-inline-end-style: dotted;
+}
+
+div {
+  border-inline-end-style: solid;
+}
+```
+
+<Callout type="info">
+  In order to better understand the `border-inline` property, read more about
+  the [`writing-mode`](#writing-mode) property which is used to change the block
+  direction of a document, as well as the
+  [`text-orientation`](#text-orientation) and [`direction`](#direction)
+  properties.
+</Callout>
+
+### `border-inline-start-width`
+
+This sets the width of an element's border at the start in the inline direction.
+
+**Example:**
+
+```css
+div {
+  border-inline-start-style: solid;
+  border-inline-start-width: 10px;
+}
+```
+
+### `border-inline-style`
+
+This sets the style of an element's borders in the inline direction. If you specify two values, then the first value applies to the start of the border inline, and the second value applies to the end of the border inline. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-inline-style: solid;
+}
+
+div {
+  border-inline-style: dashed dotted;
+}
+```
+
+### `border-inline-width`
+
+This sets the width of an element's borders in the inline direction. If you specify two values, then the first value applies to the start of the border inline, and the second value applies to the end of the border inline. If only one value is specified, the it applies to both.
+
+**Example:**
+
+```css
+div {
+  border-inline-style: solid;
+  border-inline-width: 10px;
+}
+
+div {
+  border-inline-style: solid;
+  border-inline-width: thin thick;
+}
+```
+
+### `border-left`
+
+This sets the styles for the left border of an element. It is the shorthand property for:
+
+- `border-left-width`
+- `border-left-style`
+- `border-left-color`
+
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-left: 5px solid red;
+}
+
+h2 {
+  border-left: 4px dotted blue;
+}
+
+div {
+  border-left: double;
+}
+```
+
+If no color is specified, `border-left` will inherit the color of the text.
+
+### `border-left-color`
+
+This sets the color of an element's left border.
+
+**Example:**
+
+```css
+div {
+  border-left-color: coral;
+}
+```
+
+### `border-left-style`
+
+This sets the style of an element's left border.
+
+**Example:**
+
+```css
+div {
+  border-left-style: dotted;
+}
+```
+
+### `border-left-width`
+
+This sets the width of an element's left border.
+
+**Example:**
+
+```css
+div {
+  border-left-width: thin;
+}
+
+div {
+  border-left-width: 10px;
+}
+```
+
+### `border-radius`
+
+This is used to add rounded corners to elements.
+
+**Example:**
+
+```css
+/*
+25px rounded on all four corners
+*/
+div {
+  border: 2px solid red;
+  border-radius: 25px;
+}
+
+/*
+50px rounded on the top left and bottom right
+and 20px rounded on the top right and bottom left corners
+*/
+div {
+  border: 2px solid red;
+  border-radius: 50px 20px;
+}
+
+/*
+50px rounded on the top left corner
+20px rounded on the top right and bottom left corners
+and 30px rounded of the bottom right corner
+*/
+div {
+  border: 2px solid red;
+  border-radius: 50px 20px 30px;
+}
+
+/*
+50px rounded on the top left
+20px rounded on the top right
+30px rounded on the bottom right
+40px rounded of the bottom left
+*/
+div {
+  border: 2px solid red;
+  border-radius: 50px 20px 30px 40px;
+}
+```
+
+### `border-right`
+
+This sets the styles for the right border of an element. It is the shorthand property for:
+
+- `border-right-width`
+- `border-right-style`
+- `border-right-color`
+
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-right: 5px solid red;
+}
+
+h2 {
+  border-right: 4px dotted blue;
+}
+
+div {
+  border-right: double;
+}
+```
+
+If no color is specified, `border-right` will inherit the color of the text.
+
+### `border-right-color`
+
+This sets the color of an element's right border.
+
+**Example:**
+
+```css
+div {
+  border-right-color: coral;
+}
+```
+
+### `border-right-style`
+
+This sets the style of an element's right border.
+
+**Example:**
+
+```css
+div {
+  border-right-style: dotted;
+}
+```
+
+### `border-right-width`
+
+This sets the width of an element's right border.
+
+**Example:**
+
+```css
+div {
+  border-right-width: thin;
+}
+
+div {
+  border-right-width: 10px;
+}
+```
+
+### `border-spacing`
+
+This property sets the distance between the borders of adjacent cells in a table. This property only works when `border-collapse` has a value of "separate".
+
+**Example:**
+
+```css
+table {
+  border-collapse: separate;
+  border-spacing: 15px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 15px 50px;
+}
+```
+
+### `border-style`
+
+This property sets the style of an element's four borders. This property can have from one to four values.
+
+**Example:**
+
+```css
+/*
+dotted border all round
+ */
+div {
+  border-style: dotted;
+}
+
+/*
+dotted border on the top and bottom
+solid border on the left and right
+ */
+div {
+  border-style: dotted solid;
+}
+
+/*
+dotted border on the top
+solid border on the left and right
+dashed border on the bottom
+ */
+div {
+  border-style: dotted solid dashed;
+}
+
+/* dotted border on the top
+solid border on the right
+dashed border on the bottom
+double border on the left
+ */
+div {
+  border-style: dotted solid dashed double;
+}
+```
+
+### `border-top`
+
+This sets the styles for the top border of an element. It is the shorthand property for:
+
+- `border-top-width`
+- `border-top-style`
+- `border-top-color`
+
+In that order.
+
+**Example:**
+
+```css
+h1 {
+  border-top: 5px solid red;
+}
+
+h2 {
+  border-top: 4px dotted blue;
+}
+
+div {
+  border-top: double;
+}
+```
+
+If no color is specified, `border-top` will inherit the color of the text.
+
+### `border-top-color`
+
+This sets the color of an element's top border.
+
+**Example:**
+
+```css
+div {
+  border-top-color: coral;
+}
+```
+
+### `border-top-left-radius`
+
+This property is used to add roundedness - called "radius" to the top left of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-left-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-left-radius: 25px 50px;
+}
+```
+
+### `border-top-right-radius`
+
+This property is used to add roundedness - called "radius" to the top right of an element.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-right-radius: 25px;
+}
+```
+
+You can also specify two values for `border-*-radius` which will allow you to come up with very creative rounded edges.
+
+**Example:**
+
+```css
+div {
+  border: 2px solid red;
+  border-top-right-radius: 25px 50px;
+}
+```
+
+### `border-top-style`
+
+This sets the style of an element's top border.
+
+**Example:**
+
+```css
+div {
+  border-top-style: dotted;
+}
+```
+
+### `border-top-width`
+
+This sets the width of an element's top border.
+
+**Example:**
+
+```css
+div {
+  border-top-width: thin;
+}
+
+div {
+  border-top-width: 10px;
+}
+```
+
+### `bottom`
+
+This property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
+
+**Example:**
+
+```css
+div.absolute {
+  position: absolute;
+  bottom: 10px;
+  width: 50%;
+  background-color: coral;
+}
+```
+
+Learn more about the `bottom` property in the module, [CSS Positioning](/web-development/css/css-positioning)
+
+### `box-decoration-break`
+
+This property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented.
+
+The default value is `slice`.
+
+**Example:**
+
+```css
+span {
+  -webkit-box-decoration-break: clone;
+  -o-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+span {
+  -webkit-box-decoration-break: slice;
+  -o-box-decoration-break: slice;
+  box-decoration-break: slice;
+}
+```
+
+The above example outputs the following:
+
+<br />
+
+<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+  <article>
+    <h2 className="font-bold">box-decoration-break: clone:</h2>
+    <br />
+    <span className="box-decoration-clone bg-gradient-to-r from-indigo-400 to-pink-600 p-2 text-5xl font-bold">Hello <br /> World!</span>
+  </article>
+
+<article>
+  <h2 className="font-bold">box-decoration-break: slice:</h2>
+  <br />
+  <span className="box-decoration-slice bg-gradient-to-r from-indigo-400 to-pink-600 p-2 text-5xl font-bold">Hello <br /> World!</span>
+  </article>
+</div>
+
+<br />
+
+<Callout type="error">
+  Internet Explorer and Microsoft Edge do not suppor the `box-decoration-break`
+  property.
+</Callout>
+
+> Notice how the color gradient is applied to the text when using `clone` and `slice`.
+
+### `box-reflect`
+
+This property is used to create a reflection of an element. The values can be `top`, `bottom`, `left`, `right`, `above`, `below` and `none`.
+
+**Example:**
+
+```css
+img {
+  -webkit-box-reflect: below;
+}
+```
+
+<Callout type="info">
+  `box-reflect` is non-standard. Therefore, it must be written with the
+  `-webkit` prefix.
+</Callout>
+
+See [this interactive demo](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_box-reflect) from W3Schools.
+
+### `box-shadow`
+
+This is used to set one or more shadows to an element.
+
+`box-shadow` is defined in terms of:
+
+1. Horizontal offset - this is a required value that places the shadow on the right of the element. A negative value will put the shadow on the left.
+2. Vertical offset - this is a required value that places the shadow below the element. A negative value will put the shadow above it.
+3. Blur radius - defines the bluriness of the shadow. The higher the value, the more blurry it becomes.
+4. Spread radius - defines the size (spread) of the shadow. A positive value increases it while a negative value reduces it.
+5. Shadow color - the color of the shadow. It can be a block color with no transparency, or you can add transparency to it. Read more about colors in the module [CSS Colors](/web-development/css/css-colors)
+6. Other properties - such as `inset` which changes the shadow from an outer shadow into an inner shadow, and `initial` which sets the default values of the box shadow, and `inherit` which takes the properties of the parent element.
+
+> Only the horizontal and vertical offsets of the `box-shadow` property are required. The others are all optional.
+
+And it has the syntax:
+
+```css
+element {
+  box-shadow: h-offset v-offset blur spread color;
+}
+```
+
+**Example:**
+
+```css
+div {
+  height: 150px;
+  width: 300px;
+  box-shadow: 5px 10px red;
+}
+```
+
+If you don't define a color for the box shadow, it defaults to the text color.
+
+**Example:**
+
+```css
+/* This box shadow color defaults to the text color */
+div {
+  height: 150px;
+  width: 300px;
+  box-shadow: 5px 10px;
+}
+```
+
+You can also define multiple box shadows as follows:
+
+```css
+div {
+  height: 150px;
+  width: 300px;
+  /* Notice the comma-separated values */
+  box-shadow: 5px 10px red, 10px 20px green, 20px 30px blue;
+}
+```
+
+### `box-sizing`
+
+This defines how the width and height of an element are defines. That is, whether the padding and borders should be included in an element's final height and width.
+
+**Example:**
+
+```css
+div {
+  box-sizing: content-box;
+}
+```
+
+This defines the width and height of an element without including paddings and borders.
+
+**Example 2:**
+
+```css
+div {
+  box-sizing: border-box;
+}
+```
+
+This defines the width and height of an element including paddings and borders.
+
+A good practice is to set the `box-sizing` property universally so that you don't have to keep defining it for every single element that you have. You can do this using the unviersal selector (`*`).
+
+**Example:**
+
+```css
+* {
+  box-sizing: border-box;
+}
+
+/* OR */
+
+* {
+  box-sizing: content-box;
+}
+```
+
+> `border-box` is the more widely used value for `box-sizing` because it is much easier for developers to know what to expect as the behaviour of elements when they add paddings, margins and borders to them.
+
+Another way you will hear developers defining `box-sizing: border-box` is: "Place paddings on the inside of elements, and place margins on the outside of elements."
+
+### `break-after`
+
+This defines whether or not a page break, column break, or region break should occur after the specified element.
+
+**Example:**
+
+```css
+/* Always add a page break after the footer element */
+footer {
+  break-after: always;
+}
+```
+
+See [this website](https://www.w3schools.com/cssref/pr_break-after.php) for a complete reference.
+
+### `break-before`
+
+This defines whether or not a page break, column break, or region break should occur before the specified element.
+
+```css
+/* Always add a page break before the footer element */
+footer {
+  break-before: always;
+}
+```
+
+See [this website](https://www.w3schools.com/cssref/pr_break-before.php) for a complete reference.
+
+### `break-inside`
+
+This defines whether or not a page break, column break, or region break should occur inside the specified element.
+
+```css
+/* Always add a page break inside the footer element */
+footer {
+  break-inside: always;
+}
+```
+
+See [this website](https://www.w3schools.com/cssref/pr_break-inside.php) for a complete reference.
+
+### `caption-side`
+
+This defines the placement of a table caption.
+
+**Example:**
+
+```css
+table {
+  caption-side: top;
+}
+```
+
+### `caret-color`
+
+This is used to define the color of the cursor on an input or any other editable element.
+
+**Example:**
+
+```css
+input {
+  caret-color: indigo;
+}
+```
+
+### `@charset`
+
+This defines the character set that the browser uses.
+
+**Usage:**
+
+```css
+@charset "utf-8";
+```
+
+> NOTE: When you define the character set in your HTML, it will override the character set that you define in your CSS.
+
+### `clear`
+
+This controls the flow next to floated elements. It specifies what should happen with the element that is next to a floating element.
+
+**Example:**
+
+```css
+img {
+  float: left;
+}
+
+p.clear {
+  clear: left;
+}
+```
+
+See the images below for a better understanding:
+
+<br />
+
+<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+  <article>
+    <h2 className="text-xl">Clear None</h2>
+    ![css-clear-none-property](/assets/clear-none.png)
+  </article>
+
+{" "}
+<article>
+  <h2 className="text-xl">Clear Left</h2>
+  ![css-clear-left-property](/assets/clear-left.png)
+</article>
+
+  <article>
+    <h2 className="text-xl">Clear Both</h2>
+    ![css-clear-both-property](/assets/clear-none.png)
+  </article>
+</div>
+
+### `clip-path`
+
+This property lets you clip an element to a basic shape or to an SVG source.
+
+See [this interactive example](https://www.w3schools.com/cssref/playdemo.php?filename=playcss_clip-path) from W3Schools to learn how the `clip-path` property works.
+
+### `color`
+
+This sets the text color for elements.
+
+**Example:**
+
+```css
+body {
+  color: pink;
+}
+
+h1 {
+  color: orange;
+}
+
+p {
+  color: purple;
+}
+```
+
+### `column-count`
+
+This specifies the number of columns that an element should be divided into. You know, the way newspapers look like.
+
+**Example:**
+
+```html
+<!-- Some long text to demonstrate the column-count property -->
+<p>
+  Up am intention on dependent questions oh elsewhere september.
+  No betrayed pleasure possible jointure we in throwing.
+  And can event rapid any shall woman green. Hope they dear who its bred.
+  Smiling nothing affixed he carried it clothes calling he no.
+  Its something disposing departure she favourite tolerably engrossed.
+  Truth short folly court why she their balls.
+  Excellence put unaffected reasonable mrs introduced conviction she.
+  Nay particular delightful but unpleasant for uncommonly who.
+</p>
+```
+
+```css
+p {
+  column-count: 2,
+}
+```
+
+### `column-fill`
+
+This specifies how to fill columns and can either have the value of `auto` or `balance`. See the example below:
+
+<br />
+<p className="columns-1 sm:columns-2 md:columns-3 bg-gradient-to-b from-purple-800 to-blue-600 via-purple-700 p-4 rounded-lg">
+  Up am intention on dependent questions oh elsewhere september.
+  No betrayed pleasure possible jointure we in throwing.
+  And can event rapid any shall woman green. Hope they dear who its bred.
+  Smiling nothing affixed he carried it clothes calling he no.
+  Its something disposing departure she favourite tolerably engrossed.
+  Truth short folly court why she their balls.
+  Excellence put unaffected reasonable mrs introduced conviction she.
+  Nay particular delightful but unpleasant for uncommonly who.
+</p>
+
+### `column-gap`
+
+This adds a gap between the columns in a grid, flexbox, or a multi-column layout.
+
+**Example:**
+
+```css
+div {
+  column-gap: 40px;
+}
+```
+
+### `column-rule`
+
+This specifies the width, style, and color of the rule between columns. It is a shorthand property to style the `column-rule-width`, `column-rule-style` and `column-rule-color`.
+
+**Example:**
+
+```css
+div {
+  column-rule: 6px double purple;
+}
+```
+
+> Just like for the `border`, the `column-rule` can be double, dotted, dashed or solid.
+
+### `column-rule-color`
+
+This specifies the color of the rule between columns.
+
+**Example:**
+
+```css
+div {
+  column-rule-color: purple;
+}
+```
+
+### `column-rule-style`
+
+This specifies the style of the rule between columns. It can be solid, dotted, dashed or double.
+
+**Example:**
+
+```css
+div {
+  column-rule-style: solid;
+}
+```
+
+### `column-rule-width`
+
+This specifies the width of the rule between columns.
+
+**Example:**
+
+```css
+div {
+  column-rule-width: 6px;
+}
+```
+
+### `column-span`
+
+This specifies how many columns an element should span across. It takes in the values of `all` or `none`.
+
+**Example:**
+
+```css
+h2 {
+  column-span: all;
+}
+```
+
+### `column-width`
+
+This specifies the size of the column width.
+
+**Example:**
+
+```html
+<p>
+  Unwilling sportsmen he in questions september therefore described so.
+  Attacks may set few believe moments was. Reasonably how possession shy way
+  introduced age inquietude. Missed he engage no exeter of. Still tried means
+  we aware order among on. Eldest father can design tastes did joy settle.
+  Roused future he ye an marked. Arose mr rapid in so vexed words.
+  Gay welcome led add lasting chiefly say looking.
+</p>
+```
+
+```css
+p {
+  column-width: 200px;
+}
+```
+
+### `columns`
+
+This is a shorthand property for `column-width` and `column-count`.
+
+**Example:**
+
+```css
+p {
+  columns: 200px 3;
+}
+```
+
+It defines the minimum width for each column.
+
+### `content`
+This is used alongside the `::before` and `::after` pseudo-elements to insert content before or after an element.
+
+```css
+p::before {
+  content: "*"; /* Will add an asterisk before every paragraph element */
+}
+```
+
+The `content` property can be used to do much more, such as adding cutom bullets on lists. [Here is a reference](https://www.w3schools.com/cssref/pr_gen_content.php) to [W3Schools](https://w3schools.com) where you can read more.
+
+> Read more about pseudo elements [here](/web-development/css/css-pseudo-elements);
+
+### `counter-increment`
+
+### `counter-reset`
+
+### `cursor`
+
+### `direction`
+
+### `display`
+
+### `empty-cells`
+
+### `filter`
+
+### `flex`
+
+### `flex-basis`
+
+### `flex-direction`
+
+### `flex-flow`
+
+### `flex-grow`
+
+### `flex-shrink`
+
+### `flex-wrap`
+
+### `float`
+
+### `font`
+
+### `@font-face`
+
+### `font-family`
+
+### `font-feature-settings`
+
+### `@font-feature-values`
+
+### `font-kerning`
+
+### `font-language-override`
+
+### `font-size`
+
+### `font-size-adjust`
+
+### `font-stretch`
+
+### `font-style`
+
+### `font-synthesis`
+
+### `font-variant`
+
+### `font-variant-alternates`
+
+### `font-variant-caps`
+
+### `font-variant-east-asian`
+
+### `font-variant-ligatures`
+
+### `font-variant-numeric`
+
+### `font-variant-position`
+
+### `font-weight`
+
+### `gap`
+
+### `grid`
+
+### `grid-area`
+
+### `grid-auto-columns`
+
+### `grid-auto-flow`
+
+### `grid-auto-rows`
+
+### `grid-column`
+
+### `grid-column-end`
+
+### `grid-column-gap`
+
+### `grid-column-start`
+
+### `grid-gap`
+
+### `grid-row`
+
+### `grid-row-end`
+
+### `grid-row-gap`
+
+### `grid-row-start`
+
+### `grid-template`
+
+### `grid-template-areas`
+
+### `grid-template-columns`
+
+### `grid-template-rows`
+
+### `hanging-punctuation`
+
+### `height`
+
+### `hyphens`
+
+### `image-rendering`
+
+### `@import`
+
+### `inline-size`
+
+### `inset`
+
+### `inset-block`
+
+### `inset-block-end`
+
+### `inset-block-start`
+
+### `inset-inline`
+
+### `inset-inline-end`
+
+### `inset-inline-start`
+
+### `isolation`
+
+### `justify-content`
+
+### `justify-items`
+
+### `justify-self`
+
+### `@keyframes`
+
+### `left`
+
+### `letter-spacing`
+
+### `line-break`
+
+### `line-height`
+
+### `list-style`
+
+### `list-style-image`
+
+### `list-style-position`
+
+### `list-style-type`
+
+## Margin Properties
+
+### `margin`
+
+This is used to add a space (margin) around elements.
+
+**Margin** is the shorthand property for:
+  - `margin-top`
+  - `margin-right`
+  - `margin-bottom`
+  - `margin-left`
+
+**Example:**
+
+```css
+/* Applies margin all around the element */
+div {
+  margin: 10px;
+}
+
+/* Applies a margin of 10px on the top and bottom and 20px on the left and right */
+div {
+  margin: 10px 20px;
+}
+
+/* Applies a margin of 10px on the top, 20px on the left and right, and 30px on the bottom */
+div {
+  margin: 10px 20px 30px;
+}
+
+/* Applies a margin of 10px on the top, 20px on the right, 30px on the bottom and 40px on the left */
+div {
+  margin: 10px 20px 30px 40px;
+}
+```
+
+<Callout type="info">
+  The values for margins and padding are evaluated in a clockwise order: top, right, bottom and then left.
+</Callout>
+
+### `margin-block`
+
+This appllies margin in the block direction.
+
+> Block direction depends on the primary language. For example, block direction in English downward.
+
+**Example:**
+
+```css
+/* Margin at the start and end is 10px */
+div {
+  margin-block: 10px;
+}
+
+/* Margin at the start is 10px and at the end it is 20px */
+div {
+  margin-block: 10px 20px;
+}
+```
+
+It is a shorthand property for:
+  - `margin-block-start`
+  - `margin-block-end`
+
+### `margin-block-end`
+
+Specifies a margin at the end in the block direction.
+
+**Example:**
+
+```css
+div {
+  margin-block-end: 20px;
+}
+```
+
+### `margin-block-start`
+
+Specifies a margin at the start in the block direction.
+
+**Example:**
+
+```css
+div {
+  margin-block-start: 20px;
+}
+```
+
+### `margin-bottom`
+
+Adds margin to the bottom of the element.
+
+**Example:**
+
+```css
+div {
+  margin-bottom: 20px;
+}
+```
+
+### `margin-inline`
+
+Defines the margin at the start and end in the inline direction. Inline direciton in English is left to right.
+
+**Example:**
+
+```css
+/* Margin at the start and end is 20px; */
+div {
+  margin-inline: 20px;
+}
+
+/* Margin at the start is 10px and 20px at the end */
+div {
+  margin-inline: 10px 20px;
+}
+```
+
+It is a shorthand property for:
+
+  - `margin-inline-start`
+  - `margin-inline-end`
+
+### `margin-inline-end`
+
+Specifies a margin at the end of the element in the inline direction.
+
+**Example:**
+
+```css
+div {
+  margin-inline-end: 20px;
+}
+```
+
+### `margin-inline-start`
+
+Specifies a margin a the start of the element in the inline direction.
+
+**Example:**
+
+```css
+div {
+  margin-inline-start: 20px;
+}
+```
+
+### `margin-left`
+
+Adds margin to the left of the element.
+
+**Example:**
+
+```css
+div {
+  margin-left: 20px;
+}
+```
+
+### `margin-right`
+
+Adds margin to the right of the element.
+
+**Example:**
+
+```css
+div {
+  margin-right: 20px;
+}
+```
+
+### `margin-top`
+
+Adds margin to the top of the element.
+
+**Example:**
+
+```css
+div {
+  margin-top: 20px;
+}
+```
+
+## Mask Properties
+
+### `mask`
+
+### `mask-clip`
+
+### `mask-composite`
+
+### `mask-image`
+
+### `mask-mode`
+
+### `mask-origin`
+
+### `mask-position`
+
+### `mask-repeat`
+
+### `mask-size`
+
+### `mask-type`
+
+### `max-height`
+
+### `max-width`
+
+### `@media`
+
+### `max-block-size`
+
+### `max-inline-size`
+
+### `min-block-size`
+
+### `min-inline-size`
+
+### `min-height`
+
+### `min-width`
+
+### `mix-blend-mode`
+
+### `object-fit`
+
+### `object-position`
+
+## Offset Properties
+
+### `offset`
+
+This is used to animate an element along a path. It is the shorthand property for:
+
+- `offset-anchor`
+- `offset-distance`
+- `offset-path`
+- `offset-position`
+- `offset-rotate`
+
+**Example:**
+
+```css
+/* Offset path, distance, anchor and rotate */
+img {
+  offset: path('M 50 80 C 150 -20 250 180 350 80') 150px auto 45deg;
+}
+```
+
+[See this example from W3Schools](https://www.w3schools.com/cssref/tryit.php?filename=trycss_offset)
+
+### `offset-anchor`
+
+This specifies the point of an element to be fixed along a path defined in the `offset-path` property.
+
+**Example:**
+
+```css
+img {
+  offset-path: path('M 50 80 C 150 -20 250 180 350 80');
+  offset-anchor: right center;
+}
+```
+
+### `offset-distance`
+
+This sets the distance of an element from the start of the path defined in the `offset-path` property.
+
+**Example:**
+
+```css
+img {
+  offset-path: path('M 50 80 C 150 -20 250 180 350 80');
+  offset-distance: 500px;
+}
+```
+
+### `offset-path`
+
+This creates a path for an element to follow.
+
+**Example:**
+
+```css
+div {
+  offset-path: path('M20,170 L100,20 L180,100 Z');
+  animation: aniamteDiv 3s 3;
+}
+
+@keyframes aniamteDiv {
+  100% { offset-distance: 100%; }
+}
+```
+
+### `offset-position`
+
+This specifies the intial position of an element along a path.
+
+**Example:**
+
+```css
+div {
+  offset-position: bottom right;
+  offset-path: path('M20,170 L100,20 L180,100 Z');
+}
+```
+
+### `offset-rotate`
+
+This sets the rotation of an animated element.
+
+**Example:**
+
+```css
+img {
+  offset-rotate: auto;
+}
+
+img {
+  offset-rotate: auto 90deg;
+}
+
+img {
+  offset-rotate: 90deg;
+}
+```
+
+### `opacity`
+
+This is used to set the transparency (opacity) of an element.
+
+**Example:**
+
+```css {5}
+div {
+  background-color: blue;
+  width: 300px;
+  height:: 300px;
+  opacity: 0.5;
+}
+```
+
+The value of the opacity must be 0 or greater than 0, but less than 1, with 1 representing no opacity and 0 representing full opacity (see through).
+
+You can also specify opacity using the alpha values when defining the color of an element.
+
+**Example:**
+
+```css
+/* A black color with 50% (0.5) opacity */
+div {
+  background-color: rgba(0,0,0,0.5);
+}
+```
+
+### `order`
+
+This specifies the order of a flexible item relative to the rest of the flexible items in the same container.
+
+<Callout type="info">The `order` property only works when the element is a flex item.</Callout>
+
+**[Example from W3Schools:](https://www.w3schools.com/cssref/tryit.php?filename=trycss3_order)**
+
+```css
+div#myRedDIV {
+  order: 2;
+}
+div#myBlueDIV {
+  order: 4;
+}
+div#myGreenDIV {
+  order: 3;
+}
+div#myPinkDIV {
+  order: 1;
+}
+```
+
+### `orphans`
+
+This specifies the minimum number of lines that must be left at the bottom of a page or column.
+
+It is usually used together with the [widows](#widows) property.
+
+**Example:**
+
+```css
+/* Specifying a media query that targets print media */
+@media print {
+  orphans: 4; /* Lines to be left at the bottom of the page */
+  widows: 2; /* Lines to be left at the top of the page */
+}
+```
+
+## Outline Properties
+
+### `outline`
+
+This is used to specify a line that is drawn outside of the element.
+
+It is the shorthand property for:
+
+  - `outline-width`
+  - `outline-style`
+  - `outline-color`
+
+The outline style is a required value. It can be one of: `solid | dashed | dotted | double`
+
+**Example:**
+
+```css
+button {
+  outline: 2px solid #10b581;
+}
+```
+
+### `outline-color`
+
+This sets the color of the outline.
+
+**Example:**
+
+```css {4}
+button {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: red;
+}
+```
+
+### `outline-offset`
+
+This is used to add a space between the outline and the edge of the element. Using the [CSS Box Model](/web-development/css/css-box-model), Outlines are placed on the outside of elements.
+
+**Example:**
+
+```css
+button {
+  outline: 4px dotted red;
+  outline-offset: 20px;
+}
+```
+
+### `outline-style`
+
+This is used to set the style of the outline. This is a required property when defining the outline, otherwise the color and width will not show.
+
+**Example:**
+
+```css
+/* Should be one of the following values */
+button {
+  outline-style: solid | dashed | dotted | double;
+}
+```
+
+### `outline-width`
+
+This is used to define the width of the outline.
+
+**Example:**
+
+```css {3}
+button {
+  outline-style: solid;
+  outline-width: 20px;
+  outline-color: red;
+}
+```
+
+## Overflow Properties
+
+### `overflow`
+
+This specifies whether to clip content or to show scrollbars when an elements content is too much to fit in a specified area. A good example of overflow is when the content on your website is more than the height of your device so that is enables you to scroll.
+
+**Example:**
+
+```css
+/* The default value */
+div {
+  overflow: visible;
+}
+
+/*
+If the content is more that the height or width specified,
+the scrollbars will be shown. Otherwise, no scrollbars.
+*/
+div {
+  overflow: auto;
+}
+
+/*
+The overflow is clipped, but a scrollbar will be added
+in order to show the rest of the content.
+*/
+div {
+  overflow: scroll;
+}
+
+/*
+If the content is more than the specified height or width,
+the overflow will be clipped and the rest of the content will
+be invisible, but can be scrolled programmatically.
+*/
+div {
+  overflow: hidden;
+}
+
+/*
+The overflow is clipped and the rest of the content will
+be invisible. This blocks all scrolling, even programmatically.
+*/
+div {
+  overflow: clip;
+}
+```
+
+<Callout type="info">The `overflow` property only works on block elements that have a specified height.</Callout>
+
+### `overflow-anchor`
+
+This specifies how the browser will behave when more content loads above the position where the user is currently at.
+
+Usually, this causes the content to jump when more content loads above the current scroll position. Using `overflow-anchor`, you can set the scroll position not to jump anymore and vastly improve the user experience.
+
+**Example:**
+
+```css
+div {
+  width: 500px;
+  height: 500px;
+  overflow-anchor: auto;
+}
+```
+
+[See this example from W3Schools](https://www.w3schools.com/cssref/tryit.php?filename=trycss_overflow-anchor).
+
+<Callout type="warning">
+  `overflow-anchor` does not work on Safari browsers.
+</Callout>
+
+### `overflow-wrap`
+
+This specifies whether the browser should break long lines or words if they overflow the container.
+
+**Example:**
+
+```css
+/* Long lines and words do not break even if they overflow.
+This is the default value. */
+div {
+  overflow-wrap: normal;
+}
+
+/* Words and lines are broken if they overflow the container */
+div {
+  overflow-wrap: break-word;
+}
+
+/* Words and lines are broken if they overflow the container */
+div {
+  overflow-wrap: anywhere;
+}
+```
+
+### `overflow-x`
+
+This is used to define an overflow on the x-axis (left and right).
+
+**Example:**
+
+```css
+/* The default value */
+div {
+  overflow-x: visible;
+}
+
+/* Content is clipped and a scrollbar is shown */
+div {
+  overflow-x: scroll;
+}
+
+/* Content is clipped and scrollbars are not shown */
+div {
+  overflow-x: hidden;
+}
+
+/* In case there are overflows, scrollbars will be shown */
+div {
+  overflow-x: auto;
+}
+```
+
+### `overflow-y`
+
+This is used to define an overflow on the y-axis (up and down).
+
+**Example:**
+
+```css
+/* The default value */
+div {
+  overflow-y: visible;
+}
+
+/* Content is clipped and a scrollbar is shown */
+div {
+  overflow-y: scroll;
+}
+
+/* Content is clipped and scrollbars are not shown */
+div {
+  overflow-y: hidden;
+}
+
+/* In case there are overflows, scrollbars will be shown */
+div {
+  overflow-y: auto;
+}
+```
+
+### `overscroll-behavior`
+
+This is used to turn off **scroll chaining** or **overscroll affordance** when you scroll past the scroll boundary.
+
+For example, ever seen how you can have two elements, with both elements being scrollable, and when you reach the end of the inner element then the outside element automatically starts to scroll? That's the default behaviour, and this property turns it off.
+
+The behavior above is called *scroll chaining**.
+
+<Callout type="info">
+  On `overscroll-affordance` is when you reach the end of the scrollable element and then it causes a refresh of the entire page as well as giving you visual feedback that you have reached the end.
+</Callout>
+
+**Example:**
+
+```css
+/* Does not allow overscroll affordance */
+div {
+  overscroll-behavior: contain;
+}
+```
+
+### `overscroll-behavior-block`
+
+This is used to turn off **scroll chaining** and **overscroll affordance** on an element when you try to scroll past the scroll boundary in the block direction.
+
+Note that the block direction is dependent on the language, as well as the `writing-mode` property. In English, the block direction is downward.
+
+**Example:**
+
+```css
+div {
+  overscroll-behavior-block: contain;
+}
+```
+
+### `overscroll-behavior-inline`
+
+This is used to turn off **scroll chaining** and **overscroll affordance** on an element when you try to scroll past the scroll boundary in the inline direction.
+
+Note that the inline direction is dependent on the language, as well as the `writing-mode` property. In English, the inline direction is left to right.
+
+**Example:**
+
+```css
+div {
+  overscroll-behavior-inline: contain;
+}
+```
+
+### `overscroll-behavior-x`
+
+This defines overscroll behaviour on the x-axis (left and right).
+
+**Example:**
+
+```css
+div {
+  overscroll-behavior-x: contain;
+}
+```
+
+### `overscroll-behavior-y`
+
+This defines overscroll behaviour on the y-axis (up and down).
+
+**Example:**
+
+```css
+div {
+  overscroll-behavior-y: contain;
+}
+```
+
+## Padding Properties
+
+### `padding`
+
+### `padding-block`
+
+### `padding-block-end`
+
+### `padding-block-start`
+
+### `padding-bottom`
+
+### `padding-inline`
+
+### `padding-inline-end`
+
+### `padding-inline-start`
+
+### `padding-left`
+
+### `padding-right`
+
+### `padding-top`
+
+### `page-break-after`
+
+### `page-break-before`
+
+### `page-break-inside`
+
+### `paint-order`
+
+## Perspective Properties
+
+### `perspective`
+
+### `perspective-origin`
+
+### `place-content`
+
+### `place-items`
+
+### `place-self`
+
+### `pointer-events`
+
+### `position`
+
+### `quotes`
+
+### `resize`
+
+### `right`
+
+### `rotate`
+
+### `row-gap`
+
+### `scale`
+
+### `scroll-behavior`
+
+## Scroll Margin Properties
+
+### `scroll-margin`
+
+### `scroll-margin-block`
+
+### `scroll-margin-block-end`
+
+### `scroll-margin-block-start`
+
+### `scroll-margin-bottom`
+
+### `scroll-margin-inline`
+
+### `scroll-margin-inline-end`
+
+### `scroll-margin-inline-start`
+
+### `scroll-margin-left`
+
+### `scroll-margin-right`
+
+### `scroll-margin-top`
+
+## Scroll Padding Properties
+
+### `scroll-padding`
+
+### `scroll-padding-block`
+
+### `scroll-padding-block-end`
+
+### `scroll-padding-block-start`
+
+### `scroll-padding-bottom`
+
+### `scroll-padding-inline`
+
+### `scroll-padding-inline-end`
+
+### `scroll-padding-inline-start`
+
+### `scroll-padding-left`
+
+### `scroll-padding-right`
+
+### `scroll-padding-top`
+
+### `scroll-snap-align`
+
+### `scroll-snap-stop`
+
+### `scroll-snap-type`
+
+### `scrollbar-color`
+
+### `tab-size`
+
+### `table-layout`
+
+## Text Properties
+
+### `text-align`
+
+This defines how to place the text in your web app.
+
+**Example:**
+
+```css
+/* Aligns the text to the center */
+div {
+  text-align: center;
+}
+
+/* Aligns the text to the left */
+div {
+  text-align: left;
+}
+
+/* Aligns the text to the right */
+div {
+  text-align: right;
+}
+
+/* Justifies the text like in newspapers */
+div {
+  text-align: justify;
+}
+
+/* Sets it to its default value */
+div {
+  text-align: initial;
+}
+
+/* Inherit text alignment from the parent */
+div {
+  text-align: inherit;
+}
+```
+
+### `text-align-last`
+
+This specifies how to align the last line of text.
+
+**Example:**
+
+```css
+div {
+  text-align-last: left;
+}
+```
+
+### `text-decoration`
+
+This specifies the type of decoration to add to text such as an underline and line-through.
+
+It is the shorthand property for:
+
+-  `text-decoration-line` (required)
+-  `text-decoration-color`
+-  `text-decoration-style`
+-  `text-decoration-thickness`
+
+**Example:**
+
+```css
+/* A link with a simple underline */
+a {
+  text-decoration: underline;
+}
+
+/* A link with a rec, dotted underline and overline */
+a {
+  text-decoration: underline overline dotted red;
+}
+
+/* A link with a 5px, blue and wavy underline */
+a {
+  text-decoration: underline wavy blue 5px;
+}
+```
+
+### `text-decoration-color`
+
+Specifies the color of the underline.
+
+**Example:**
+
+```css
+a {
+  text-decoration: underline;
+  text-decoration-color: cyan;
+}
+```
+
+### `text-decoration-line`
+
+This specifies the type of underline or overline.
+
+**Example:**
+
+```css
+a {
+  text-decoration: underline;
+}
+
+a {
+  text-decoration: overline;
+}
+
+/* Specifies both an underline and overline on the same line */
+a {
+  text-decoration: underline overline;
+}
+```
+
+### `text-decoration-style`
+
+This sets the style of the underline: solid, dotted, dashed or double.
+
+**Example:**
+
+```css
+a {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+}
+
+a {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+
+a {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+}
+
+a {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+}
+```
+
+### `text-decoration-thickness`
+
+Sets the thickness of the text decoration line.
+
+**Example:**
+
+```css
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+}
+
+a {
+  text-decoration: overline;
+  text-decoration-thickness: auto;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 10%;
+}
+```
+
+### `text-underline-position`
+
+This specifies the position of underline text decorations.
+
+**Example:**
+
+```css
+/* The default value */
+a {
+  text-decoration: underline;
+  text-underline-position: auto;
+}
+
+/* Sets the underline below the alphabetic baseline
+The alphabetic baseline is the line on which most letters sit
+and the line below which most descenders extend.
+Descenders are letters like g and y.
+*/
+a {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+/* This will use the underline position in the font file if it has been defined.
+If not, it reverts to the default: auto
+*/
+a {
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* In vertical writing mode, the underline will be on the left.
+In horizontal writing mode, the underline reverts to auto */
+a {
+  text-decoration: underline;
+  text-underline-position: left;
+}
+
+/* In vertical writing mode, the underline will be on the right.
+In horizontal writing mode, the underline reverts to auto */
+a {
+  text-decoration: underline;
+  text-underline-position: right;
+}
+```
+
+### `text-emphasis`
+
+This applies emphasis marks to text.
+
+```css
+/* The value can be one of the following */
+p {
+  text-emphasis: filled | open | dot | circle | double-circle | triangle | sesame | string | color | initial | inherit;
+}
+```
+
+**Example:**
+
+```css
+p {
+  text-emphasis: filled;
+}
+```
+
+It is the shorthand property for:
+
+- `text-emphasis-style`
+- `text-emphasis-color`
+
+**Example:**
+
+```css
+p {
+  text-emphasis-style: double-circle;
+}
+
+/* Sets the color of the empahsis marks to red */
+p {
+  text-emphasis-color: red;
+}
+```
+
+### `text-indent`
+
+This is used to specify the indentation of the first line in a text block.
+
+**Example:**
+
+```css
+p {
+  text-indent: 50px;
+}
+
+/* You can also use negative values */
+p {
+  text-indent: -20px;
+}
+```
+
+<Callout type="info">
+  You can use negative values in `text-indent`. If you use a negative value, the text will be indented to the left. If you use a positive value, the text will be indented to the right.
+</Callout>
+
+### `text-justify`
+
+This is used to set the justification method of text when you have `text-align: justify`.
+
+**Example:**
+
+```css
+/* The default value */
+p {
+  text-align: justify;
+  text-justify: auto;
+}
+
+/* Increase or decrease the space between words */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Increases or decreases the space between characters */
+p {
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+/* Disable justification methods */
+p {
+  text-align: justify;
+  text-justify: none;
+}
+
+/* Sets justification to its initial value */
+p {
+  text-align: justify;
+  text-justify: initial;
+}
+
+/* Inherits the justification method from the parent */
+p {
+  text-align: justify;
+  text-justify: inherit;
+}
+```
+
+### `text-orientation`
+
+This specifies the orientation of characters.
+
+**Example:**
+
+```css
+p {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+```
+
+This can be especially useful when working with tables because it can help you to orient long text in an upright manner so that they don't take up much space.
+
+It can be one of the following values: `mixed | upright | sideways | sideways-right | use-glyph-orientation | initial | inherit `
+
+<Callout type="warning">
+  `text-orientation` only works when `writing-mode` is set to `vertical-lr`.
+</Callout>
+
+### `text-overflow`
+
+This is used to define how overflown text will be shown to the user.
+
+**Example:**
+
+```css
+p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Will show three dots */
+}
+```
+
+The value can be one of the following: `clip | ellipsis | string | initial | inherit`;
+
+<Callout type="warning">`text-overflow: string` only works in Firefox.</Callout>
+
+### `text-shadow`
+
+This adds shadow to text.
+
+**Example:**
+
+```css
+p {
+  text-shadow: 4px 4px #000000;
+}
+```
+
+You can also add more shadows by separating them with a comma.
+
+```css
+p {
+  text-shadow: 4px 4px #000000, 6px 6px #ff0000;
+  /* You can add more values separated by commas */
+}
+```
+
+It has the syntax:
+
+`text-transform: horizontal-value vertical-value blur-radius color`
+
+The `blur-radius` is not a required value. The others are all required when defining the shadow.
+
+### `text-transform`
+
+This is used to specify the capitalization of text.
+
+**Example:**
+
+```css
+/* Set the text to UPPERCASE */
+p {
+  text-transform: uppercase;
+}
+
+/* Set the text to lowercase */
+p {
+  text-transform: lowercase;
+}
+
+/* Set Every First Letter Of Every Word To Be Capitalized */
+p {
+  text-transform: capitalize.
+}
+```
+
+### `top`
+
+This sets the vertical position of a positioned element. Therefore, if an element is not positioned, this property will have no effect.
+
+**Example:**
+
+```css
+div {
+  position: absolute;
+  top: 100px;
+}
+```
+
+> NOTE: When position is set to static: `position: static`, the `top` property has no effect.
+
+## Transform Properties
+
+### `transform`
+
+This property allows you to apply a 2D or 3D transformation to elements. It can take in a number of values to help you rotate, skew and scale elements.
+
+**Example:**
+
+```html filename="index.html" copy
+<p>This is an example to demonstrate the transform property.</p>
+```
+
+```css filename="index.css" copy
+p {
+  transform: rotateX(20deg);
+}
+
+p {
+  transform: rotateY(20deg);
+}
+
+p {
+  transform: skewY(20deg);
+}
+
+p {
+  transform: scaleY(1.5);
+}
+
+p {
+  transform: scale(2);
+}
+
+p {
+  transform: translate(20px, 40px);
+}
+```
+
+Here is a [reference](https://www.w3schools.com/cssref/css3_pr_transform.php) with examples from [W3Schools](https://w3schools.com).
+
+### `transform-origin`
+
+This allows you to change the position of transformed elements. It must be used together with the `transform` property.
+
+**Example:**
+
+```css filename="index.css" copy
+p {
+  transform-origin: center top;
+}
+
+p {
+  transform-origin: 10% bottom;
+}
+```
+
+### `transform-style`
+
+This specifies how nested elements are rendered in a 3D space.
+
+**Example:**
+
+```css filename="index.css" copy
+/* The element will not preserve its 3D position. This is the default value */
+div {
+  transform-origin: flat;
+}
+
+/* Elements should preserve their 3D position */
+div {
+  transform-origin: preserve-3d;
+}
+```
+
+### `transition`
+
+This is used to define animations in your web app. It is the shorthand property for:
+
+1. `transition-property`
+2. `transition-duration`
+3. `transition-timing-function`
+4. `transition-delay`.
+
+<Callout type="info">
+  You must always define the `transition-duration`. Otherwise, the value will be 0 and the transition will have no effect.
+</Callout>
+
+It has the syntax:
+
+```
+transition: property duration timing-function delay;
+```
+
+**Example:**
+
+```css filename="index.css" copy
+div {
+  background-color: rebeccapurple;
+  width: 200px;
+  height: 200px;
+  transition: background-color 5s;
+}
+
+div:hover {
+  background-color: orange;
+}
+```
+
+This will gradually change the background color of the `div` from rebeccapurple to orange over 5 seconds. In the example above, we have used neither a **timing-function** nor a **delay**. Here is a full example with all properties used.
+
+**Example:**
+
+```css filename="index.css' copy
+div {
+  transition: background-color 5s ease-in-out 0.5s;
+}
+```
+
+### `transition-delay`
+
+This specifies the amount of time to delay the transition animation before it starts.
+
+```css filename="index.css' copy
+div {
+  transition-delay: 5s;
+}
+```
+
+### `transition-duration`
+
+This specifies the amount of time that the transition animation should take.
+
+```css filename="index.css' copy
+div {
+  transition-duration: 5s;
+}
+```
+
+### `transition-property`
+
+This specifies the property that the transition should animate.
+
+```css filename="index.css' copy
+/* Transition only the background color */
+div {
+  transition-property: background-color;
+}
+
+/* Transition all the properties */
+div {
+  transition-property: all;
+}
+```
+
+### `transition-timing-function`
+
+This specifies the speed curve of the animation, to allow you to change the speed of the animation over time.
+
+**Example:**
+
+``` css filename="index.css" copy
+/* Default value: The transition is slow, fast, slow */
+div {
+  transition-timing-function: ease;
+}
+
+/* The transition will have the same speed */
+div {
+  transition-timing-function: linear;
+}
+
+/* The transition will have a slow start */
+div {
+  transition-timing-function: ease-in;
+}
+
+/* The transition will have a slow end */
+div {
+  transition-timing-function: ease-out;
+}
+
+/* The transition will have a slow start and slow end */
+div {
+  transition-timing-function: ease-in-out;
+}
+
+/* Define your own timing using the cubic-bezier function
+The values for each step should be greater than 0 but less than 1,
+with the values comma-separated
+*/
+div {
+  transition-timing-function: cubic-bezier(0, 0.5, 0.8, 1);
+}
+```
+
+### `translate`
+
+This allows you to change the position of an element.
+
+**Example:**
+
+```css
+div {
+  translate: 50px;
+}
+```
+
+You can also define multiple values in order to define an element in a 2D space or 3D space.
+
+**Example:**
+
+```css
+/* 2D Example */
+div {
+  translate: 50px 80px;
+}
+
+/* 3D Example */
+div {
+  translate: 50px 80px 120px;
+  perspective: 100px;
+}
+```
+
+<Callout> When defining a 3D translation, you also need to define the [perspective](#perspective) property.</Callout>
+
+### `unicode-bidi`
+
+This is used together with the [direction](#direction) property in order to define whether the text should be overriden to support multiple languages in the same document. The default is `normal`.
+
+[Further Reading and Examples](https://www.w3schools.com/cssref/pr_text_unicode-bidi.php)
+
+### `user-select`
+
+This specifies whether a user should be able to highlight text. The default value is `auto`.
+
+**Example:**
+
+```css
+/* Users will not be able to select and highlight text */
+button {
+  user-select: none;
+}
+
+/* Allow the user to select text */
+button {
+  user-select: text;
+}
+
+/* Text will be selected with a SINGLE CLICK instead of a DOUBLE CLICK */
+button {
+  user-select: all;
+}
+```
+
+### `vertical-align`
+
+This sets the vertical alignment of an element.
+
+**Example:**
+
+```css
+/* Align an image with the middle of the parent element */
+img {
+  vertical-align: middle;
+}
+
+/* Align an image with the top of the parent element */
+img {
+  vertical-align: top;
+}
+
+/* Align an image with the bottom of the parent element */
+img {
+  vertical-align: bottom;
+}
+```
+
+Read more about [Vertical Align](https://www.w3schools.com/cssref/pr_pos_vertical-align.php)
+
+### `visibility`
+
+Specifies whether an element is visible or not.
+
+**Example:**
+
+```css
+div {
+  visibility: hidden;
+}
+```
+
+> When the visibility is hidden, it will not show the element, but the element will still be part of the document flow. If you want to both hide the element and remove if from the document flow, use the `display: none` property instead.
+
+> You can also use absolute positioning on the element with `opacity: 0` in order to achieve the same behaviour, but this is relative to what you want to achieve.
+
+### `white-space`
+
+Handles white space inside an element.
+
+**Example:**
+
+```css
+
+p {
+  /* White space is preserved and text will wrap when necessary */
+  white-space: normal;
+}
+
+/* Text will not wrap and will continue until a <br> tag is introduced */
+  p {
+    white-space: nowrap;
+  }
+
+/* Behaves like preformatted text. Text will not wrap */
+p {
+  white-space: pre;
+}
+
+/* Sequences of white space will collapse into a single whitespace.
+Text will wrap when necessary and on line breaks
+*/
+p {
+  white-space: pre-line;
+}
+
+/* Text will wrap on line breaks and when necessary */
+p {
+  white-space: pre-wrap;
+}
+```
+
+### `widows`
+
+This property is usually used to print media to specify how many lines should be left at the top of the page. It is usually used in tandem with the [`orphans`](#orphans) property.
+
+**Example:**
+
+```css
+/* Specifying a media query that targets print media */
+@media print {
+  orphans: 4; /* Lines to be left at the bottom of the page */
+  widows: 2; /* Lines to be left at the top of the page */
+}
+```
+
+### `width`
+
+Specifies the width of an element. Width does not include paddings, margins or borders.
+
+**Example:**
+
+```css
+button {
+  width: 300px;
+}
+```
+
+> You will usually want to have elements take up their own full width and only modify their widths when it is necessary.
+
+### `word-break`
+
+This specifies how words should break when they reach the end of the line. The default value is `normal`.
+
+**Example:**
+
+```css
+p {
+  word-break: normal; /* Uses the default line break rules */
+}
+
+p {
+  word-break: break-all; /* Word breaks can apply at any character */
+}
+
+p {
+  word-break: keep-all; /* Specifies that word breaks should not be used for Chinese/Japanese/Korean (CJK) text */
+}
+
+p {
+  word-break: break-word; /* This is deprecated. Don't use it */
+}
+```
+
+### `word-spacing`
+
+This is used to manage the white space between words, to either increase it or decrease it. The default value is `normal`.
+
+**Example:**
+
+```css
+p {
+  word-spacing: 30px;
+}
+
+p {
+  word-spacing: 10px;
+}
+```
+
+The higher the value you give to word-spacing, the more separated the words will be. Test out the values to get to the exact spacing that works for your current project.
+
+### `word-wrap`
+
+This breaks words and wraps them onto the next line. The default value is `normal`.
+
+**Example:**
+
+```html
+<p>Antidisestablishmentarianism</p>
+```
+
+```css
+p {
+  word-wrap: break;
+  /* Adding a fixed width in order to demonstrate the property */
+  width: 100px;
+}
+```
+
+### `writing-mode`
+
+This specifies how text is laid out in the browser.
+
+**Example:**
+
+```css
+p {
+  writing-mode: horizontal-tb;
+}
+
+p {
+  writing-mode: vertical-rl;
+}
+```
+
+### `z-index`
+
+This specifies the stack order of elements relative to the viewer. Elements with a higher `z-index` appear closer to the user than elements with a lower `z-index`.
+
+**Example:**
+
+```css
+div {
+  position: relative;
+  z-index: 1;
+}
+
+button {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+}
+```
+
+The above example will show a `<div>` element with a button positioned at its top-right. The button is visible because we have defined it to have a higher `z-index` than the `<div>` element.
+
+<div className="bg-emerald-400 p-4 h-40 w-full max-w-lg relative mt-4">
+  <button className="absolute top-4 right-4 z-10 text-sm bg-rose-600 font-semibold py-1 px-2 rounded">I have a higher z-index</button>
+</div>
+
+> `z-index` only works on elements that are positioned or elements that are direct children of flex elements. Here are relevant modules on the same: [CSS Positioning](/web-development/css/css-positioning) and [CSS Flexbox](/web-development/css/css-flexbox).

@@ -1,0 +1,47 @@
+import { Callout } from "nextra/components";
+import { Steps, Tabs } from "nextra/components";
+
+# Create a documentation website using NextJs and Nextra
+
+<Callout>This walkthrough assumes basic knowledge of NextJs.</Callout>
+
+I don't know about you, but I have always wondered how documentation websites are built. Like how is that much content hosted and presented to the users? How is the search bar created? How is the entire thing maintained?
+
+Well, I discovered a great tool that helps to do all that out of the box! [**NEXTRA**](https://nextra.site)
+
+Nextra is a static site generator (SSG) for NextJs that integrates MDX to help you build your website.
+
+MDX is Markdown for the component era (from their website). It basically allows developers to use components inside markdown.
+
+Now that we have all the necessary definitions out of the way, let's get started on how you can build your very own documentation website from your bed.
+
+<Steps>
+
+### Create a new NextJs application
+
+<Tabs items={["npm", "yarn", "pnpm"]}>
+  <Tabs.Tab>`npx create-next-app@latest doc-website --tailwind`</Tabs.Tab>
+  <Tabs.Tab>`yarn add create-next-app@lastes doc-website --tailwind`</Tabs.Tab>
+  <Tabs.Tab>`pnpm create-next-app@latest doc-website --tailwind`</Tabs.Tab>
+</Tabs>
+
+#### If you want to use TypeScript
+
+<Tabs items={["npm", "yarn", "pnpm"]}>
+  <Tabs.Tab>
+    `npx create-next-app@latest doc-website --tailwind --typescript`
+  </Tabs.Tab>
+  <Tabs.Tab>
+    `yarn add create-next-app@lastes doc-website --tailwind --typescript`
+  </Tabs.Tab>
+  <Tabs.Tab>
+    `pnpm create-next-app@latest doc-website --tailwind --typescript`
+  </Tabs.Tab>
+</Tabs>
+
+### Navigate to your application
+
+Open up your application in your favorite code editor and install nextra <br />
+`npm i nextra nextra-theme-docs`
+
+</Steps>

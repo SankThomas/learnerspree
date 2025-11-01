@@ -1,0 +1,325 @@
+import { Callout } from "nextra/components";
+
+# CSS Functions
+
+<Callout type="info">
+### Note
+
+When defining gradients such as `linear-gradient`, we use the `background-image` property as opposed to the `background-color` property.
+</Callout>
+
+In programming, functions are a series of specific instructions that are packaged together to perform a specific task. For example, a function in JavaScript would have a look typical to this:
+
+```javascript
+function getSum() {
+    return 8 + 8;
+}
+```
+
+In CSS, however, functions don't have such a complicated structure, but only the following syntax:
+
+```css
+.class {
+    property_name: function_name(values);
+}
+```
+
+Of course the function will take in at least one value, but that's the typical structure for all CSS functions. Below is not an exhaustive list of all CSS functions, but they are the most commonly used ones. For a comprehensive list, visit the MDN Docs.
+
+## calc()
+This allows you to perform calculations to determine CSS property values. It has the following syntax:
+
+```css
+selector {
+    property_name: calc(valueOne + valueTwo)
+}
+```
+
+You can perform any kind of arithmetic operation using the `calc()` function. However, you **MUST** make sure to add a space before and after the Mathematical symbol you are using. Look at the two examples below:
+
+```css
+/* Example 1 */
+section {
+    height: calc(100vh-20px);
+}
+
+/* Example 2 */
+section {
+    height: calc(100vh - 50px);
+}
+```
+
+**Example 1** will not evaluate because of wrong syntax. **Example 2**, however, will evaluate correctly.
+
+<Callout type="error">
+    The space before and after the Mathematical symbol when using the `calc()` function are **MUST HAVES!**
+</Callout>
+
+## conic-gradient()
+Creates a color transition rotated about a center point - a conic gradient. For example:
+
+```css
+section {
+    background-image: conic-gradient(orange, yellow);
+}
+```
+
+You must define at least two color stops for the conic gradient.
+
+More about Conic Gradient in [Color Gradients](/web-development/css/css-color-gradients).
+
+## cubic-bezier()
+Defines a Cubic Bezier curve, i.e a transition effect with a variable speed from start to finish. A cubic bezier curve is defined by four points P0, P1, P2, P3. P0 and P3 are the start and end of the function. P0 is defined as coordinates (0, 0) while P3 is defined as coordindates (1, 1).
+
+This function can be used with the [animation-timing-function](/web-development/css/css-properties#animation-timing-function) property and the [transition-timing-function](web-development/css/css-properties#transition-timing-function) property.
+
+The following example is from [W3Schools](https://www.w3schools.com/cssref/tryit.php?filename=trycss_func_cubic-bezier) and it shows a `div` that grows to `300px` when you hover over it.
+
+```css
+div {
+    width: 100px;
+    height: 100px;
+    background: red;
+    transition: width 2s;
+    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+}
+
+div:hover {
+    width:300px;
+}
+```
+
+## hsl()
+Defines colors using the Hue-Saturation-Lightness model (HSL). It represents a cylindrical-coordinate representation of colors. It has the syntax:
+
+```css
+div {
+    background-color: hsl(hueValue, saturationValue, lightnessValue);
+}
+```
+
+With the first value being the **hue**, the second being **saturation** and the third being **lightness**.
+
+<Callout type="info">
+**Hue** is represented as a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue and 360 swings back to red.
+
+**Saturation** is represented in percentages. 0% represents a shade of gray while 100% represents the full color i.e fully saturated.
+
+**Lightness** is also represented as a percentage. 0% is black, 50% is normal and 100% is white.
+</Callout>
+
+**For example:**
+
+```css
+div {
+    background-color: hsl(120, 100%, 50%);
+}
+```
+
+## hsla()
+Defines colors using the Hue-Saturation-Lightness-Alpha model (HSLA). It's just like the `hsl()` model, with an alpha value that adds opacity to the color. The alpha value is a value between **0.0** and **1.0**, with **0.0** being fully transparent and **1.0** being fully opaque.
+
+**For example:**
+
+```css
+div {
+    background-color: hsla(120, 100%, 50%, 0.5);
+    /* The background color will have 0.5 or 50% opacity*/
+}
+```
+
+## linear-gradient()
+Creates a linear gradient by defining at least two color stops, or by setting a starting point and a direction or angle.
+
+**Examples:**
+
+```css
+/* Using two color stops */
+div {
+    background-image: linear-gradient(red, orange);
+}
+
+/* Using more than two color stops */
+div {
+    background-image: linear-gradient(red, orange, yellow, green, blue, skyblue);
+}
+
+/* Using direction */
+div {
+    background-image: linear-gradient(to bottom left, red, orange);
+}
+
+/* Using an angle */
+div {
+    background-image: linear-gradient(120deg, red, orange);
+}
+
+/* With transparency */
+div {
+    background-image: linear-gradient(140deg, hsla(120, 100%, 50%, 0.5), hsla(180, 100%, 50%, 0.8));
+}
+```
+
+## max()
+Uses the largest value, from a comma-separated list of values, as the property value.
+
+**Example:**
+
+```css
+div {
+    background-color: orange; /* To make it visible for demonstration */
+    height: 150px; /* To make it visible for demonstration */
+    width: max(60%, 450px);
+}
+```
+
+This will check the viewport of the device and, depending on the size of the viewport, will set the width of the `div` to either 50% of the viewport, or `450px`. Play around with this to see its effect in action.
+
+## min()
+Uses the smallest value, from a comma-separated list of values, as the property value. This is the opposite of the `max()` function. So, if `max()` selects the largest value, `min()` will select the smallest value.
+
+**Example:**
+
+```css
+div {
+    background-color: orange; /* To make it visible for demonstration */
+    height: 150px; /* To make it visible for demonstration */
+    width: min(60%, 450px);
+}
+```
+
+## radial-gradient()
+Creates a radial gradient, that is, a color gradient that is defined by its center. You must define at least two color stops for a radial gradient to be visible.
+
+```css
+div {
+    background-image: radial-gradient(red, orange, yellow);
+}
+```
+
+## repeating-conic-gradient()
+Repeats a conic gradient. You need to define the color stops as well as the angle you want to colors to take in degrees or percentages.
+
+**Example using percentages:**
+
+```css
+div {
+    height: 200px; /* To make it visible */
+    width: 200px; /* To make it visible */
+    background-color: red; /* Fallback for browsers that do not support gradients */
+    background-image: repeating-conic-gradient(#9233ea 10%, #db2777 20%);	
+    border-radius: 50%; /* To make it circular */
+}
+```
+
+The example above produces the following:
+
+<div className="w-[200px] h-[200px] rounded-full" style={{
+    backgroundImage: "repeating-conic-gradient(#9233ea 10%,#db2777 20%)"
+}}></div>
+
+**Example using degrees:**
+
+```css
+div {
+    height: 200px; /* To make it visible */
+    width: 200px; /* To make it visible */
+    background-color: red; /* Fallback for browsers that do not support gradients */
+    background-image: repeating-conic-gradient(red 0deg 30deg, yellow 30deg 60deg, blue 60deg 90deg);	
+    border-radius: 50%; /* To make it circular */
+}
+```
+
+The example above produces the following:
+
+<div className="w-[200px] h-[200px] rounded-full" style={{
+    backgroundImage: "repeating-conic-gradient(red 0deg 30deg,yellow 30deg 60deg,blue 60deg 90deg)"
+}}></div>
+
+The second example using degrees might be more understandable because it's easy to see that the first color takes up 30degress of the cone, the second color takes the next 30 degrees and the third one takes the next 30 degrees. Of course these are programmer-defined values and you can change them up however you want.
+
+## repeating-linear-gradient()
+Repeats a linear gradient.
+
+**Example:**
+
+```css
+div {
+    height: 200px; /* To make it visible */
+    background-image: repeating-linear-gradient(45deg, #9233ea 10%, #db2777 20%);
+}
+```
+
+The above example produces the following:
+<div className="h-[200px]" style={{
+    backgroundImage: "repeating-linear-gradient(45deg, #9233ea 10%, #db2777 20%)"
+}}></div>
+
+
+## repeating-radial-gradient()
+Repeats a radial gradient.
+
+**Example:**
+
+```css
+div {
+    height: 200px; /* To make it visible */
+    background-image: repeating-radial-gradient(#9233ea 10%, #db2777 20%);
+}
+```
+
+The above example produces the following:
+<div className="h-[200px]" style={{
+    backgroundImage: "repeating-radial-gradient(#9233ea 10%, #db2777 20%)"
+}}></div>
+
+
+## rgb()
+Defines colors using the Red-Green-Blue model. RGB is defined by values in percentages from 0% to 100%, or integer values from 0 to 255, with 0 representing none of that color and 100% or 255 representing the full color.
+
+For example, if you wanted to show a completely red color, you would write: `rgb(255, 0, 0)`. Therefore, a green color becomes `rgb(0, 255, 0)` and blue becomes `rgb(0, 0, 255)`. And then of course you can play around with the values to get the exact color you want, whether shades or tints.
+
+**Example:**
+
+```css
+div {
+    background-color: rgb(150, 250, 180); /* Produces a nice emeraldish green */
+}
+```
+
+The above example produces the following:
+
+<div className="h-5" style={{ background: "rgb(150, 250, 180)"}}></div>
+
+## rgba()
+Defines colors using the Red-Green-Blue-Alpha model (RGBA). The alpha value adds opacity to the color in a range of `0.0` to `1.0`, just like with `hsla()`
+
+**Example:**
+
+```css
+div {
+    background-color: rgba(150, 250, 180, 0.5)
+    /* The background color will have 0.5 or 50% opacity*/
+}
+```
+
+The above example produces the following:
+
+<div className="h-5" style={{ background: "rgba(150, 250, 180, 0.5)"}}></div>
+
+## var()
+Inserts the value of a custom property. This is usually used to pass values that have been declared as global variables to properties.
+
+Read more about CSS Variables in [the next chapter](/web-development/css/css-variables).
+
+**Example:**
+
+```css
+:root {
+    --bg-color: #9233ea;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+```

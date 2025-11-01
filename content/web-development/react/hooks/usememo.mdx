@@ -1,0 +1,134 @@
+import { Callout } from "nextra/components";
+
+# useMemo
+
+<Callout type="info">
+  React 19 comes with the React Compiler which handles automatic re-renders,
+  effectively rendering the useMemo hook useless. However, at the time of
+  writing this, this feature is still in development and is opt-in. So if you
+  choose to use it, then you don’t need the useMemo hook anymore. If you don’t
+  choose to use it, then the useMemo hook is still useful to you.
+</Callout>
+
+<Callout type="info">
+  As the useCallback hook returns a memoized function, the useMemo hook returns
+  a memoized value.
+</Callout>
+
+**A reminder**: Memoization is an optimization method that is used to store the result of an expensive function, so that you don’t need to recalculate it every single time that you want to reuse it in your application.
+
+Consider the following example from [FreeCodeCamp.org](https://www.freecodecamp.org/news/how-to-work-with-usememo-in-react/#what-is-usememo)
+
+```js copy
+import React from "react";
+
+const ListComponent = ({ items }) => {
+  const processedItems = processItems(items); // Expensive computation
+
+  return (
+    <ul>
+      {processedItems.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+const processItems = (items) => {
+  // Expensive computation
+  // Imagine some heavy processing here
+  return items.map((item) => ({ id: item.id, name: item.name.toUpperCase() }));
+};
+
+export default ListComponent;
+```
+
+## **The problem**
+
+Above, we are doing a heavy computation which requires some data from another component. Therefore, every single time that this component is going to be rendered to the user, even the expensive computation is going to rerun. And this happens, even if the value of the computation does not change at all. Obviously, this is not what we expect from our application. So, how do you fix this?
+
+## **The Solution: Enter useMemo**
+
+useMemo will store the value of the expensive computation and then only rerun it when its dependencies change.
+
+It has the following syntax:
+
+```js
+const calculation = useMemo(() => expensiveFunction, [dependency]);
+```
+
+Therefore, formatting the example above to add the useMemo hook, it will look like this:
+
+```js copy
+import React, { useMemo } from 'react';
+
+const ListComponent = ({ items }) => {
+  const processedItems = useMemo(() => processItems(items), [items]);
+  // The rest of the code remains unchanged
+
+export default ListComponent;
+```
+
+**Another bit to remember**: You can think of a dependency or dependency array like a conditional that will be the controller of the useMemo hook – meaning that when the dependency changes, then the useMemo hook will also rerun the computation.
+
+In the example above, we first import useMemo as a named import from React, and then we wrap our expensive calculation around the useMemo hook so that at the first render, useMemo will cache the result and you won’t need to rerun the calculation when you need the value again.
+
+We then pass a dependency array called items so that the useMemo hook will only run when the items array also changes. In other words, you won’t be using extra resources for yourself or your clients unless you need to.
+
+The useMemo hook works the same way as the useCallback hook. The only difference being that useCallback returns a memoized function, while useMemo returns a memoized value.
+
+I will show you two examples of how to use the useMemo hook:
+
+### **Example One**
+
+In order to understand the useMemo (as well as the useCallback hook) in-depth, we first need to talk about how React renders and re-renders components. We already know that the initial render of an application occurs when the app first loads to the user. Other renders can occur later such as when the user updates some part of their profile for example.
+
+React always re-renders whenever a function is called and whenever a state value is updated or changed – even if the function doesn’t change in terms of the parameters that it accepts, React will still cause a re-render. This is because, before rendering or re-rendering occurs, React has to check for what is called **referential equality** – a fancy name for the triple equal signs (**===**) in programming which check for whether two variables are equal in value and type.
+
+In this case, React determines that the two functions – the previous one already rendered and the new one requesting a re-render – are equal in type but not in value. So, it causes a re-render. Memoizing this function will help to prevent this.
+
+[Here is a link to one of my videos](https://www.youtube.com/watch?v=EXX6Dg0SN1A) to help you understand the useMemo hook better.
+
+### **Example Two**
+
+Here is a full example on how you can use useMemo to cache the result of an API GET request (This example memoizes the result of the [useFetch custom hook](/custom-hooks#custom-hook-to-make-an-api-call) we created in the [Custom hooks](/custom-hooks) chapter):
+
+```js copy
+import { useState, useEffect, useMemo } from "react";
+
+export default function useFetch(url) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(url);
+      const result = await response.json();
+      setData(result);
+    };
+
+    fetchData();
+  }, [url]);
+
+  // Memoize the data value
+  const memoizedData = useMemo(() => data, [data]);
+
+  return memoizedData;
+}
+```
+
+The above is a custom hook called useFetch that will send a GET request to an API and then return some data, which is stored in the data state value created by the useState hook.
+
+The above example is the same as the one we created in the chapter about useEffect to create custom hooks. This example is, however, arguably better, because we now cache the data returned – so we don’t have to send the GET request every time, except only when the data changes.
+
+Look at the line:
+
+```js
+const memoizedData = useMemo(() => data, [data]);
+```
+
+This is the part that memoizes our response. So, we are memoizing the data that we get back in order to optimize our application – it optimizes it by increasing performance and reducing network bandwidth consumption because now our app does not need to reload if the data from the API does not change. Therefore, there’s no need to make a GET request for as long as the data does not change. And then of course, the GET request is only sent when the data state value changes.
+
+<Callout type="info">
+  The difference between useMemo and useCallback is that, useMemo returns a
+  memoized value, while useCallback returns a memoized function.
+</Callout>

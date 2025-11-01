@@ -1,0 +1,41 @@
+import { Callout } from "nextra/components";
+
+# Introduction to React
+
+<Callout>
+We are going to use JavaScript in the examples as opposed to TypeScript because I am, as of now, not proficient in TypeScript. If you want to see TypeScript examples, become a contributor on the project where you can help to add them.
+</Callout>
+
+ReactJs is a front-end JavaScript framework used to build interactive user interfaces. It used declarative programming, that is, developers design the UI for the application and React only updates and re-renders the components when the state changes.
+
+The key advantage of declarative programming is that it only re-renders the parts of the application that have changed and not the entire application. That is what makes React extremely fast out of the box. React achieves this also by using the Virtual DOM.
+
+The virtual DOM compares what is has in state with what is in the actual DOM and then renders the parts of the application that don't match up, i.e, the parts of the application that have changed.
+
+React itself can be used to build single page applications, but if you want to build larger applications, it is recommended to use a React-based framework instead such as NextJs, GatsbyJs and Remix. This is because React itself does not have certain functionalities unless it is paired with a library. For example, you cannot build routing for your application unless you install a routing package like `react-router-dom`. However, frameworks like NextJs already have routing built in and you do not need extra packages to get started.
+
+## Thinking in React
+
+React projects are made up **components**. Components are modular and reusable parts of your application. In React, you can make anything a component. This is especially important because it means that you can easily integrate components into your application even if they were built by many other developers.
+
+It is advisable that a React component should only ever handle one piece of state or functionality. Therefore, if you realise that you components are doing more than one funcitonality, you should refactor your code.
+
+In order to know what components you need to refactor, or how to build your application in React, take this example of a website. A website can contain:
+
+1. A header
+2. A navigation bar
+3. A hamburger menu
+4. The banner or showcase section
+5. A call to action section
+6. A footer
+
+...among other sections.
+
+Thinking in React therefore means that you can build all of these components and then nest them to build out your UI. The advantange of this is that:
+
+1. You can reuse these components anywhere within your application - for example, the navigation and footer usually appear on many pages on your website.
+2. If you need to change something in many pages that share the same components, you only need to make the change in one place and they apply in all places.
+
+If you have some experience in programming in any language, you will quickly realize that these are the principles of programming: **Reusability**, **DRY (Don't Repeat Yourself)** and **KISS (Keep It Simple Stupid)**. Again, if you have experience in programming in any language, you will also quickly realize that you may already be using these principles. For example, in CSS, you can reuse class names.
+
+With that, we are ready to delve into ReactJs.

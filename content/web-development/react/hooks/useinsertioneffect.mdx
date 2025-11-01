@@ -1,0 +1,72 @@
+import { Callout } from "nextra/components";
+
+# useInsertionEffect
+
+useInsertionEffect is a special-purpose hook that is used to inject styles into the DOM before layout and paint, like CSS-in-JS libraries.
+
+> It ensures that your styles are inserted synchronously and before the browser paints so that there is not visual flicker or unstyled content.
+
+It was introduced in React 18, and was intended for CSS-in-JS libraries like Emotion and styled-components.
+
+<Callout type="warning">
+  useInsertionEffect was not intended for general app logic.
+</Callout>
+
+## When to use it
+
+1. When you are building a CSS-in-JS library or tool.
+2. When you need to insert styles into the DOM before the browser paints.
+3. When you want to prevent a Flash Of Unstyled Content (FOUC).
+
+> Most React developers never even need to use this hook. I have never bothered with this hook up until now, and I am only using it in order to better write this book.
+
+## Syntax
+
+```js copy
+useInsertionEffect(() => {
+  // Insert styles here (e.g., add a <style> tag to the head)
+  return () => {
+    // Optional cleanup
+  };
+}, [dependencies]);
+```
+
+Similar to other hooks that require a dependency array, it only runs when the value of the dependency changes.
+
+The useInsertionEffect hook behaves similarly to [useEffect](/useeffect) and [useLayoutEffect](/uselayouteffect), but it runs even earlier than both those hooks, because it runs right after DOM mutations, but before the browser paints.
+
+### Example
+
+This example demonstrates how you would use this hook in a CSS-in-JS library:
+
+```js copy
+import { useInsertionEffect } from 'react';
+
+function useCustomStyle(styleString) {
+  useInsertionEffect(() => {
+    // creating the <style> tag in the head of your document
+    const styleTag = document.createElement('style');
+    styleTag.textContent = styleString;
+    document.head.appendChild(styleTag);
+
+    return () => {
+      // Cleanup function
+      document.head.removeChild(styleTag);
+    };
+  }, [styleString]);
+}
+
+// Styles
+function StyledBox() {
+  useCustomStyle(`
+    .styled-box {
+      background-color: lightblue;
+      padding: 20px;
+    }
+  `);
+
+  return <div className="styled-box">I am styled!</div>;
+}
+```
+
+The above example ensures that the styles are injected **before** the component renders, such that you will not be able to see the unstyled box at all.

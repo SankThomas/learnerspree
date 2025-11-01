@@ -1,0 +1,315 @@
+import { Callout, Steps } from "nextra/components";
+
+# The useEffect hook
+
+This is by far my favorite hook because of one reason - I once broke a client website because I unintentionally caused an infinite loop 😅, and I have also crashed my computer once.
+
+The useEffect hook is used to perform after effects (not Adobe) in your applications. After effects (also called passive effects) include updating your document title, sending GET requests to an API, adding eventListeners, and even creating a timer.
+
+It has the following syntax:
+
+```js
+import { useEffect } from "react";
+
+useEffect(() => {
+  setup;
+}, [dependencies]);
+```
+
+**(setup)** above refers to the callback function (the effect) that you want to perform. Whenever there is a re-render of your application, the setup function will re-run.
+
+The dependencies refer to the options you pass to the useEffect hook so that the callback function will only run when there is a change is the values of the dependencies. If you do not have any dependecies, you will usually pass an empty array so that the useEffect hook only runs once on the initial render of the application.
+
+**Example**
+
+```js
+import { useEffect } from "react";
+
+useEffect(() => {
+  setup;
+}, []); // An empty array
+```
+
+If you do not pass the empty array, the useEffect hook will re-run every single time that your components mounts and this can easily cause memory leaks in your application because it uses resources that it does not need and that you do not intend. This will also create a heavy load on your device, and, if you were making a call to an API...yeah, that is not a good idea. In fact, they might think you're a bot and rate-limit you, or worse, they might think you're trying to DDoS them.
+
+## Examples
+
+### Updating your document title
+
+In HTML, when you want to change the document title, all you need to do is to find the HMTL `<title>` tag and update the text. In JavaScript, you would use `document.title = "New document title"`.
+
+You can do the same using the useEffect hook in the following way:
+
+```js
+useEffect(() => {
+  document.title = "useEffect is the best hook";
+}, []);
+```
+
+Easy right? Yes! Notice that I have an empty dependency array, so that the useEffect will only run when the application is first rendered and not any other time. Here is a further example about how you can use an input to update the document title:
+
+```js copy
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  return (
+    <div>
+      <label>Update document title</label>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+    </div>
+  );
+}
+```
+
+Run this example and try typing inside the input. Remember to give your application some styling.
+
+Notice that the useEffect now has a dependency of **title** which is also our state value initialized in the useState hook. This is because we need the title to be updated on every keystroke that we make. If you don't want the title updated on every keystroke, you can create a submit function as follows:
+
+```js copy
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const [title, setTitle] = useState("");
+
+  function updateDocumentTitle(e) {
+    e.preventDefault(); // Prevents the form from reloading the web page on submit
+
+    document.title = title;
+  }
+
+  useEffect(() => {
+    updateDocumentTitle();
+  }, []); // Now we don't need a dependency array
+
+  return (
+    <div>
+      {/* onSubmit event handler is now on the form */}
+      <form onSubmit={updateDocumentTitle}>
+        <label>Update document title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <button type="submit">Update document title</button>
+      </form>
+    </div>
+  );
+}
+```
+
+### Making a timer
+
+Building a timer in React is mostly the same as doing it in JavaScript, only that now we use the useEffect hook, and it introduces a new concept which we are going to tackle. Let's begin...
+
+<Steps>
+
+### Step 1
+
+First, we need to import the useState and useEffect hooks from react, so that we can set up our state values:
+
+```js copy
+import { useEffect, useState } from "react";
+
+export default function Timer() {
+  const [seconds, setSeconds] = useState(60);
+  // Default is 60 seconds. You can change this to suit your application
+
+  return <div>Countdown Timer</div>;
+}
+```
+
+Above, we have named our state value <strong>seconds</strong>, and the function that controls how we access our state value is called <strong>setSeconds</strong>. This is initialized to 60 with the obvious reason that every minute has 60 seconds. However, depending on what app you are building, and what functionality you want with your timer, you can change this value to your convenience.
+
+### Step 2
+
+Next, we need to create our timer function. Inside the useEffect hook, add the following code:
+
+```js copy
+useEffect(() => {
+  if (seconds <= 0) return;
+
+  const timeout = setTimeout(() => {
+    setSeconds(seconds - 1);
+  }, 1000);
+});
+```
+
+Also, modify the return to show the number of seconds left:
+
+```js copy
+<div>{seconds}</div>
+```
+
+If you were to run your application at this point, your timer will work correctly at face value - but there is a problem - your timer will continue indefinitely. This is a big problem because it can cause memory leaks, and it will use up more resources on your machine than you intend. Therefore, in order to fix it, you need to add a cleanup function to the useEffect as follows:
+
+```js copy
+useEffect(() => {
+  if (seconds <= 0) return;
+
+  const timeout = setTimeout(() => {
+    setSeconds(seconds - 1);
+  }, 1000);
+
+  return () => clearTimeout(timeout);
+});
+```
+
+This ensures that when the if condition is met, then the timer also stops.
+
+### Full code
+
+```js copy
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [seconds, setSeconds] = useState(60);
+
+  useEffect(() => {
+    if (seconds <= 0) return;
+
+    const timeout = setTimeout(() => {
+      setSeconds(seconds - 1);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  });
+
+  return <div>{seconds}</div>;
+}
+```
+
+</Steps>
+
+### Making API calls
+
+Almost every app you build will depend on some kind of API call in order to make the app interactive, such as creating and updating posts, deleting posts, managing friend requests, and even uploading images.
+
+Here is an illustration of what happens when you make an API call:
+
+![Making an api call](/assets/making-an-api-call.png)
+
+API calls are not native to React. They are built into every programming language. In order to make an API call in React, we use the useEffect hook, because it is considered an after effect. That is, it happens in the background as your app is loading, or as it is doing something else.
+
+<Callout type="info">
+  You will **usually** make API calls inside the useEffect hook, but not all API
+  calls should be made inside the useEffect hook. A good example is an API call
+  that depends on a form submit function.
+</Callout>
+
+Let's make a GET request to the [RestCountries API](https://restcountries.com) - one of my favorite APIs - in order to understand this hook. Take note that this API is constantly being updated, and in case something in the example is not working properly, please read [the documentation](https://restcountries.com)
+
+<Steps>
+
+### Set up our hooks
+
+As per usual, we first need to import our hooks, and set up our state values:
+
+```js copy
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [countries, setCountries] = useState([]);
+}
+```
+
+### Make our GET request
+
+Next, we can hit the API endpoint we want. In this case, we want to get details about all the countries from the API
+
+```js copy
+useEffect(() => {
+  const fetchCountries = async () => {
+    const response = await fetch("https://restcountries.com/v3.1/all");
+    const data = await response.json();
+    setCountries(data);
+  };
+
+  fetchCountries();
+}, []);
+```
+
+The code above should not be new to you as it is the fetch API from JavaScript. We have simply wrapped it inside the useEffect hook.
+
+We simply create an asynchronous arrow function called fetchCountries which we call right before closing the useEffect hook.
+
+Note that the useEffect has an empty dependency array. This is to ensure that the effect only runs once, i.e on the initial render of the application. This prevents making the GET request every second which would bloat your application and cause memory leaks.
+
+### Test the application
+
+```js copy
+return <div>Showing data about {countries.length} countries</div>;
+```
+
+To test out whether we are hitting the API endpoint, we are rendering the length of the array that we get back. Go ahead and check out the API in order to see the kind of information you can render to the UI.
+
+You can go ahead and build out the rest of the UI according to your liking.
+
+### Full code example
+
+```js copy
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const response = await fetch("https://restcountries.com/v3.1/all");
+      const data = await response.json();
+      setCountries(data); // Populating our state value
+    };
+
+    fetchCountries();
+  }, []);
+
+  return <div>Showing data about {countries.length} countries</div>;
+}
+```
+
+</Steps>
+
+### Important to note
+
+<Callout type="warning">
+Never ever ever ever ever ever ever ever make the useEffect asynchronous. You can make functions inside the useEffect asynchronous, but never the useEffect hook itself. This is simply because an asynchronous function returns a Promise.
+
+You can have as many useEffects as you need in your application.
+
+Functions inside a useEffect cannot be accessed outside of the useEffect. For example, if you wanted to add a click event on a button that calls the function above to make the GET request to the API, you would do something like this:
+
+```js
+<button onClick={fetchCountries}>Fetch countries</button>
+```
+
+However, if you ran your application, it would give you an error that says, “fetchCountries is not defined”. In order to circumvent this, all you need to do is move your function outside of the useEffect, but still call it within the useEffect. See the example below:
+
+```js copy
+// The function is now outside of the useEffect hook
+const fetchCountries = async () => {
+  const response = await fetch("https://restcountries.com/v3.1/all");
+  const data = await response.json();
+  setCountries(data);
+};
+
+// But we still call the function in our hook
+useEffect(() => {
+  fetchCountries();
+}, []);
+```
+
+The above method now gives the entire application access to the function in case we might need to use it in some other component.
+
+</Callout>
+
+We have covered the concepts we need for the effect hook. Now, we are well equipped to create our own custom react hooks. That, we will do in the next chapter.

@@ -1,0 +1,54 @@
+# How JavaScript is Interpreted
+
+JavaScript is a high-level programming language. This means, programmers write JavaScript code in a way that is almost similar to spoken English, but with the syntax and rules of JavaScript.
+
+When a browser encouters this code, it needs to convert it into machine-readable code before it can execute it. This process can be completed by compilation or interpretation. Browsers are equipped with an Interpreter to help them complete this process.
+
+## How an interpreter works
+
+An interpreter works by reading code line by line and executing it line by line. A compiler works by reading the entire code first and then executing it. This means that, when working with JavaScript, you will encounter issues in your code at runtime. These are called **runtime errors**.
+
+## A note about runtime errors
+
+Runtime errors are generally harder to solve because they tell you that there is an issue in your code and where it is, but not what it is. However, compilers and interpreters have gotten smarter, and with frameworks like NextJs, they provide a nice window for when they encounter an error in your code, to show you where the issue is. This means that Google, Code Documentation, and Forums will have to become close friends of yours...unless you're Sheldon Cooper and you have an eidetic memory. I'm not, and I don't.
+
+A final note about interpreters is that, since they execute one line after another, then you should take note of how you want your code to execute - since they execute code from top to bottom. If you want some piece of code to execute first before another, then you should place it above. However, this might not be the best solution because of coding best practices. For exampe, if you are using **strict mode** then you cannot use a variable before declaring it - which is something weird that JavaScript has.
+
+## Common practice
+
+A practice that you will see is that programmers will either:
+  1. Link their JavaScript files right before the closing `</body>` tag in their HTML files. This is to ensure that the JavaScript is loaded last so as not to prevent any loading of the initial web app - because HTML is also executed line by line, top to bottom... OR
+  2. They will link JavaScript files in the `<head>` section and will add the `defer` attribute which does the same thing as above... it prevents the script from loading until all the HTML has loaded and therefore increases loading speed and prevents blocking of the UI.
+
+## Examples
+### 1. Linking JavaScript as the last element
+``` html
+<!-- Adding your JavaScript right at the end of your HTML file so that it is executed last -->
+<!Doctype html>
+<head>
+  <title>How JavaScript is Interpreted</title>
+</head>
+
+<body>
+  <!-- Some content about your website -->
+
+  <script src="index.js"></script>
+</body>
+</html>
+```
+
+### 2. Using the `defer` attribute
+
+``` html
+<!-- Adding your JavaScript in the <head> section but with the "defer" attribute -->
+<!Doctype html>
+<head>
+  <script src="index.js" defer></script>
+  <title>How JavaScript is Interpreted</title>
+</head>
+
+<body>
+  <!-- Some content about your website -->
+</body>
+</html>
+```

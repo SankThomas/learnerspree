@@ -1,0 +1,86 @@
+import { Steps } from "nextra/components";
+
+# useTransition
+
+The useTransition hook is used to update the state of your application without blocking the UI. This is especially useful because it means your users won't have to apply for vacation time as they wait for your application to load. It is also useful because people these days rarely wait for a slow-loading website, hence increasing the bounce rate of your website.
+
+It has the following syntax:
+
+```js
+import { useTransition } from "react";
+
+export default function TransitionExample() {
+  const [isPending, startTransition] = useTransition();
+}
+```
+
+The useTransition hooks takes no parameters, but it returns an array with two items: **isPending** and **startTransition**.
+
+startTransition is used to define the function that is required to run in te background so that it doesn't block the UI, and isPending is used to check whether startTransition has successfully run or not, and then returns a corresponding UI element.
+
+### Example
+
+```js copy
+import React, { useState, useTransition } from "react";
+
+function TransitionExample() {
+  const [isPending, startTransition] = useTransition();
+  const [input, setInput] = useState("");
+  const [list, setList] = useState([]);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInput(value);
+
+    // Start a transition for a slow update (like filtering a large list)
+    startTransition(() => {
+      const filteredList = Array.from(
+        { length: 5000 },
+        (_, i) => `Item ${i}`,
+      ).filter((item) => item.includes(value));
+      setList(filteredList);
+    });
+  };
+
+  return (
+    <div className="p-4">
+      <input
+        className="mb-4 w-full border p-2"
+        type="text"
+        value={input}
+        onChange={handleChange}
+        placeholder="Type to filter items..."
+      />
+
+      {isPending && <div className="mb-2 text-blue-500">Loading...</div>}
+
+      <ul className="h-64 overflow-auto border p-2">
+        {list.map((item, index) => (
+          <li key={index} className="border-b py-1">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TransitionExample;
+```
+
+And here is the explanation:
+
+<Steps>
+###
+
+We have an input that takes in our state value of input and an onChange event handler that calls the handleChange function. Inside the handleChange function, we set the value of the input equal to whatever the user will type, and then startTransition() is called.
+
+###
+
+Inside startTransition(), we create a variable called filteredList which does exactly what it says – it creates an array of 5000 items and then compares the text of the array elements with what the user types in and then returns all corresponding items.
+
+###
+
+isPending is one of the values that we get when we initialize useTransition. Using the isPending value, we can check whether startTransition() is successful or not and then render the corresponding UI. In this case, when startTransition() is still running, we are showing a div element with text that says “Loading…” and then once it finishes running, then we show the unordered list with the filtered items.
+
+</Steps>

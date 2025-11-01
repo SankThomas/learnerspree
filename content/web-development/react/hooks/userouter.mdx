@@ -1,0 +1,123 @@
+import { Callout } from "nextra/components";
+
+# useRouter
+
+<Callout type="info">
+  This hook is only available in NextJs (App Router)
+</Callout>
+
+The useRouter hook gives you programmatic control over routing in your NextJs application. With this hook, you can:
+
+1. Navigate between pages.
+2. Go back in history.
+3. Refresh the current route.
+4. Replace the URL without reload.
+5. Get the current path (using [usePathname](/usepathname))
+
+When you are using the App router, import useRouter as follows:
+
+```js copy
+import { useRouter } from "next/navigation";
+```
+
+When you are using the pages router, import useRouter as follows:
+
+```js copy
+import { useRouter } from "next/router";
+```
+
+## Syntax
+
+```js
+const router = useRouter();
+```
+
+Once you do this, you get access to the following functions:
+
+| Function              | Description                                                                                                       |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `router.push(url)`    | Navigate to a new URL (adds to the history stack). Takes in a url string of the new page you want to navigate to. |
+| `router.replace(url)` | Navigate to the new page without adding to the history stack. Takes in a url string.                              |
+| `router.back()`       | Go back to the previous page in history stack. Does not take any parameter.                                       |
+| `router.refresh()`    | Refresh the current page. Does not take in any parameter.                                                         |
+
+## Examples
+
+### Navigate after form submission
+
+If you wanted to navigate to a new page after a user signs up, you could do something like this:
+
+```js copy
+"use client";
+
+import { useRouter } from "next/navigation";
+
+function SignupForm() {
+  const router = useRouter();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // handle logic...
+    router.push("/dashboard"); // go to dashboard after signup
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Name" />
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+}
+```
+
+<Callout type="info">
+  Notice the `use client` directive at the top of the file. Since NextJs is
+  server-rendered by default, you cannot use any hooks in it because hooks are
+  client-side only. Therefore, you need to tell NextJs that this is a client
+  component by adding the `use client` directive.
+</Callout>
+
+## Going back to the previous page
+
+Go back to the previous page when you click the button.
+
+```js copy
+"use client";
+
+import { useRouter } from "next/navigation";
+
+export default function GoBackButton() {
+  const router = useRouter();
+
+  return <button onClick={() => router.back()}>&larr; Go Back</button>;
+}
+```
+
+This is basically like the browser's Back button.
+
+## Replace the URL
+
+`router.replace` works almost like `router.push`. The difference is that when you replace the URL, you cannot navigate back to the previous page. But with push, you can navigate back.
+
+```js copy
+"use client";
+
+import { useRouter } from "next/navigation";
+
+function SignupForm() {
+  const router = useRouter();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // handle logic...
+    router.replace("/dashboard"); // go to the dashboard after signup
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Name" />
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+}
+```

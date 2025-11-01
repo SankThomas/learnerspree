@@ -1,0 +1,196 @@
+import { Steps, Callout } from "nextra/components";
+
+# useRef
+
+I call the useRef hook the Reference hook because we can use it to point to exact elements in our code, that is, to reference specific elements as you are going to find out in this section.
+In React, every element has access to a ref attribute that you can point towards your useRef variable. In order to understand the useRef hook, we are going to use an example that you will come across in your career as a ReactJs developer. Take a look below:
+
+<Callout type="warning">
+  **P/S: DO NOT RUN THIS EXAMPLE BECAUSE IT WILL CAUSE AN INFINITE LOOP AND IT
+  MIGHT CRASH YOUR BROWSER OR YOUR PC, IF YOU HAVE A POTATO PC LIKE MINE**
+</Callout>
+
+```js
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [name, setName] = useState("");
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount((previousCount) => previousCount + 1);
+  });
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value} />
+
+      <p>Rendered {count} times</p>
+    </div>
+  )
+}
+```
+
+**Let’s explain the code example**
+
+1. We import the useState hook to handle our state values, and the useEffect hook to update the count value.
+
+2. In the useEffect block, we update the value of count by incrementing it by one every single time that the component renders - this means that the component will have to re-render every single time that the value of count changes. Being that every update to the state causes a React component to re-render, then this causes an infinite loop, hence the caution not to run the example.
+
+3. We create a controlled input which will update the name state value whenever we type into it.
+
+Therefore, how do we fix the example above?
+
+### **Enter useRef**
+
+The useRef hook gives us access to a **ref** object – which I like to think of as meaning reference but don’t quote me on that. Ref is similar to state with the only difference being that refs persist the state between renders – therefore, your component does not need to re-render every time. This is already an upside.
+
+Therefore, updating the example above, instead of using useState for our count state value, we are going to change it to useRef so that the line of code now looks like this:
+
+```js
+const count = useRef(0);
+```
+
+Notice that we are no longer using the array destructuring syntax, but we are only setting one value for useRef.
+If you were to console log **count** from the example above, you would get an object similar to this:
+
+```js
+{
+  current: 0;
+}
+```
+
+So, it sets it to the default value of your ref. Therefore, count in this case, is simply an object that has a current property, and when we update our state, it is the current property that gets persisted between re-renders.
+
+Therefore, let’s fix our example better, by updating the code inside the useEffect hook:
+
+```js copy
+useEffect(() => {
+  count.current = count.current + 1;
+});
+```
+
+If you get an error at this point that says something like, useRef is not defined, simply import it alongside your useState and useEffect hooks.
+
+```js copy
+import { useRef, useEffect, useState } from "react";
+```
+
+However, you are going to get another error that says something along the lines of: objects are not valid as a React child; this is because we are still rendering count inside our paragraph – but we have transformed it into an object with a current property.
+
+Therefore, to fix it we just need to render `count.current` inside our paragraph as follows:
+
+```js copy
+<p>Rendered {count.current} times</p>
+```
+
+Here is the full example so that you can run it on your machine for purposes of the next step:
+
+```js copy
+import { useState, useEffect, useRef } from "react";
+
+export default function App() {
+  const [name, setName] = useState("");
+  const count = useRef(0);
+
+  useEffect(() => {
+    count.current = count.current + 1;
+  });
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value} />
+
+      <p>Rendered {count.current} times</p>
+    </div>
+  )
+}
+```
+
+Try to run the example above and you should see your component updating with every keystroke just like in the original example – with the difference being that the component does not re-render on every state change.
+
+<Steps>
+
+### Using refs to access elements
+
+`useRef` is so popular that every element in React has access to a ref attribute. We are still going to use the example above, modifying it with every step:
+
+```js copy
+import { useState, useEffect, useRef } from "react";
+
+export default function App() {
+  const [name, setName] = useState("");
+  const inputRef = useRef();
+
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value} />
+    </div>
+  );
+}
+```
+
+**Changes in the code**
+
+1. We have updated our useRef value to **inputRef** and then added a ref attribute to our input and set it equal to inputRef. We have also removed our count completely.
+
+2. Therefore, what happens in the code is that, when the inputRef is rendered on the screen, it is going to set that variable equal to what is typed inside the input.
+
+3. If you console log the inputRef, you will still get the property of current, because we are still using refs, but it will no longer be initialized to 0 as was the case in the first example. Instead, it will be initialized to **HTMLInputElement** – because the ref is inside an input.
+
+What if we want to display what we type in the input to the user? Well, we simply need to access the current property once again, and then access the defaultValue. But where does the default value come from? Well, expand the console log you have and then look through the properties of the input that you can access – that’s where it comes from. Take a look at the image below:
+
+We would therefore do something like the example below in order to show what the user types in:
+
+```js
+<p>{inputRef.current.defaultValue}</p>
+```
+
+However, you will notice something when you type in the input – that what you type in is only updated after the next keystroke. So, if you typed in **AWESOME**, what you would see on the screen is **AWESOM**, and you would only see the complete word after the next keystroke. Remember that this is the functionality of the useRef hook, in that, it preserves your previous value so that you don’t need to rerender your component when the state changes.
+
+### Using refs to trigger focus
+
+Have you ever seen those buttons which, when you click, they trigger focus on an input? Let’s build something like that! We are simply going to update our example code as follows:
+
+```js copy
+import { useState, useEffect, useRef } from "react";
+
+export default function App() {
+  const [name, setName] = useState("");
+  const inputRef = useRef();
+
+  // New code
+  function triggerFocus() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value} />
+      <button onClick={triggerFocus}>Focus Input</button>
+    </div>
+  )
+}
+```
+
+We have created a new function called **triggerFocus** which will access the current property of the inputRef and then call the focus() function on it.
+
+We have added a button right below the input which, when clicked is going to call the triggerFocus function above, and place focus on the input.
+
+</Steps>
+
+That is a simple way that you can use refs to put focus on elements and make your UI more interactive. And that will be it for the useRef hook.

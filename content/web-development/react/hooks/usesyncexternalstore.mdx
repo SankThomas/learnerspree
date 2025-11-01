@@ -1,0 +1,116 @@
+import { Callout } from "nextra/components";
+
+# useSyncExternalStore
+
+This hooks is used to safely subscribe to external stores such as Redux, Zustand or even `localStorage` in a concurrent-safe way. It ensures that React can stay in sync with the external data sources without causing tearing or inconsistent renders in concurrent rendering scenarios.
+
+## Syntax
+
+```js
+const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
+```
+
+1. `subscribe`: a function to subscribe to the store (it’s called with a callback that will re-trigger the component when the store updates).
+2. `getSnapshot`: a function that returns the current value of the store.
+3. `getServerSnapshot` (optional): used for SSR.
+
+## Examples
+
+### Subscribing to `localStorage` changes
+
+```js copy filename="localStorageStore.js"
+let listeners = [];
+
+function getSnapshot() {
+  return localStorage.getItem("theme") || "dark";
+}
+
+function subscribe(callback) {
+  const listener = (e) => {
+    if (e.key === "theme") {
+      callback();
+    }
+  };
+
+  window.addEventListener("storage", listener);
+  listeners.push(callback);
+
+  return () => {
+    window.removeEventListener("storage", listener);
+    listeners = listeners.filter((l) => l !== callback);
+  };
+}
+
+export const themeStore = {
+  getSnapshot,
+  subscribe,
+};
+```
+
+And then use it in your component:
+
+```js copy filename="theme.jsx"
+import { useSyncExternalStore } from "react";
+import { themeStore } from "./localStorageStore";
+
+export default function ThemeDisplay() {
+  const theme = useSyncExternalStore(
+    themeStore.subscribe,
+    themeStore.getSnapshot,
+  );
+
+  return <div>Current theme: {theme}</div>;
+}
+```
+
+The benefit of this is that the component will update in real-time even if another tab changes the theme in `localStorage`.
+
+### Subscribing to a custom global store
+
+```js copy filename="counterStore.js"
+let count = 0;
+const listeners = new Set();
+
+export const counterStore = {
+  getSnapshot: () => count,
+
+  subscribe: (callback) => {
+    listeners.add(callback);
+    return () => listeners.delete(callback);
+  },
+
+  increment: () => {
+    count++;
+    listeners.forEach((cb) => cb());
+  },
+
+  decrement: () => {
+    count--;
+    listeners.forEach((cb) => cb());
+  },
+};
+```
+
+And then in your component:
+
+```js copy filename="counter.jsx"
+import { useSyncExternalStore } from "react";
+import { counterStore } from "./counterStore";
+
+export default function Counter() {
+  const count = useSyncExternalStore(
+    counterStore.subscribe,
+    counterStore.getSnapshot,
+  );
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={counterStore.increment}>Increment</button>
+      <button onClick={counterStore.decrement}>Decrement</button>
+    </div>
+  );
+}
+```
+
+This allows components to read and react to global state without React Context or Redux, and it works safely with concurrent rendering.
